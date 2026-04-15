@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Surcos | Perfil</title>
+  <meta name="description" content="Surcos â€” Del campo al terminal." />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&family=Space+Grotesk:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+
+<body>
+  <!-- barra superior -->
+  <header class="navbar"><a class="brand" href="marketplace_terminal.html">Surcos</a>
+    <nav class="nav-links"><a href="marketplace_terminal.html">Marketplace</a><a
+        href="historias_productor.html">Stories</a></nav><a class="nav-user" href="perfil.html" aria-label="perfil"><svg
+        viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4"></circle>
+        <path d="M4 20c0-4 4-7 8-7s8 3 8 7"></path>
+      </svg></a>
+  </header>
+  <div class="ticker">■ TOTAL ACTIVE POOLS: 142 &nbsp; ■ ENTREGAS RECIENTES: 28 &nbsp; ■ TENDENCIA: GEISHA +14%</div>
+
+  <!-- bloque de identidad y actividad -->
+  <main class="wrap wrap--tight">
+    <section class="split">
+      <aside class="left">
+        <div class="avatar">NP</div>
+        <h1 class="name">Nodo Panama</h1>
+        <p class="meta">MIEMBRO DESDE OCT 2023</p>
+        <p class="meta">NODO CONSUMIDOR · CIUDAD DE PANAMA</p>
+        <div class="stats">
+          <div class="box">Pools Ganados<b class="tab">14</b></div>
+          <div class="box">Total Ahorrado<b class="tab">B/.312.40</b></div>
+          <div class="box">Ventaja de Rendimiento<b class="tab">+19.2%</b></div>
+        </div>
+      </aside>
+      <section class="right">
+        <h2>Actividad del Terminal</h2>
+        <div class="feed">
+          <div class="item">
+            <div class="dt">14 ABR 2026</div>
+            <div class="tx">COMPROMETIDO AL POOL — Cafe Geisha Micro-lote #42</div>
+          </div>
+          <div class="item">
+            <div class="dt">03 NOV 2025</div>
+            <div class="tx">POOL ASEGURADO — Miel Silvestre Artesanal · Entregado Nov 3</div>
+          </div>
+          <div class="item">
+            <div class="dt">21 OCT 2025</div>
+            <div class="tx">PERFIL ACTUALIZADO — Preferencias de notificacion cambiadas</div>
+          </div>
+          <div class="item">
+            <div class="dt">15 SEP 2025</div>
+            <div class="tx">COMPROMETIDO AL POOL — Cacao Crudo Lote 7 · Darien</div>
+          </div>
+          <div class="item">
+            <div class="dt">02 AGO 2025</div>
+            <div class="tx">POOL ASEGURADO — Aceite Arbequina · Entregado Ago 5</div>
+          </div>
+        </div>
+        <div class="actions"><button class="out">Editar Perfil</button><button class="out">Descargar Mis Datos</button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- drawer -->
+  <button class="drawer-trigger" id="drawerTrigger" aria-label="abrir terminal"><span>MI TERMINAL</span></button>
+  <div class="overlay" id="drawerOverlay"></div>
+  <aside class="drawer" id="drawer">
+    <button class="x" id="drawerClose" aria-label="cerrar">&times;</button>
+    <div class="d-head">
+      <h3>Mi Terminal</h3>
+      <p>Estado de Pools Activos</p>
+    </div>
+    <a class="live" href="mi_terminal_dashboard.html">VER TERMINAL ACTIVO</a>
+    <nav class="d-nav">
+      <a href="mi_terminal_dashboard.html"><svg viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+        </svg><span>Mi Terminal</span></a>
+      <a href="historial_ordenes.html"><svg viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg><span>Historial de Ordenes</span></a>
+      <a href="metodos_pago.html"><svg viewBox="0 0 24 24">
+          <rect x="3" y="5" width="18" height="14"></rect>
+          <path d="M3 10h18"></path>
+        </svg><span>Metodos de Pago</span></a>
+      <a href="configuracion.html"><svg viewBox="0 0 24 24">
+          <path d="M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
+          <path d="M4 12h2m12 0h2M12 4v2m0 12v2"></path>
+        </svg><span>Ajustes</span></a>
+    </nav>
+    <div class="port">
+      <p>Valor del Portafolio</p><strong class="tab">B/. 1,248.00</strong>
+      <div class="yield"><span>Ahorro de Rendimiento</span><b class="tab">+18.4%</b></div>
+    </div>
+  </aside>
+
+  <!-- pie -->
+  <footer class="footer">
+    <div>
+      <div class="f-brand">Surcos</div>
+      <div class="f-small">Del campo al terminal.</div>
+      <div class="f-small">&copy; 2024 SURCOS. DEL CAMPO AL TERMINAL.</div>
+    </div>
+    <div>
+      <div class="f-head">Red</div><a class="f-link" href="#">Logistica</a><a class="f-link" href="#">Terminal API</a>
+    </div>
+    <div>
+      <div class="f-head">Legal</div><a class="f-link" href="#">Privacidad</a><a class="f-link" href="#">Terminos</a>
+    </div>
+    <div>
+      <div class="f-head">Idioma</div><a class="f-link" href="#">ES</a><a class="f-link" href="#">EN</a>
+      <div class="f-small">ESTADO DE RED: OPTIMO</div>
+      <div class="f-small">NODO: PTY-01</div>
+    </div>
+  </footer>
+  <script>
+    const t = document.getElementById('drawerTrigger'); const d = document.getElementById('drawer'); const o = document.getElementById('drawerOverlay'); const c = document.getElementById('drawerClose');
+    const cerrar = () => { d.classList.remove('open'); o.classList.remove('open'); t.style.display = ''; };
+    t.onclick = () => { d.classList.add('open'); o.classList.add('open'); t.style.display = 'none'; }; o.onclick = cerrar; c.onclick = cerrar;
+  </script>
+</body>
+
+</html>

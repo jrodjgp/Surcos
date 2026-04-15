@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Surcos | Mi Terminal</title>
+  <meta name="description" content="Surcos â€” Del campo al terminal." />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&family=Space+Grotesk:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+
+<body>
+  <!-- barra superior -->
+  <header class="navbar">
+    <a class="brand" href="marketplace_terminal.html">Surcos</a>
+    <nav class="nav-links"><a href="marketplace_terminal.html">Marketplace</a><a
+        href="historias_productor.html">Stories</a></nav>
+    <a class="nav-user" href="perfil.html" aria-label="perfil"><svg viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4"></circle>
+        <path d="M4 20c0-4 4-7 8-7s8 3 8 7"></path>
+      </svg></a>
+  </header>
+  <div class="ticker">■ TOTAL ACTIVE POOLS: 142 &nbsp; ■ ENTREGAS RECIENTES: 28 &nbsp; ■ TENDENCIA: GEISHA +14%</div>
+
+  <!-- terminal activo -->
+  <main class="wrap wrap--md">
+    <section class="top-flex">
+      <div>
+        <h1 class="h1-terminal">Mi Terminal Activo</h1>
+        <p class="sub">Supervision en tiempo real de tus compromisos agrarios y estado de logistica.</p>
+      </div>
+      <div class="savings">
+        <div class="savings-label">AHORRO TOTAL AGREGADO</div>
+        <div class="savings-val tab">B/. 1,428.50</div>
+      </div>
+    </section>
+
+    <div class="sec-head">
+      <h2>Pools Activos</h2>
+      <span class="badge">4 OFERTAS EN VIVO</span>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Producto y Origen</th>
+            <th>Tu Contribucion</th>
+            <th>Progreso del Pool</th>
+            <th>Entrega Est.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="prod">
+                <div class="thb"><img alt="Aceite Arbequina"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBZ5sSKS8t51PagJKdrCz2BOclMRVsgUyx1qmMezRP78uEQHyCxVUoPOEL_nf07_23yuiiK7lNREQOcR3kOIeAe9AfdYnkjQm5ZRyb9VJJqEf_W6JszsNkZWwPxB1dqg6H9EvUhWcLrndilVbTwHiWReBD7uFyRCtfZm1exzDaG3Xn1OZBNQoffvBkO-sbmWB1u5PrmDd5LjJn4gMD8jXam5tsK4ITWVmUrO_qVfQbYgswzJIcVkJAVh-8yUWRgIBuXp845_vVGQk" />
+                </div>
+                <div>
+                  <div class="p-name">Aceite Virgen Extra Arbequina</div>
+                  <div class="p-origin">Chiriqui, Panama</div>
+                </div>
+              </div>
+            </td>
+            <td class="contrib"><b>25.00 L</b><small class="tab">B/. 182.50 Pagado</small></td>
+            <td>
+              <div class="pool-prog">
+                <div class="pool-meta"><span>842 / 1000 L</span><span class="pool-badge ochre">CRITICO</span></div>
+                <div class="mini-bar"><i class="ochre" style="width:84%"></i></div>
+              </div>
+            </td>
+            <td>
+              <div class="est-date tab">24 OCT 2024</div>
+              <div class="est-status st-muted">En Proceso</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="prod">
+                <div class="thb"><img alt="Queso Manchego"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq9h2W3EZlxPK_8QBKmC8EMQnXStPgSprsnKggD7sqIcjof6EdjaU19RTP3wVPP0p2dGMZpNmYcDkesanoJBYUGbcLrM4eHYVFi4iimIqZl8Ih1NAAXT97WZ0TXPUs2NZMY13QaCFQI14st-AGQQDgaPieaiv1lHowCJVKNwJ-JkWyNgNjQqU9IY-iLxPlH6_XbxEjaJL404xZhcpDKX9s_72Xs0aoxnxLcCPbsXPTQpF0CksMpG9TvTBRcK5wNFaay2Wr3Lbv9H4" />
+                </div>
+                <div>
+                  <div class="p-name">Queso Manchego Curado</div>
+                  <div class="p-origin">Boquete, Panama</div>
+                </div>
+              </div>
+            </td>
+            <td class="contrib"><b>2.40 kg</b><small class="tab">B/. 52.80 Pagado</small></td>
+            <td>
+              <div class="pool-prog">
+                <div class="pool-meta"><span>48 / 50 kg</span><span class="pool-badge leaf">ASEGURADO</span></div>
+                <div class="mini-bar"><i class="leaf" style="width:96%"></i></div>
+              </div>
+            </td>
+            <td>
+              <div class="est-date tab">18 OCT 2024</div>
+              <div class="est-status st-terra">En Camino</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="prod">
+                <div class="thb"><img alt="Hebras de azafran"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuATQWp4zCyrl3wWrBSUR2tqariu_RzWzVGZ7t36JOwWY-28hSwT7vgMZb50dVDEZyxOYnogLXIVS_hoibzfPIV7DX9LSgB1EhrUafQt7M2hdOqxb4v706DTwW-bdFv7jv2VfhNNA4LeTMeKFwdtkABAkGEnut-JQph73MlCVURM6nyEO0KguLz0nurUXuOTvFsMkLkZQ28auXzJtVy4yMiPtnNUeT2Hkn6-O_F1QxIzy3MVDT0aXcCU-nI7vrn66TQXrXL2roeQXUY" />
+                </div>
+                <div>
+                  <div class="p-name">Hebras de Azafran A+</div>
+                  <div class="p-origin">Tierras Altas, Panama</div>
+                </div>
+              </div>
+            </td>
+            <td class="contrib"><b>50.00 g</b><small class="tab">B/. 310.00 Pagado</small></td>
+            <td>
+              <div class="pool-prog">
+                <div class="pool-meta"><span>120 / 500 g</span><span class="pool-badge ochre">CRITICO</span></div>
+                <div class="mini-bar"><i class="ochre" style="width:24%"></i></div>
+              </div>
+            </td>
+            <td>
+              <div class="est-date tab">05 NOV 2024</div>
+              <div class="est-status st-muted">Volumen Pendiente</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="action-grid">
+      <div class="action-block surface">
+        <h3>Exportar Registro</h3>
+        <p>Descarga tus datos del terminal para reportes fiscales y auditoria de cooperativas locales.</p>
+        <button class="btn-primary">Generar CSV Manifiesto</button>
+      </div>
+      <div class="action-block leaf">
+        <h3>Aviso de Logistica</h3>
+        <p>Lluvias intensas en la region de Chiriqui han retrasado los lotes de cafe por 48 horas. Los registros de
+          rastreo han sido actualizados automaticamente.</p>
+        <a href="#" class="btn-link">Ver Mapa de Transito Detallado &rarr;</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- drawer -->
+  <button class="drawer-trigger" id="drawerTrigger" aria-label="abrir terminal"><span>MI TERMINAL</span></button>
+  <div class="overlay" id="drawerOverlay"></div>
+  <aside class="drawer" id="drawer">
+    <button class="x" id="drawerClose" aria-label="cerrar">&times;</button>
+    <div class="d-head">
+      <h3>Mi Terminal</h3>
+      <p>Estado de Pools Activos</p>
+    </div>
+    <a class="live" href="mi_terminal_dashboard.html">VER TERMINAL ACTIVO</a>
+    <nav class="d-nav">
+      <a href="mi_terminal_dashboard.html"><svg viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+        </svg><span>Mi Terminal</span></a>
+      <a href="historial_ordenes.html"><svg viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg><span>Historial de Ordenes</span></a>
+      <a href="metodos_pago.html"><svg viewBox="0 0 24 24">
+          <rect x="3" y="5" width="18" height="14"></rect>
+          <path d="M3 10h18"></path>
+        </svg><span>Metodos de Pago</span></a>
+      <a href="configuracion.html"><svg viewBox="0 0 24 24">
+          <path d="M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
+          <path d="M4 12h2m12 0h2M12 4v2m0 12v2"></path>
+        </svg><span>Ajustes</span></a>
+    </nav>
+    <div class="port">
+      <p>Valor del Portafolio</p><strong class="tab">B/. 1,248.00</strong>
+      <div class="yield"><span>Ahorro de Rendimiento</span><b class="tab">+18.4%</b></div>
+    </div>
+  </aside>
+
+  <!-- pie -->
+  <footer class="footer">
+    <div>
+      <div class="f-brand">Surcos</div>
+      <div class="f-small">Del campo al terminal.</div>
+      <div class="f-small">&copy; 2024 SURCOS. DEL CAMPO AL TERMINAL.</div>
+    </div>
+    <div>
+      <div class="f-head">Red</div><a class="f-link" href="#">Logistica</a><a class="f-link" href="#">Terminal API</a>
+    </div>
+    <div>
+      <div class="f-head">Legal</div><a class="f-link" href="#">Privacidad</a><a class="f-link" href="#">Terminos</a>
+    </div>
+    <div>
+      <div class="f-head">Idioma</div><a class="f-link" href="#">ES</a><a class="f-link" href="#">EN</a>
+      <div class="f-small">ESTADO DE RED: OPTIMO</div>
+      <div class="f-small">NODO: PTY-01</div>
+    </div>
+  </footer>
+  <script>
+    const t = document.getElementById('drawerTrigger'); const d = document.getElementById('drawer'); const o = document.getElementById('drawerOverlay'); const c = document.getElementById('drawerClose');
+    const cerrar = () => { d.classList.remove('open'); o.classList.remove('open'); t.style.display = ''; };
+    t.onclick = () => { d.classList.add('open'); o.classList.add('open'); t.style.display = 'none'; }; o.onclick = cerrar; c.onclick = cerrar;
+  </script>
+</body>
+
+</html>

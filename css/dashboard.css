@@ -1,0 +1,864 @@
+h1 {
+  font-family: 'Newsreader', serif;
+  font-size: 52px;
+  color: var(--leaf)
+}
+
+/* h1 fluido para el terminal activo */
+.h1-terminal {
+  font-size: clamp(40px, 6vw, 60px);
+  letter-spacing: -.03em
+}
+
+/* subtitulo debajo del h1 */
+.sub {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #6d5f57;
+  max-width: 420px
+}
+
+/* ---------------------------------------------------------
+   seccion superior con datos clave (terminal activo)
+   --------------------------------------------------------- */
+.top-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line)
+}
+
+/* encabezado de sub-seccion con badge */
+.sec-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 32px 0 16px
+}
+
+.sec-head h2 {
+  font-family: 'Newsreader', serif;
+  font-size: 22px;
+  color: var(--leaf)
+}
+
+/* badge de conteo activo */
+.badge {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  background: var(--leaf);
+  color: #fff;
+  padding: 4px 12px
+}
+
+/* ---------------------------------------------------------
+   tablas de datos (dashboard e historial de ordenes)
+   --------------------------------------------------------- */
+table {
+  width: 100%;
+  border-collapse: collapse
+}
+
+thead tr {
+  border-bottom: 2px solid var(--leaf);
+  text-align: left
+}
+
+th {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #756962;
+  padding: 12px 8px 12px 0
+}
+
+th:last-child {
+  text-align: right
+}
+
+td {
+  border-bottom: 1px solid var(--line);
+  padding: 18px 8px 18px 0;
+  vertical-align: middle;
+  font-size: 14px
+}
+
+td:last-child {
+  text-align: right
+}
+
+/* celda de producto con imagen miniatura */
+.prod {
+  display: flex;
+  align-items: center;
+  gap: 12px
+}
+
+/* miniatura cuadrada del producto */
+.thb {
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  text-transform: uppercase;
+  color: #766960
+}
+
+.thb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover
+}
+
+/* nombre del producto en historial */
+.p-name {
+  font-family: 'Newsreader', serif;
+  font-size: 16px;
+  font-weight: 700
+}
+
+/* origen del producto */
+.p-origin {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #766a62
+}
+
+/* celda de contribucion del usuario */
+.contrib b {
+  font-size: 15px
+}
+
+.contrib small {
+  display: block;
+  font-size: 11px;
+  color: var(--terra);
+  font-weight: 700
+}
+
+/* ---------------------------------------------------------
+   barras de progreso mini dentro de las tablas
+   --------------------------------------------------------- */
+
+/* contenedor de progreso del pool en la tabla */
+.pool-prog {
+  max-width: 190px
+}
+
+.pool-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 700
+}
+
+/* badge de estado del pool en la tabla */
+.pool-badge {
+  font-size: 9px;
+  color: #fff;
+  padding: 2px 8px
+}
+
+.pool-badge.ochre {
+  background: var(--ochre)
+}
+
+.pool-badge.leaf {
+  background: var(--leaf)
+}
+
+/* barra mini de 10px — version compacta */
+.mini-bar {
+  height: 10px;
+  background: var(--line)
+}
+
+.mini-bar i {
+  display: block;
+  height: 100%
+}
+
+.mini-bar i.ochre {
+  background: var(--ochre)
+}
+
+.mini-bar i.leaf {
+  background: var(--leaf)
+}
+
+/* barra extra mini de 8px para historial de ordenes */
+.mini {
+  height: 8px;
+  background: var(--line);
+  margin-top: 6px;
+  width: 110px
+}
+
+.mini i {
+  display: block;
+  height: 100%;
+  background: var(--ochre)
+}
+
+/* precio de orden cancelada — tachado terracota */
+.price-cancelled {
+  color: #8e8078;
+  text-decoration: line-through;
+  text-decoration-color: var(--terra)
+}
+
+/* ---------------------------------------------------------
+   fecha y estado estimado de entrega
+   --------------------------------------------------------- */
+.est-date {
+  font-size: 13px;
+  font-weight: 700
+}
+
+.est-status {
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-top: 4px
+}
+
+/* colores semanticos de estado */
+.st-terra {
+  color: var(--terra)
+}
+
+.st-leaf {
+  color: var(--leaf)
+}
+
+.st-muted {
+  color: #766a62
+}
+
+/* ---------------------------------------------------------
+   badges de estado en historial de ordenes
+   --------------------------------------------------------- */
+.status {
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-weight: 700
+}
+
+/* entregado = hoja verde */
+.s-del {
+  color: var(--leaf)
+}
+
+/* en transito = ochre */
+.s-tr {
+  color: var(--ochre)
+}
+
+/* fallido/cancelado = terracota */
+.s-fail {
+  color: var(--terra)
+}
+
+/* activo = hoja verde */
+.s-act {
+  color: var(--leaf)
+}
+
+/* barra de resumen al pie del historial */
+.summary {
+  margin-top: 22px;
+  background: var(--leaf);
+  color: #fff;
+  padding: 16px;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase
+}
+
+/* ---------------------------------------------------------
+   bloques de accion (exportar / aviso de logistica)
+   --------------------------------------------------------- */
+.action-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--line);
+  margin-top: 48px
+}
+
+.action-block {
+  padding: 40px
+}
+
+.action-block.surface {
+  background: var(--surface)
+}
+
+/* bloque de fondo oscuro con texto blanco */
+.action-block.leaf {
+  background: var(--leaf);
+  color: #fff
+}
+
+.action-block h3 {
+  font-family: 'Newsreader', serif;
+  font-size: 24px;
+  margin-bottom: 18px
+}
+
+.action-block p {
+  margin-bottom: 24px;
+  font-size: 14px;
+  line-height: 1.6
+}
+
+.action-block.leaf p {
+  opacity: .85;
+  font-style: italic
+}
+
+/* enlace de accion sobre fondo oscuro */
+.btn-link {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 700;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 2px
+}
+
+/* ---------------------------------------------------------
+   pagina de filtros (historial de ordenes)
+   --------------------------------------------------------- */
+.filters {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap
+}
+
+/* grupo de botones de filtro con clase .tog en historial */
+/* nota: la clase .tog tambien existe en configuracion con logica diferente */
+.filters .tog {
+  display: flex;
+  gap: 8px
+}
+
+.filters .tog button {
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 10px 14px;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif
+}
+
+.filters .tog button.active {
+  background: var(--leaf);
+  border-color: var(--leaf);
+  color: #fff
+}
+
+/* input de rango de fechas */
+.date {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  padding: 8px 0;
+  font-size: 12px;
+  min-width: 230px;
+  font-family: 'Space Grotesk', sans-serif
+}
+
+/* ---------------------------------------------------------
+   pagina de metodos de pago
+   --------------------------------------------------------- */
+.cols {
+  margin-top: 18px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 6fr 4fr
+}
+
+.left {
+  padding: 20px 18px 20px 0;
+  border-right: 1px solid var(--line)
+}
+
+.right {
+  padding: 20px 0 20px 18px
+}
+
+/* tarjeta de metodo de pago */
+.m-card {
+  border: 1px solid var(--line);
+  padding: 14px;
+  margin-bottom: 12px;
+  background: #fff
+}
+
+.m-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px
+}
+
+/* icono textual del metodo (visa, mastercard...) */
+.icon {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--leaf)
+}
+
+/* numero de tarjeta enmascarado */
+.num {
+  font-size: 17px
+}
+
+/* etiqueta principal / respaldo */
+.tag {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #72665f
+}
+
+/* accion de eliminar en terracota */
+.rm {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--terra)
+}
+
+/* zona de agregar nuevo metodo */
+.add {
+  border: 1px dashed var(--line);
+  height: 88px;
+  display: grid;
+  place-items: center;
+  color: var(--terra);
+  font-size: 28px;
+  cursor: pointer;
+  transition: background .15s
+}
+
+.add:hover {
+  background: var(--surface)
+}
+
+/* tabla mini de ciclo de pagos */
+.mini table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px
+}
+
+.mini tr {
+  border-bottom: 1px solid var(--line)
+}
+
+.mini td {
+  padding: 9px 0;
+  font-size: 13px
+}
+
+.mini td:last-child {
+  text-align: right
+}
+
+/* id del nodo cifrado — estilo monoespaciado */
+.node {
+  margin-top: 18px;
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-family: monospace;
+  color: #5b4d46
+}
+
+/* ---------------------------------------------------------
+   pagina de perfil del usuario
+   --------------------------------------------------------- */
+
+/* layout de dos columnas: avatar + actividad */
+.split {
+  display: grid;
+  grid-template-columns: 4fr 6fr;
+  border-top: 1px solid var(--line)
+}
+
+/* avatar con arco superior — patron de granero */
+.avatar {
+  height: 320px;
+  border-radius: 200px 200px 0 0;
+  background: var(--leaf);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-family: 'Newsreader', serif;
+  font-size: 72px;
+  border: 1px solid var(--line)
+}
+
+/* nombre del usuario */
+.name {
+  font-family: 'Newsreader', serif;
+  font-size: 28px;
+  color: var(--leaf);
+  margin-top: 14px
+}
+
+/* metadatos del perfil (membresia, nodo) */
+.meta {
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #766a62;
+  margin-top: 6px
+}
+
+/* cuadricula de estadisticas del perfil */
+.stats {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px
+}
+
+/* celda de estadistica individual */
+.box {
+  border: 1px solid var(--line);
+  padding: 10px;
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #6d6058
+}
+
+.box b {
+  display: block;
+  margin-top: 4px;
+  color: var(--leaf);
+  font-size: 15px
+}
+
+/* encabezado de la columna de actividad */
+.right h2 {
+  font-family: 'Newsreader', serif;
+  font-size: 24px;
+  color: var(--leaf)
+}
+
+/* feed de actividad del terminal */
+.feed {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px
+}
+
+/* entrada de actividad: fecha + descripcion */
+.item {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 12px
+}
+
+.dt {
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #7a6e66
+}
+
+.tx {
+  font-size: 14px;
+  color: #2a231d
+}
+
+/* botones de accion del perfil */
+.actions {
+  margin-top: 24px;
+  display: flex;
+  gap: 10px
+}
+
+.out {
+  border: 1px solid var(--terra);
+  background: transparent;
+  color: var(--terra);
+  padding: 10px 14px;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: background .15s
+}
+
+.out:hover {
+  background: var(--terra);
+  color: #fff
+}
+
+/* ---------------------------------------------------------
+   pagina de configuracion del terminal
+   --------------------------------------------------------- */
+
+/* seccion de ajustes con separadores horizontales */
+.sec {
+  border-top: 1px solid var(--line);
+  padding: 22px 0
+}
+
+.sec h2 {
+  font-family: 'Newsreader', serif;
+  font-size: 30px;
+  color: var(--leaf);
+  margin-bottom: 12px
+}
+
+/* cuadricula de campos de formulario */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px
+}
+
+/* etiqueta de campo — estilo "underline input" */
+label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #72655e
+}
+
+/* campo de texto e input — estilo underline minimalista */
+input,
+select {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 0;
+  background: transparent;
+  font-size: 14px;
+  font-family: 'Space Grotesk', sans-serif
+}
+
+/* input enfocado: linea inferior terracota 2px */
+input:focus,
+select:focus {
+  outline: none;
+  border-bottom: 2px solid var(--terra)
+}
+
+/* ---------------------------------------------------------
+   toggles de notificacion (configuracion)
+   --------------------------------------------------------- */
+.tog {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px
+}
+
+.tog-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+}
+
+/* switch de palanca — aristas vivas, sin radius */
+.switch {
+  position: relative;
+  width: 46px;
+  height: 22px
+}
+
+.switch input {
+  display: none
+}
+
+/* pista del switch — gris por defecto */
+.track {
+  position: absolute;
+  inset: 0;
+  background: var(--line);
+  cursor: pointer
+}
+
+/* boton deslizante del switch */
+.knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  transition: left .2s
+}
+
+/* estado activo: pista terracota, boton desplazado */
+.switch input:checked+.track {
+  background: var(--terra)
+}
+
+.switch input:checked+.track+.knob {
+  left: 27px
+}
+
+/* ---------------------------------------------------------
+   radio buttons de visualizacion de datos
+   --------------------------------------------------------- */
+.rad {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px
+}
+
+.rad label {
+  font-size: 12px;
+  text-transform: none;
+  letter-spacing: 0
+}
+
+.rad input[type='radio'] {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  /* sin redondeo — brutalismo */
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
+  cursor: pointer
+}
+
+.rad input[type='radio']:checked {
+  background: var(--terra);
+  border-color: var(--terra)
+}
+
+/* boton de contorno en configuracion (cambiar contrasena) */
+.outline {
+  border: 1px solid var(--terra);
+  background: transparent;
+  color: var(--terra);
+  padding: 10px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif
+}
+
+/* bloque de id del nodo cifrado — monoespacio */
+.node-block {
+  margin-top: 12px;
+  background: var(--surface);
+  padding: 12px;
+  font-family: monospace;
+  font-size: 12px
+}
+
+/* campo de formulario con margen superior (unidad de datos) */
+.field-mt {
+  margin-top: 10px
+}
+
+/* enlaces de seccion (regenerar, eliminar cuenta) */
+.sec-links {
+  margin-top: 10px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap
+}
+
+/* accion de peligro en terracota */
+.danger {
+  color: var(--terra);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .08em
+}
+
+/* boton flotante de guardar ajustes — sticky bottom */
+.save {
+  position: sticky;
+  bottom: 12px;
+  width: 100%;
+  border: 0;
+  background: var(--terra);
+  color: #fff;
+  padding: 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: background .2s
+}
+
+.save:hover {
+  background: var(--leaf)
+}
+
+/* ---------------------------------------------------------
+   responsive dashboard y paginas de terminal
+   ========================================================= */
+@media (max-width: 980px) {
+  .action-grid {
+    grid-template-columns: 1fr
+  }
+
+  .cols {
+    grid-template-columns: 1fr
+  }
+
+  .left {
+    border-right: 0
+  }
+
+  .grid {
+    grid-template-columns: 1fr
+  }
+
+  .split {
+    grid-template-columns: 1fr
+  }
+
+  .stats {
+    grid-template-columns: 1fr
+  }
+
+  .item {
+    grid-template-columns: 1fr
+  }
+
+  .actions {
+    flex-direction: column
+  }
+}

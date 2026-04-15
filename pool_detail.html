@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Surcos | Detalle del Pool</title>
+  <meta name="description" content="Surcos â€” Del campo al terminal." />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&family=Space+Grotesk:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/marketplace.css" />
+</head>
+
+<body>
+  <!-- barra superior -->
+  <header class="navbar navbar--fixed">
+    <a class="brand" href="marketplace_terminal.html">Surcos</a>
+    <nav class="nav-links"><a class="active" href="marketplace_terminal.html">Marketplace</a><a
+        href="historias_productor.html">Stories</a></nav>
+    <a class="nav-user" href="perfil.html" aria-label="perfil"><svg viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4"></circle>
+        <path d="M4 20c0-4 4-7 8-7s8 3 8 7"></path>
+      </svg></a>
+  </header>
+  <div class="ticker ticker--fixed">■ TOTAL ACTIVE POOLS: 142 &nbsp; ■ ENTREGAS RECIENTES: 28 &nbsp; ■ TENDENCIA: TOMATES +12%</div>
+
+  <!-- diseno dividido -->
+  <main class="split">
+    <section class="hero-col">
+      <div class="arch">
+        <img alt="Tomates de herencia frescos cultivados en tierras altas de Panama"
+          src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=800&q=85&fit=crop" />
+      </div>
+      <div class="hero-meta">
+        <p>Cosechado 24 Oct, 2024</p>
+        <p>"El sabor de la tierra banada por el sol."</p>
+      </div>
+    </section>
+
+    <section class="terminal-col">
+      <div class="terminal-inner">
+        <h1 class="pool-title">Tomates de Herencia Finca Oasis</h1>
+        <div class="pool-meta">
+          <span>Origen: Tierras Altas, PA</span>
+          <span class="divider"></span>
+          <span class="batch">Lote Limitado #042</span>
+        </div>
+
+        <div class="terminal-box">
+          <div class="ver">TERMINAL v.2.0</div>
+          <div class="status-row">
+            <div>
+              <div class="label">Estado del Pool</div>
+              <div class="val">Llenado Activo</div>
+            </div>
+            <div class="text-right">
+              <div class="label">Tiempo Restante</div>
+              <div class="val terra">Cierra en 4h 22m</div>
+            </div>
+          </div>
+          <div class="progress-labels"><span>0 kg</span><span class="goal">Meta: 500 kg alcanzado</span><span>750 kg
+              Max</span></div>
+          <div class="progress-track"><i style="width:66%"></i>
+            <div class="mark" style="left:33.3%"></div>
+            <div class="mark" style="left:66.6%"></div>
+          </div>
+          <div class="pricing">
+            <div>
+              <div class="label">Precio de Mercado</div><span class="market-price tab">B/.8.50<small>/kg</small></span>
+            </div>
+            <div>
+              <div class="label ochre">Precio del Pool</div><span
+                class="pool-price tab">B/.4.95<small>/kg</small></span>
+            </div>
+          </div>
+          <button class="btn-pool">Unirse al Pool <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <path d="M22 17l-5 5m0 0l-5-5m5 5V3"></path>
+            </svg></button>
+        </div>
+
+        <div class="details">
+          <div>
+            <h3>El Origen</h3>
+            <p class="text">Cultivados en los suelos volcanicos de las tierras altas, estos tomates se riegan con agua
+              de manantial. La oscilacion termica extrema de la region concentra los azucares, creando una complejidad
+              raramente encontrada en la agricultura industrial.</p>
+          </div>
+          <div>
+            <h3>Terminal de Logistica</h3>
+            <div class="log-row"><span>Fecha de Entrega</span><span>31 Oct</span></div>
+            <div class="log-row"><span>Punto de Recogida</span><span>Mercado Central</span></div>
+            <div class="log-row"><span>Compromiso Minimo</span><span>2.5 kg</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- drawer -->
+  <button class="drawer-trigger" id="drawerTrigger" aria-label="abrir terminal"><span>MI TERMINAL</span></button>
+  <div class="overlay" id="drawerOverlay"></div>
+  <aside class="drawer" id="drawer">
+    <button class="x" id="drawerClose" aria-label="cerrar">&times;</button>
+    <div class="d-head">
+      <h3>Mi Terminal</h3>
+      <p>Estado de Pools Activos</p>
+    </div>
+    <a class="live" href="mi_terminal_dashboard.html">VER TERMINAL ACTIVO</a>
+    <nav class="d-nav">
+      <a href="mi_terminal_dashboard.html"><svg viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+        </svg><span>Mi Terminal</span></a>
+      <a href="historial_ordenes.html"><svg viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg><span>Historial de Ordenes</span></a>
+      <a href="metodos_pago.html"><svg viewBox="0 0 24 24">
+          <rect x="3" y="5" width="18" height="14"></rect>
+          <path d="M3 10h18"></path>
+        </svg><span>Metodos de Pago</span></a>
+      <a href="configuracion.html"><svg viewBox="0 0 24 24">
+          <path d="M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
+          <path d="M4 12h2m12 0h2M12 4v2m0 12v2"></path>
+        </svg><span>Ajustes</span></a>
+    </nav>
+    <div class="port">
+      <p>Valor del Portafolio</p><strong class="tab">B/. 1,248.00</strong>
+      <div class="yield"><span>Ahorro de Rendimiento</span><b class="tab">+18.4%</b></div>
+    </div>
+  </aside>
+
+  <!-- pie -->
+  <footer class="footer">
+    <div>
+      <div class="f-brand">Surcos</div>
+      <div class="f-small">Del campo al terminal.</div>
+      <div class="f-small">&copy; 2024 SURCOS. DEL CAMPO AL TERMINAL.</div>
+    </div>
+    <div>
+      <div class="f-head">Red</div><a class="f-link" href="#">Logistica</a><a class="f-link" href="#">Terminal API</a>
+    </div>
+    <div>
+      <div class="f-head">Legal</div><a class="f-link" href="#">Privacidad</a><a class="f-link" href="#">Terminos</a>
+    </div>
+    <div>
+      <div class="f-head">Idioma</div><a class="f-link" href="#">ES</a><a class="f-link" href="#">EN</a>
+      <div class="f-small">ESTADO DE RED: OPTIMO</div>
+      <div class="f-small">NODO: PTY-01</div>
+    </div>
+  </footer>
+  <script>
+    const t = document.getElementById('drawerTrigger'); const d = document.getElementById('drawer'); const o = document.getElementById('drawerOverlay'); const c = document.getElementById('drawerClose');
+    const cerrar = () => { d.classList.remove('open'); o.classList.remove('open'); t.style.display = ''; };
+    t.onclick = () => { d.classList.add('open'); o.classList.add('open'); t.style.display = 'none'; }; o.onclick = cerrar; c.onclick = cerrar;
+  </script>
+</body>
+
+</html>

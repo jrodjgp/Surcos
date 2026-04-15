@@ -1,0 +1,284 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line)
+}
+
+/* logotipo editorial en newsreader serif */
+.brand {
+  font-family: 'Newsreader', serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--leaf)
+}
+
+/* enlaces de navegacion horizontal */
+.nav-links {
+  display: flex;
+  gap: 28px
+}
+
+.nav-links a {
+  font-size: 14px;
+  color: #5c4b44;
+  padding-bottom: 4px
+}
+
+/* enlace activo: subrayado terracota */
+.nav-links a.active {
+  border-bottom: 2px solid var(--terra);
+  color: var(--leaf);
+  font-weight: 700
+}
+
+/* icono de perfil de usuario */
+.nav-user svg {
+  width: 26px;
+  height: 26px;
+  stroke: var(--leaf);
+  fill: none;
+  stroke-width: 1.5
+}
+
+/* ---------------------------------------------------------
+   pie de pagina global
+   --------------------------------------------------------- */
+.footer {
+  background: var(--leaf);
+  color: #FDFBF7;
+  padding: 56px 24px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.2fr;
+  gap: 24px
+}
+
+.f-brand {
+  font-family: 'Newsreader', serif;
+  font-size: 28px
+}
+
+.f-small {
+  margin-top: 8px;
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  opacity: .9
+}
+
+/* encabezado de columna del pie — ochre */
+.f-head {
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ochre);
+  margin-bottom: 12px
+}
+
+/* enlaces del pie de pagina */
+.f-link {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 8px
+}
+
+/* ---------------------------------------------------------
+   disparador del cajon lateral (pestana fija derecha)
+   --------------------------------------------------------- */
+.drawer-trigger {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 96px;
+  background: var(--leaf);
+  border: 0;
+  z-index: 90;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible
+}
+
+/* texto vertical de la pestana */
+.drawer-trigger span {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  white-space: nowrap;
+  font-size: 10px;
+  letter-spacing: .12em;
+  color: #fff;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  text-transform: uppercase
+}
+
+/* fondo semitransparente al abrir el cajon */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .28s ease;
+  z-index: 95
+}
+
+.overlay.open {
+  opacity: 1;
+  pointer-events: auto
+}
+
+/* ---------------------------------------------------------
+   cajon lateral deslizable
+   --------------------------------------------------------- */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 280px;
+  height: 100vh;
+  background: var(--surface);
+  border-left: 1px solid var(--line);
+  transform: translateX(100%);
+  transition: transform .28s ease;
+  z-index: 100;
+  display: flex;
+  flex-direction: column
+}
+
+.drawer.open {
+  transform: translateX(0)
+}
+
+/* boton de cierre del cajon */
+.x {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  border: 0;
+  background: none;
+  color: var(--leaf);
+  font-size: 24px;
+  cursor: pointer
+}
+
+/* zona de encabezado del cajon */
+.d-head {
+  padding: 44px 22px 16px
+}
+
+.d-head h3 {
+  font-size: 16px;
+  color: var(--leaf)
+}
+
+.d-head p {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #7a6d65;
+  margin-top: 4px
+}
+
+/* enlace "ver terminal activo" — contorno terracota */
+.live {
+  margin: 0 22px 8px;
+  border: 1px solid var(--terra);
+  padding: 10px;
+  text-align: center;
+  color: var(--terra);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: block
+}
+
+/* navegacion interna del cajon */
+.d-nav {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column
+}
+
+.d-nav a {
+  padding: 13px 22px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  color: var(--leaf);
+  font-size: 14px;
+  transition: background .15s
+}
+
+.d-nav a:hover {
+  background: rgba(44, 76, 59, .06)
+}
+
+.d-nav svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5
+}
+
+/* bloque de portafolio en la parte inferior del cajon */
+.port {
+  margin-top: auto;
+  background: var(--leaf);
+  color: #fff;
+  padding: 20px
+}
+
+.port p {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  opacity: .8
+}
+
+.port strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 31px
+}
+
+/* fila de rendimiento del portafolio */
+.port .yield {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, .2);
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  text-transform: uppercase
+}
+
+.port .yield b {
+  color: var(--ochre)
+}
+
+/* ---------------------------------------------------------
+   responsive navbar y footer
+   --------------------------------------------------------- */
+@media (max-width: 980px) {
+  .nav-links {
+    gap: 18px
+  }
+
+  .footer {
+    grid-template-columns: 1fr
+  }
+}
