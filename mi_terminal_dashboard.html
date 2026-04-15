@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -19,13 +19,46 @@
   <header class="navbar">
     <a class="brand" href="marketplace_terminal.html">Surcos</a>
     <nav class="nav-links"><a href="marketplace_terminal.html">Marketplace</a><a
-        href="historias_productor.html">Stories</a></nav>
+        href="historias_productor.html">Stories</a><a href="nosotros.html">Nosotros</a></nav>
     <a class="nav-user" href="perfil.html" aria-label="perfil"><svg viewBox="0 0 24 24">
         <circle cx="12" cy="8" r="4"></circle>
         <path d="M4 20c0-4 4-7 8-7s8 3 8 7"></path>
       </svg></a>
   </header>
-  <div class="ticker">■ TOTAL ACTIVE POOLS: 142 &nbsp; ■ ENTREGAS RECIENTES: 28 &nbsp; ■ TENDENCIA: GEISHA +14%</div>
+  <!-- ticker animado — css only, sin javascript -->
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span class="ticker-item">Pools Activos: <b>142</b></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Entregas Recientes: <b>28</b></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Tendencia: <span class="ticker-positivo">Geisha +14%</span></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Tendencia: <span class="ticker-positivo">Cacao Darien +8%</span></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Pools Cerrados Hoy: <b>9</b></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Provincias Activas: <b>4</b></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Proximo Cierre: Tomates Herrera · 06h 22m</span>
+      <span class="ticker-item ticker-separador">■</span>
+      <!-- duplicado para loop seamless -->
+      <span class="ticker-item">Pools Activos: <b>142</b></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Entregas Recientes: <b>28</b></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Tendencia: <span class="ticker-positivo">Geisha +14%</span></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Tendencia: <span class="ticker-positivo">Cacao Darien +8%</span></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Pools Cerrados Hoy: <b>9</b></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Provincias Activas: <b>4</b></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Proximo Cierre: Tomates Herrera · 06h 22m</span>
+      <span class="ticker-item ticker-separador">■</span>
+    </div>
+  </div>
 
   <!-- terminal activo -->
   <main class="wrap wrap--md">

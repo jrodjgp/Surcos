@@ -1,0 +1,406 @@
+/* =========================================================
+   nosotros.css — estilos exclusivos de la pagina "nosotros"
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   hero principal — titulo editorial con subtexto
+   --------------------------------------------------------- */
+.nosotros-hero {
+  padding: 100px 24px 80px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center
+}
+
+.nosotros-hero h1 {
+  font-family: 'Newsreader', serif;
+  font-size: clamp(48px, 8vw, 80px);
+  color: var(--leaf);
+  line-height: .92;
+  letter-spacing: -.04em;
+  margin-bottom: 24px
+}
+
+.nosotros-hero p {
+  font-family: 'Newsreader', serif;
+  font-size: 19px;
+  font-style: italic;
+  color: rgba(44, 76, 59, .85);
+  line-height: 1.7;
+  max-width: 640px;
+  margin: 0 auto
+}
+
+/* dato destacado dentro del subtexto */
+.nosotros-hero .dato {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 8px 18px;
+  border: 1px solid var(--terra);
+  font-family: 'Space Grotesk', sans-serif;
+  font-style: normal;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--terra);
+  font-weight: 700
+}
+
+/* ---------------------------------------------------------
+   seccion generica con titulo y linea inferior
+   --------------------------------------------------------- */
+.nosotros-seccion {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px 80px
+}
+
+.nosotros-seccion-titulo {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+  margin-bottom: 48px
+}
+
+.nosotros-seccion-titulo h2 {
+  font-family: 'Newsreader', serif;
+  font-size: 38px;
+  color: var(--leaf)
+}
+
+/* ---------------------------------------------------------
+   pasos del pool — cuadricula de 4 columnas
+   --------------------------------------------------------- */
+/* bootstrap-equiv: .row > .col-md-3 */
+.pasos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--line)
+}
+
+.paso {
+  padding: 32px 24px;
+  border-right: 1px solid var(--line);
+  background: #fff;
+  transition: background .15s
+}
+
+.paso:last-child {
+  border-right: none
+}
+
+.paso:hover {
+  background: var(--surface)
+}
+
+/* numero del paso — estilo ticker agresivo */
+.paso-numero {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--terra);
+  font-weight: 700;
+  margin-bottom: 16px
+}
+
+/* icono unicode grande */
+.paso-icono {
+  font-size: 48px;
+  margin-bottom: 16px;
+  line-height: 1;
+  color: var(--leaf)
+}
+
+/* titulo del paso */
+.paso h3 {
+  font-family: 'Newsreader', serif;
+  font-size: 20px;
+  color: var(--leaf);
+  margin-bottom: 10px;
+  line-height: 1.2
+}
+
+/* descripcion del paso */
+.paso p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #5c4b44
+}
+
+/* ---------------------------------------------------------
+   comparacion de cadenas — dos columnas
+   --------------------------------------------------------- */
+/* bootstrap-equiv: .row > .col-md-6 */
+.cadenas-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--line)
+}
+
+.cadena {
+  padding: 40px 32px
+}
+
+.cadena:first-child {
+  border-right: 1px solid var(--line)
+}
+
+.cadena-titulo {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 700;
+  margin-bottom: 28px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--leaf)
+}
+
+.cadena:first-child .cadena-titulo {
+  color: #766a62
+}
+
+.cadena:last-child .cadena-titulo {
+  color: var(--terra)
+}
+
+/* bloque de actor en la cadena */
+.actor {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line)
+}
+
+.actor:last-child {
+  border-bottom: none
+}
+
+/* simbolo del actor (cuadrado con inicial) */
+.actor-simbolo {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  flex-shrink: 0
+}
+
+/* variantes de color del simbolo de actor */
+.actor-simbolo.bg-leaf {
+  background: var(--leaf);
+  color: #fff
+}
+
+.actor-simbolo.bg-muted {
+  background: var(--line);
+  color: #766a62
+}
+
+.actor-simbolo.bg-terra {
+  background: var(--terra);
+  color: #fff
+}
+
+.actor-simbolo.bg-ochre {
+  background: var(--ochre);
+  color: #fff
+}
+
+/* texto del actor */
+.actor-info {
+  flex: 1
+}
+
+.actor-nombre {
+  font-family: 'Newsreader', serif;
+  font-size: 17px;
+  color: var(--ink)
+}
+
+/* porcentaje de markup */
+.actor-markup {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--terra);
+  font-weight: 700;
+  margin-top: 2px
+}
+
+/* flecha de conexion entre actores */
+.flecha {
+  text-align: center;
+  padding: 6px 0;
+  font-size: 20px;
+  color: var(--line)
+}
+
+/* resumen de eliminacion de intermediarios */
+.cadena-resumen {
+  margin-top: 20px;
+  padding: 14px;
+  background: var(--surface);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 700;
+  text-align: center
+}
+
+.cadena:first-child .cadena-resumen {
+  color: #766a62
+}
+
+.cadena:last-child .cadena-resumen {
+  color: var(--leaf)
+}
+
+/* ---------------------------------------------------------
+   tarjetas del equipo — cuadricula de 6
+   --------------------------------------------------------- */
+/* bootstrap-equiv: .row > .col-md-2 */
+.equipo-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+  border: 1px solid var(--line)
+}
+
+/* bootstrap-equiv: .card */
+.miembro {
+  padding: 28px 16px;
+  border-right: 1px solid var(--line);
+  text-align: center;
+  transition: background .15s
+}
+
+.miembro:last-child {
+  border-right: none
+}
+
+.miembro:hover {
+  background: var(--surface)
+}
+
+/* avatar circular con iniciales — excepcion al no-radius (avatar explicitamente permitido) */
+.miembro-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--leaf);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-family: 'Newsreader', serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 auto 14px
+}
+
+.miembro-nombre {
+  font-family: 'Newsreader', serif;
+  font-size: 16px;
+  color: var(--leaf);
+  margin-bottom: 4px
+}
+
+.miembro-rol {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #766a62
+}
+
+/* ---------------------------------------------------------
+   fila de respaldo institucional
+   --------------------------------------------------------- */
+.respaldo-fila {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding: 40px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 80px
+}
+
+.respaldo-fila a {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 700;
+  color: var(--leaf);
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--ochre);
+  transition: color .2s
+}
+
+.respaldo-fila a:hover {
+  color: var(--terra)
+}
+
+/* etiqueta descriptiva de la seccion de respaldo */
+.respaldo-etiqueta {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: #766a62;
+  font-weight: 700
+}
+
+/* ---------------------------------------------------------
+   responsive nosotros
+   --------------------------------------------------------- */
+@media (max-width: 980px) {
+  .pasos-grid {
+    grid-template-columns: 1fr 1fr
+  }
+
+  .paso:nth-child(2) {
+    border-right: none
+  }
+
+  .cadenas-grid {
+    grid-template-columns: 1fr
+  }
+
+  .cadena:first-child {
+    border-right: none;
+    border-bottom: 1px solid var(--line)
+  }
+
+  .equipo-grid {
+    grid-template-columns: repeat(3, 1fr)
+  }
+
+  .miembro:nth-child(3) {
+    border-right: none
+  }
+}
+
+@media (max-width: 600px) {
+  .pasos-grid {
+    grid-template-columns: 1fr
+  }
+
+  .paso {
+    border-right: none;
+    border-bottom: 1px solid var(--line)
+  }
+
+  .paso:last-child {
+    border-bottom: none
+  }
+
+  .equipo-grid {
+    grid-template-columns: repeat(2, 1fr)
+  }
+
+  .miembro:nth-child(even) {
+    border-right: none
+  }
+}

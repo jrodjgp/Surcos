@@ -46,6 +46,7 @@ h1 {
 }
 
 /* badge de conteo activo */
+/* bootstrap-equiv: .badge */
 .badge {
   font-size: 10px;
   text-transform: uppercase;
@@ -165,6 +166,7 @@ td:last-child {
 }
 
 /* badge de estado del pool en la tabla */
+/* bootstrap-equiv: .badge */
 .pool-badge {
   font-size: 9px;
   color: #fff;
@@ -180,6 +182,7 @@ td:last-child {
 }
 
 /* barra mini de 10px — version compacta */
+/* bootstrap-equiv: .progress */
 .mini-bar {
   height: 10px;
   background: var(--line)
@@ -406,6 +409,7 @@ td:last-child {
 }
 
 /* tarjeta de metodo de pago */
+/* bootstrap-equiv: .card */
 .m-card {
   border: 1px solid var(--line);
   padding: 14px;
@@ -773,13 +777,68 @@ select:focus {
   font-family: 'Space Grotesk', sans-serif
 }
 
-/* bloque de id del nodo cifrado — monoespacio */
+/* bloque de id del nodo cifrado — estetica terminal oscuro */
 .node-block {
-  margin-top: 12px;
-  background: var(--surface);
-  padding: 12px;
-  font-family: monospace;
-  font-size: 12px
+  margin-top: 14px;
+  background: var(--leaf);
+  color: var(--bg);
+  padding: 16px;
+  font-family: 'Space Grotesk', monospace;
+  font-size: 13px;
+  letter-spacing: .04em;
+  border: 1px solid var(--ochre)
+}
+
+.node-block code {
+  color: var(--ochre)
+}
+
+/* boton fantasma de advertencia (regenerar) */
+.btn-ghost-peligro {
+  border: 1px solid var(--terra);
+  background: transparent;
+  color: var(--terra);
+  padding: 8px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: background .15s
+}
+
+.btn-ghost-peligro:hover {
+  background: var(--terra);
+  color: #fff
+}
+
+/* input de rango estilizado (umbral de compromiso) */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: var(--line);
+  border: none;
+  outline: none;
+  margin-top: 8px
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--terra);
+  cursor: pointer
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--terra);
+  border: none;
+  cursor: pointer
 }
 
 /* campo de formulario con margen superior (unidad de datos) */
@@ -804,6 +863,13 @@ select:focus {
   letter-spacing: .08em
 }
 
+/* titulo de seccion de ciclo de pagos */
+.sec-titulo-ciclo {
+  font-family: 'Newsreader', serif;
+  font-size: 30px;
+  color: var(--leaf)
+}
+
 /* boton flotante de guardar ajustes — sticky bottom */
 .save {
   position: sticky;
@@ -824,6 +890,13 @@ select:focus {
 
 .save:hover {
   background: var(--leaf)
+}
+
+/* texto auxiliar pequeno (helper text) */
+.sub-sm {
+  font-size: 11px;
+  margin-top: 4px;
+  color: #6d5f57
 }
 
 /* ---------------------------------------------------------

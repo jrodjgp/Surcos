@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -12,19 +12,19 @@
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/mapa.css" />
 </head>
 
 <body>
   <!-- barra superior -->
   <header class="navbar"><a class="brand" href="marketplace_terminal.html">Surcos</a>
     <nav class="nav-links"><a href="marketplace_terminal.html">Marketplace</a><a
-        href="historias_productor.html">Stories</a></nav><a class="nav-user" href="perfil.html" aria-label="perfil"><svg
+        href="historias_productor.html">Stories</a><a href="nosotros.html">Nosotros</a></nav><a class="nav-user" href="perfil.html" aria-label="perfil"><svg
         viewBox="0 0 24 24">
         <circle cx="12" cy="8" r="4"></circle>
         <path d="M4 20c0-4 4-7 8-7s8 3 8 7"></path>
       </svg></a>
   </header>
-  <div class="ticker">■ TOTAL ACTIVE POOLS: 142 &nbsp; ■ ENTREGAS RECIENTES: 28 &nbsp; ■ TENDENCIA: GEISHA +14%</div>
 
   <!-- configuracion -->
   <main class="wrap wrap--config">
@@ -52,13 +52,45 @@
 
     <section class="sec">
       <h2>Preferencias del Terminal</h2>
-      <div class="grid">
-        <div><label>punto de recogida predeterminado</label><select>
-            <option>PTY Terminal Oeste</option>
-            <option>Boquete Nodo Norte</option>
-          </select></div>
-        <div><label>umbral de compromiso</label><input class="tab" type="number" value="60" /></div>
+
+      <!-- mapa interactivo de seleccion de provincia — contexto C -->
+      <!-- seleccion css-only con radio inputs -->
+      <label>punto de recogida predeterminado</label>
+      <div class="mapa-contenedor mapa-config">
+        <div class="mapa-etiqueta">Selecciona Tu Provincia</div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" aria-label="Selector de provincia">
+          <path class="provincia" d="M30,140 L80,110 L120,115 L130,140 L120,170 L80,180 L40,170 Z"/>
+          <text class="provincia-label" x="80" y="150">Bocas del Toro</text>
+          <path class="provincia activa" d="M40,180 L80,180 L130,170 L160,180 L180,220 L170,260 L130,280 L80,270 L40,240 L30,200 Z"/>
+          <text class="provincia-label activa" x="110" y="230">Chiriqui</text>
+          <path class="provincia" d="M130,140 L180,120 L230,130 L260,160 L250,200 L240,240 L200,280 L170,260 L180,220 L160,180 L130,170 Z"/>
+          <text class="provincia-label" x="200" y="200">Veraguas</text>
+          <path class="provincia" d="M260,160 L300,150 L320,170 L330,210 L310,240 L280,250 L250,230 L250,200 Z"/>
+          <text class="provincia-label" x="290" y="200">Herrera</text>
+          <path class="provincia" d="M250,230 L280,250 L310,240 L330,270 L320,310 L280,330 L240,310 L230,280 L240,240 Z"/>
+          <text class="provincia-label" x="280" y="285">Los Santos</text>
+          <path class="provincia" d="M300,150 L360,130 L400,140 L420,170 L410,200 L380,220 L350,220 L330,210 L320,170 Z"/>
+          <text class="provincia-label" x="365" y="180">Cocle</text>
+          <path class="provincia" d="M400,140 L460,120 L520,110 L560,130 L580,160 L570,200 L540,230 L500,240 L460,230 L430,210 L410,200 L420,170 Z"/>
+          <text class="provincia-label" x="490" y="175">Panama</text>
+          <path class="provincia" d="M360,130 L400,100 L460,90 L520,80 L560,100 L560,130 L520,110 L460,120 L400,140 Z"/>
+          <text class="provincia-label" x="460" y="108">Colon</text>
+          <path class="provincia" d="M560,100 L620,80 L680,70 L720,80 L710,110 L670,120 L620,120 L580,130 L560,130 Z"/>
+          <text class="provincia-label" x="640" y="100">Guna Yala</text>
+          <path class="provincia" d="M580,130 L620,120 L670,120 L710,110 L740,140 L760,180 L750,230 L720,270 L680,290 L640,280 L600,250 L570,220 L570,200 L580,160 Z"/>
+          <text class="provincia-label" x="670" y="200">Darien</text>
+        </svg>
       </div>
+      <div class="provincia-seleccionada">Provincia seleccionada: Chiriqui — Nodo PTY Terminal Oeste</div>
+
+      <!-- umbral de compromiso — slider css estilizado -->
+      <div class="field-mt">
+        <label>umbral de compromiso</label>
+        <p class="sub">Solo notificarme de pools con al menos <b>60%</b> completado</p>
+        <input class="tab" type="range" min="0" max="100" value="60" />
+        <p class="sub sub-sm">Pools por debajo de este umbral no apareceran en tus notificaciones</p>
+      </div>
+
       <div class="field-mt"><label>visualizacion de datos</label>
         <div class="rad"><label><input checked name="unit" type="radio" />Metrico</label><label><input name="unit"
               type="radio" />Imperial</label></div>
@@ -68,9 +100,18 @@
     <section class="sec">
       <h2>Seguridad y Nodo</h2>
       <button class="outline">Cambiar Contrasena</button>
-      <div class="node-block">NODO CIFRADO ID: 0x71C9A2FF4A...8a42</div>
-      <div class="sec-links"><a class="danger" href="#">REGENERAR</a><button class="outline">Exportar Datos del
-          Terminal</button><a class="danger" href="#">Eliminar Cuenta</a></div>
+
+      <!-- Backend scope: hash generado server-side en PHP,
+           almacenado en tabla users. Regenerar invalida hash previo.
+           Implementacion Proyecto 1. -->
+      <div class="node-block">
+        NODO CIFRADO ID: <code>0x71C9A2FF4A...8a42</code>
+      </div>
+      <div class="sec-links">
+        <a class="btn-ghost-peligro" href="#">REGENERAR</a>
+        <button class="outline">Exportar Datos del Terminal</button>
+        <a class="danger" href="#">Eliminar Cuenta</a>
+      </div>
     </section>
 
     <button class="save">Guardar Ajustes</button>

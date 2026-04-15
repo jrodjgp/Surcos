@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/marketplace.css" />
+    <link rel="stylesheet" href="css/mapa.css" />
 </head>
 
 <body>
@@ -19,13 +20,46 @@
   <header class="navbar navbar--fixed">
     <a class="brand" href="marketplace_terminal.html">Surcos</a>
     <nav class="nav-links"><a class="active" href="marketplace_terminal.html">Marketplace</a><a
-        href="historias_productor.html">Stories</a></nav>
+        href="historias_productor.html">Stories</a><a href="nosotros.html">Nosotros</a></nav>
     <a class="nav-user" href="perfil.html" aria-label="perfil"><svg viewBox="0 0 24 24">
         <circle cx="12" cy="8" r="4"></circle>
         <path d="M4 20c0-4 4-7 8-7s8 3 8 7"></path>
       </svg></a>
   </header>
-  <div class="ticker ticker--fixed">■ TOTAL ACTIVE POOLS: 142 &nbsp; ■ ENTREGAS RECIENTES: 28 &nbsp; ■ TENDENCIA: TOMATES +12%</div>
+  <!-- ticker animado fijo — css only, sin javascript -->
+  <div class="ticker-wrap ticker--fixed">
+    <div class="ticker-track">
+      <span class="ticker-item">Pools Activos: <b>142</b></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Entregas Recientes: <b>28</b></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Tendencia: <span class="ticker-positivo">Tomates +12%</span></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Tendencia: <span class="ticker-positivo">Cacao Darien +8%</span></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Pools Cerrados Hoy: <b>9</b></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Provincias Activas: <b>4</b></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Proximo Cierre: Tomates Herrera · 06h 22m</span>
+      <span class="ticker-item ticker-separador">■</span>
+      <!-- duplicado para loop seamless -->
+      <span class="ticker-item">Pools Activos: <b>142</b></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Entregas Recientes: <b>28</b></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Tendencia: <span class="ticker-positivo">Tomates +12%</span></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Tendencia: <span class="ticker-positivo">Cacao Darien +8%</span></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Pools Cerrados Hoy: <b>9</b></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Provincias Activas: <b>4</b></span>
+      <span class="ticker-item ticker-separador">■</span>
+      <span class="ticker-item">Proximo Cierre: Tomates Herrera · 06h 22m</span>
+      <span class="ticker-item ticker-separador">■</span>
+    </div>
+  </div>
 
   <!-- diseno dividido -->
   <main class="split">
@@ -57,13 +91,14 @@
               <div class="val">Llenado Activo</div>
             </div>
             <div class="text-right">
-              <div class="label">Tiempo Restante</div>
-              <div class="val terra">Cierra en 4h 22m</div>
+              <div class="label">Fecha Limite</div>
+              <div class="val terra">Viernes 18 Abr</div>
+              <div class="deadline"><span class="deadline-icono">🕐</span> Cierra: 11:59 PM</div>
             </div>
           </div>
           <div class="progress-labels"><span>0 kg</span><span class="goal">Meta: 500 kg alcanzado</span><span>750 kg
               Max</span></div>
-          <div class="progress-track"><i style="width:66%"></i>
+          <div class="progress-track"><i class="progress-fill" style="--pool-progress:66%"></i>
             <div class="mark" style="left:33.3%"></div>
             <div class="mark" style="left:66.6%"></div>
           </div>
@@ -94,6 +129,29 @@
             <div class="log-row"><span>Fecha de Entrega</span><span>31 Oct</span></div>
             <div class="log-row"><span>Punto de Recogida</span><span>Mercado Central</span></div>
             <div class="log-row"><span>Compromiso Minimo</span><span>2.5 kg</span></div>
+          </div>
+        </div>
+
+        <!-- mapa de cobertura del pool — contexto A -->
+        <div class="mapa-contenedor mapa-pool">
+          <div class="mapa-etiqueta">Cobertura de Este Pool</div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" aria-label="Mapa de cobertura del pool">
+            <path class="provincia" d="M30,140 L80,110 L120,115 L130,140 L120,170 L80,180 L40,170 Z"/>
+            <path class="provincia activa" d="M40,180 L80,180 L130,170 L160,180 L180,220 L170,260 L130,280 L80,270 L40,240 L30,200 Z"/>
+            <text class="provincia-label activa" x="110" y="230">Chiriqui</text>
+            <path class="provincia" d="M130,140 L180,120 L230,130 L260,160 L250,200 L240,240 L200,280 L170,260 L180,220 L160,180 L130,170 Z"/>
+            <path class="provincia" d="M260,160 L300,150 L320,170 L330,210 L310,240 L280,250 L250,230 L250,200 Z"/>
+            <path class="provincia" d="M250,230 L280,250 L310,240 L330,270 L320,310 L280,330 L240,310 L230,280 L240,240 Z"/>
+            <path class="provincia" d="M300,150 L360,130 L400,140 L420,170 L410,200 L380,220 L350,220 L330,210 L320,170 Z"/>
+            <path class="provincia activa" d="M400,140 L460,120 L520,110 L560,130 L580,160 L570,200 L540,230 L500,240 L460,230 L430,210 L410,200 L420,170 Z"/>
+            <text class="provincia-label activa" x="490" y="175">Panama</text>
+            <path class="provincia" d="M360,130 L400,100 L460,90 L520,80 L560,100 L560,130 L520,110 L460,120 L400,140 Z"/>
+            <path class="provincia" d="M560,100 L620,80 L680,70 L720,80 L710,110 L670,120 L620,120 L580,130 L560,130 Z"/>
+            <path class="provincia" d="M580,130 L620,120 L670,120 L710,110 L740,140 L760,180 L750,230 L720,270 L680,290 L640,280 L600,250 L570,220 L570,200 L580,160 Z"/>
+          </svg>
+          <div class="mapa-leyenda">
+            <span class="leyenda-origen">Finca origen</span>
+            <span class="leyenda-retiro">Puntos de retiro</span>
           </div>
         </div>
       </div>

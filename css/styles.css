@@ -117,6 +117,7 @@ a {
 }
 
 /* boton primario — terracota, aristas vivas */
+/* bootstrap-equiv: .btn .btn-primary */
 .btn-primary {
   display: inline-block;
   padding: 14px 28px;
@@ -136,6 +137,7 @@ a {
 }
 
 /* boton de contorno — secundario */
+/* bootstrap-equiv: .btn .btn-outline-primary */
 .btn-outline {
   border: 1px solid var(--terra);
   background: transparent;
@@ -177,6 +179,18 @@ a {
 
 .overflow-x-auto {
   overflow-x: auto
+}
+
+/* =========================================================
+   animacion de llenado de pool — css only, sin javascript
+   ========================================================= */
+@keyframes fill-pool {
+  from { width: 0% }
+  to { width: var(--pool-progress) }
+}
+
+.progress-fill {
+  animation: fill-pool 1.2s ease-out forwards
 }
 
 /* =========================================================

@@ -1,17 +1,18 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Surcos | Marketplace</title>
-  <meta name="description" content="Surcos â€” Del campo al terminal." />
+  <meta name="description" content="Surcos — Del campo al terminal." />
   <link
     href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&family=Space+Grotesk:wght@400;500;700&display=swap"
     rel="stylesheet" />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/marketplace.css" />
+    <link rel="stylesheet" href="css/mapa.css" />
 </head>
 
 <body>
@@ -21,6 +22,7 @@
         <nav class="nav-links">
             <a class="active" href="marketplace_terminal.html">Marketplace</a>
             <a href="historias_productor.html">Stories</a>
+            <a href="nosotros.html">Nosotros</a>
         </nav>
         <a class="nav-user" href="perfil.html" aria-label="perfil">
             <svg viewBox="0 0 24 24">
@@ -30,8 +32,40 @@
         </a>
     </header>
 
-    <!-- ticker informativo -->
-    <div class="ticker">■ TOTAL ACTIVE POOLS: 142 &nbsp; ■ ENTREGAS RECIENTES: 28 &nbsp; ■ TENDENCIA: GEISHA +14%</div>
+    <!-- ticker animado — css only, sin javascript -->
+    <div class="ticker-wrap">
+      <div class="ticker-track">
+        <span class="ticker-item">Pools Activos: <b>142</b></span>
+        <span class="ticker-item ticker-separador">■</span>
+        <span class="ticker-item">Entregas Recientes: <b>28</b></span>
+        <span class="ticker-item ticker-separador">■</span>
+        <span class="ticker-item">Tendencia: <span class="ticker-positivo">Geisha +14%</span></span>
+        <span class="ticker-item ticker-separador">■</span>
+        <span class="ticker-item">Tendencia: <span class="ticker-positivo">Cacao Darien +8%</span></span>
+        <span class="ticker-item ticker-separador">■</span>
+        <span class="ticker-item">Pools Cerrados Hoy: <b>9</b></span>
+        <span class="ticker-item ticker-separador">■</span>
+        <span class="ticker-item">Provincias Activas: <b>4</b></span>
+        <span class="ticker-item ticker-separador">■</span>
+        <span class="ticker-item">Proximo Cierre: Tomates Herrera · 06h 22m</span>
+        <span class="ticker-item ticker-separador">■</span>
+        <!-- duplicado para loop seamless -->
+        <span class="ticker-item">Pools Activos: <b>142</b></span>
+        <span class="ticker-item ticker-separador">■</span>
+        <span class="ticker-item">Entregas Recientes: <b>28</b></span>
+        <span class="ticker-item ticker-separador">■</span>
+        <span class="ticker-item">Tendencia: <span class="ticker-positivo">Geisha +14%</span></span>
+        <span class="ticker-item ticker-separador">■</span>
+        <span class="ticker-item">Tendencia: <span class="ticker-positivo">Cacao Darien +8%</span></span>
+        <span class="ticker-item ticker-separador">■</span>
+        <span class="ticker-item">Pools Cerrados Hoy: <b>9</b></span>
+        <span class="ticker-item ticker-separador">■</span>
+        <span class="ticker-item">Provincias Activas: <b>4</b></span>
+        <span class="ticker-item ticker-separador">■</span>
+        <span class="ticker-item">Proximo Cierre: Tomates Herrera · 06h 22m</span>
+        <span class="ticker-item ticker-separador">■</span>
+      </div>
+    </div>
 
     <!-- contenido principal -->
     <main class="wrap wrap--marketplace">
@@ -43,11 +77,28 @@
         </section>
 
         <div class="section-title">
-            <h2>Pools de Compra Activos</h2>
+            <h2>Terminal de Marketplace</h2>
             <span>terminal en vivo · 08:24 PM</span>
         </div>
 
-        <section class="grid">
+        <!-- Demo UI: el cambio de rol es solo presentacional.
+             La autenticacion real se implementa en Proyecto 1 con sesiones PHP -->
+        <input type="checkbox" id="role-toggle" class="role-input">
+        <label for="role-toggle" class="role-label">
+          <span class="role-comprador">🛒 Comprador</span>
+          <span class="role-productor">🌱 Productor</span>
+        </label>
+
+        <!-- ===============================================
+             vista del comprador — pools activos
+             =============================================== -->
+        <section class="view-comprador">
+          <div class="section-title">
+            <h2>Pools de Compra Activos</h2>
+            <span>3 pools abiertos</span>
+          </div>
+
+          <section class="grid">
             <!-- tarjeta 1 -->
             <article class="card">
                 <div class="card-img">
@@ -62,8 +113,9 @@
                 </div>
                 <div class="prog">
                     <div class="prog-head"><span>Llenando Pool</span><span>85%</span></div>
-                    <div class="bar"><i class="terra" style="width:85%"></i></div>
+                    <div class="bar"><i class="progress-fill terra" style="--pool-progress:85%"></i></div>
                 </div>
+                <div class="deadline"><span class="deadline-icono">🕐</span> Cierra: Viernes 18 Abr · 11:59 PM</div>
                 <a href="pool_detail.html" class="btn">Comprometerse al Pool</a>
             </article>
             <!-- tarjeta 2 -->
@@ -80,8 +132,9 @@
                 </div>
                 <div class="prog">
                     <div class="prog-head"><span>Llenando Pool</span><span>42%</span></div>
-                    <div class="bar"><i class="terra" style="width:42%"></i></div>
+                    <div class="bar"><i class="progress-fill" style="--pool-progress:42%"></i></div>
                 </div>
+                <div class="deadline"><span class="deadline-icono">🕐</span> Cierra: Viernes 18 Abr · 11:59 PM</div>
                 <a href="pool_detail.html" class="btn">Comprometerse al Pool</a>
             </article>
             <!-- tarjeta 3 -->
@@ -98,10 +151,100 @@
                 </div>
                 <div class="prog">
                     <div class="prog-head"><span>Llenando Pool</span><span>98%</span></div>
-                    <div class="bar"><i style="width:98%"></i></div>
+                    <div class="bar"><i class="progress-fill" style="--pool-progress:98%"></i></div>
                 </div>
+                <div class="deadline"><span class="deadline-icono">🕐</span> Cierra: Viernes 18 Abr · 11:59 PM</div>
                 <a href="pool_detail.html" class="btn">Comprometerse al Pool</a>
             </article>
+          </section>
+        </section>
+
+        <!-- ===============================================
+             vista del productor — publicar cosecha y lotes
+             requiere backend: PHP/MySQL para persistir datos
+             =============================================== -->
+        <section class="view-productor">
+          <div class="section-title">
+            <h2>Panel del Productor</h2>
+            <span>modo productor</span>
+          </div>
+
+          <!-- formulario placeholder — requiere backend PHP para procesar -->
+          <div class="form-cosecha">
+            <h3>Publicar Nueva Cosecha</h3>
+            <div class="form-grid">
+              <div class="form-campo">
+                <label>producto</label>
+                <input type="text" placeholder="Ej: Tomates de Herencia" />
+              </div>
+              <div class="form-campo">
+                <label>variedad / lote</label>
+                <input type="text" placeholder="Ej: Lote #09 — Organico" />
+              </div>
+              <div class="form-campo">
+                <label>cantidad disponible (kg)</label>
+                <input type="number" placeholder="500" class="tab" />
+              </div>
+              <div class="form-campo">
+                <label>precio minimo grupal (B/./kg)</label>
+                <input type="text" placeholder="B/. 4.50" class="tab" />
+              </div>
+              <div class="form-campo">
+                <label>ubicacion de la finca</label>
+                <select>
+                  <option>Tierras Altas, Chiriqui</option>
+                  <option>Boquete, Chiriqui</option>
+                  <option>Volcan, Chiriqui</option>
+                  <option>Cerro Punta</option>
+                  <option>Cocle</option>
+                  <option>Darien</option>
+                </select>
+              </div>
+              <div class="form-campo">
+                <label>ventana de cosecha</label>
+                <input type="text" placeholder="15 Abr — 30 Abr 2026" />
+              </div>
+            </div>
+            <!-- requiere backend: validacion y almacenamiento en MySQL -->
+            <button class="btn-primary" disabled>Publicar en Marketplace →</button>
+          </div>
+
+          <!-- estadisticas del productor -->
+          <div class="lotes-panel">
+            <div class="lotes-panel-titulo">Mis Lotes Activos</div>
+            <div class="lotes-stat"><span>Lotes publicados este ciclo</span><span>3</span></div>
+            <div class="lotes-stat"><span>Volumen total comprometido</span><span class="tab">1,240 kg</span></div>
+            <div class="lotes-stat"><span>Pools activos con mi producto</span><span>2</span></div>
+            <div class="lotes-stat"><span>Ingreso estimado del ciclo</span><span class="tab">B/. 3,720.00</span></div>
+            <div class="lotes-stat"><span>Tasa de llenado promedio</span><span>74%</span></div>
+          </div>
+
+          <!-- mapa de zonas activas del productor — contexto B -->
+          <div class="mapa-contenedor mapa-productor">
+            <div class="mapa-etiqueta">Tus Zonas Activas</div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" aria-label="Mapa de zonas activas del productor">
+              <path class="provincia" d="M30,140 L80,110 L120,115 L130,140 L120,170 L80,180 L40,170 Z"/>
+              <text class="provincia-label" x="80" y="150">Bocas del Toro</text>
+              <path class="provincia activa" d="M40,180 L80,180 L130,170 L160,180 L180,220 L170,260 L130,280 L80,270 L40,240 L30,200 Z"/>
+              <text class="provincia-label activa" x="110" y="230">Chiriqui</text>
+              <path class="provincia" d="M130,140 L180,120 L230,130 L260,160 L250,200 L240,240 L200,280 L170,260 L180,220 L160,180 L130,170 Z"/>
+              <text class="provincia-label" x="200" y="200">Veraguas</text>
+              <path class="provincia" d="M260,160 L300,150 L320,170 L330,210 L310,240 L280,250 L250,230 L250,200 Z"/>
+              <text class="provincia-label" x="290" y="200">Herrera</text>
+              <path class="provincia" d="M250,230 L280,250 L310,240 L330,270 L320,310 L280,330 L240,310 L230,280 L240,240 Z"/>
+              <text class="provincia-label" x="280" y="285">Los Santos</text>
+              <path class="provincia activa" d="M300,150 L360,130 L400,140 L420,170 L410,200 L380,220 L350,220 L330,210 L320,170 Z"/>
+              <text class="provincia-label activa" x="365" y="180">Cocle</text>
+              <path class="provincia" d="M400,140 L460,120 L520,110 L560,130 L580,160 L570,200 L540,230 L500,240 L460,230 L430,210 L410,200 L420,170 Z"/>
+              <text class="provincia-label" x="490" y="175">Panama</text>
+              <path class="provincia" d="M360,130 L400,100 L460,90 L520,80 L560,100 L560,130 L520,110 L460,120 L400,140 Z"/>
+              <text class="provincia-label" x="460" y="108">Colon</text>
+              <path class="provincia" d="M560,100 L620,80 L680,70 L720,80 L710,110 L670,120 L620,120 L580,130 L560,130 Z"/>
+              <text class="provincia-label" x="640" y="100">Guna Yala</text>
+              <path class="provincia" d="M580,130 L620,120 L670,120 L710,110 L740,140 L760,180 L750,230 L720,270 L680,290 L640,280 L600,250 L570,220 L570,200 L580,160 Z"/>
+              <text class="provincia-label" x="670" y="200">Darien</text>
+            </svg>
+          </div>
         </section>
     </main>
 

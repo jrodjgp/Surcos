@@ -43,6 +43,7 @@
 }
 
 /* tarjeta individual de producto */
+/* bootstrap-equiv: .card */
 .card {
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -75,6 +76,7 @@
 }
 
 /* badge de origen — esquina superior derecha de la imagen */
+/* bootstrap-equiv: .badge .bg-dark */
 .card-badge {
   position: absolute;
   top: 0;
@@ -127,6 +129,7 @@
 
 /* ---------------------------------------------------------
    barra de progreso del pool (brutalista rectangular)
+   bootstrap-equiv: .progress
    --------------------------------------------------------- */
 .prog {
   margin-top: 12px
@@ -369,6 +372,7 @@
 }
 
 /* barra de progreso grande (22px) del pool detail */
+/* bootstrap-equiv: .progress */
 .progress-track {
   height: 22px;
   width: 100%;
@@ -870,6 +874,179 @@
 
 .shop-card .sbtn:hover {
   background: var(--leaf)
+}
+
+/* ---------------------------------------------------------
+   selector de rol — checkbox hack, sin javascript
+   --------------------------------------------------------- */
+
+/* ocultar el input real */
+.role-input {
+  display: none
+}
+
+/* etiqueta del toggle — contenedor horizontal */
+.role-label {
+  display: flex;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  width: fit-content;
+  margin: 0 auto 32px
+}
+
+/* cada opcion de rol */
+.role-comprador,
+.role-productor {
+  padding: 12px 28px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 700;
+  transition: background .2s, color .2s
+}
+
+/* estado por defecto: comprador activo */
+.role-comprador {
+  background: var(--leaf);
+  color: #fff
+}
+
+.role-productor {
+  background: #fff;
+  color: #766a62
+}
+
+/* estado checked: productor activo */
+.role-input:checked ~ .role-label .role-comprador {
+  background: #fff;
+  color: #766a62
+}
+
+.role-input:checked ~ .role-label .role-productor {
+  background: var(--terra);
+  color: #fff
+}
+
+/* logica de visibilidad de las vistas */
+.view-comprador {
+  display: block
+}
+
+.view-productor {
+  display: none
+}
+
+.role-input:checked ~ .view-productor {
+  display: block
+}
+
+.role-input:checked ~ .view-comprador {
+  display: none
+}
+
+/* ---------------------------------------------------------
+   panel del productor — estilos del placeholder
+   --------------------------------------------------------- */
+
+/* formulario de publicacion de cosecha (placeholder) */
+.form-cosecha {
+  border: 1px solid var(--line);
+  padding: 32px;
+  background: var(--surface);
+  margin-bottom: 40px
+}
+
+.form-cosecha h3 {
+  font-family: 'Newsreader', serif;
+  font-size: 28px;
+  color: var(--leaf);
+  margin-bottom: 20px
+}
+
+/* campo de formulario del productor */
+.form-campo {
+  margin-bottom: 16px
+}
+
+.form-campo label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #72655e;
+  margin-bottom: 4px
+}
+
+.form-campo input,
+.form-campo select {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 0;
+  background: transparent;
+  font-size: 14px;
+  font-family: 'Space Grotesk', sans-serif
+}
+
+.form-campo input:focus,
+.form-campo select:focus {
+  outline: none;
+  border-bottom: 2px solid var(--terra)
+}
+
+/* cuadricula de formulario del productor */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px
+}
+
+/* panel de estadisticas del productor */
+.lotes-panel {
+  border: 1px solid var(--line);
+  margin-bottom: 40px
+}
+
+.lotes-panel-titulo {
+  background: var(--leaf);
+  color: #fff;
+  padding: 14px 20px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 700
+}
+
+.lotes-stat {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px
+}
+
+.lotes-stat:last-child {
+  border-bottom: none
+}
+
+.lotes-stat span:last-child {
+  font-weight: 700;
+  color: var(--leaf)
+}
+
+/* indicador de fecha limite estatica */
+.deadline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--terra);
+  font-weight: 700;
+  margin-top: 8px
+}
+
+.deadline-icono {
+  font-size: 16px
 }
 
 /* ---------------------------------------------------------

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Surcos | Nosotros — Conectamos la finca con tu mesa</title>
+  <meta name="description"
+    content="Surcos elimina intermediarios en la cadena agricola de Panama. Conoce como los pools de compra grupal reducen precios hasta un 60%." />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&family=Space+Grotesk:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/nosotros.css" />
+  <link rel="stylesheet" href="css/mapa.css" />
+</head>
+
+<body>
+  <!-- barra superior -->
+  <header class="navbar">
+    <a class="brand" href="marketplace_terminal.html">Surcos</a>
+    <nav class="nav-links">
+      <a href="marketplace_terminal.html">Marketplace</a>
+      <a href="historias_productor.html">Stories</a>
+      <a class="active" href="nosotros.html">Nosotros</a>
+    </nav>
+    <a class="nav-user" href="perfil.html" aria-label="perfil">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4"></circle>
+        <path d="M4 20c0-4 4-7 8-7s8 3 8 7"></path>
+      </svg>
+    </a>
+  </header>
+
+  <!-- a) hero — propuesta de valor -->
+  <section class="nosotros-hero">
+    <h1>Conectamos la finca con tu mesa</h1>
+    <p>
+      En Panama, los intermediarios capturan entre el 40% y el 60% del precio final de los productos agricolas.
+      Surcos elimina esos eslabones innecesarios conectando directamente al productor con el consumidor
+      a traves de pools de compra grupal.
+    </p>
+    <span class="dato">Fuente: datos MIDA Panama — cadena de intermediacion agricola</span>
+  </section>
+
+  <!-- b) como funcionan los pools — 4 pasos -->
+  <section class="nosotros-seccion">
+    <div class="nosotros-seccion-titulo">
+      <h2>¿Como funcionan los pools?</h2>
+    </div>
+    <div class="pasos-grid">
+      <!-- paso 1 -->
+      <div class="paso">
+        <div class="paso-numero">Paso 01</div>
+        <div class="paso-icono">🌾</div>
+        <h3>Agricultor publica su cosecha</h3>
+        <p>El productor registra su lote, establece un precio minimo grupal y define la ventana de cosecha disponible.</p>
+      </div>
+      <!-- paso 2 -->
+      <div class="paso">
+        <div class="paso-numero">Paso 02</div>
+        <div class="paso-icono">🤝</div>
+        <h3>Compradores se comprometen</h3>
+        <p>Los consumidores se unen al pool comprometiendo una cantidad. No hay pago inmediato — solo compromiso de compra.</p>
+      </div>
+      <!-- paso 3 -->
+      <div class="paso">
+        <div class="paso-numero">Paso 03</div>
+        <div class="paso-icono">📉</div>
+        <h3>El pool se llena, el precio baja</h3>
+        <p>Al alcanzar el volumen minimo, el precio por unidad baja para todos los participantes del pool.</p>
+      </div>
+      <!-- paso 4 -->
+      <div class="paso">
+        <div class="paso-numero">Paso 04</div>
+        <div class="paso-icono">📦</div>
+        <h3>Retiro o despacho directo</h3>
+        <p>Se coordina la entrega en un punto de retiro cercano o despacho directo desde la finca al consumidor final.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- c) el problema que resolvemos — comparacion de cadenas -->
+  <section class="nosotros-seccion">
+    <div class="nosotros-seccion-titulo">
+      <h2>El problema que resolvemos</h2>
+    </div>
+    <div class="cadenas-grid">
+      <!-- cadena tradicional -->
+      <div class="cadena">
+        <div class="cadena-titulo">Cadena Tradicional</div>
+
+        <div class="actor">
+          <div class="actor-simbolo bg-leaf">A</div>
+          <div class="actor-info">
+            <div class="actor-nombre">Agricultor</div>
+            <div class="actor-markup">Recibe B/.1.00 base</div>
+          </div>
+        </div>
+        <div class="flecha">↓</div>
+
+        <div class="actor">
+          <div class="actor-simbolo bg-muted">C</div>
+          <div class="actor-info">
+            <div class="actor-nombre">Acopiador</div>
+            <div class="actor-markup">+15-20% markup</div>
+          </div>
+        </div>
+        <div class="flecha">↓</div>
+
+        <div class="actor">
+          <div class="actor-simbolo bg-muted">D</div>
+          <div class="actor-info">
+            <div class="actor-nombre">Distribuidor</div>
+            <div class="actor-markup">+10-15% markup</div>
+          </div>
+        </div>
+        <div class="flecha">↓</div>
+
+        <div class="actor">
+          <div class="actor-simbolo bg-muted">S</div>
+          <div class="actor-info">
+            <div class="actor-nombre">Supermercado</div>
+            <div class="actor-markup">+20-30% markup</div>
+          </div>
+        </div>
+        <div class="flecha">↓</div>
+
+        <div class="actor">
+          <div class="actor-simbolo bg-terra">F</div>
+          <div class="actor-info">
+            <div class="actor-nombre">Consumidor Final</div>
+            <div class="actor-markup">Paga B/.2.50 — 150% sobre precio en finca</div>
+          </div>
+        </div>
+
+        <div class="cadena-resumen">4 intermediarios · precio final +150%</div>
+      </div>
+
+      <!-- modelo surcos -->
+      <div class="cadena">
+        <div class="cadena-titulo">Modelo Surcos</div>
+
+        <div class="actor">
+          <div class="actor-simbolo bg-leaf">A</div>
+          <div class="actor-info">
+            <div class="actor-nombre">Agricultor</div>
+            <div class="actor-markup">Recibe B/.1.40 — 40% mas que cadena tradicional</div>
+          </div>
+        </div>
+        <div class="flecha">↓</div>
+
+        <div class="actor">
+          <div class="actor-simbolo bg-ochre">P</div>
+          <div class="actor-info">
+            <div class="actor-nombre">Pool de Compra Grupal</div>
+            <div class="actor-markup">Volumen colectivo = precio reducido</div>
+          </div>
+        </div>
+        <div class="flecha">↓</div>
+
+        <div class="actor">
+          <div class="actor-simbolo bg-terra">F</div>
+          <div class="actor-info">
+            <div class="actor-nombre">Consumidor Final</div>
+            <div class="actor-markup">Paga B/.1.60 — 36% menos que retail</div>
+          </div>
+        </div>
+
+        <div class="cadena-resumen">0 intermediarios · precio final -36%</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- d) quienes somos — equipo -->
+  <section class="nosotros-seccion">
+    <div class="nosotros-seccion-titulo">
+      <h2>Quienes somos</h2>
+    </div>
+    <div class="equipo-grid">
+      <div class="miembro">
+        <div class="miembro-avatar">MS</div>
+        <div class="miembro-nombre">Miranda Sarai</div>
+      </div>
+      <div class="miembro">
+        <div class="miembro-avatar">JU</div>
+        <div class="miembro-nombre">Joseph Urriola</div>
+      </div>
+      <div class="miembro">
+        <div class="miembro-avatar">PA</div>
+        <div class="miembro-nombre">Paola</div>
+      </div>
+      <div class="miembro">
+        <div class="miembro-avatar">PT</div>
+        <div class="miembro-nombre">Patricio</div>
+      </div>
+      <div class="miembro">
+        <div class="miembro-avatar">GP</div>
+        <div class="miembro-nombre">Gael Pereira</div>
+      </div>
+      <div class="miembro">
+        <div class="miembro-avatar">GW</div>
+        <div class="miembro-nombre">George Worrell</div>
+      </div>
+      <div class="miembro">
+        <div class="miembro-avatar">JR</div>
+        <div class="miembro-nombre">Jose Rodriguez</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- mapa de provincias conectadas — contexto D, decorativo -->
+  <section class="nosotros-seccion">
+    <div class="nosotros-seccion-titulo">
+      <h2>Provincias Conectadas</h2>
+    </div>
+    <div class="mapa-contenedor mapa-nosotros">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" aria-label="Provincias conectadas por Surcos">
+        <path class="provincia" d="M30,140 L80,110 L120,115 L130,140 L120,170 L80,180 L40,170 Z"/>
+        <text class="provincia-label" x="80" y="150">Bocas del Toro</text>
+        <path class="provincia activa" d="M40,180 L80,180 L130,170 L160,180 L180,220 L170,260 L130,280 L80,270 L40,240 L30,200 Z"/>
+        <text class="provincia-label activa" x="110" y="230">Chiriqui</text>
+        <path class="provincia" d="M130,140 L180,120 L230,130 L260,160 L250,200 L240,240 L200,280 L170,260 L180,220 L160,180 L130,170 Z"/>
+        <text class="provincia-label" x="200" y="200">Veraguas</text>
+        <path class="provincia activa" d="M260,160 L300,150 L320,170 L330,210 L310,240 L280,250 L250,230 L250,200 Z"/>
+        <text class="provincia-label activa" x="290" y="200">Herrera</text>
+        <path class="provincia activa" d="M250,230 L280,250 L310,240 L330,270 L320,310 L280,330 L240,310 L230,280 L240,240 Z"/>
+        <text class="provincia-label activa" x="280" y="285">Los Santos</text>
+        <path class="provincia activa" d="M300,150 L360,130 L400,140 L420,170 L410,200 L380,220 L350,220 L330,210 L320,170 Z"/>
+        <text class="provincia-label activa" x="365" y="180">Cocle</text>
+        <path class="provincia" d="M400,140 L460,120 L520,110 L560,130 L580,160 L570,200 L540,230 L500,240 L460,230 L430,210 L410,200 L420,170 Z"/>
+        <text class="provincia-label" x="490" y="175">Panama</text>
+        <path class="provincia" d="M360,130 L400,100 L460,90 L520,80 L560,100 L560,130 L520,110 L460,120 L400,140 Z"/>
+        <text class="provincia-label" x="460" y="108">Colon</text>
+        <path class="provincia" d="M560,100 L620,80 L680,70 L720,80 L710,110 L670,120 L620,120 L580,130 L560,130 Z"/>
+        <text class="provincia-label" x="640" y="100">Guna Yala</text>
+        <path class="provincia" d="M580,130 L620,120 L670,120 L710,110 L740,140 L760,180 L750,230 L720,270 L680,290 L640,280 L600,250 L570,220 L570,200 L580,160 Z"/>
+        <text class="provincia-label" x="670" y="200">Darien</text>
+      </svg>
+      <div class="mapa-nota">Expansion a Veraguas y Darien — 2025</div>
+    </div>
+  </section>
+
+  <!-- e) respaldados por — referencias institucionales -->
+  <section class="nosotros-seccion">
+    <div class="nosotros-seccion-titulo">
+      <h2>Respaldados por</h2>
+    </div>
+    <div class="respaldo-fila">
+      <span class="respaldo-etiqueta">Referencias Institucionales:</span>
+      <a href="https://www.mida.gob.pa" target="_blank" rel="noopener">MIDA Panama</a>
+      <a href="https://www.ima.gob.pa" target="_blank" rel="noopener">IMA Panama</a>
+      <a href="https://www.fao.org/panama" target="_blank" rel="noopener">FAO Panama</a>
+    </div>
+  </section>
+
+  <!-- pie de pagina global -->
+  <footer class="footer">
+    <div>
+      <div class="f-brand">Surcos</div>
+      <div class="f-small">Del campo al terminal.</div>
+      <div class="f-small">&copy; 2024 SURCOS. DEL CAMPO AL TERMINAL.</div>
+    </div>
+    <div>
+      <div class="f-head">Red</div>
+      <a class="f-link" href="#">Logistica</a>
+      <a class="f-link" href="#">Terminal API</a>
+    </div>
+    <div>
+      <div class="f-head">Legal</div>
+      <a class="f-link" href="#">Privacidad</a>
+      <a class="f-link" href="#">Terminos</a>
+    </div>
+    <div>
+      <div class="f-head">Idioma</div>
+      <a class="f-link" href="#">ES</a>
+      <a class="f-link" href="#">EN</a>
+      <div class="f-small">ESTADO DE RED: OPTIMO</div>
+      <div class="f-small">NODO: PTY-01</div>
+    </div>
+  </footer>
+</body>
+
+</html>

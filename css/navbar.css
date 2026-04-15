@@ -271,6 +271,55 @@
 }
 
 /* ---------------------------------------------------------
+   ticker animado — desplazamiento css-only, sin javascript
+   --------------------------------------------------------- */
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  background: var(--leaf);
+  border-bottom: 1px solid var(--ochre);
+  height: 32px;
+  display: flex;
+  align-items: center
+}
+
+.ticker-track {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  animation: ticker-scroll 35s linear infinite
+}
+
+.ticker-track:hover {
+  animation-play-state: paused
+}
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0) }
+  to { transform: translateX(-50%) }
+}
+
+.ticker-item {
+  white-space: nowrap;
+  padding: 0 1.5rem;
+  font-family: 'Space Grotesk', monospace;
+  font-size: .75rem;
+  letter-spacing: .05em;
+  color: var(--bg);
+  text-transform: uppercase
+}
+
+/* dato positivo — color ochre */
+.ticker-positivo {
+  color: var(--ochre)
+}
+
+/* separador — baja opacidad */
+.ticker-separador {
+  opacity: .4
+}
+
+/* ---------------------------------------------------------
    responsive navbar y footer
    --------------------------------------------------------- */
 @media (max-width: 980px) {

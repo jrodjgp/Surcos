@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" aria-label="Mapa de provincias de Panama">
+  <!-- mapa simplificado de panama — estetica data-viz dashboard -->
+  <!-- cada provincia tiene id para css targeting -->
+  <style>
+    .provincia {
+      fill: var(--surface, #F4F1EA);
+      stroke: var(--line, #E0DCD3);
+      stroke-width: 1;
+      transition: fill .2s, stroke .2s;
+      cursor: default;
+    }
+    .provincia.activa {
+      fill: rgba(200, 90, 50, .25);
+      stroke: var(--terra, #C85A32);
+      stroke-width: 1.5;
+    }
+    .provincia.activa:hover {
+      fill: rgba(200, 90, 50, .4);
+    }
+    .provincia-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 9px;
+      fill: var(--ink, #1f1b16);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      pointer-events: none;
+      text-anchor: middle;
+    }
+    .provincia.activa + .provincia-label,
+    .provincia-label.activa {
+      fill: var(--terra, #C85A32);
+      font-weight: 700;
+    }
+  </style>
+
+  <!-- bocas del toro -->
+  <path id="provincia-bocas-del-toro" class="provincia"
+    d="M30,140 L80,110 L120,115 L130,140 L120,170 L80,180 L40,170 Z"/>
+  <text class="provincia-label" x="80" y="150">Bocas del Toro</text>
+
+  <!-- chiriqui -->
+  <path id="provincia-chiriqui" class="provincia"
+    d="M40,180 L80,180 L130,170 L160,180 L180,220 L170,260 L130,280 L80,270 L40,240 L30,200 Z"/>
+  <text class="provincia-label" x="110" y="230">Chiriqui</text>
+
+  <!-- veraguas -->
+  <path id="provincia-veraguas" class="provincia"
+    d="M130,140 L180,120 L230,130 L260,160 L250,200 L240,240 L200,280 L170,260 L180,220 L160,180 L130,170 Z"/>
+  <text class="provincia-label" x="200" y="200">Veraguas</text>
+
+  <!-- herrera -->
+  <path id="provincia-herrera" class="provincia"
+    d="M260,160 L300,150 L320,170 L330,210 L310,240 L280,250 L250,230 L250,200 Z"/>
+  <text class="provincia-label" x="290" y="200">Herrera</text>
+
+  <!-- los santos -->
+  <path id="provincia-los-santos" class="provincia"
+    d="M250,230 L280,250 L310,240 L330,270 L320,310 L280,330 L240,310 L230,280 L240,240 Z"/>
+  <text class="provincia-label" x="280" y="285">Los Santos</text>
+
+  <!-- cocle -->
+  <path id="provincia-cocle" class="provincia"
+    d="M300,150 L360,130 L400,140 L420,170 L410,200 L380,220 L350,220 L330,210 L320,170 Z"/>
+  <text class="provincia-label" x="365" y="180">Cocle</text>
+
+  <!-- panama (provincia) -->
+  <path id="provincia-panama" class="provincia"
+    d="M400,140 L460,120 L520,110 L560,130 L580,160 L570,200 L540,230 L500,240 L460,230 L430,210 L410,200 L420,170 Z"/>
+  <text class="provincia-label" x="490" y="175">Panama</text>
+
+  <!-- colon -->
+  <path id="provincia-colon" class="provincia"
+    d="M360,130 L400,100 L460,90 L520,80 L560,100 L560,130 L520,110 L460,120 L400,140 Z"/>
+  <text class="provincia-label" x="460" y="108">Colon</text>
+
+  <!-- guna yala (comarca) -->
+  <path id="provincia-guna-yala" class="provincia"
+    d="M560,100 L620,80 L680,70 L720,80 L710,110 L670,120 L620,120 L580,130 L560,130 Z"/>
+  <text class="provincia-label" x="640" y="100">Guna Yala</text>
+
+  <!-- darien -->
+  <path id="provincia-darien" class="provincia"
+    d="M580,130 L620,120 L670,120 L710,110 L740,140 L760,180 L750,230 L720,270 L680,290 L640,280 L600,250 L570,220 L570,200 L580,160 Z"/>
+  <text class="provincia-label" x="670" y="200">Darien</text>
+</svg>
