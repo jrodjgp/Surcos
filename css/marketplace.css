@@ -1,8 +1,8 @@
-.hero {
+﻿.hero {
   height: 520px;
   border: 1px solid var(--line);
   border-radius: 220px 220px 0 0;
-  /* arco de granero — patron disenio */
+  /* arco de granero â€” patron disenio */
   overflow: hidden;
   position: relative
 }
@@ -75,7 +75,7 @@
   transform: scale(1.05)
 }
 
-/* badge de origen — esquina superior derecha de la imagen */
+/* badge de origen â€” esquina superior derecha de la imagen */
 /* bootstrap-equiv: .badge .bg-dark */
 .card-badge {
   position: absolute;
@@ -105,7 +105,7 @@
   margin-top: 6px
 }
 
-/* precio del pool — "ticker" agresivo */
+/* precio del pool â€” "ticker" agresivo */
 .price {
   font-size: 28px;
   font-weight: 700;
@@ -147,13 +147,13 @@
   margin-bottom: 4px
 }
 
-/* pista de la barra — 12px alto, sin redondear */
+/* pista de la barra â€” 12px alto, sin redondear */
 .bar {
   height: 12px;
   background: var(--line)
 }
 
-/* relleno de la barra — ochre por defecto */
+/* relleno de la barra â€” ochre por defecto */
 .bar>i {
   display: block;
   height: 100%;
@@ -192,7 +192,7 @@
    pagina de detalle del pool (diseno dividido)
    --------------------------------------------------------- */
 
-/* navbar fija — usada en pool_detail donde el layout es 100vh */
+/* navbar fija â€” usada en pool_detail donde el layout es 100vh */
 .navbar--fixed {
   position: fixed;
   width: 100%
@@ -227,7 +227,7 @@
   justify-content: flex-end
 }
 
-/* contenedor de imagen con arco superior — patron de granero */
+/* contenedor de imagen con arco superior â€” patron de granero */
 .arch {
   width: 100%;
   max-width: 380px;
@@ -321,7 +321,7 @@
   overflow: hidden
 }
 
-/* version del terminal — marca de agua */
+/* version del terminal â€” marca de agua */
 .terminal-box .ver {
   position: absolute;
   top: 14px;
@@ -442,7 +442,7 @@
   font-size: 15px
 }
 
-/* precio del pool — prominente, hoja verde */
+/* precio del pool â€” prominente, hoja verde */
 .pool-price {
   font-size: 40px;
   font-weight: 700;
@@ -527,7 +527,7 @@
 }
 
 /* ---------------------------------------------------------
-   historias del productor — hero editorial
+   historias del productor â€” hero editorial
    --------------------------------------------------------- */
 .story-hero {
   position: relative;
@@ -877,7 +877,7 @@
 }
 
 /* ---------------------------------------------------------
-   selector de rol — checkbox hack, sin javascript
+   selector de rol â€” checkbox hack, sin javascript
    --------------------------------------------------------- */
 
 /* ocultar el input real */
@@ -885,7 +885,7 @@
   display: none
 }
 
-/* etiqueta del toggle — contenedor horizontal */
+/* etiqueta del toggle â€” contenedor horizontal */
 .role-label {
   display: flex;
   border: 1px solid var(--line);
@@ -945,7 +945,7 @@
 }
 
 /* ---------------------------------------------------------
-   panel del productor — estilos del placeholder
+   panel del productor â€” estilos del placeholder
    --------------------------------------------------------- */
 
 /* formulario de publicacion de cosecha (placeholder) */
@@ -1050,6 +1050,111 @@
 }
 
 /* ---------------------------------------------------------
+   modelos de entrega â€” badge en pool_detail y radio en productor
+   --------------------------------------------------------- */
+
+/* bloque de modelo de entrega */
+.modelo-entrega {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: .75rem 1rem;
+  border-left: 3px solid var(--ochre);
+  background: var(--surface);
+  margin-top: 1rem
+}
+
+/* icono del modelo */
+.modelo-icon {
+  font-size: 20px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px
+}
+
+/* titulo del modelo â€” label agresivo */
+.modelo-titulo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: .7rem;
+  letter-spacing: .1em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ink)
+}
+
+/* descripcion del modelo */
+.modelo-desc {
+  font-size: .75rem;
+  opacity: .75;
+  margin-top: .25rem;
+  line-height: 1.5
+}
+
+/* variantes de borde segun tipo */
+.modelo-nodo {
+  border-left-color: var(--leaf)
+}
+
+.modelo-envio {
+  border-left-color: var(--ochre)
+}
+
+.modelo-empresa {
+  border-left-color: var(--terra)
+}
+
+/* fieldset de radios para seleccion de modelo */
+.modelo-fieldset {
+  border: 1px solid var(--line);
+  padding: 20px;
+  margin-top: 16px;
+  margin-bottom: 16px
+}
+
+.modelo-fieldset legend {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 700;
+  color: var(--leaf);
+  padding: 0 8px
+}
+
+/* cada opcion de radio de modelo */
+.modelo-radio {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer
+}
+
+.modelo-radio:last-child {
+  border-bottom: none
+}
+
+.modelo-radio input[type='radio'] {
+  margin-top: 3px;
+  accent-color: var(--terra)
+}
+
+.modelo-radio-titulo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 700;
+  color: var(--ink)
+}
+
+.modelo-radio-desc {
+  font-size: 12px;
+  color: #766a62;
+  margin-top: 2px
+}
+
+/* ---------------------------------------------------------
    responsive marketplace y detalle del pool
    --------------------------------------------------------- */
 @media (max-width: 980px) {
@@ -1094,4 +1199,21 @@
   .photo-strip {
     grid-template-columns: 1fr
   }
+}
+/* formato de avance del pool: X/Y principal y % secundario */
+.prog-head .pool-cantidad,
+.progress-labels .pool-cantidad {
+  font-size: 11px;
+  letter-spacing: .01em;
+  text-transform: none;
+  color: var(--leaf)
+}
+
+.prog-head .pool-porcentaje,
+.progress-labels .pool-porcentaje {
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--terra);
+  font-weight: 700
 }

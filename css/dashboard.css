@@ -470,22 +470,22 @@ td:last-child {
 }
 
 /* tabla mini de ciclo de pagos */
-.mini table {
+.panel-mini table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px
 }
 
-.mini tr {
+.panel-mini tr {
   border-bottom: 1px solid var(--line)
 }
 
-.mini td {
+.panel-mini td {
   padding: 9px 0;
   font-size: 13px
 }
 
-.mini td:last-child {
+.panel-mini td:last-child {
   text-align: right
 }
 
