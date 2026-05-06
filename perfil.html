@@ -20,7 +20,7 @@
   <!-- barra superior -->
   <header class="navbar"><a class="brand" href="marketplace_terminal.html">Surcos</a>
     <nav class="nav-links"><a href="marketplace_terminal.html">Marketplace</a><a
-        href="historias_productor.html">Historias</a><a href="nosotros.html">Nosotros</a><a href="contacto.html">Contacto</a></nav><a class="nav-user" href="perfil.html" aria-label="perfil"><svg
+        href="historias_productor.html">Historias</a><a href="nosotros.html">Nosotros</a><a href="contacto.html">Contacto</a></nav><a class="nav-user" href="ingreso.html" aria-label="ingresar a Surcos"><svg
         viewBox="0 0 24 24">
         <circle cx="12" cy="8" r="4"></circle>
         <path d="M4 20c0-4 4-7 8-7s8 3 8 7"></path>
@@ -33,10 +33,10 @@
   <main class="wrap wrap--tight">
     <section class="split">
       <aside class="left">
-        <div class="avatar">NP</div>
-        <h1 class="name">Nodo Panama</h1>
+        <div class="avatar" data-usuario-iniciales>NP</div>
+        <h1 class="name" data-usuario-nombre>Nodo Panama</h1>
         <p class="meta">MIEMBRO DESDE OCT 2023</p>
-        <p class="meta">NODO CONSUMIDOR · CIUDAD DE PANAMA</p>
+        <p class="meta" data-usuario-provincia>NODO CONSUMIDOR - CIUDAD DE PANAMA</p>
         <div class="stats">
           <div class="box">Pools Ganados<b class="tab">14</b></div>
           <div class="box">Total Ahorrado<b class="tab">B/.312.40</b></div>
@@ -67,7 +67,8 @@
             <div class="tx">POOL ASEGURADO — Aceite Arbequina · Entregado Ago 5</div>
           </div>
         </div>
-        <div class="actions"><button class="out">Editar Perfil</button><button class="out">Descargar Mis Datos</button>
+        <div class="actions"><button class="out">Editar Perfil</button><button class="out">Descargar Mis Datos</button><button
+            class="out" data-accion-sesion="cerrar">Cerrar Sesion</button>
         </div>
       </section>
     </section>
@@ -135,6 +136,10 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
   <script src="js/componentes/CajonLateral.js"></script>
+  <script src="js/datos/datosIniciales.js"></script>
+  <script src="js/servicios/FormatoSurcos.js"></script>
+  <script src="js/servicios/EstadoSurcos.js"></script>
+  <script src="js/servicios/AutenticacionSurcos.js"></script>
   <script src="js/global.js"></script>
 </body>
 

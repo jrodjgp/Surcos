@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -23,7 +23,7 @@
     <a class="brand" href="marketplace_terminal.html">Surcos</a>
     <nav class="nav-links"><a class="active" href="marketplace_terminal.html">Marketplace</a><a
         href="historias_productor.html">Historias</a><a href="nosotros.html">Nosotros</a><a href="contacto.html">Contacto</a></nav>
-    <a class="nav-user" href="perfil.html" aria-label="perfil"><svg viewBox="0 0 24 24">
+    <a class="nav-user" href="ingreso.html" aria-label="ingresar a Surcos"><svg viewBox="0 0 24 24">
         <circle cx="12" cy="8" r="4"></circle>
         <path d="M4 20c0-4 4-7 8-7s8 3 8 7"></path>
       </svg></a>
@@ -67,22 +67,22 @@
   <main class="split">
     <section class="hero-col">
       <div class="arch">
-        <img alt="Tomates de herencia frescos cultivados en tierras altas de Panama"
+        <img data-grupo-imagen alt="Tomates de herencia frescos cultivados en tierras altas de Panama"
           src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=800&q=85&fit=crop" />
       </div>
       <div class="hero-meta">
-        <p>Cosechado 24 Oct, 2024</p>
-        <p>"El sabor de la tierra banada por el sol."</p>
+        <p data-grupo-cosecha>Cosechado 24 Oct, 2024</p>
+        <p data-grupo-frase>"El sabor de la tierra banada por el sol."</p>
       </div>
     </section>
 
     <section class="terminal-col">
       <div class="terminal-inner">
-        <h1 class="pool-title">Tomates de Herencia Finca Oasis</h1>
+        <h1 class="pool-title" data-grupo-titulo>Tomates de Herencia Finca Oasis</h1>
         <div class="pool-meta">
-          <span>Origen: Tierras Altas, PA</span>
+          <span data-grupo-origen>Origen: Tierras Altas, PA</span>
           <span class="divider"></span>
-          <span class="batch">Lote Limitado #042</span>
+          <span class="batch" data-grupo-variedad>Lote Limitado #042</span>
         </div>
 
         <div class="terminal-box">
@@ -94,25 +94,25 @@
             </div>
             <div class="text-right">
               <div class="label">Fecha Limite</div>
-              <div class="val terra">Viernes 18 Abr</div>
-              <div class="deadline">Cierra: 11:59 PM</div>
+              <div class="val terra" data-grupo-fecha-limite>Viernes 18 Abr</div>
+              <div class="deadline" data-grupo-hora>Cierra: 11:59 PM</div>
             </div>
           </div>
-          <div class="progress-labels"><span class="pool-cantidad">33/50 personas</span><span class="pool-porcentaje">66%</span></div>
-          <div class="progress-track"><i class="progress-fill" style="--pool-progress:66%"></i>
+          <div class="progress-labels"><span class="pool-cantidad" data-grupo-cantidad>33/50 personas</span><span class="pool-porcentaje" data-grupo-porcentaje>66%</span></div>
+          <div class="progress-track"><i class="progress-fill" data-grupo-progreso style="--pool-progress:66%; width:66%"></i>
             <div class="mark" style="left:33.3%"></div>
             <div class="mark" style="left:66.6%"></div>
           </div>
           <div class="pricing">
             <div>
-              <div class="label">Precio de Mercado</div><span class="market-price tab">B/.8.50<small>/kg</small></span>
+              <div class="label">Precio de Mercado</div><span class="market-price tab"><span data-grupo-precio-mercado>B/.8.50</span><small>/kg</small></span>
             </div>
             <div>
               <div class="label ochre">Precio del Pool</div><span
-                class="pool-price tab">B/.4.95<small>/kg</small></span>
+                class="pool-price tab"><span data-grupo-precio>B/.4.95</span><small>/kg</small></span>
             </div>
           </div>
-          <button class="btn-pool">Unirse al Pool <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          <button class="btn-pool" data-accion-grupo="unirse">Unirse al Pool <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
               stroke-width="2">
               <path d="M22 17l-5 5m0 0l-5-5m5 5V3"></path>
             </svg></button>
@@ -121,15 +121,15 @@
         <div class="details">
           <div>
             <h3>El Origen</h3>
-            <p class="text">Cultivados en los suelos volcanicos de las tierras altas, estos tomates se riegan con agua
+            <p class="text" data-grupo-historia>Cultivados en los suelos volcanicos de las tierras altas, estos tomates se riegan con agua
               de manantial. La oscilacion termica extrema de la region concentra los azucares, creando una complejidad
               raramente encontrada en la agricultura industrial.</p>
           </div>
           <div>
             <h3>Terminal de Logistica</h3>
-            <div class="log-row"><span>Fecha de Entrega</span><span>31 Oct</span></div>
-            <div class="log-row"><span>Punto de Recogida</span><span>Mercado Central</span></div>
-            <div class="log-row"><span>Compromiso Minimo</span><span>2.5 kg</span></div>
+            <div class="log-row"><span>Fecha de Entrega</span><span data-grupo-entrega>31 Oct</span></div>
+            <div class="log-row"><span>Punto de Recogida</span><span data-grupo-nodo>Mercado Central</span></div>
+            <div class="log-row"><span>Compromiso Minimo</span><span data-grupo-minimo>2.5 kg</span></div>
           </div>
         </div>
 
@@ -137,10 +137,12 @@
         <div class="modelo-entrega modelo-nodo">
           <span class="modelo-icon">⬡</span>
           <div>
-            <p class="modelo-titulo">Retiro en Nodo</p>
-            <p class="modelo-desc">Retiras en PTY Terminal Oeste · Via Espana, frente al Rey</p>
+            <p class="modelo-titulo" data-grupo-modelo-titulo>Retiro en Nodo</p>
+            <p class="modelo-desc" data-grupo-modelo-desc>Retiras en PTY Terminal Oeste · Via Espana, frente al Rey</p>
           </div>
         </div>
+
+        <div class="mensaje-grupo" data-mensaje-grupo role="status" aria-live="polite" hidden></div>
 
         <!-- mapa de cobertura del pool — contexto A, inline svg -->
         <div class="mapa-contenedor mapa-pool">
@@ -312,7 +314,13 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
   <script src="js/componentes/CajonLateral.js"></script>
+  <script src="js/datos/datosIniciales.js"></script>
+  <script src="js/servicios/FormatoSurcos.js"></script>
+  <script src="js/servicios/EstadoSurcos.js"></script>
+  <script src="js/servicios/AutenticacionSurcos.js"></script>
+  <script src="js/servicios/GruposCompraSurcos.js"></script>
   <script src="js/global.js"></script>
+  <script src="js/paginas/detalleGrupo.js"></script>
 </body>
 
 </html>

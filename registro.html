@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Surcos | Registro</title>
+  <meta name="description" content="Registro de usuarios compradores y productores en Surcos." />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&family=Space+Grotesk:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9Oer+RExp5H92yM9LL3G8G2CkXn5c5L7+AMvyTG2x" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/autenticacion.css" />
+</head>
+
+<body>
+  <header class="navbar">
+    <a class="brand" href="marketplace_terminal.html">Surcos</a>
+    <nav class="nav-links">
+      <a href="marketplace_terminal.html">Marketplace</a>
+      <a href="historias_productor.html">Historias</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+    <a class="nav-user active" href="ingreso.html" aria-label="ingresar a Surcos">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4"></circle>
+        <path d="M4 20c0-4 4-7 8-7s8 3 8 7"></path>
+      </svg>
+    </a>
+  </header>
+
+  <main class="autenticacion">
+    <section class="autenticacion-lateral" aria-label="Registro en Surcos">
+      <h1>Abre tu terminal.</h1>
+      <p>Crea una cuenta demo funcional para probar compras grupales, perfil y configuracion sin base de datos.</p>
+    </section>
+
+    <section class="autenticacion-panel">
+      <div class="autenticacion-contenido">
+        <p class="autenticacion-eyebrow">Nueva cuenta</p>
+        <h2>Registro</h2>
+        <p class="autenticacion-texto">Los datos quedan guardados en este navegador para simular una sesion completa.</p>
+
+        <form class="autenticacion-formulario needs-validation" id="formularioRegistro" novalidate>
+          <div>
+            <label class="form-label" for="nombreRegistro">Nombre completo</label>
+            <input class="form-control" id="nombreRegistro" name="nombre" type="text" autocomplete="name" required />
+            <div class="invalid-feedback">Escribe tu nombre.</div>
+          </div>
+
+          <div>
+            <label class="form-label" for="correoRegistro">Correo</label>
+            <input class="form-control" id="correoRegistro" name="correo" type="email" autocomplete="email" required />
+            <div class="invalid-feedback">Escribe un correo valido.</div>
+          </div>
+
+          <div>
+            <label class="form-label" for="telefonoRegistro">Telefono</label>
+            <input class="form-control" id="telefonoRegistro" name="telefono" type="tel" autocomplete="tel" required />
+            <div class="invalid-feedback">Escribe un telefono de contacto.</div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label" for="provinciaRegistro">Provincia</label>
+              <select class="form-select" id="provinciaRegistro" name="provincia" required>
+                <option value="">Selecciona</option>
+                <option>Panama</option>
+                <option>Chiriqui</option>
+                <option>Cocle</option>
+                <option>Herrera</option>
+                <option>Darien</option>
+              </select>
+              <div class="invalid-feedback">Selecciona una provincia.</div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label" for="rolRegistro">Tipo de cuenta</label>
+              <select class="form-select" id="rolRegistro" name="rol" required>
+                <option value="comprador">Comprador</option>
+                <option value="productor">Productor</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="form-label" for="nodoRegistro">Nodo de retiro</label>
+            <select class="form-select" id="nodoRegistro" name="nodoRetiro" required>
+              <option>PTY Terminal Oeste</option>
+              <option>Mercado Central</option>
+              <option>Nodo David Centro</option>
+              <option>Nodo Penonome</option>
+              <option>Nodo Chitre Norte</option>
+            </select>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label" for="claveRegistro">Clave</label>
+              <input class="form-control" id="claveRegistro" name="clave" type="password" autocomplete="new-password"
+                minlength="6" required />
+              <div class="invalid-feedback">La clave debe tener al menos 6 caracteres.</div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label" for="confirmacionRegistro">Confirmar clave</label>
+              <input class="form-control" id="confirmacionRegistro" name="confirmacionClave" type="password"
+                autocomplete="new-password" minlength="6" required />
+              <div class="invalid-feedback">Confirma la clave.</div>
+            </div>
+          </div>
+
+          <p class="autenticacion-mensaje" data-mensaje-registro></p>
+
+          <div class="autenticacion-acciones">
+            <button class="autenticacion-boton" type="submit">Crear Cuenta</button>
+            <a class="autenticacion-enlace" href="ingreso.html">Ya tengo cuenta</a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <div class="f-brand">Surcos</div>
+      <div class="f-small">Del campo al terminal.</div>
+      <div class="f-small">&copy; 2024 SURCOS. DEL CAMPO AL TERMINAL.</div>
+    </div>
+    <div>
+      <div class="f-head">Red</div>
+      <a class="f-link" href="#">Logistica</a>
+      <a class="f-link" href="contacto.html">Contacto</a>
+      <a class="f-link" href="#">Terminal API</a>
+      <a class="f-link f-social" href="mailto:contacto@surcos.pa">contacto@surcos.pa</a>
+      <a class="f-link f-social" href="https://instagram.com/surcos.pa" target="_blank" rel="noopener">Instagram @surcos.pa</a>
+      <a class="f-link f-social" href="https://x.com/surcos_pa" target="_blank" rel="noopener">X @surcos_pa</a>
+      <a class="f-link f-social" href="https://facebook.com/surcos.pa" target="_blank" rel="noopener">Facebook /surcos.pa</a>
+    </div>
+    <div>
+      <div class="f-head">Legal</div>
+      <a class="f-link" href="#">Privacidad</a>
+      <a class="f-link" href="#">Terminos</a>
+    </div>
+    <div>
+      <div class="f-head">Idioma</div>
+      <a class="f-link" href="#">ES</a>
+      <a class="f-link" href="#">EN</a>
+      <div class="f-small">ESTADO DE RED: OPTIMO</div>
+      <div class="f-small">NODO: PTY-01</div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="js/datos/datosIniciales.js"></script>
+  <script src="js/servicios/FormatoSurcos.js"></script>
+  <script src="js/servicios/EstadoSurcos.js"></script>
+  <script src="js/servicios/AutenticacionSurcos.js"></script>
+  <script src="js/global.js"></script>
+  <script src="js/paginas/registro.js"></script>
+</body>
+
+</html>

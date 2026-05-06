@@ -46,6 +46,10 @@
   stroke-width: 1.5
 }
 
+.nav-user.sesion-activa svg {
+  stroke: var(--terra)
+}
+
 /* ---------------------------------------------------------
    pie de pagina global
    --------------------------------------------------------- */
@@ -97,7 +101,7 @@
 }
 
 /* aviso breve para acciones de demostracion */
-.demo-aviso {
+.aviso-demostracion {
   position: fixed;
   right: 24px;
   bottom: 24px;
@@ -117,7 +121,7 @@
   transition: opacity .22s ease, transform .22s ease
 }
 
-.demo-aviso.visible {
+.aviso-demostracion.visible {
   opacity: 1;
   transform: translateY(0)
 }
