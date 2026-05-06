@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Surcos | Contacto</title>
+  <meta name="description"
+    content="Contacta al equipo de Surcos para soporte, productores, compras grupales y alianzas logisticas." />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&family=Space+Grotesk:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9Oer+RExp5H92yM9LL3G8G2CkXn5c5L7+AMvyTG2x" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/contacto.css" />
+</head>
+
+<body>
+  <!-- barra superior -->
+  <header class="navbar">
+    <a class="brand" href="marketplace_terminal.html">Surcos</a>
+    <nav class="nav-links">
+      <a href="marketplace_terminal.html">Marketplace</a>
+      <a href="historias_productor.html">Historias</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a class="active" href="contacto.html">Contacto</a>
+    </nav>
+    <a class="nav-user" href="perfil.html" aria-label="perfil">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4"></circle>
+        <path d="M4 20c0-4 4-7 8-7s8 3 8 7"></path>
+      </svg>
+    </a>
+  </header>
+
+  <main class="contacto-shell">
+    <section class="contacto-hero">
+      <div>
+        <h1>Contacto del Terminal</h1>
+        <p>Escribenos para activar una finca, resolver dudas de compra grupal, coordinar entregas o conversar sobre una alianza con Surcos.</p>
+      </div>
+      <aside class="contacto-meta" aria-label="estado de respuesta">
+        <span>Tiempo de respuesta</span>
+        <strong>24 horas</strong>
+        <span>Nodo activo</span>
+        <strong>PTY-01</strong>
+      </aside>
+    </section>
+
+    <section class="contacto-grid">
+      <form class="contacto-formulario needs-validation" id="formularioContacto" name="contacto-surcos"
+        method="POST" data-netlify="true" novalidate>
+        <input type="hidden" name="form-name" value="contacto-surcos" />
+        <h2>Enviar Mensaje</h2>
+
+        <div class="contacto-campos">
+          <div class="contacto-campo">
+            <label for="nombreContacto">nombre completo</label>
+            <input class="form-control" id="nombreContacto" name="nombre" type="text"
+              placeholder="Ej: Ana Rodriguez" minlength="3" required />
+            <div class="invalid-feedback">Escribe tu nombre completo.</div>
+          </div>
+
+          <div class="contacto-campo">
+            <label for="correoContacto">correo electronico</label>
+            <input class="form-control" id="correoContacto" name="correo" type="email"
+              placeholder="correo@ejemplo.com" required />
+            <div class="invalid-feedback">Ingresa un correo valido.</div>
+          </div>
+
+          <div class="contacto-campo">
+            <label for="telefonoContacto">telefono</label>
+            <input class="form-control" id="telefonoContacto" name="telefono" type="tel"
+              placeholder="+507 6000-0000" pattern="^[0-9+()\\-\\s]{7,}$" />
+            <div class="invalid-feedback">Usa un telefono valido o deja el campo vacio.</div>
+          </div>
+
+          <div class="contacto-campo">
+            <label for="tipoContacto">tipo de usuario</label>
+            <select class="form-select" id="tipoContacto" name="tipoUsuario" required>
+              <option value="">Selecciona una opcion</option>
+              <option>Productor</option>
+              <option>Comprador</option>
+              <option>Empresa</option>
+              <option>Aliado logistico</option>
+            </select>
+            <div class="invalid-feedback">Selecciona el tipo de usuario.</div>
+          </div>
+
+          <div class="contacto-campo contacto-campo--full">
+            <label for="asuntoContacto">asunto</label>
+            <input class="form-control" id="asuntoContacto" name="asunto" type="text"
+              placeholder="Ej: Quiero publicar una cosecha" minlength="4" required />
+            <div class="invalid-feedback">Indica el asunto del mensaje.</div>
+          </div>
+
+          <div class="contacto-campo contacto-campo--full">
+            <label for="mensajeContactoTexto">mensaje</label>
+            <textarea class="form-control" id="mensajeContactoTexto" name="mensaje"
+              placeholder="Cuéntanos que necesitas coordinar con Surcos." minlength="12" required></textarea>
+            <div class="invalid-feedback">El mensaje debe tener al menos 12 caracteres.</div>
+          </div>
+        </div>
+
+        <div class="contacto-check">
+          <label>
+            <input class="form-check-input" name="aceptaContacto" type="checkbox" required />
+            Acepto que Surcos use estos datos para responder mi solicitud.
+          </label>
+          <div class="invalid-feedback">Debes aceptar el uso de datos para responderte.</div>
+        </div>
+
+        <div class="alert alert-success" id="mensajeContacto" role="status" aria-live="polite" hidden></div>
+        <button class="btn-primary" type="submit" data-accion="enviar-contacto" disabled>Enviar al Terminal</button>
+      </form>
+
+      <aside class="contacto-aside">
+        <div class="contacto-insignia" id="insigniaContacto">SR</div>
+        <h2>Canales Surcos</h2>
+        <div class="contacto-lista">
+          <article>
+            <h3>Productores</h3>
+            <p>Validacion de finca, carga de cosechas y condiciones de lote.</p>
+          </article>
+          <article>
+            <h3>Compradores</h3>
+            <p>Estado de pools, puntos de retiro, pagos y compromisos activos.</p>
+          </article>
+          <article>
+            <h3>Empresas</h3>
+            <p>Lotes empresariales, compras recurrentes y acuerdos logisticos.</p>
+          </article>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <!-- drawer -->
+  <button class="drawer-trigger" id="drawerTrigger" aria-label="abrir terminal"><span>MI TERMINAL</span></button>
+  <div class="overlay" id="drawerOverlay"></div>
+  <aside class="drawer" id="drawer">
+    <button class="x" id="drawerClose" aria-label="cerrar">&times;</button>
+    <div class="d-head">
+      <h3>Mi Terminal</h3>
+      <p>Estado de Pools Activos</p>
+    </div>
+    <a class="live" href="mi_terminal_dashboard.html">VER TERMINAL ACTIVO</a>
+    <nav class="d-nav">
+      <a href="mi_terminal_dashboard.html"><svg viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+        </svg><span>Mi Terminal</span></a>
+      <a href="historial_ordenes.html"><svg viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg><span>Historial de Ordenes</span></a>
+      <a href="metodos_pago.html"><svg viewBox="0 0 24 24">
+          <rect x="3" y="5" width="18" height="14"></rect>
+          <path d="M3 10h18"></path>
+        </svg><span>Metodos de Pago</span></a>
+      <a href="configuracion.html"><svg viewBox="0 0 24 24">
+          <path d="M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
+          <path d="M4 12h2m12 0h2M12 4v2m0 12v2"></path>
+        </svg><span>Ajustes</span></a>
+    </nav>
+    <div class="port">
+      <p>Valor del Portafolio</p><strong class="tab">B/. 1,248.00</strong>
+      <div class="yield"><span>Ahorro de Rendimiento</span><b class="tab">+18.4%</b></div>
+    </div>
+  </aside>
+
+  <!-- pie -->
+  <footer class="footer">
+    <div>
+      <div class="f-brand">Surcos</div>
+      <div class="f-small">Del campo al terminal.</div>
+      <div class="f-small">&copy; 2024 SURCOS. DEL CAMPO AL TERMINAL.</div>
+    </div>
+    <div>
+      <div class="f-head">Red</div>
+      <a class="f-link" href="#">Logistica</a>
+      <a class="f-link" href="contacto.html">Contacto</a>
+      <a class="f-link" href="#">Terminal API</a>
+    </div>
+    <div>
+      <div class="f-head">Legal</div>
+      <a class="f-link" href="#">Privacidad</a>
+      <a class="f-link" href="#">Terminos</a>
+    </div>
+    <div>
+      <div class="f-head">Idioma</div>
+      <a class="f-link" href="#">ES</a>
+      <a class="f-link" href="#">EN</a>
+      <div class="f-small">ESTADO DE RED: OPTIMO</div>
+      <div class="f-small">NODO: PTY-01</div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="js/modelos/Contacto.js"></script>
+  <script src="js/formularios/FormularioContacto.js"></script>
+  <script src="js/componentes/CajonLateral.js"></script>
+  <script src="js/contacto.js"></script>
+</body>
+
+</html>
