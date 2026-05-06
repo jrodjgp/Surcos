@@ -68,6 +68,7 @@ class GruposCompraSurcos {
 
     const personasActuales = Math.min(grupo.personasObjetivo, grupo.personasActuales + 1);
     const estadoGrupo = personasActuales >= grupo.personasObjetivo ? 'ganado' : 'pendiente';
+    const metodoPago = window.MetodosPagoSurcos?.obtenerPrincipal?.() || null;
     window.EstadoSurcos.actualizar('gruposCompra', grupo.id, { personasActuales });
 
     const orden = {
@@ -77,6 +78,8 @@ class GruposCompraSurcos {
       producto: `${grupo.producto} ${grupo.variedad}`,
       origen: grupo.origen,
       monto: Number((grupo.precioGrupal * grupo.cantidadMinima).toFixed(2)),
+      metodoPagoId: metodoPago?.id || null,
+      metodoPagoEtiqueta: metodoPago ? `${metodoPago.tipo} ${metodoPago.ultimos}` : 'Metodo pendiente',
       estadoGrupo,
       estadoEntrega: 'programado',
       fecha: new Date().toISOString().slice(0, 10)

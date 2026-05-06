@@ -34,25 +34,54 @@
     <h1>Terminal de Pagos</h1>
     <section class="cols">
       <div class="left">
-        <article class="m-card">
-          <div class="m-row"><span class="icon">[VISA]</span><span class="num tab">&bull;&bull;&bull;&bull;
-              &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; 4821</span><span class="tag">PRINCIPAL</span><a
-              class="rm" href="#">ELIMINAR</a></div>
-        </article>
-        <article class="m-card">
-          <div class="m-row"><span class="icon">[MASTERCARD]</span><span class="num tab">&bull;&bull;&bull;&bull;
-              &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; 0934</span><span class="tag">RESPALDO</span><a
-              class="rm" href="#">ELIMINAR</a></div>
-        </article>
-        <article class="m-card">
-          <div class="m-row"><span class="icon">[YAPPY PA]</span><span class="num">Yappy Panama</span><span
-              class="tag">RESPALDO</span><a class="rm" href="#">ELIMINAR</a></div>
-        </article>
-        <div class="add">+</div>
+        <div data-lista-pagos>
+          <article class="m-card">
+            <div class="m-row"><span class="icon">[VISA]</span><span class="num tab">&bull;&bull;&bull;&bull;
+                &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; 4821</span><span class="tag">PRINCIPAL</span><a
+                class="rm" href="#">ELIMINAR</a></div>
+          </article>
+          <article class="m-card">
+            <div class="m-row"><span class="icon">[MASTERCARD]</span><span class="num tab">&bull;&bull;&bull;&bull;
+                &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; 0934</span><span class="tag">RESPALDO</span><a
+                class="rm" href="#">ELIMINAR</a></div>
+          </article>
+          <article class="m-card">
+            <div class="m-row"><span class="icon">[YAPPY PA]</span><span class="num">Yappy Panama</span><span
+                class="tag">RESPALDO</span><a class="rm" href="#">ELIMINAR</a></div>
+          </article>
+        </div>
+        <button class="add" type="button" data-accion-pago="mostrar-formulario" aria-label="agregar metodo de pago">+</button>
+        <form class="formulario-pago needs-validation" data-formulario-pago hidden novalidate>
+          <div class="grid pago-grid">
+            <div>
+              <label for="tipoPago">Tipo</label>
+              <select id="tipoPago" name="tipo" required>
+                <option value="">Selecciona</option>
+                <option>VISA</option>
+                <option>MASTERCARD</option>
+                <option>YAPPY PA</option>
+              </select>
+              <div class="invalid-feedback">Selecciona un tipo.</div>
+            </div>
+            <div>
+              <label for="ultimosPago">Ultimos digitos</label>
+              <input id="ultimosPago" name="ultimos" type="text" inputmode="numeric" maxlength="4" minlength="3"
+                placeholder="1234" required />
+              <div class="invalid-feedback">Escribe los ultimos digitos o identificador.</div>
+            </div>
+          </div>
+          <label for="etiquetaPago">Etiqueta</label>
+          <input id="etiquetaPago" name="etiqueta" type="text" placeholder="Tarjeta de respaldo" minlength="3"
+            required />
+          <div class="invalid-feedback">Escribe una etiqueta.</div>
+          <button class="outline pago-guardar" type="submit">Guardar Metodo</button>
+        </form>
+        <p class="mensaje-pago" data-mensaje-pago hidden></p>
       </div>
       <aside class="right panel-mini">
         <h2 class="sec-titulo-ciclo">Estado del Ciclo</h2>
         <table>
+          <tbody data-ciclo-pagos>
           <tr>
             <td>12 ABR · Geisha Honey #04</td>
             <td class="tab">B/. 218.00</td>
@@ -65,6 +94,7 @@
             <td>29 MAR · Cacao Crudo Lote 7</td>
             <td class="tab">B/. 133.00</td>
           </tr>
+          </tbody>
         </table>
         <p class="node">NODO CIFRADO: 0x71C9...8a42</p>
       </aside>
@@ -137,7 +167,11 @@
   <script src="js/servicios/FormatoSurcos.js"></script>
   <script src="js/servicios/EstadoSurcos.js"></script>
   <script src="js/servicios/AutenticacionSurcos.js"></script>
+  <script src="js/servicios/GruposCompraSurcos.js"></script>
+  <script src="js/servicios/OrdenesSurcos.js"></script>
+  <script src="js/servicios/MetodosPagoSurcos.js"></script>
   <script src="js/global.js"></script>
+  <script src="js/paginas/pagos.js"></script>
 </body>
 
 </html>

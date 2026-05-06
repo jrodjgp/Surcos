@@ -474,10 +474,26 @@ td:last-child {
 
 /* accion de eliminar en terracota */
 .rm {
+  border: 0;
+  background: transparent;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: .08em;
-  color: var(--terra)
+  color: var(--terra);
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif
+}
+
+.pay-action {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--leaf);
+  padding: 6px 8px;
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif
 }
 
 /* zona de agregar nuevo metodo */
@@ -494,6 +510,27 @@ td:last-child {
 
 .add:hover {
   background: var(--surface)
+}
+
+.formulario-pago {
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  padding: 16px;
+  background: var(--surface)
+}
+
+.pago-grid {
+  margin-bottom: 12px
+}
+
+.pago-guardar {
+  margin-top: 14px
+}
+
+.mensaje-pago {
+  margin-top: 12px;
+  color: var(--leaf);
+  font-size: 13px
 }
 
 /* tabla mini de ciclo de pagos */
