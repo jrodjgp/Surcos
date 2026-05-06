@@ -1,0 +1,13 @@
+DESIGN.md
+
+# Dependencias y salidas locales
+node_modules/
+dist/
+build/
+
+# Archivos temporales del sistema y editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+

@@ -9,6 +9,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&family=Space+Grotesk:wght@400;500;700&display=swap"
     rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9Oer+RExp5H92yM9LL3G8G2CkXn5c5L7+AMvyTG2x" crossorigin="anonymous" />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/marketplace.css" />
@@ -21,7 +23,7 @@
         <a class="brand" href="marketplace_terminal.html">Surcos</a>
         <nav class="nav-links">
             <a class="active" href="marketplace_terminal.html">Marketplace</a>
-            <a href="historias_productor.html">Stories</a>
+            <a href="historias_productor.html">Historias</a>
             <a href="nosotros.html">Nosotros</a>
         </nav>
         <a class="nav-user" href="perfil.html" aria-label="perfil">
@@ -161,7 +163,7 @@
 
         <!-- ===============================================
              vista del productor — publicar cosecha y lotes
-             requiere backend: PHP/MySQL para persistir datos
+             validacion con HTML5, Bootstrap y POO en JavaScript
              =============================================== -->
         <section class="view-productor">
           <div class="section-title">
@@ -169,29 +171,37 @@
             <span>modo productor</span>
           </div>
 
-          <!-- formulario placeholder — requiere backend PHP para procesar -->
-          <div class="form-cosecha">
+          <form class="form-cosecha needs-validation" id="formularioCosecha" novalidate>
             <h3>Publicar Nueva Cosecha</h3>
             <div class="form-grid">
               <div class="form-campo">
-                <label>producto</label>
-                <input type="text" placeholder="Ej: Tomates de Herencia" />
+                <label for="productoCosecha">producto</label>
+                <input class="form-control" id="productoCosecha" name="producto" type="text"
+                  placeholder="Ej: Tomates de Herencia" minlength="3" required />
+                <div class="invalid-feedback">Escribe el nombre del producto.</div>
               </div>
               <div class="form-campo">
-                <label>variedad / lote</label>
-                <input type="text" placeholder="Ej: Lote #09 — Organico" />
+                <label for="variedadCosecha">variedad / lote</label>
+                <input class="form-control" id="variedadCosecha" name="variedad" type="text"
+                  placeholder="Ej: Lote #09 — Organico" minlength="3" required />
+                <div class="invalid-feedback">Indica la variedad o codigo del lote.</div>
               </div>
               <div class="form-campo">
-                <label>cantidad disponible (kg)</label>
-                <input type="number" placeholder="500" class="tab" />
+                <label for="cantidadCosecha">cantidad disponible (kg)</label>
+                <input class="form-control tab" id="cantidadCosecha" name="cantidadKg" type="number" placeholder="500"
+                  min="25" step="1" required />
+                <div class="invalid-feedback">La cantidad minima para publicar es 25 kg.</div>
               </div>
               <div class="form-campo">
-                <label>precio minimo grupal (B/./kg)</label>
-                <input type="text" placeholder="B/. 4.50" class="tab" />
+                <label for="precioCosecha">precio minimo grupal (B/./kg)</label>
+                <input class="form-control tab" id="precioCosecha" name="precioMinimo" type="number" placeholder="4.50"
+                  min="0.25" step="0.01" required />
+                <div class="invalid-feedback">Ingresa un precio valido por kilogramo.</div>
               </div>
               <div class="form-campo">
-                <label>ubicacion de la finca</label>
-                <select>
+                <label for="ubicacionCosecha">ubicacion de la finca</label>
+                <select class="form-select" id="ubicacionCosecha" name="ubicacion" required>
+                  <option value="">Selecciona una zona</option>
                   <option>Tierras Altas, Chiriqui</option>
                   <option>Boquete, Chiriqui</option>
                   <option>Volcan, Chiriqui</option>
@@ -199,34 +209,35 @@
                   <option>Cocle</option>
                   <option>Darien</option>
                 </select>
+                <div class="invalid-feedback">Selecciona la ubicacion de la finca.</div>
               </div>
               <div class="form-campo">
-                <label>ventana de cosecha</label>
-                <input type="text" placeholder="15 Abr — 30 Abr 2026" />
+                <label for="ventanaCosecha">ventana de cosecha</label>
+                <input class="form-control" id="ventanaCosecha" name="ventana" type="text"
+                  placeholder="15 Abr — 30 Abr 2026" minlength="8" required />
+                <div class="invalid-feedback">Indica la ventana estimada de cosecha.</div>
               </div>
             </div>
-            <!-- requiere backend: validacion y almacenamiento en MySQL -->
 
-            <!-- Proyecto 1: selected model populates different form fields,
-                 affects price calculation and pool minimum threshold -->
+            <!-- Proyecto 1: el modelo seleccionado alimenta la clase Cosecha. -->
             <fieldset class="modelo-fieldset">
               <legend>Modelo de Entrega</legend>
               <label class="modelo-radio">
-                <input type="radio" name="modelo" checked />
+                <input type="radio" name="modeloEntrega" value="Retiro en Nodo" checked />
                 <div>
                   <p class="modelo-radio-titulo">⬡ Retiro en Nodo</p>
                   <p class="modelo-radio-desc">El comprador retira en el nodo mas cercano a su provincia</p>
                 </div>
               </label>
               <label class="modelo-radio">
-                <input type="radio" name="modelo" />
+                <input type="radio" name="modeloEntrega" value="Envio a Domicilio" />
                 <div>
                   <p class="modelo-radio-titulo">→ Envio a Domicilio</p>
                   <p class="modelo-radio-desc">Costo adicional B/.3.50 · MRW / servicio del agricultor</p>
                 </div>
               </label>
               <label class="modelo-radio">
-                <input type="radio" name="modelo" />
+                <input type="radio" name="modeloEntrega" value="Lote Empresarial" />
                 <div>
                   <p class="modelo-radio-titulo">⬢ Lote Empresarial</p>
                   <p class="modelo-radio-desc">Minimo 200 lbs · Precio negociado directo con la finca</p>
@@ -234,8 +245,9 @@
               </label>
             </fieldset>
 
-            <button class="btn-primary" disabled>Publicar en Marketplace →</button>
-          </div>
+            <div class="alert alert-success mt-3" id="mensajeCosecha" role="status" aria-live="polite" hidden></div>
+            <button class="btn-primary" type="submit" data-accion="publicar-cosecha" disabled>Publicar en Marketplace →</button>
+          </form>
 
           <!-- estadisticas del productor -->
           <div class="lotes-panel">
@@ -412,18 +424,10 @@
         </div>
     </footer>
 
-    <!-- script minimo para el cajon lateral -->
-    <script>
-        const t = document.getElementById('drawerTrigger');
-        const d = document.getElementById('drawer');
-        const o = document.getElementById('drawerOverlay');
-        const c = document.getElementById('drawerClose');
-        const cerrar = () => { d.classList.remove('open'); o.classList.remove('open'); t.style.display = ''; };
-        t.onclick = () => { d.classList.add('open'); o.classList.add('open'); t.style.display = 'none'; };
-        o.onclick = cerrar; c.onclick = cerrar;
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"></script>
+    <script type="module" src="js/marketplace.js"></script>
 </body>
 
 </html>
-
-
