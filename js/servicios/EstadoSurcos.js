@@ -76,8 +76,47 @@ class EstadoSurcos {
       ...semillas,
       ...guardado,
       version: semillas.version || guardado.version,
-      usuarioDemo: { ...semillas.usuarioDemo, ...guardado.usuarioDemo },
-      configuracion: { ...semillas.configuracion, ...guardado.configuracion }
+      usuarioDemo: this.fusionarUsuarioSemilla(semillas.usuarioDemo, guardado.usuarioDemo),
+      usuarios: this.fusionarUsuarios(semillas.usuarios || [], guardado.usuarios || []),
+      configuracion: this.fusionarConfiguracion(semillas.configuracion || {}, guardado.configuracion || {})
+    };
+  }
+
+  static fusionarUsuarios(semillas, guardados) {
+    const usuarios = [...guardados];
+
+    semillas.forEach((semilla) => {
+      const indice = usuarios.findIndex((usuario) => usuario.id === semilla.id);
+
+      if (indice >= 0) {
+        usuarios[indice] = this.fusionarUsuarioSemilla(semilla, usuarios[indice]);
+        return;
+      }
+
+      usuarios.push(semilla);
+    });
+
+    return usuarios;
+  }
+
+  static fusionarUsuarioSemilla(semilla, guardado = {}) {
+    const esUsuarioAnterior = guardado.id === 'usr-nodo-panama' && guardado.nombre === 'Nodo Panama';
+
+    if (esUsuarioAnterior) {
+      return { ...guardado, ...semilla };
+    }
+
+    return { ...semilla, ...guardado };
+  }
+
+  static fusionarConfiguracion(semilla, guardado) {
+    return {
+      ...semilla,
+      ...guardado,
+      notificaciones: {
+        ...(semilla.notificaciones || {}),
+        ...(guardado.notificaciones || {})
+      }
     };
   }
 

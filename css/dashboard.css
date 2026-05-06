@@ -663,6 +663,12 @@ td:last-child {
   color: #2a231d
 }
 
+.mensaje-perfil {
+  margin-top: 16px;
+  color: var(--leaf);
+  font-size: 13px
+}
+
 /* botones de accion del perfil */
 .actions {
   margin-top: 24px;
@@ -936,6 +942,24 @@ select:focus {
   letter-spacing: .08em
 }
 
+.danger-boton {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif
+}
+
+.mensaje-configuracion {
+  margin: 18px 0 10px;
+  border-left: 4px solid var(--terra);
+  background: rgba(192, 82, 42, .08);
+  color: var(--leaf);
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.45
+}
+
 /* titulo de seccion de ciclo de pagos */
 .sec-titulo-ciclo {
   font-family: 'Newsreader', serif;
@@ -943,7 +967,7 @@ select:focus {
   color: var(--leaf)
 }
 
-/* boton flotante de guardar ajustes — sticky bottom */
+/* boton flotante de guardar ajustes */
 .save {
   position: sticky;
   bottom: 12px;
@@ -965,7 +989,7 @@ select:focus {
   background: var(--leaf)
 }
 
-/* texto auxiliar pequeno (helper text) */
+/* texto auxiliar pequeno */
 .sub-sm {
   font-size: 11px;
   margin-top: 4px;

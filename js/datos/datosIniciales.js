@@ -2,26 +2,26 @@ const DatosInicialesSurcos = {
   version: 1,
   usuarioDemo: {
     id: 'usr-nodo-panama',
-    nombre: 'Nodo Panama',
+    nombre: 'Juan Juanes',
     correo: 'nodo@surcos.pa',
     clave: 'surcos2026',
     telefono: '+507 6000-0000',
     rol: 'comprador',
     provincia: 'Panama',
     nodoRetiro: 'PTY Terminal Oeste',
-    iniciales: 'NP'
+    iniciales: 'JJ'
   },
   usuarios: [
     {
       id: 'usr-nodo-panama',
-      nombre: 'Nodo Panama',
+      nombre: 'Juan Juanes',
       correo: 'nodo@surcos.pa',
       clave: 'surcos2026',
       telefono: '+507 6000-0000',
       rol: 'comprador',
       provincia: 'Panama',
       nodoRetiro: 'PTY Terminal Oeste',
-      iniciales: 'NP'
+      iniciales: 'JJ'
     }
   ],
   productores: [

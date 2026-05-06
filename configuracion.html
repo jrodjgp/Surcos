@@ -35,19 +35,19 @@
     <section class="sec">
       <h2>Perfil y Notificaciones</h2>
       <div class="grid">
-        <div><label>nombre para mostrar</label><input type="text" value="Nodo Panama" /></div>
-        <div><label>correo electronico</label><input type="email" value="nodo@surcos.pa" /></div>
-        <div><label>idioma preferido</label><select>
+        <div><label for="nombreConfiguracion">nombre para mostrar</label><input id="nombreConfiguracion" data-configuracion="nombre" type="text" value="Juan Juanes" /></div>
+        <div><label for="correoConfiguracion">correo electronico</label><input id="correoConfiguracion" data-configuracion="correo" type="email" value="nodo@surcos.pa" /></div>
+        <div><label for="idiomaConfiguracion">idioma preferido</label><select id="idiomaConfiguracion" data-configuracion="idioma">
             <option>EN</option>
             <option selected>ES</option>
           </select></div>
       </div>
       <div class="tog">
-        <div class="tog-row"><span>Alertas de Pool</span><label class="switch"><input checked type="checkbox" /><span
+        <div class="tog-row"><span>Alertas de Pool</span><label class="switch"><input data-notificacion="alertasPool" checked type="checkbox" /><span
               class="track"></span><span class="knob"></span></label></div>
-        <div class="tog-row"><span>Actualizaciones de Entrega</span><label class="switch"><input checked
+        <div class="tog-row"><span>Actualizaciones de Entrega</span><label class="switch"><input data-notificacion="actualizacionesEntrega" checked
               type="checkbox" /><span class="track"></span><span class="knob"></span></label></div>
-        <div class="tog-row"><span>Bajas de Precio</span><label class="switch"><input type="checkbox" /><span
+        <div class="tog-row"><span>Bajas de Precio</span><label class="switch"><input data-notificacion="bajasPrecio" type="checkbox" /><span
               class="track"></span><span class="knob"></span></label></div>
       </div>
     </section>
@@ -168,7 +168,12 @@
         <tr><td>Colon</td><td>Nodo Colon Puerto</td></tr>
       </table>
 
-      <!-- umbral de compromiso — slider css estilizado -->
+      <div class="grid field-mt">
+        <div><label for="provinciaRetiro">provincia de retiro</label><select id="provinciaRetiro" data-configuracion="provinciaRetiro"></select></div>
+        <div><label for="nodoRetiro">nodo de retiro</label><select id="nodoRetiro" data-configuracion="nodoRetiro"></select></div>
+      </div>
+
+      <!-- umbral de compromiso con control de rango estilizado -->
       <div class="field-mt">
         <label>umbral de compromiso</label>
         <p class="sub">Solo notificarme de pools con al menos <b id="valorUmbral">60%</b> completado</p>
@@ -185,22 +190,23 @@
 
     <section class="sec">
       <h2>Seguridad y Nodo</h2>
-      <button class="outline">Cambiar Contrasena</button>
+      <button class="outline" type="button" data-accion-configuracion="clave">Cambiar Contrasena</button>
 
-      <!-- Backend scope: hash generado server-side en PHP,
-           almacenado en tabla users. Regenerar invalida hash previo.
+      <!-- Alcance de servidor: hash generado en el servidor,
+           almacenado en tabla de usuarios. Regenerar invalida hash previo.
            Implementacion Proyecto 1. -->
       <div class="node-block">
         NODO CIFRADO ID: <code>0x71C9A2FF4A...8a42</code>
       </div>
       <div class="sec-links">
-        <a class="btn-ghost-peligro" href="#">REGENERAR</a>
-        <button class="outline">Exportar Datos del Terminal</button>
-        <a class="danger" href="#">Eliminar Cuenta</a>
+        <button class="btn-ghost-peligro" type="button" data-accion-configuracion="regenerar">REGENERAR</button>
+        <button class="outline" type="button" data-accion-configuracion="exportar">Exportar Datos del Terminal</button>
+        <button class="danger danger-boton" type="button" data-accion-configuracion="eliminar">Eliminar Cuenta</button>
       </div>
     </section>
 
-    <button class="save">Guardar Ajustes</button>
+    <p class="mensaje-configuracion" data-mensaje-configuracion hidden></p>
+    <button class="save" type="button" data-accion-configuracion="guardar">Guardar Ajustes</button>
   </main>
 
   <!-- drawer -->
@@ -243,7 +249,7 @@
     <div>
       <div class="f-brand">Surcos</div>
       <div class="f-small">Del campo al terminal.</div>
-      <div class="f-small">&copy; 2024 SURCOS. DEL CAMPO AL TERMINAL.</div>
+      <div class="f-small">&copy; 2026 SURCOS. DEL CAMPO AL TERMINAL.</div>
     </div>
     <div>
       <div class="f-head">Red</div><a class="f-link" href="#">Logistica</a><a class="f-link" href="contacto.html">Contacto</a><a class="f-link" href="#">Terminal API</a>

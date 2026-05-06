@@ -33,11 +33,11 @@
   <main class="wrap wrap--tight">
     <section class="split">
       <aside class="left">
-        <div class="avatar" data-usuario-iniciales>NP</div>
-        <h1 class="name" data-usuario-nombre>Nodo Panama</h1>
+        <div class="avatar" data-usuario-iniciales>JJ</div>
+        <h1 class="name" data-usuario-nombre>Juan Juanes</h1>
         <p class="meta">MIEMBRO DESDE OCT 2023</p>
         <p class="meta" data-usuario-provincia>NODO CONSUMIDOR - CIUDAD DE PANAMA</p>
-        <div class="stats">
+        <div class="stats" data-perfil-estadisticas>
           <div class="box">Pools Ganados<b class="tab">14</b></div>
           <div class="box">Total Ahorrado<b class="tab">B/.312.40</b></div>
           <div class="box">Ventaja de Rendimiento<b class="tab">+19.2%</b></div>
@@ -45,7 +45,7 @@
       </aside>
       <section class="right">
         <h2>Actividad del Terminal</h2>
-        <div class="feed">
+        <div class="feed" data-perfil-actividad>
           <div class="item">
             <div class="dt">14 ABR 2026</div>
             <div class="tx">COMPROMETIDO AL POOL — Cafe Geisha Micro-lote #42</div>
@@ -67,7 +67,9 @@
             <div class="tx">POOL ASEGURADO — Aceite Arbequina · Entregado Ago 5</div>
           </div>
         </div>
-        <div class="actions"><button class="out">Editar Perfil</button><button class="out">Descargar Mis Datos</button><button
+        <p class="mensaje-perfil" data-mensaje-perfil hidden></p>
+        <div class="actions"><button class="out" type="button" data-accion-perfil="editar">Editar Perfil</button><button
+            class="out" type="button" data-accion-perfil="exportar">Descargar Mis Datos</button><button
             class="out" data-accion-sesion="cerrar">Cerrar Sesion</button>
         </div>
       </section>
@@ -114,7 +116,7 @@
     <div>
       <div class="f-brand">Surcos</div>
       <div class="f-small">Del campo al terminal.</div>
-      <div class="f-small">&copy; 2024 SURCOS. DEL CAMPO AL TERMINAL.</div>
+      <div class="f-small">&copy; 2026 SURCOS. DEL CAMPO AL TERMINAL.</div>
     </div>
     <div>
       <div class="f-head">Red</div><a class="f-link" href="#">Logistica</a><a class="f-link" href="contacto.html">Contacto</a><a class="f-link" href="#">Terminal API</a>
@@ -140,7 +142,10 @@
   <script src="js/servicios/FormatoSurcos.js"></script>
   <script src="js/servicios/EstadoSurcos.js"></script>
   <script src="js/servicios/AutenticacionSurcos.js"></script>
+  <script src="js/servicios/GruposCompraSurcos.js"></script>
+  <script src="js/servicios/OrdenesSurcos.js"></script>
   <script src="js/global.js"></script>
+  <script src="js/paginas/perfil.js"></script>
 </body>
 
 </html>
