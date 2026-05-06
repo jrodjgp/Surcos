@@ -71,13 +71,13 @@
       </div>
       <div class="savings">
         <div class="savings-label">AHORRO TOTAL AGREGADO</div>
-        <div class="savings-val tab">B/. 1,428.50</div>
+        <div class="savings-val tab" data-terminal-ahorro>B/. 1,428.50</div>
       </div>
     </section>
 
     <div class="sec-head">
       <h2>Pools Activos</h2>
-      <span class="badge">4 OFERTAS EN VIVO</span>
+      <span class="badge" data-terminal-insignia>4 OFERTAS EN VIVO</span>
     </div>
 
     <div class="overflow-x-auto">
@@ -90,7 +90,7 @@
             <th>Entrega Est.</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-terminal-activos>
           <tr>
             <td>
               <div class="prod">
@@ -171,7 +171,7 @@
       <div class="action-block surface">
         <h3>Exportar Registro</h3>
         <p>Descarga tus datos del terminal para reportes fiscales y auditoria de cooperativas locales.</p>
-        <button class="btn-primary">Generar CSV Manifiesto</button>
+        <button class="btn-primary" type="button" data-accion-terminal="exportar">Generar CSV Manifiesto</button>
       </div>
       <div class="action-block leaf">
         <h3>Aviso de Logistica</h3>
@@ -248,7 +248,10 @@
   <script src="js/servicios/FormatoSurcos.js"></script>
   <script src="js/servicios/EstadoSurcos.js"></script>
   <script src="js/servicios/AutenticacionSurcos.js"></script>
+  <script src="js/servicios/GruposCompraSurcos.js"></script>
+  <script src="js/servicios/OrdenesSurcos.js"></script>
   <script src="js/global.js"></script>
+  <script src="js/paginas/terminal.js"></script>
 </body>
 
 </html>

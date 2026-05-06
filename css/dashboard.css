@@ -121,6 +121,33 @@ td:last-child {
   object-fit: cover
 }
 
+.estado-vacio {
+  padding: 20px 0;
+  color: #6d5f57;
+  text-align: left
+}
+
+.estado-vacio strong {
+  display: block;
+  color: var(--leaf);
+  font-family: 'Newsreader', serif;
+  font-size: 20px;
+  margin-bottom: 4px
+}
+
+.estado-vacio span {
+  display: block;
+  margin-bottom: 10px
+}
+
+.estado-vacio a {
+  color: var(--terra);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-weight: 700
+}
+
 /* nombre del producto en historial */
 .p-name {
   font-family: 'Newsreader', serif;

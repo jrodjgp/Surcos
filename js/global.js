@@ -82,8 +82,10 @@ class AccionesDemostracion {
     const esCajon = objetivo.classList.contains('drawer-trigger') || objetivo.classList.contains('x');
     const esSesion = objetivo.dataset.accionSesion;
     const esGrupo = objetivo.dataset.accionGrupo;
+    const esTerminal = objetivo.dataset.accionTerminal;
+    const esFiltroHistorial = objetivo.dataset.filtroHistorial;
 
-    return esEnvio || esCajon || esSesion || esGrupo || objetivo.disabled;
+    return esEnvio || esCajon || esSesion || esGrupo || esTerminal || esFiltroHistorial || objetivo.disabled;
   }
 
   crearMensaje(objetivo) {

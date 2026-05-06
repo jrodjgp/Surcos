@@ -34,8 +34,11 @@
     <p class="sub">Registro completo de tus pools comprometidos y lotes entregados.</p>
 
     <div class="filters">
-      <div class="tog"><button class="active">TODAS</button><button>ENTREGADAS</button><button>CANCELADAS</button></div>
-      <input class="date" type="text" value="01 ABR 2026 — 14 ABR 2026" aria-label="rango de fechas" />
+      <div class="tog"><button class="active" type="button" data-filtro-historial="todas">TODAS</button><button
+          type="button" data-filtro-historial="entregadas">ENTREGADAS</button><button type="button"
+          data-filtro-historial="canceladas">CANCELADAS</button></div>
+      <input class="date" type="text" value="01 ABR 2026 - 14 ABR 2026" aria-label="rango de fechas"
+        data-historial-rango readonly />
     </div>
 
     <div class="overflow-x-auto">
@@ -49,7 +52,7 @@
             <th>TOTAL PAGADO</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-historial-ordenes>
           <tr>
             <td>
               <div class="prod">
@@ -131,7 +134,7 @@
       </table>
     </div>
 
-    <div class="summary tab">TOTAL COMPROMETIDO ESTE CICLO: B/.1,428.50 · AHORRO VS RETAIL: +22.4% · POOLS GANADOS: 8/9
+    <div class="summary tab" data-historial-resumen>TOTAL COMPROMETIDO ESTE CICLO: B/.1,428.50 · AHORRO VS RETAIL: +22.4% · POOLS GANADOS: 8/9
     </div>
   </main>
 
@@ -202,7 +205,10 @@
   <script src="js/servicios/FormatoSurcos.js"></script>
   <script src="js/servicios/EstadoSurcos.js"></script>
   <script src="js/servicios/AutenticacionSurcos.js"></script>
+  <script src="js/servicios/GruposCompraSurcos.js"></script>
+  <script src="js/servicios/OrdenesSurcos.js"></script>
   <script src="js/global.js"></script>
+  <script src="js/paginas/historial.js"></script>
 </body>
 
 </html>
