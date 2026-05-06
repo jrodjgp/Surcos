@@ -1,4 +1,4 @@
-export class Cosecha {
+class Cosecha {
   constructor({
     producto,
     variedad,
@@ -39,3 +39,4 @@ export class Cosecha {
   }
 }
 
+window.Cosecha = Cosecha;

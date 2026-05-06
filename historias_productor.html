@@ -9,6 +9,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&family=Space+Grotesk:wght@400;500;700&display=swap"
     rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9Oer+RExp5H92yM9LL3G8G2CkXn5c5L7+AMvyTG2x" crossorigin="anonymous" />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/marketplace.css" />
@@ -43,7 +45,8 @@
   </section>
 
   <!-- contenido editorial -->
-  <main class="editorial">
+  <main>
+  <section class="editorial">
     <!-- metadatos del productor -->
     <aside class="sidebar-meta">
       <div class="block">
@@ -100,8 +103,7 @@
           src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=600&q=80&fit=crop" />
       </div>
     </aside>
-  </main>
-
+  </section>
   <!-- galeria de fotos del productor -->
   <section class="photo-strip" aria-label="Galeria de la finca Heredia">
     <figure>
@@ -129,7 +131,7 @@
         <a href="#">VER TODOS LOS LOTES &rarr;</a>
       </div>
       <div class="shop-grid">
-        <div class="shop-card">
+        <article class="shop-card">
           <figure>
             <img alt="Bolsa de cafe Geisha Honey micro-lote Panama"
               src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&q=80&fit=crop" />
@@ -140,8 +142,8 @@
             <div class="sprice tab">B/. 78.00</div>
             <button class="sbtn">Comprometerse</button>
           </div>
-        </div>
-        <div class="shop-card">
+        </article>
+        <article class="shop-card">
           <figure>
             <img alt="Cafe Geisha Natural proceso produccion Boquete"
               src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&q=80&fit=crop" />
@@ -152,8 +154,8 @@
             <div class="sprice tab">B/. 62.00</div>
             <button class="sbtn">Comprometerse</button>
           </div>
-        </div>
-        <div class="shop-card">
+        </article>
+        <article class="shop-card">
           <figure>
             <img alt="Cafe lavado geisha washed process Panama Volcan Baru"
               src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600&q=80&fit=crop" />
@@ -164,10 +166,11 @@
             <div class="sprice tab">B/. 54.00</div>
             <button class="sbtn">Comprometerse</button>
           </div>
-        </div>
+        </article>
       </div>
     </div>
   </section>
+  </main>
 
   <!-- drawer -->
   <button class="drawer-trigger" id="drawerTrigger" aria-label="abrir terminal"><span>MI TERMINAL</span></button>
@@ -223,11 +226,11 @@
       <div class="f-small">NODO: PTY-01</div>
     </div>
   </footer>
-  <script>
-    const t = document.getElementById('drawerTrigger'); const d = document.getElementById('drawer'); const o = document.getElementById('drawerOverlay'); const c = document.getElementById('drawerClose');
-    const cerrar = () => { d.classList.remove('open'); o.classList.remove('open'); t.style.display = ''; };
-    t.onclick = () => { d.classList.add('open'); o.classList.add('open'); t.style.display = 'none'; }; o.onclick = cerrar; c.onclick = cerrar;
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="js/componentes/CajonLateral.js"></script>
+  <script src="js/global.js"></script>
 </body>
 
 </html>

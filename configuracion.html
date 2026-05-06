@@ -9,6 +9,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&family=Space+Grotesk:wght@400;500;700&display=swap"
     rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9Oer+RExp5H92yM9LL3G8G2CkXn5c5L7+AMvyTG2x" crossorigin="anonymous" />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/dashboard.css" />
@@ -19,7 +21,7 @@
   <!-- barra superior -->
   <header class="navbar"><a class="brand" href="marketplace_terminal.html">Surcos</a>
     <nav class="nav-links"><a href="marketplace_terminal.html">Marketplace</a><a
-        href="historias_productor.html">Stories</a><a href="nosotros.html">Nosotros</a></nav><a class="nav-user" href="perfil.html" aria-label="perfil"><svg
+        href="historias_productor.html">Historias</a><a href="nosotros.html">Nosotros</a></nav><a class="nav-user" href="perfil.html" aria-label="perfil"><svg
         viewBox="0 0 24 24">
         <circle cx="12" cy="8" r="4"></circle>
         <path d="M4 20c0-4 4-7 8-7s8 3 8 7"></path>
@@ -169,14 +171,15 @@
       <!-- umbral de compromiso — slider css estilizado -->
       <div class="field-mt">
         <label>umbral de compromiso</label>
-        <p class="sub">Solo notificarme de pools con al menos <b>60%</b> completado</p>
-        <input class="tab" type="range" min="0" max="100" value="60" />
+        <p class="sub">Solo notificarme de pools con al menos <b id="valorUmbral">60%</b> completado</p>
+        <input class="tab control-rango" id="umbralCompromiso" type="range" min="0" max="100" value="60" />
         <p class="sub sub-sm">Pools por debajo de este umbral no apareceran en tus notificaciones</p>
       </div>
 
       <div class="field-mt"><label>visualizacion de datos</label>
-        <div class="rad"><label><input checked name="unit" type="radio" />Metrico</label><label><input name="unit"
-              type="radio" />Imperial</label></div>
+        <div class="rad"><label><input checked name="unidadDatos" type="radio" value="metrico" />Metrico</label><label><input name="unidadDatos"
+              type="radio" value="imperial" />Imperial</label></div>
+        <p class="sub sub-sm vista-unidad">Vista previa: <b id="vistaVolumen" class="tab">1,240 kg</b>. <span id="notaUnidad">Los volumenes del terminal se mostraran en kilogramos.</span></p>
       </div>
     </section>
 
@@ -254,11 +257,12 @@
       <div class="f-small">NODO: PTY-01</div>
     </div>
   </footer>
-  <script>
-    const t = document.getElementById('drawerTrigger'); const d = document.getElementById('drawer'); const o = document.getElementById('drawerOverlay'); const c = document.getElementById('drawerClose');
-    const cerrar = () => { d.classList.remove('open'); o.classList.remove('open'); t.style.display = ''; };
-    t.onclick = () => { d.classList.add('open'); o.classList.add('open'); t.style.display = 'none'; }; o.onclick = cerrar; c.onclick = cerrar;
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="js/componentes/CajonLateral.js"></script>
+  <script src="js/global.js"></script>
+  <script src="js/configuracion.js"></script>
 </body>
 
 </html>

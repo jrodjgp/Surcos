@@ -1,6 +1,4 @@
-import { Cosecha } from '../modelos/Cosecha.js';
-
-export class FormularioCosecha {
+class FormularioCosecha {
   constructor(formulario) {
     this.formulario = formulario;
     this.mensaje = document.getElementById('mensajeCosecha');
@@ -34,7 +32,7 @@ export class FormularioCosecha {
   crearCosecha() {
     const datos = new FormData(this.formulario);
 
-    return new Cosecha({
+    return new window.Cosecha({
       producto: datos.get('producto'),
       variedad: datos.get('variedad'),
       cantidadKg: datos.get('cantidadKg'),
@@ -57,3 +55,4 @@ export class FormularioCosecha {
   }
 }
 
+window.FormularioCosecha = FormularioCosecha;

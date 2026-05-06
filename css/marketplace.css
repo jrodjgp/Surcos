@@ -958,9 +958,9 @@
 
 .form-cosecha h3 {
   font-family: 'Newsreader', serif;
-  font-size: 28px;
+  font-size: 26px;
   color: var(--leaf);
-  margin-bottom: 20px
+  margin-bottom: 22px
 }
 
 /* campo de formulario del productor */
@@ -973,25 +973,48 @@
   font-size: 10px;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: #72655e;
+  color: rgba(92, 75, 68, .78);
   margin-bottom: 4px
 }
 
 .form-campo input,
-.form-campo select {
+.form-campo select,
+.form-cosecha .form-control,
+.form-cosecha .form-select {
   width: 100%;
   border: 0;
   border-bottom: 1px solid var(--line);
   padding: 10px 0;
   background: transparent;
   font-size: 14px;
+  font-weight: 400;
+  color: rgba(31, 27, 22, .72);
   font-family: 'Space Grotesk', sans-serif
 }
 
 .form-campo input:focus,
-.form-campo select:focus {
+.form-campo select:focus,
+.form-cosecha .form-control:focus,
+.form-cosecha .form-select:focus {
   outline: none;
-  border-bottom: 2px solid var(--terra)
+  border-bottom: 2px solid var(--terra);
+  box-shadow: none;
+  color: var(--ink)
+}
+
+/* mensajes de validacion discretos para no dominar el formulario */
+.form-cosecha .invalid-feedback {
+  display: none;
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 400;
+  color: rgba(200, 90, 50, .78)
+}
+
+.form-cosecha.was-validated .form-control:invalid ~ .invalid-feedback,
+.form-cosecha.was-validated .form-select:invalid ~ .invalid-feedback {
+  display: block
 }
 
 /* cuadricula de formulario del productor */

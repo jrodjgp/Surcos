@@ -814,31 +814,40 @@ select:focus {
 }
 
 /* input de rango estilizado (umbral de compromiso) */
-input[type='range'] {
+.control-rango {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 8px;
-  background: var(--line);
+  height: 14px;
+  background: linear-gradient(to right, var(--terra) 0 var(--valor-rango, 60%), var(--line) var(--valor-rango, 60%) 100%);
   border: none;
   outline: none;
+  margin-top: 8px;
+  cursor: pointer
+}
+
+.control-rango::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 22px;
+  background: var(--terra);
+  cursor: pointer
+}
+
+.control-rango::-moz-range-thumb {
+  width: 18px;
+  height: 22px;
+  background: var(--terra);
+  border: none;
+  cursor: pointer
+}
+
+.vista-unidad {
   margin-top: 8px
 }
 
-input[type='range']::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  background: var(--terra);
-  cursor: pointer
-}
-
-input[type='range']::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  background: var(--terra);
-  border: none;
-  cursor: pointer
+.vista-unidad b {
+  color: var(--leaf)
 }
 
 /* campo de formulario con margen superior (unidad de datos) */
