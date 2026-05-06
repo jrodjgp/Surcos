@@ -2,7 +2,7 @@
   height: 520px;
   border: 1px solid var(--line);
   border-radius: 220px 220px 0 0;
-  /* arco de granero â€” patron disenio */
+  /* arco de granero - patron disenio */
   overflow: hidden;
   position: relative
 }
@@ -29,7 +29,8 @@
   font-size: clamp(42px, 7vw, 90px);
   color: #fff;
   line-height: .92;
-  letter-spacing: -.04em
+  letter-spacing: -.04em;
+  margin: 0
 }
 
 /* ---------------------------------------------------------
@@ -75,7 +76,7 @@
   transform: scale(1.05)
 }
 
-/* badge de origen â€” esquina superior derecha de la imagen */
+/* badge de origen - esquina superior derecha de la imagen */
 /* bootstrap-equiv: .badge .bg-dark */
 .card-badge {
   position: absolute;
@@ -105,7 +106,7 @@
   margin-top: 6px
 }
 
-/* precio del pool â€” "ticker" agresivo */
+/* precio del pool - "ticker" agresivo */
 .price {
   font-size: 28px;
   font-weight: 700;
@@ -147,13 +148,13 @@
   margin-bottom: 4px
 }
 
-/* pista de la barra â€” 12px alto, sin redondear */
+/* pista de la barra - 12px alto, sin redondear */
 .bar {
   height: 12px;
   background: var(--line)
 }
 
-/* relleno de la barra â€” ochre por defecto */
+/* relleno de la barra - ochre por defecto */
 .bar>i {
   display: block;
   height: 100%;
@@ -192,7 +193,7 @@
    pagina de detalle del pool (diseno dividido)
    --------------------------------------------------------- */
 
-/* navbar fija â€” usada en pool_detail donde el layout es 100vh */
+/* navbar fija - usada en pool_detail donde el layout es 100vh */
 .navbar--fixed {
   position: fixed;
   width: 100%
@@ -227,7 +228,7 @@
   justify-content: flex-end
 }
 
-/* contenedor de imagen con arco superior â€” patron de granero */
+/* contenedor de imagen con arco superior - patron de granero */
 .arch {
   width: 100%;
   max-width: 380px;
@@ -321,7 +322,7 @@
   overflow: hidden
 }
 
-/* version del terminal â€” marca de agua */
+/* version del terminal - marca de agua */
 .terminal-box .ver {
   position: absolute;
   top: 14px;
@@ -442,7 +443,7 @@
   font-size: 15px
 }
 
-/* precio del pool â€” prominente, hoja verde */
+/* precio del pool - prominente, hoja verde */
 .pool-price {
   font-size: 40px;
   font-weight: 700;
@@ -527,7 +528,7 @@
 }
 
 /* ---------------------------------------------------------
-   historias del productor â€” hero editorial
+   historias del productor - hero editorial
    --------------------------------------------------------- */
 .story-hero {
   position: relative;
@@ -877,7 +878,7 @@
 }
 
 /* ---------------------------------------------------------
-   selector de rol â€” checkbox hack, sin javascript
+   selector de rol - checkbox hack, sin javascript
    --------------------------------------------------------- */
 
 /* ocultar el input real */
@@ -885,7 +886,7 @@
   display: none
 }
 
-/* etiqueta del toggle â€” contenedor horizontal */
+/* etiqueta del toggle - contenedor horizontal */
 .role-label {
   display: flex;
   border: 1px solid var(--line);
@@ -945,7 +946,7 @@
 }
 
 /* ---------------------------------------------------------
-   panel del productor â€” estilos del placeholder
+   panel del productor - estilos del placeholder
    --------------------------------------------------------- */
 
 /* formulario de publicacion de cosecha (placeholder) */
@@ -1073,7 +1074,7 @@
 }
 
 /* ---------------------------------------------------------
-   modelos de entrega â€” badge en pool_detail y radio en productor
+   modelos de entrega - badge en pool_detail y radio en productor
    --------------------------------------------------------- */
 
 /* bloque de modelo de entrega */
@@ -1095,7 +1096,7 @@
   margin-top: 2px
 }
 
-/* titulo del modelo â€” label agresivo */
+/* titulo del modelo - label agresivo */
 .modelo-titulo {
   font-family: 'Space Grotesk', sans-serif;
   font-size: .7rem;

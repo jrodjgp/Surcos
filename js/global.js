@@ -1,1 +1,57 @@
-new window.CajonLateral().iniciar();
+class AccionesDemo {
+  constructor() {
+    this.aviso = null;
+    this.temporizador = null;
+  }
+
+  iniciar() {
+    document.addEventListener('click', (evento) => this.manejarClic(evento));
+  }
+
+  manejarClic(evento) {
+    const objetivo = evento.target.closest('a[href="#"], button');
+
+    if (!objetivo || this.esControlReal(objetivo)) {
+      return;
+    }
+
+    evento.preventDefault();
+    this.mostrarAviso(this.crearMensaje(objetivo));
+  }
+
+  esControlReal(objetivo) {
+    const tipo = objetivo.getAttribute('type');
+    const esEnvio = objetivo.tagName === 'BUTTON' && tipo === 'submit';
+    const esCajon = objetivo.classList.contains('drawer-trigger') || objetivo.classList.contains('x');
+
+    return esEnvio || esCajon || objetivo.disabled;
+  }
+
+  crearMensaje(objetivo) {
+    const texto = objetivo.dataset.demoMensaje || objetivo.textContent.trim().replace(/\s+/g, ' ');
+    return texto ? `Demo del terminal: ${texto}` : 'Demo del terminal: accion registrada';
+  }
+
+  mostrarAviso(mensaje) {
+    if (!this.aviso) {
+      this.aviso = document.createElement('div');
+      this.aviso.className = 'demo-aviso';
+      this.aviso.setAttribute('role', 'status');
+      this.aviso.setAttribute('aria-live', 'polite');
+      document.body.appendChild(this.aviso);
+    }
+
+    this.aviso.textContent = mensaje;
+    this.aviso.classList.add('visible');
+    window.clearTimeout(this.temporizador);
+    this.temporizador = window.setTimeout(() => {
+      this.aviso.classList.remove('visible');
+    }, 2600);
+  }
+}
+
+if (window.CajonLateral) {
+  new window.CajonLateral().iniciar();
+}
+
+new AccionesDemo().iniciar();

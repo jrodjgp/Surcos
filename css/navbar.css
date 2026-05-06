@@ -89,6 +89,39 @@
   margin-bottom: 8px
 }
 
+/* enlaces sociales del pie con lectura mas natural */
+.f-social {
+  text-transform: none;
+  letter-spacing: .02em;
+  opacity: .92
+}
+
+/* aviso breve para acciones de demostracion */
+.demo-aviso {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 120;
+  max-width: min(360px, calc(100vw - 32px));
+  padding: 12px 14px;
+  background: var(--leaf);
+  color: #FDFBF7;
+  border: 1px solid rgba(253, 251, 247, .22);
+  box-shadow: 0 18px 40px rgba(33, 28, 22, .18);
+  font-size: 12px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity .22s ease, transform .22s ease
+}
+
+.demo-aviso.visible {
+  opacity: 1;
+  transform: translateY(0)
+}
+
 /* ---------------------------------------------------------
    disparador del cajon lateral (pestana fija derecha)
    --------------------------------------------------------- */
