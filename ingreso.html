@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="img/logo-surcos-icono.svg" />
   <title>Surcos | Ingreso</title>
   <meta name="description" content="Ingreso al terminal de Surcos." />
   <link
@@ -18,7 +19,7 @@
 
 <body>
   <header class="navbar">
-    <a class="brand" href="marketplace_terminal.html">Surcos</a>
+    <a class="brand" href="marketplace_terminal.html"><img src="img/logo-surcos.svg" alt="Surcos" /></a>
     <nav class="nav-links">
       <a href="marketplace_terminal.html">Marketplace</a>
       <a href="historias_productor.html">Historias</a>
@@ -33,27 +34,22 @@
     </a>
   </header>
 
-  <main class="autenticacion">
-    <section class="autenticacion-lateral" aria-label="Resumen de Surcos">
-      <h1>Tu nodo esta listo.</h1>
-      <p>Ingresa para revisar compras grupales, metodos de pago, historial y preferencias del terminal.</p>
-    </section>
-
-    <section class="autenticacion-panel">
+  <main class="autenticacion autenticacion-ingreso">
+    <section class="autenticacion-panel" aria-labelledby="tituloIngreso">
       <div class="autenticacion-contenido">
-        <p class="autenticacion-eyebrow">Acceso del terminal</p>
-        <h2>Ingresar</h2>
-        <p class="autenticacion-texto">Usa tu cuenta Surcos para continuar la experiencia sin dejar botones vacios.</p>
+        <p class="autenticacion-eyebrow">Terminal PTY-01</p>
+        <h1 id="tituloIngreso">Entra al mercado vivo.</h1>
+        <p class="autenticacion-texto">Revisa tus pools, pagos, historial y rutas de retiro desde una cuenta de prueba funcional.</p>
 
         <form class="autenticacion-formulario needs-validation" id="formularioIngreso" novalidate>
-          <div>
+          <div class="campo-terminal">
             <label class="form-label" for="correoIngreso">Correo</label>
             <input class="form-control" id="correoIngreso" name="correo" type="email" value="nodo@surcos.pa"
               autocomplete="email" required />
             <div class="invalid-feedback">Escribe un correo valido.</div>
           </div>
 
-          <div>
+          <div class="campo-terminal">
             <label class="form-label" for="claveIngreso">Clave</label>
             <input class="form-control" id="claveIngreso" name="clave" type="password" value="surcos2026"
               autocomplete="current-password" minlength="6" required />
@@ -63,21 +59,37 @@
           <p class="autenticacion-mensaje" data-mensaje-ingreso></p>
 
           <div class="autenticacion-acciones">
-            <button class="autenticacion-boton" type="submit">Ingresar al Terminal</button>
+            <button class="autenticacion-boton" type="submit">
+              <span>Ingresar al Terminal</span>
+              <span aria-hidden="true">></span>
+            </button>
             <a class="autenticacion-enlace" href="registro.html">Crear cuenta nueva</a>
           </div>
         </form>
 
-        <div class="autenticacion-demo">
-          <strong>Cuenta demo:</strong> nodo@surcos.pa / surcos2026
+        <div class="autenticacion-prueba">
+          <div>
+            <strong>Cuenta de prueba activa</strong>
+            <span>nodo@surcos.pa / surcos2026</span>
+          </div>
+          <button type="button" data-prueba-ingreso>Usar prueba</button>
         </div>
       </div>
     </section>
+
+    <aside class="autenticacion-lateral" aria-label="Paisaje de Boquete">
+      <figure class="autenticacion-imagen">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Boquete_town_in_Chiriqui_Highlands%2C_Panama.png/3840px-Boquete_town_in_Chiriqui_Highlands%2C_Panama.png"
+          alt="Valle de Boquete en las tierras altas de Chiriqui" />
+        <figcaption>Boquete, Chiriqui. Foto: Ariel Rodriguez-Vargas, CC BY-SA 4.0.</figcaption>
+      </figure>
+    </aside>
   </main>
 
   <footer class="footer">
     <div>
-      <div class="f-brand">Surcos</div>
+      <div class="f-brand"><img src="img/logo-surcos-claro.svg" alt="Surcos" /></div>
       <div class="f-small">Del campo al terminal.</div>
       <div class="f-small">&copy; 2026 SURCOS. DEL CAMPO AL TERMINAL.</div>
     </div>

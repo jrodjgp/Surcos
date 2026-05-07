@@ -2,6 +2,13 @@ class FormularioRegistro {
   constructor(selector) {
     this.formulario = document.querySelector(selector);
     this.mensaje = document.querySelector('[data-mensaje-registro]');
+    this.campos = {
+      nombre: document.querySelector('#nombreRegistro'),
+      correo: document.querySelector('#correoRegistro'),
+      provincia: document.querySelector('#provinciaRegistro'),
+      rol: document.querySelector('#rolRegistro'),
+      nodo: document.querySelector('#nodoRegistro')
+    };
   }
 
   iniciar() {

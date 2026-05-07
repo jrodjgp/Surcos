@@ -10,12 +10,18 @@
   border-bottom: 1px solid var(--line)
 }
 
-/* logotipo editorial en newsreader serif */
+/* logotipo principal */
 .brand {
-  font-family: 'Newsreader', serif;
-  font-size: 30px;
-  font-weight: 700;
-  color: var(--leaf)
+  display: inline-flex;
+  align-items: center;
+  width: 142px;
+  min-width: 142px
+}
+
+.brand img {
+  display: block;
+  width: 100%;
+  height: auto
 }
 
 /* enlaces de navegacion horizontal */
@@ -63,8 +69,14 @@
 }
 
 .f-brand {
-  font-family: 'Newsreader', serif;
-  font-size: 28px
+  width: 150px;
+  max-width: 100%
+}
+
+.f-brand img {
+  display: block;
+  width: 100%;
+  height: auto
 }
 
 .f-small {
@@ -360,6 +372,15 @@
    responsive navbar y footer
    --------------------------------------------------------- */
 @media (max-width: 980px) {
+  .navbar {
+    gap: 18px
+  }
+
+  .brand {
+    width: 118px;
+    min-width: 118px
+  }
+
   .nav-links {
     gap: 18px
   }

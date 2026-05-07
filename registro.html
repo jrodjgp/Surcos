@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="img/logo-surcos-icono.svg" />
   <title>Surcos | Registro</title>
   <meta name="description" content="Registro de usuarios compradores y productores en Surcos." />
   <link
@@ -18,7 +19,7 @@
 
 <body>
   <header class="navbar">
-    <a class="brand" href="marketplace_terminal.html">Surcos</a>
+    <a class="brand" href="marketplace_terminal.html"><img src="img/logo-surcos.svg" alt="Surcos" /></a>
     <nav class="nav-links">
       <a href="marketplace_terminal.html">Marketplace</a>
       <a href="historias_productor.html">Historias</a>
@@ -33,32 +34,27 @@
     </a>
   </header>
 
-  <main class="autenticacion">
-    <section class="autenticacion-lateral" aria-label="Registro en Surcos">
-      <h1>Abre tu terminal.</h1>
-      <p>Crea una cuenta demo funcional para probar compras grupales, perfil y configuracion sin base de datos.</p>
-    </section>
-
-    <section class="autenticacion-panel">
+  <main class="autenticacion autenticacion-registro">
+    <section class="autenticacion-panel" aria-labelledby="tituloRegistro">
       <div class="autenticacion-contenido">
         <p class="autenticacion-eyebrow">Nueva cuenta</p>
-        <h2>Registro</h2>
-        <p class="autenticacion-texto">Los datos quedan guardados en este navegador para simular una sesion completa.</p>
+        <h1 id="tituloRegistro">Activa tu nodo Surcos.</h1>
+        <p class="autenticacion-texto">Crea una identidad local para probar el flujo completo de comprador o productor.</p>
 
         <form class="autenticacion-formulario needs-validation" id="formularioRegistro" novalidate>
-          <div>
+          <div class="campo-terminal">
             <label class="form-label" for="nombreRegistro">Nombre completo</label>
             <input class="form-control" id="nombreRegistro" name="nombre" type="text" autocomplete="name" required />
             <div class="invalid-feedback">Escribe tu nombre.</div>
           </div>
 
-          <div>
+          <div class="campo-terminal">
             <label class="form-label" for="correoRegistro">Correo</label>
             <input class="form-control" id="correoRegistro" name="correo" type="email" autocomplete="email" required />
             <div class="invalid-feedback">Escribe un correo valido.</div>
           </div>
 
-          <div>
+          <div class="campo-terminal">
             <label class="form-label" for="telefonoRegistro">Telefono</label>
             <input class="form-control" id="telefonoRegistro" name="telefono" type="tel" autocomplete="tel" required />
             <div class="invalid-feedback">Escribe un telefono de contacto.</div>
@@ -117,17 +113,28 @@
           <p class="autenticacion-mensaje" data-mensaje-registro></p>
 
           <div class="autenticacion-acciones">
-            <button class="autenticacion-boton" type="submit">Crear Cuenta</button>
+            <button class="autenticacion-boton" type="submit">
+              <span>Crear Cuenta</span>
+              <span aria-hidden="true">></span>
+            </button>
             <a class="autenticacion-enlace" href="ingreso.html">Ya tengo cuenta</a>
           </div>
         </form>
       </div>
     </section>
+
+    <aside class="autenticacion-lateral" aria-label="Rio Caldera en Boquete">
+      <figure class="autenticacion-imagen">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/RVN06957.jpg"
+          alt="Rio Caldera junto a los jardines de Boquete" />
+        <figcaption>Rio Caldera, Boquete. Foto: Rob vanNostrand, CC BY-SA 4.0.</figcaption>
+      </figure>
+    </aside>
   </main>
 
   <footer class="footer">
     <div>
-      <div class="f-brand">Surcos</div>
+      <div class="f-brand"><img src="img/logo-surcos-claro.svg" alt="Surcos" /></div>
       <div class="f-small">Del campo al terminal.</div>
       <div class="f-small">&copy; 2026 SURCOS. DEL CAMPO AL TERMINAL.</div>
     </div>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 120" role="img" aria-labelledby="titulo descripcion">
+  <title id="titulo">Surcos</title>
+  <desc id="descripcion">Logotipo de Surcos con brote verde y surcos agricolas.</desc>
+  <defs>
+    <linearGradient id="tierra" x1="18" y1="90" x2="106" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#C85A32" />
+      <stop offset=".55" stop-color="#C85A32" />
+      <stop offset="1" stop-color="#D69B38" />
+    </linearGradient>
+    <linearGradient id="hoja" x1="38" y1="27" x2="82" y2="66" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1B6A35" />
+      <stop offset="1" stop-color="#2C4C3B" />
+    </linearGradient>
+  </defs>
+
+  <path d="M18 70a42 42 0 0 1 84 0" fill="none" stroke="#1B6A35" stroke-width="6" stroke-linecap="round" />
+  <path d="M60 70c0-18-14-31-32-32 1 23 15 35 31 35" fill="url(#hoja)" />
+  <path d="M61 68c4-12 15-19 30-18-2 17-13 26-30 25" fill="url(#hoja)" />
+  <path d="M59 72c-3-13-10-24-24-34" fill="none" stroke="#FDFBF7" stroke-width="3" stroke-linecap="round" />
+  <path d="M60 73c2-9 8-16 18-21" fill="none" stroke="#FDFBF7" stroke-width="3" stroke-linecap="round" />
+  <path d="M18 76h84v4c-8 21-24 33-42 33S26 101 18 80Z" fill="url(#tierra)" />
+  <path d="M60 76 28 104" fill="none" stroke="#FDFBF7" stroke-width="5" stroke-linecap="round" />
+  <path d="M60 76 45 111" fill="none" stroke="#FDFBF7" stroke-width="5" stroke-linecap="round" />
+  <path d="M60 76v37" fill="none" stroke="#FDFBF7" stroke-width="5" stroke-linecap="round" />
+  <path d="M60 76 75 111" fill="none" stroke="#FDFBF7" stroke-width="5" stroke-linecap="round" />
+  <path d="M60 76 95 96" fill="none" stroke="#FDFBF7" stroke-width="5" stroke-linecap="round" />
+
+  <text x="132" y="82" fill="#1B6A35" font-family="Newsreader, Georgia, serif" font-size="70" font-weight="700">Surcos</text>
+</svg>
