@@ -116,6 +116,35 @@ class AccionesDemostracion {
   }
 }
 
+class RelojTerminal {
+  iniciar() {
+    this.elementos = document.querySelectorAll('[data-hora-terminal]');
+
+    if (!this.elementos.length) {
+      return;
+    }
+
+    this.actualizar();
+    window.setInterval(() => this.actualizar(), 60000);
+  }
+
+  actualizar() {
+    const ahora = new Date();
+    const hora = ahora.toLocaleTimeString('es-PA', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+
+    this.elementos.forEach((elemento) => {
+      elemento.textContent = hora;
+
+      if (elemento.tagName === 'TIME') {
+        elemento.setAttribute('datetime', ahora.toISOString());
+      }
+    });
+  }
+}
+
 class CintaTerminal {
   iniciar() {
     if (!window.EstadoSurcos) {
@@ -205,6 +234,7 @@ if (window.CajonLateral) {
   new window.CajonLateral().iniciar();
 }
 
+new RelojTerminal().iniciar();
 new CintaTerminal().iniciar();
 new SesionInterfaz().iniciar();
 new AccionesDemostracion().iniciar();

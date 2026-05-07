@@ -4,7 +4,7 @@
    ========================================================= */
 
 /* ---------------------------------------------------------
-   estilos base de las provincias (inline svg)
+   estilos base de las provincias del svg
    --------------------------------------------------------- */
 .provincia {
   fill: var(--surface);
@@ -65,7 +65,7 @@
   padding: 20px
 }
 
-/* etiqueta superior tipo label small-caps */
+/* etiqueta superior en versalitas */
 .mapa-etiqueta {
   font-size: 10px;
   text-transform: uppercase;
@@ -75,8 +75,9 @@
   margin-bottom: 14px
 }
 
-/* svg responsivo dentro del contenedor */
-.mapa-contenedor svg {
+/* mapa responsivo dentro del contenedor */
+.mapa-contenedor svg,
+.mapa-contenedor .mapa-recurso {
   width: 100%;
   height: auto;
   display: block
@@ -135,7 +136,7 @@
   margin: 0 auto 16px
 }
 
-/* cursor pointer en provincias interactivas */
+/* cursor de seleccion en provincias interactivas */
 .mapa-config .provincia {
   cursor: pointer
 }

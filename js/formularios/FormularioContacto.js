@@ -97,7 +97,7 @@ class FormularioContacto {
       acciones.className = 'contacto-acciones';
       acciones.innerHTML = `
         <a href="mi_terminal_dashboard.html">Ir a Mi Terminal</a>
-        <a href="marketplace_terminal.html">Volver al Marketplace</a>
+        <a href="index.html">Volver al Marketplace</a>
       `;
       this.mensaje.appendChild(acciones);
     }

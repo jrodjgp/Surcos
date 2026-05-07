@@ -84,7 +84,7 @@ class TerminalUsuario {
           <div class="estado-vacio">
             <strong>No tienes pools activos.</strong>
             <span>Explora el marketplace y compromete un lote para verlo aqui.</span>
-            <a href="marketplace_terminal.html">Ir al Marketplace</a>
+            <a href="index.html">Ir al Marketplace</a>
           </div>
         </td>
       </tr>
