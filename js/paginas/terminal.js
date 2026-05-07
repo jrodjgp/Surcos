@@ -4,6 +4,7 @@ class TerminalUsuario {
     this.totalAhorro = document.querySelector('[data-terminal-ahorro]');
     this.insignia = document.querySelector('[data-terminal-insignia]');
     this.botonExportar = document.querySelector('[data-accion-terminal="exportar"]');
+    this.mensaje = document.querySelector('[data-mensaje-terminal]');
   }
 
   iniciar() {
@@ -60,14 +61,26 @@ class TerminalUsuario {
           <div class="est-date tab">${fechaEntrega}</div>
           <div class="est-status ${orden.estadoEntrega === 'transito' ? 'st-terra' : 'st-muted'}">${orden.textoEntrega}</div>
         </td>
+        <td>${this.crearAcciones(orden)}</td>
       </tr>
     `;
+  }
+
+  crearAcciones(orden) {
+    const enlace = orden.grupo
+      ? `<a class="accion-tabla" href="pool_detail.html?id=${orden.grupoCompraId}">Ver</a>`
+      : '';
+    const salida = orden.grupo && orden.estadoEntrega !== 'entregado'
+      ? `<button class="accion-tabla peligro" type="button" data-accion-orden="salir" data-grupo-id="${orden.grupoCompraId}">Salir</button>`
+      : '';
+
+    return `<div class="acciones-tabla">${enlace}${salida}</div>`;
   }
 
   crearFilaVacia() {
     return `
       <tr>
-        <td colspan="4">
+        <td colspan="5">
           <div class="estado-vacio">
             <strong>No tienes pools activos.</strong>
             <span>Explora el marketplace y compromete un lote para verlo aqui.</span>
@@ -79,11 +92,32 @@ class TerminalUsuario {
   }
 
   registrarAcciones() {
-    if (!this.botonExportar) {
-      return;
+    if (this.botonExportar) {
+      this.botonExportar.addEventListener('click', () => this.exportarManifiesto());
     }
 
-    this.botonExportar.addEventListener('click', () => this.exportarManifiesto());
+    document.addEventListener('click', (evento) => {
+      const boton = evento.target.closest('[data-accion-orden="salir"]');
+
+      if (!boton) {
+        return;
+      }
+
+      evento.preventDefault();
+      const resultado = window.GruposCompraSurcos.cancelarCompromiso(boton.dataset.grupoId);
+
+      if (resultado.requiereIngreso) {
+        const retorno = encodeURIComponent('mi_terminal_dashboard.html');
+        window.location.href = `ingreso.html?retorno=${retorno}`;
+        return;
+      }
+
+      this.mostrarMensaje(resultado.mensaje);
+
+      if (resultado.exito) {
+        this.renderizar();
+      }
+    });
   }
 
   exportarManifiesto() {
@@ -108,6 +142,15 @@ class TerminalUsuario {
     enlace.download = 'manifiesto-surcos.csv';
     enlace.click();
     URL.revokeObjectURL(enlace.href);
+  }
+
+  mostrarMensaje(texto) {
+    if (!this.mensaje) {
+      return;
+    }
+
+    this.mensaje.textContent = texto;
+    this.mensaje.hidden = false;
   }
 }
 

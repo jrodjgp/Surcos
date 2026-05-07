@@ -318,6 +318,44 @@ td:last-child {
   text-transform: uppercase
 }
 
+.acciones-tabla {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap
+}
+
+.accion-tabla {
+  border: 1px solid var(--terra);
+  background: transparent;
+  color: var(--terra);
+  padding: 7px 9px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  text-decoration: none;
+  cursor: pointer
+}
+
+.accion-tabla:hover {
+  background: var(--terra);
+  color: var(--bg)
+}
+
+.accion-tabla.peligro {
+  border-color: rgba(192, 82, 42, .72)
+}
+
+.mensaje-terminal {
+  margin-top: 18px;
+  padding: 12px 14px;
+  border: 1px solid rgba(26, 92, 42, .2);
+  background: rgba(26, 92, 42, .08);
+  color: var(--leaf);
+  font-size: 13px
+}
+
 /* ---------------------------------------------------------
    bloques de accion (exportar / aviso de logistica)
    --------------------------------------------------------- */

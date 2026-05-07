@@ -87,8 +87,10 @@ class AccionesDemostracion {
     const esPago = objetivo.dataset.accionPago;
     const esPerfil = objetivo.dataset.accionPerfil;
     const esConfiguracion = objetivo.dataset.accionConfiguracion;
+    const esOrden = objetivo.dataset.accionOrden;
+    const esHistorialOrden = objetivo.dataset.accionHistorialOrden;
 
-    return esEnvio || esCajon || esSesion || esGrupo || esTerminal || esFiltroHistorial || esPago || esPerfil || esConfiguracion || objetivo.disabled;
+    return esEnvio || esCajon || esSesion || esGrupo || esTerminal || esFiltroHistorial || esPago || esPerfil || esConfiguracion || esOrden || esHistorialOrden || objetivo.disabled;
   }
 
   crearMensaje(objetivo) {

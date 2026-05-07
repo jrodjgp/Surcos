@@ -32,13 +32,13 @@
 
   <!-- hero editorial -->
   <section class="story-hero">
-    <img alt="Caficultor en las tierras altas de Boquete Panama"
+    <img data-historia-imagen alt="Caficultor en las tierras altas de Boquete Panama"
       src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1800&q=85&fit=crop" />
     <div class="grad"></div>
     <div class="content">
       <div>
-        <p class="label">Volumen IV: Las Tierras Altas</p>
-        <h1>La Leyenda del<br>Geisha.</h1>
+        <p class="label" data-historia-volumen>Volumen IV: Las Tierras Altas</p>
+        <h1 data-historia-titulo>La Leyenda del<br>Geisha.</h1>
       </div>
       <div class="arrow">&darr;</div>
     </div>
@@ -51,20 +51,20 @@
     <aside class="sidebar-meta">
       <div class="block">
         <h4 class="lbl">Productor</h4>
-        <p class="val">Don Sebastian Heredia</p>
+        <p class="val" data-productor-responsable>Don Sebastian Heredia</p>
       </div>
       <div class="block">
         <h4 class="lbl">Ubicacion</h4>
-        <p class="val">Boquete, Chiriqui<br>1,800 MSNM</p>
+        <p class="val" data-productor-ubicacion>Boquete, Chiriqui<br>1,800 MSNM</p>
       </div>
       <div class="block">
         <h4 class="lbl">Varietal</h4>
-        <p class="val">Panama Geisha T.2722</p>
+        <p class="val" data-productor-varietal>Panama Geisha T.2722</p>
       </div>
     </aside>
 
     <!-- articulo principal -->
-    <article class="article">
+    <article class="article" data-historia-articulo>
       <p class="dropcap">La historia del Geisha no comienza en los suelos volcanicos de Panama, sino en el bosque de
         Gori Gesha en Etiopia. Sin embargo, fue aqui, a la sombra del Volcan Baru, donde el grano encontro su maxima
         expresion. Don Sebastian recuerda cuando se plantaron las primeras semillas — una apuesta que pocos creian que
@@ -93,19 +93,19 @@
     <aside class="sidebar-detail">
       <div class="batch-card">
         <h4 class="lbl">Estado del Lote</h4>
-        <div class="batch-row"><span>Cosecha Total</span><span>420 KG</span></div>
-        <div class="batch-row"><span>Asignacion Surcos</span><span class="terra">120 KG</span></div>
-        <div class="batch-row"><span>Estado del Pool</span><span><b class="pool-cantidad">44/50 personas</b> · <span class="pool-porcentaje">88%</span></span></div>
-        <div class="mini-bar"><i style="width:88%"></i></div>
+        <div class="batch-row"><span>Cosecha Total</span><span data-historia-cosecha>420 KG</span></div>
+        <div class="batch-row"><span>Asignacion Surcos</span><span class="terra" data-historia-asignacion>120 KG</span></div>
+        <div class="batch-row"><span>Estado del Pool</span><span><b class="pool-cantidad" data-historia-cantidad>44/50 personas</b> - <span class="pool-porcentaje" data-historia-porcentaje>88%</span></span></div>
+        <div class="mini-bar"><i data-historia-progreso style="width:88%"></i></div>
       </div>
       <div class="sidebar-img">
-        <img alt="Granos de cafe geisha secandose en camas africanas en Boquete"
+        <img data-historia-imagen-detalle alt="Granos de cafe geisha secandose en camas africanas en Boquete"
           src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=600&q=80&fit=crop" />
       </div>
     </aside>
   </section>
   <!-- galeria de fotos del productor -->
-  <section class="photo-strip" aria-label="Galeria de la finca Heredia">
+  <section class="photo-strip" aria-label="Galeria de la finca Heredia" data-historia-galeria>
     <figure>
       <img alt="Manos de agricultor clasificando cerezas de cafe geisha en Panama"
         src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80&fit=crop" />
@@ -123,50 +123,17 @@
     </figure>
   </section>
 
+  <section class="productores-relacionados" data-lista-productores></section>
+
   <!-- seccion de compra del productor -->
   <section class="shop">
     <div class="shop-inner">
       <div class="shop-header">
-        <h2>Compra de este Productor</h2>
-        <a href="#">VER TODOS LOS LOTES &rarr;</a>
+        <h2 data-historia-shop-titulo>Compra de este Productor</h2>
+        <a href="marketplace_terminal.html">VER TODOS LOS LOTES</a>
       </div>
-      <div class="shop-grid">
-        <article class="shop-card">
-          <figure>
-            <img alt="Bolsa de cafe Geisha Honey micro-lote Panama"
-              src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&q=80&fit=crop" />
-          </figure>
-          <div class="body">
-            <h3 class="sname">Geisha Honey #04</h3>
-            <p class="lot">LOTE GH-04 · 280G</p>
-            <div class="sprice tab">B/. 78.00</div>
-            <button class="sbtn">Comprometerse</button>
-          </div>
-        </article>
-        <article class="shop-card">
-          <figure>
-            <img alt="Cafe Geisha Natural proceso produccion Boquete"
-              src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&q=80&fit=crop" />
-          </figure>
-          <div class="body">
-            <h3 class="sname">Natural Geisha Reservoir</h3>
-            <p class="lot">LOTE NGR-01 · 280G</p>
-            <div class="sprice tab">B/. 62.00</div>
-            <button class="sbtn">Comprometerse</button>
-          </div>
-        </article>
-        <article class="shop-card">
-          <figure>
-            <img alt="Cafe lavado geisha washed process Panama Volcan Baru"
-              src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600&q=80&fit=crop" />
-          </figure>
-          <div class="body">
-            <h3 class="sname">Traditional Washed Geisha</h3>
-            <p class="lot">LOTE TWG-01 · 280G</p>
-            <div class="sprice tab">B/. 54.00</div>
-            <button class="sbtn">Comprometerse</button>
-          </div>
-        </article>
+      <div class="shop-grid" data-historia-lotes>
+        <p class="historia-vacia">Cargando lotes del productor.</p>
       </div>
     </div>
   </section>
@@ -238,7 +205,9 @@
   <script src="js/servicios/FormatoSurcos.js"></script>
   <script src="js/servicios/EstadoSurcos.js"></script>
   <script src="js/servicios/AutenticacionSurcos.js"></script>
+  <script src="js/servicios/GruposCompraSurcos.js"></script>
   <script src="js/global.js"></script>
+  <script src="js/paginas/historias.js"></script>
 </body>
 
 </html>

@@ -71,6 +71,10 @@ class GruposCompraSurcos {
       return { exito: false, mensaje: 'No se encontro este grupo de compra.' };
     }
 
+    if (grupo.estado !== 'activo') {
+      return { exito: false, mensaje: 'Este pool ya no esta activo.' };
+    }
+
     const ordenExistente = this.obtenerOrdenActivaUsuario(grupo.id);
 
     if (ordenExistente) {
