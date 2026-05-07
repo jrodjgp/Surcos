@@ -642,6 +642,38 @@ td:last-child {
   margin-top: 6px
 }
 
+.perfil-cuenta {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  background: var(--surface)
+}
+
+.perfil-cuenta div {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px
+}
+
+.perfil-cuenta div:last-child {
+  border-bottom: 0
+}
+
+.perfil-cuenta span {
+  color: #766a62;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: 10px
+}
+
+.perfil-cuenta strong {
+  color: var(--leaf);
+  text-align: right;
+  font-weight: 700
+}
+
 /* cuadricula de estadisticas del perfil */
 .stats {
   margin-top: 14px;
@@ -724,12 +756,15 @@ td:last-child {
   text-transform: uppercase;
   cursor: pointer;
   font-family: 'Space Grotesk', sans-serif;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
   transition: background .15s
 }
 
 .out:hover {
   background: var(--terra);
-  color: #fff
+  color: var(--bg)
 }
 
 /* ---------------------------------------------------------

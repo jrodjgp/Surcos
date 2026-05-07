@@ -198,6 +198,34 @@
   line-height: 1.55
 }
 
+.contacto-lista a {
+  color: var(--terra);
+  text-decoration: none;
+  font-weight: 700
+}
+
+.contacto-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px
+}
+
+.contacto-acciones a {
+  border: 1px solid rgba(26, 92, 42, .28);
+  color: var(--leaf);
+  padding: 8px 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: 10px
+}
+
+.contacto-acciones a:hover {
+  background: var(--leaf);
+  color: var(--bg)
+}
+
 @media (max-width: 860px) {
   .contacto-hero,
   .contacto-grid,

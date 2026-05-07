@@ -2,19 +2,40 @@ class PerfilTerminal {
   constructor() {
     this.estadisticas = document.querySelector('[data-perfil-estadisticas]');
     this.actividad = document.querySelector('[data-perfil-actividad]');
+    this.cuenta = document.querySelector('[data-perfil-cuenta]');
     this.botonExportar = document.querySelector('[data-accion-perfil="exportar"]');
     this.botonEditar = document.querySelector('[data-accion-perfil="editar"]');
     this.mensaje = document.querySelector('[data-mensaje-perfil]');
   }
 
   iniciar() {
+    this.estado = window.EstadoSurcos.obtenerEstado();
+    this.usuario = window.AutenticacionSurcos.obtenerUsuarioActual() || this.estado.usuarioDemo;
     this.renderizar();
     this.registrarAcciones();
   }
 
   renderizar() {
+    this.renderizarCuenta();
     this.renderizarEstadisticas();
     this.renderizarActividad();
+  }
+
+  renderizarCuenta() {
+    if (!this.cuenta) {
+      return;
+    }
+
+    const configuracion = this.estado.configuracion || {};
+    const nodo = configuracion.nodoRetiro || this.usuario.nodoRetiro || 'PTY Terminal Oeste';
+    const provincia = configuracion.provinciaRetiro || this.usuario.provincia || 'Panama';
+
+    this.cuenta.innerHTML = `
+      <div><span>Correo</span><strong>${this.usuario.correo}</strong></div>
+      <div><span>Nodo de retiro</span><strong>${nodo}</strong></div>
+      <div><span>Provincia</span><strong>${provincia}</strong></div>
+      <div><span>Rol activo</span><strong>${this.usuario.rol || 'comprador'}</strong></div>
+    `;
   }
 
   renderizarEstadisticas() {
@@ -80,14 +101,15 @@ class PerfilTerminal {
 
   registrarAcciones() {
     this.botonExportar?.addEventListener('click', () => this.exportarDatos());
-    this.botonEditar?.addEventListener('click', () => this.mostrarMensaje('La edicion completa queda pendiente para la fase de configuracion.'));
+    this.botonEditar?.addEventListener('click', () => {
+      window.location.href = 'configuracion.html';
+    });
   }
 
   exportarDatos() {
-    const usuario = window.AutenticacionSurcos.obtenerUsuarioActual()
-      || window.EstadoSurcos.obtenerEstado().usuarioDemo;
     const datos = {
-      usuario,
+      usuario: this.usuario,
+      configuracion: this.estado.configuracion,
       ordenes: window.OrdenesSurcos.obtenerOrdenesUsuario(),
       actividad: this.obtenerActividad()
     };
