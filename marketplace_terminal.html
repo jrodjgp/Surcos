@@ -81,15 +81,15 @@
 
         <div class="section-title">
             <h2>Terminal de Marketplace</h2>
-            <span>terminal en vivo · 08:24 PM</span>
+            <span>terminal en vivo - 08:24 PM</span>
         </div>
 
         <!-- Demo UI: el cambio de rol es solo presentacional.
              La autenticacion real se implementa en Proyecto 1 con sesiones PHP -->
         <input type="checkbox" id="role-toggle" class="role-input">
         <label for="role-toggle" class="role-label">
-          <span class="role-comprador">🛒 Comprador</span>
-          <span class="role-productor">🌱 Productor</span>
+          <span class="role-comprador">Comprador</span>
+          <span class="role-productor">Productor</span>
         </label>
 
         <!-- ===============================================
@@ -163,7 +163,7 @@
         </section>
 
         <!-- ===============================================
-             vista del productor — publicar cosecha y lotes
+             vista del productor: publicar cosecha y lotes
              validacion con HTML5, Bootstrap y POO en JavaScript
              =============================================== -->
         <section class="view-productor">
@@ -184,7 +184,7 @@
               <div class="form-campo">
                 <label for="variedadCosecha">variedad / lote</label>
                 <input class="form-control" id="variedadCosecha" name="variedad" type="text"
-                  placeholder="Ej: Lote #09 — Organico" minlength="3" required />
+                  placeholder="Ej: Lote #09 - Organico" minlength="3" required />
                 <div class="invalid-feedback">Indica la variedad o codigo del lote.</div>
               </div>
               <div class="form-campo">
@@ -215,7 +215,7 @@
               <div class="form-campo">
                 <label for="ventanaCosecha">ventana de cosecha</label>
                 <input class="form-control" id="ventanaCosecha" name="ventana" type="text"
-                  placeholder="15 Abr — 30 Abr 2026" minlength="8" required />
+                  placeholder="15 May - 30 May 2026" minlength="8" required />
                 <div class="invalid-feedback">Indica la ventana estimada de cosecha.</div>
               </div>
             </div>
@@ -226,41 +226,46 @@
               <label class="modelo-radio">
                 <input type="radio" name="modeloEntrega" value="Retiro en Nodo" checked />
                 <div>
-                  <p class="modelo-radio-titulo">⬡ Retiro en Nodo</p>
+                  <p class="modelo-radio-titulo">Retiro en Nodo</p>
                   <p class="modelo-radio-desc">El comprador retira en el nodo mas cercano a su provincia</p>
                 </div>
               </label>
               <label class="modelo-radio">
                 <input type="radio" name="modeloEntrega" value="Envio a Domicilio" />
                 <div>
-                  <p class="modelo-radio-titulo">→ Envio a Domicilio</p>
-                  <p class="modelo-radio-desc">Costo adicional B/.3.50 · MRW / servicio del agricultor</p>
+                  <p class="modelo-radio-titulo">Envio a Domicilio</p>
+                  <p class="modelo-radio-desc">Costo adicional B/.3.50 - MRW / servicio del agricultor</p>
                 </div>
               </label>
               <label class="modelo-radio">
                 <input type="radio" name="modeloEntrega" value="Lote Empresarial" />
                 <div>
-                  <p class="modelo-radio-titulo">⬢ Lote Empresarial</p>
-                  <p class="modelo-radio-desc">Minimo 200 lbs · Precio negociado directo con la finca</p>
+                  <p class="modelo-radio-titulo">Lote Empresarial</p>
+                  <p class="modelo-radio-desc">Minimo 200 lbs - Precio negociado directo con la finca</p>
                 </div>
               </label>
             </fieldset>
 
             <div class="alert alert-success mt-3" id="mensajeCosecha" role="status" aria-live="polite" hidden></div>
-            <button class="btn-primary" type="submit" data-accion="publicar-cosecha" disabled>Publicar en Marketplace →</button>
+            <button class="btn-primary" type="submit" data-accion="publicar-cosecha" disabled>Publicar en Marketplace</button>
           </form>
 
           <!-- estadisticas del productor -->
           <div class="lotes-panel">
             <div class="lotes-panel-titulo">Mis Lotes Activos</div>
-            <div class="lotes-stat"><span>Lotes publicados este ciclo</span><span>3</span></div>
-            <div class="lotes-stat"><span>Volumen total comprometido</span><span class="tab">1,240 kg</span></div>
-            <div class="lotes-stat"><span>Pools activos con mi producto</span><span>2</span></div>
-            <div class="lotes-stat"><span>Ingreso estimado del ciclo</span><span class="tab">B/. 3,720.00</span></div>
-            <div class="lotes-stat"><span>Tasa de llenado promedio</span><span>74%</span></div>
+            <div class="lotes-stat"><span>Lotes publicados este ciclo</span><span data-lotes-publicados>0</span></div>
+            <div class="lotes-stat"><span>Volumen objetivo publicado</span><span class="tab" data-volumen-productor>0 kg</span></div>
+            <div class="lotes-stat"><span>Pools activos con mi producto</span><span data-pools-productor>0</span></div>
+            <div class="lotes-stat"><span>Ingreso potencial del ciclo</span><span class="tab" data-ingreso-productor>B/. 0.00</span></div>
+            <div class="lotes-stat"><span>Tasa de llenado promedio</span><span data-llenado-productor>0%</span></div>
           </div>
 
-          <!-- mapa de zonas activas del productor — contexto B, inline svg -->
+          <div class="lotes-panel">
+            <div class="lotes-panel-titulo">Publicaciones del Productor</div>
+            <div class="lotes-lista" data-lista-lotes-productor></div>
+          </div>
+
+          <!-- mapa de zonas activas del productor: contexto B, svg integrado -->
           <div class="mapa-contenedor mapa-productor">
             <div class="mapa-etiqueta">Zonas Activas del Productor</div>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 421" aria-label="Mapa de zonas activas del productor">
@@ -441,6 +446,7 @@
   <script src="js/servicios/EstadoSurcos.js"></script>
   <script src="js/servicios/AutenticacionSurcos.js"></script>
   <script src="js/servicios/GruposCompraSurcos.js"></script>
+  <script src="js/servicios/PublicacionesProductorSurcos.js"></script>
   <script src="js/global.js"></script>
     <script src="js/marketplace.js"></script>
 </body>

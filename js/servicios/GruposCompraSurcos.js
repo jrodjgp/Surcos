@@ -36,14 +36,26 @@ class GruposCompraSurcos {
   }
 
   static usuarioEstaComprometido(grupoId) {
-    const usuario = window.AutenticacionSurcos.obtenerUsuarioActual();
+    return Boolean(this.obtenerOrdenActivaUsuario(grupoId));
+  }
 
+  static obtenerOrdenActivaUsuario(grupoId) {
+    return this.obtenerOrdenesUsuarioGrupo(grupoId)
+      .find((orden) => !this.ordenEstaCancelada(orden)) || null;
+  }
+
+  static obtenerOrdenUsuarioGrupo(grupoId, usuario = window.AutenticacionSurcos.obtenerUsuarioActual()) {
+    return this.obtenerOrdenesUsuarioGrupo(grupoId, usuario)[0] || null;
+  }
+
+  static obtenerOrdenesUsuarioGrupo(grupoId, usuario = window.AutenticacionSurcos.obtenerUsuarioActual()) {
     if (!usuario) {
-      return false;
+      return [];
     }
 
     return window.EstadoSurcos.obtenerColeccion('ordenes')
-      .some((orden) => orden.grupoCompraId === grupoId && orden.usuarioId === usuario.id);
+      .filter((orden) => orden.grupoCompraId === grupoId && orden.usuarioId === usuario.id)
+      .sort((primera, segunda) => this.obtenerFechaOrden(segunda) - this.obtenerFechaOrden(primera));
   }
 
   static comprometerse(grupoId) {
@@ -59,11 +71,16 @@ class GruposCompraSurcos {
       return { exito: false, mensaje: 'No se encontro este grupo de compra.' };
     }
 
-    const ordenes = window.EstadoSurcos.obtenerColeccion('ordenes');
-    const ordenExistente = ordenes.find((orden) => orden.grupoCompraId === grupo.id && orden.usuarioId === usuario.id);
+    const ordenExistente = this.obtenerOrdenActivaUsuario(grupo.id);
 
     if (ordenExistente) {
       return { exito: false, mensaje: 'Ya estas comprometido con este pool.' };
+    }
+
+    const ordenAnterior = this.obtenerOrdenUsuarioGrupo(grupo.id, usuario);
+
+    if (ordenAnterior?.estadoEntrega === 'entregado') {
+      return { exito: false, mensaje: 'Este pool ya fue entregado para tu cuenta.' };
     }
 
     const personasActuales = Math.min(grupo.personasObjetivo, grupo.personasActuales + 1);
@@ -71,8 +88,7 @@ class GruposCompraSurcos {
     const metodoPago = window.MetodosPagoSurcos?.obtenerPrincipal?.() || null;
     window.EstadoSurcos.actualizar('gruposCompra', grupo.id, { personasActuales });
 
-    const orden = {
-      id: window.FormatoSurcos.crearId('ord', `${grupo.id} ${usuario.id}`),
+    const datosOrden = {
       grupoCompraId: grupo.id,
       usuarioId: usuario.id,
       producto: `${grupo.producto} ${grupo.variedad}`,
@@ -82,10 +98,17 @@ class GruposCompraSurcos {
       metodoPagoEtiqueta: metodoPago ? `${metodoPago.tipo} ${metodoPago.ultimos}` : 'Metodo pendiente',
       estadoGrupo,
       estadoEntrega: 'programado',
-      fecha: new Date().toISOString().slice(0, 10)
+      fecha: new Date().toISOString().slice(0, 10),
+      fechaCancelacion: null
     };
+    const orden = ordenAnterior
+      ? window.EstadoSurcos.actualizar('ordenes', ordenAnterior.id, datosOrden)
+      : window.EstadoSurcos.agregar('ordenes', {
+        id: window.FormatoSurcos.crearId('ord', `${grupo.id} ${usuario.id}`),
+        ...datosOrden
+      });
 
-    window.EstadoSurcos.agregar('ordenes', orden);
+    this.consolidarOrdenesUsuarioGrupo(grupo.id, usuario.id, orden.id);
     window.EstadoSurcos.agregar('actividad', {
       id: window.FormatoSurcos.crearId('act', `${grupo.id} ${usuario.id}`),
       tipo: 'grupo',
@@ -101,6 +124,74 @@ class GruposCompraSurcos {
       grupo: this.obtenerGrupoPorId(grupo.id),
       orden
     };
+  }
+
+  static cancelarCompromiso(grupoId) {
+    const usuario = window.AutenticacionSurcos.obtenerUsuarioActual();
+
+    if (!usuario) {
+      return { requiereIngreso: true };
+    }
+
+    const grupo = this.obtenerGrupoPorId(grupoId);
+    const orden = this.obtenerOrdenActivaUsuario(grupoId);
+
+    if (!grupo || !orden) {
+      return { exito: false, mensaje: 'No tienes un compromiso activo en este pool.' };
+    }
+
+    if (orden.estadoEntrega === 'entregado') {
+      return { exito: false, mensaje: 'No se puede cancelar un pool ya entregado.' };
+    }
+
+    const personasActuales = Math.max(0, Number(grupo.personasActuales || 0) - 1);
+    window.EstadoSurcos.actualizar('gruposCompra', grupo.id, { personasActuales });
+    window.EstadoSurcos.actualizar('ordenes', orden.id, {
+      estadoGrupo: 'cancelado',
+      estadoEntrega: 'cancelado',
+      fechaCancelacion: new Date().toISOString().slice(0, 10)
+    });
+    this.consolidarOrdenesUsuarioGrupo(grupo.id, usuario.id, orden.id);
+    window.EstadoSurcos.agregar('actividad', {
+      id: window.FormatoSurcos.crearId('act', `${grupo.id} ${usuario.id} salida`),
+      tipo: 'grupo',
+      texto: `Saliste del pool ${grupo.producto} ${grupo.variedad}`,
+      fecha: new Date().toISOString().slice(0, 10)
+    });
+
+    return {
+      exito: true,
+      mensaje: 'Saliste del pool. Tu compromiso quedo cancelado en el terminal.',
+      grupo: this.obtenerGrupoPorId(grupo.id),
+      orden: window.EstadoSurcos.buscarPorId('ordenes', orden.id)
+    };
+  }
+
+  static consolidarOrdenesUsuarioGrupo(grupoId, usuarioId, ordenIdPrincipal) {
+    const ordenes = window.EstadoSurcos.obtenerColeccion('ordenes');
+    const relacionadas = ordenes.filter((orden) => orden.grupoCompraId === grupoId && orden.usuarioId === usuarioId);
+
+    if (relacionadas.length <= 1) {
+      return;
+    }
+
+    const principal = relacionadas.find((orden) => orden.id === ordenIdPrincipal)
+      || relacionadas[0];
+    const depuradas = ordenes.filter((orden) => (
+      orden.grupoCompraId !== grupoId
+      || orden.usuarioId !== usuarioId
+      || orden.id === principal.id
+    ));
+
+    window.EstadoSurcos.guardarColeccion('ordenes', depuradas);
+  }
+
+  static ordenEstaCancelada(orden) {
+    return orden.estadoEntrega === 'cancelado' || orden.estadoGrupo === 'cancelado';
+  }
+
+  static obtenerFechaOrden(orden) {
+    return new Date(orden.fechaCancelacion || orden.fecha || 0).getTime();
   }
 }
 

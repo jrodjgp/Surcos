@@ -7,10 +7,54 @@ class OrdenesSurcos {
       return [];
     }
 
-    return window.EstadoSurcos.obtenerColeccion('ordenes')
-      .filter((orden) => orden.usuarioId === usuario.id)
+    const ordenes = window.EstadoSurcos.obtenerColeccion('ordenes');
+    const ordenesUsuario = ordenes.filter((orden) => orden.usuarioId === usuario.id);
+    const ordenesConsolidadas = this.consolidarOrdenes(ordenesUsuario);
+
+    if (ordenesConsolidadas.length !== ordenesUsuario.length) {
+      const otrasOrdenes = ordenes.filter((orden) => orden.usuarioId !== usuario.id);
+      window.EstadoSurcos.guardarColeccion('ordenes', [...otrasOrdenes, ...ordenesConsolidadas]);
+    }
+
+    return ordenesConsolidadas
       .map((orden) => this.completarOrden(orden))
       .sort((primera, segunda) => new Date(segunda.fecha) - new Date(primera.fecha));
+  }
+
+  static consolidarOrdenes(ordenes) {
+    const porGrupo = new Map();
+
+    ordenes.forEach((orden) => {
+      const actual = porGrupo.get(orden.grupoCompraId);
+      porGrupo.set(orden.grupoCompraId, this.elegirOrdenPrincipal(actual, orden));
+    });
+
+    return Array.from(porGrupo.values());
+  }
+
+  static elegirOrdenPrincipal(actual, candidata) {
+    if (!actual) {
+      return candidata;
+    }
+
+    const actualActiva = !this.ordenEstaCancelada(actual);
+    const candidataActiva = !this.ordenEstaCancelada(candidata);
+
+    if (actualActiva !== candidataActiva) {
+      return candidataActiva ? candidata : actual;
+    }
+
+    return this.obtenerFechaOrden(candidata) >= this.obtenerFechaOrden(actual)
+      ? candidata
+      : actual;
+  }
+
+  static ordenEstaCancelada(orden) {
+    return orden.estadoEntrega === 'cancelado' || orden.estadoGrupo === 'cancelado';
+  }
+
+  static obtenerFechaOrden(orden) {
+    return new Date(orden.fechaCancelacion || orden.fecha || 0).getTime();
   }
 
   static obtenerOrdenesActivas() {
@@ -56,7 +100,8 @@ class OrdenesSurcos {
     const textos = {
       ganado: 'GANADO',
       pendiente: 'PENDIENTE',
-      fallido: 'POOL FALLIDO'
+      fallido: 'POOL FALLIDO',
+      cancelado: 'CANCELADO'
     };
 
     return textos[estado] || 'POOL ACTIVO';
@@ -74,7 +119,7 @@ class OrdenesSurcos {
   }
 
   static obtenerClaseGrupo(estado) {
-    if (estado === 'fallido') {
+    if (estado === 'fallido' || estado === 'cancelado') {
       return 's-fail';
     }
 

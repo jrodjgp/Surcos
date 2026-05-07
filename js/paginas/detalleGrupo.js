@@ -2,6 +2,7 @@ class DetalleGrupoCompra {
   constructor() {
     this.grupo = null;
     this.boton = document.querySelector('[data-accion-grupo="unirse"]');
+    this.botonCancelar = document.querySelector('[data-accion-grupo="cancelar"]');
     this.mensaje = document.querySelector('[data-mensaje-grupo]');
   }
 
@@ -53,11 +54,13 @@ class DetalleGrupoCompra {
   }
 
   registrarAcciones() {
-    if (!this.boton) {
-      return;
+    if (this.boton) {
+      this.boton.addEventListener('click', () => this.unirse());
     }
 
-    this.boton.addEventListener('click', () => this.unirse());
+    if (this.botonCancelar) {
+      this.botonCancelar.addEventListener('click', () => this.cancelar());
+    }
   }
 
   unirse() {
@@ -79,16 +82,45 @@ class DetalleGrupoCompra {
     }
   }
 
-  actualizarBoton() {
-    if (!this.boton) {
+  cancelar() {
+    const resultado = window.GruposCompraSurcos.cancelarCompromiso(this.grupo.id);
+
+    if (resultado.requiereIngreso) {
+      const retorno = encodeURIComponent(`pool_detail.html?id=${this.grupo.id}`);
+      window.location.href = `ingreso.html?retorno=${retorno}`;
       return;
     }
 
-    const comprometido = window.GruposCompraSurcos.usuarioEstaComprometido(this.grupo.id);
-    this.boton.disabled = comprometido;
+    this.mostrarMensaje(resultado.mensaje);
 
-    if (comprometido) {
-      this.boton.textContent = 'Ya Comprometido';
+    if (resultado.exito) {
+      this.grupo = resultado.grupo;
+      this.renderizar();
+    }
+  }
+
+  actualizarBoton() {
+    if (!this.boton && !this.botonCancelar) {
+      return;
+    }
+
+    const estaActivo = this.grupo.estado === 'activo';
+    const comprometido = window.GruposCompraSurcos.usuarioEstaComprometido(this.grupo.id);
+
+    if (this.boton) {
+      this.boton.disabled = comprometido || !estaActivo;
+
+      if (!estaActivo) {
+        this.boton.textContent = 'Pool Cancelado';
+      } else if (comprometido) {
+        this.boton.textContent = 'Ya Comprometido';
+      } else {
+        this.boton.textContent = 'Unirse al Pool';
+      }
+    }
+
+    if (this.botonCancelar) {
+      this.botonCancelar.hidden = !comprometido || !estaActivo;
     }
   }
 

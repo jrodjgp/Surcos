@@ -23,7 +23,9 @@ class FormularioCosecha {
     }
 
     const cosecha = this.crearCosecha();
-    this.mostrarMensaje(cosecha.crearMensajeConfirmacion(), true);
+    const publicacion = window.PublicacionesProductorSurcos.publicar(cosecha);
+    this.mostrarMensaje(publicacion.mensaje || cosecha.crearMensajeConfirmacion(), true, publicacion.grupo);
+    window.dispatchEvent(new CustomEvent('cosecha:publicada', { detail: publicacion }));
     this.formulario.reset();
     this.formulario.classList.remove('was-validated');
     this.actualizarEstadoBoton();
@@ -47,11 +49,19 @@ class FormularioCosecha {
     this.boton.disabled = !this.formulario.checkValidity();
   }
 
-  mostrarMensaje(texto, esExito) {
+  mostrarMensaje(texto, esExito, grupo = null) {
     this.mensaje.textContent = texto;
     this.mensaje.hidden = false;
     this.mensaje.classList.toggle('alert-success', esExito);
     this.mensaje.classList.toggle('alert-danger', !esExito);
+
+    if (grupo) {
+      const enlace = document.createElement('a');
+      enlace.href = `pool_detail.html?id=${grupo.id}`;
+      enlace.className = 'alert-link ms-2';
+      enlace.textContent = 'Ver pool publicado';
+      this.mensaje.appendChild(enlace);
+    }
   }
 }
 

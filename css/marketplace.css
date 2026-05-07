@@ -483,6 +483,18 @@
   opacity: .86
 }
 
+.btn-pool-secundario {
+  margin-top: 10px;
+  border: 1px solid var(--terra);
+  background: transparent;
+  color: var(--terra)
+}
+
+.btn-pool-secundario:hover {
+  background: var(--terra);
+  color: var(--bg)
+}
+
 .btn-pool svg {
   width: 18px;
   height: 18px
@@ -1072,6 +1084,72 @@
 .lotes-stat span:last-child {
   font-weight: 700;
   color: var(--leaf)
+}
+
+.lotes-lista {
+  padding: 0
+}
+
+.lote-productor {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line)
+}
+
+.lote-productor:last-child {
+  border-bottom: 0
+}
+
+.lote-productor strong,
+.lote-productor span {
+  display: block
+}
+
+.lote-productor strong {
+  color: var(--leaf);
+  font-family: 'Newsreader', serif;
+  font-size: 18px
+}
+
+.lote-productor span {
+  margin-top: 3px;
+  color: #766a62;
+  font-size: 12px
+}
+
+.lote-productor-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px
+}
+
+.lote-productor-meta a {
+  border: 1px solid var(--terra);
+  background: transparent;
+  color: var(--terra);
+  padding: 8px 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  cursor: pointer
+}
+
+.lote-productor-meta a:hover {
+  background: var(--terra);
+  color: var(--bg)
+}
+
+.lotes-vacio {
+  margin: 0;
+  padding: 16px 20px;
+  color: #766a62;
+  font-size: 13px
 }
 
 /* indicador de fecha limite estatica */

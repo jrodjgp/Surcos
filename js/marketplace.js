@@ -2,11 +2,22 @@ class VistaMercado {
   constructor() {
     this.lista = document.querySelector('[data-lista-grupos]');
     this.total = document.querySelector('[data-total-grupos]');
+    this.lotesPublicados = document.querySelector('[data-lotes-publicados]');
+    this.volumenProductor = document.querySelector('[data-volumen-productor]');
+    this.poolsProductor = document.querySelector('[data-pools-productor]');
+    this.ingresoProductor = document.querySelector('[data-ingreso-productor]');
+    this.llenadoProductor = document.querySelector('[data-llenado-productor]');
+    this.listaLotesProductor = document.querySelector('[data-lista-lotes-productor]');
   }
 
   iniciar() {
     this.iniciarFormularioCosecha();
     this.renderizarGrupos();
+    this.renderizarResumenProductor();
+    window.addEventListener('cosecha:publicada', () => {
+      this.renderizarGrupos();
+      this.renderizarResumenProductor();
+    });
   }
 
   iniciarFormularioCosecha() {
@@ -56,6 +67,58 @@ class VistaMercado {
         <a href="pool_detail.html?id=${grupo.id}" class="btn">Ver y Comprometerse</a>
       </article>
     `;
+  }
+
+  renderizarResumenProductor() {
+    if (!window.PublicacionesProductorSurcos) {
+      return;
+    }
+
+    const grupos = window.PublicacionesProductorSurcos.obtenerGruposProductorActual();
+    const volumen = grupos.reduce((total, grupo) => total + Number(grupo.cantidadMinima * grupo.personasObjetivo), 0);
+    const ingreso = grupos.reduce((total, grupo) => (
+      total + Number(grupo.precioGrupal * grupo.cantidadMinima * grupo.personasObjetivo)
+    ), 0);
+    const llenado = grupos.length
+      ? Math.round(grupos.reduce((total, grupo) => total + window.GruposCompraSurcos.calcularPorcentaje(grupo), 0) / grupos.length)
+      : 0;
+
+    this.escribir(this.lotesPublicados, grupos.length);
+    this.escribir(this.volumenProductor, `${window.FormatoSurcos.numero(volumen)} kg`);
+    this.escribir(this.poolsProductor, grupos.length);
+    this.escribir(this.ingresoProductor, window.FormatoSurcos.moneda(ingreso));
+    this.escribir(this.llenadoProductor, `${llenado}%`);
+    this.renderizarLotesProductor(grupos);
+  }
+
+  renderizarLotesProductor(grupos) {
+    if (!this.listaLotesProductor) {
+      return;
+    }
+
+    if (!grupos.length) {
+      this.listaLotesProductor.innerHTML = '<p class="lotes-vacio">No tienes pools activos publicados en este ciclo.</p>';
+      return;
+    }
+
+    this.listaLotesProductor.innerHTML = grupos.map((grupo) => `
+      <article class="lote-productor">
+        <div>
+          <strong>${grupo.producto}</strong>
+          <span>${grupo.variedad} - ${grupo.origen}</span>
+        </div>
+        <div class="lote-productor-meta">
+          <span>${window.GruposCompraSurcos.calcularPorcentaje(grupo)}%</span>
+          <a href="pool_detail.html?id=${grupo.id}">Ver</a>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  escribir(elemento, texto) {
+    if (elemento) {
+      elemento.textContent = texto;
+    }
   }
 }
 
