@@ -170,6 +170,7 @@ class ConfiguracionTerminal {
       exportar: () => this.exportarDatos(),
       clave: () => this.mostrarMensaje('Cambio de contrasena preparado para la siguiente version con servidor.'),
       regenerar: () => this.mostrarMensaje('Identificador regenerado en modo demostracion. El acceso local se mantiene activo.'),
+      reiniciar: () => this.reiniciarDemostracion(),
       eliminar: () => this.mostrarMensaje('Eliminacion simulada. No se borra la cuenta durante la demostracion.')
     };
 
@@ -241,6 +242,13 @@ class ConfiguracionTerminal {
     enlace.click();
     URL.revokeObjectURL(enlace.href);
     this.mostrarMensaje('Datos del terminal exportados en formato JSON.');
+  }
+
+  reiniciarDemostracion() {
+    this.estado = window.EstadoSurcos.reiniciar();
+    this.usuario = window.AutenticacionSurcos.iniciarSesionDemo() || this.estado.usuarioDemo;
+    this.hidratarFormulario();
+    this.mostrarMensaje('Demo reiniciada. Los pools, historial y metodos de pago volvieron al estado base.');
   }
 
   mostrarMensaje(texto) {

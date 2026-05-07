@@ -10,7 +10,13 @@ class EstadoSurcos {
       return semillas;
     }
 
-    return this.fusionarEstado(semillas, guardado);
+    const fusionado = this.fusionarEstado(semillas, guardado);
+
+    if (fusionado.version !== guardado.version) {
+      this.guardarEstado(fusionado);
+    }
+
+    return fusionado;
   }
 
   static guardarEstado(estado) {
@@ -78,8 +84,81 @@ class EstadoSurcos {
       version: semillas.version || guardado.version,
       usuarioDemo: this.fusionarUsuarioSemilla(semillas.usuarioDemo, guardado.usuarioDemo),
       usuarios: this.fusionarUsuarios(semillas.usuarios || [], guardado.usuarios || []),
+      productores: this.fusionarColeccionPorId(semillas.productores || [], guardado.productores || []),
+      gruposCompra: this.fusionarGruposCompra(semillas.gruposCompra || [], guardado.gruposCompra || []),
+      ordenes: this.migrarOrdenesHistoricas(
+        this.fusionarColeccionPorId(semillas.ordenes || [], guardado.ordenes || [])
+      ),
+      nodosRetiro: this.fusionarColeccionPorClave(
+        semillas.nodosRetiro || [],
+        guardado.nodosRetiro || [],
+        (nodo) => `${nodo.provincia}-${nodo.nodo}`
+      ),
       configuracion: this.fusionarConfiguracion(semillas.configuracion || {}, guardado.configuracion || {})
     };
+  }
+
+  static fusionarColeccionPorId(semillas, guardados) {
+    const registros = [...guardados];
+
+    semillas.forEach((semilla) => {
+      const indice = registros.findIndex((registro) => registro.id === semilla.id);
+
+      if (indice >= 0) {
+        registros[indice] = { ...semilla, ...registros[indice] };
+        return;
+      }
+
+      registros.push(semilla);
+    });
+
+    return registros;
+  }
+
+  static fusionarColeccionPorClave(semillas, guardados, obtenerClave) {
+    const registros = [...guardados];
+
+    semillas.forEach((semilla) => {
+      const claveSemilla = obtenerClave(semilla);
+      const existe = registros.some((registro) => obtenerClave(registro) === claveSemilla);
+
+      if (!existe) {
+        registros.push(semilla);
+      }
+    });
+
+    return registros;
+  }
+
+  static fusionarGruposCompra(semillas, guardados) {
+    return this.fusionarColeccionPorId(semillas, guardados)
+      .map((grupo) => {
+        const semilla = semillas.find((registro) => registro.id === grupo.id);
+
+        if (!semilla) {
+          return grupo;
+        }
+
+        return {
+          ...semilla,
+          ...grupo,
+          fechaCierre: semilla.fechaCierre,
+          fechaEntrega: semilla.fechaEntrega,
+          estado: semilla.estado
+        };
+      });
+  }
+
+  static migrarOrdenesHistoricas(ordenes) {
+    const historicos = {
+      'ord-geisha-04': { grupoCompraId: 'grupo-geisha-04-historico' },
+      'ord-miel-01': { grupoCompraId: 'grupo-miel-01-historico', origen: 'El Valle, Cocle' }
+    };
+
+    return ordenes.map((orden) => {
+      const cambio = historicos[orden.id];
+      return cambio ? { ...orden, ...cambio } : orden;
+    });
   }
 
   static fusionarUsuarios(semillas, guardados) {

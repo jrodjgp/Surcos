@@ -16,14 +16,20 @@ class AutenticacionSurcos {
 
   static obtenerUsuarioActual() {
     const sesion = this.obtenerSesion();
-
-    if (!sesion?.usuarioId) {
-      return null;
-    }
-
     const estado = window.EstadoSurcos.obtenerEstado();
     const usuarios = estado.usuarios || [estado.usuarioDemo].filter(Boolean);
-    return usuarios.find((usuario) => usuario.id === sesion.usuarioId) || null;
+
+    if (!sesion?.usuarioId) {
+      return this.iniciarSesionDemo();
+    }
+
+    const usuario = usuarios.find((item) => item.id === sesion.usuarioId) || null;
+
+    if (!usuario) {
+      return this.iniciarSesionDemo();
+    }
+
+    return usuario;
   }
 
   static buscarPorCorreo(correo) {
@@ -77,6 +83,26 @@ class AutenticacionSurcos {
     }));
 
     return usuario;
+  }
+
+  static obtenerUsuarioDemo() {
+    const estado = window.EstadoSurcos.obtenerEstado();
+    const usuarios = estado.usuarios || [];
+
+    return usuarios.find((usuario) => usuario.id === estado.usuarioDemo?.id)
+      || usuarios.find((usuario) => this.normalizarCorreo(usuario.correo) === this.normalizarCorreo(estado.usuarioDemo?.correo))
+      || estado.usuarioDemo
+      || null;
+  }
+
+  static iniciarSesionDemo() {
+    const usuario = this.obtenerUsuarioDemo();
+
+    if (!usuario) {
+      return null;
+    }
+
+    return this.iniciarSesion(usuario);
   }
 
   static cerrarSesion() {

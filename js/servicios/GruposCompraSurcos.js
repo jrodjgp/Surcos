@@ -41,7 +41,7 @@ class GruposCompraSurcos {
 
   static obtenerOrdenActivaUsuario(grupoId) {
     return this.obtenerOrdenesUsuarioGrupo(grupoId)
-      .find((orden) => !this.ordenEstaCancelada(orden)) || null;
+      .find((orden) => !this.ordenEstaFinalizada(orden)) || null;
   }
 
   static obtenerOrdenUsuarioGrupo(grupoId, usuario = window.AutenticacionSurcos.obtenerUsuarioActual()) {
@@ -81,11 +81,7 @@ class GruposCompraSurcos {
       return { exito: false, mensaje: 'Ya estas comprometido con este pool.' };
     }
 
-    const ordenAnterior = this.obtenerOrdenUsuarioGrupo(grupo.id, usuario);
-
-    if (ordenAnterior?.estadoEntrega === 'entregado') {
-      return { exito: false, mensaje: 'Este pool ya fue entregado para tu cuenta.' };
-    }
+    const ordenReutilizable = this.obtenerOrdenReutilizableUsuarioGrupo(grupo.id, usuario);
 
     const personasActuales = Math.min(grupo.personasObjetivo, grupo.personasActuales + 1);
     const estadoGrupo = personasActuales >= grupo.personasObjetivo ? 'ganado' : 'pendiente';
@@ -105,8 +101,8 @@ class GruposCompraSurcos {
       fecha: new Date().toISOString().slice(0, 10),
       fechaCancelacion: null
     };
-    const orden = ordenAnterior
-      ? window.EstadoSurcos.actualizar('ordenes', ordenAnterior.id, datosOrden)
+    const orden = ordenReutilizable
+      ? window.EstadoSurcos.actualizar('ordenes', ordenReutilizable.id, datosOrden)
       : window.EstadoSurcos.agregar('ordenes', {
         id: window.FormatoSurcos.crearId('ord', `${grupo.id} ${usuario.id}`),
         ...datosOrden
@@ -192,6 +188,16 @@ class GruposCompraSurcos {
 
   static ordenEstaCancelada(orden) {
     return orden.estadoEntrega === 'cancelado' || orden.estadoGrupo === 'cancelado';
+  }
+
+  static ordenEstaFinalizada(orden) {
+    return ['cancelado', 'entregado'].includes(orden.estadoEntrega)
+      || ['cancelado', 'fallido'].includes(orden.estadoGrupo);
+  }
+
+  static obtenerOrdenReutilizableUsuarioGrupo(grupoId, usuario = window.AutenticacionSurcos.obtenerUsuarioActual()) {
+    return this.obtenerOrdenesUsuarioGrupo(grupoId, usuario)
+      .find((orden) => this.ordenEstaCancelada(orden)) || null;
   }
 
   static obtenerFechaOrden(orden) {

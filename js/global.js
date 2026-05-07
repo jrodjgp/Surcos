@@ -46,10 +46,10 @@ class SesionInterfaz {
         evento.preventDefault();
         evento.stopPropagation();
         this.autenticacion.cerrarSesion();
-        new AccionesDemostracion().mostrarAviso('Sesion cerrada. Volviendo al ingreso.');
-        window.setTimeout(() => {
-          window.location.href = 'ingreso.html';
-        }, 900);
+        this.usuario = this.autenticacion.iniciarSesionDemo();
+        this.actualizarAccesoPerfil();
+        this.actualizarDatosUsuario();
+        new AccionesDemostracion().mostrarAviso('Modo demo activo: sesion restaurada para continuar el recorrido.');
       });
     });
   }
@@ -116,9 +116,95 @@ class AccionesDemostracion {
   }
 }
 
+class CintaTerminal {
+  iniciar() {
+    if (!window.EstadoSurcos) {
+      return;
+    }
+
+    document.querySelectorAll('.ticker-track').forEach((pista) => {
+      this.actualizarPista(pista);
+    });
+  }
+
+  actualizarPista(pista) {
+    const fragmento = document.createDocumentFragment();
+    const elementos = this.obtenerElementos();
+
+    [...elementos, ...elementos].forEach((elemento, indice) => {
+      fragmento.appendChild(this.crearElemento(elemento));
+
+      if (indice < elementos.length * 2 - 1) {
+        fragmento.appendChild(this.crearSeparador());
+      }
+    });
+
+    pista.replaceChildren(fragmento);
+  }
+
+  obtenerElementos() {
+    const grupos = window.EstadoSurcos.obtenerColeccion('gruposCompra')
+      .filter((grupo) => grupo.estado === 'activo');
+    const ordenes = window.EstadoSurcos.obtenerColeccion('ordenes');
+    const entregas = ordenes.filter((orden) => orden.estadoEntrega === 'entregado').length;
+    const provincias = new Set(grupos.map((grupo) => this.obtenerProvincia(grupo)).filter(Boolean));
+    const asegurados = grupos.filter((grupo) => Number(grupo.personasActuales || 0) >= Number(grupo.personasObjetivo || 1)).length;
+    const siguiente = this.obtenerSiguienteCierre(grupos);
+
+    return [
+      { etiqueta: 'Pools Activos', valor: grupos.length },
+      { etiqueta: 'Entregas Recientes', valor: entregas },
+      { etiqueta: 'Pools Asegurados', valor: asegurados },
+      { etiqueta: 'Provincias Activas', valor: provincias.size },
+      { texto: siguiente ? `Proximo Cierre: ${siguiente}` : 'Proximo Cierre: sin pools activos' }
+    ];
+  }
+
+  crearElemento(elemento) {
+    const elementoCinta = document.createElement('span');
+    elementoCinta.className = 'ticker-item';
+
+    if (elemento.texto) {
+      elementoCinta.textContent = elemento.texto;
+      return elementoCinta;
+    }
+
+    elementoCinta.append(`${elemento.etiqueta}: `);
+    const valor = document.createElement('b');
+    valor.textContent = elemento.valor;
+    elementoCinta.appendChild(valor);
+    return elementoCinta;
+  }
+
+  crearSeparador() {
+    const separador = document.createElement('span');
+    separador.className = 'ticker-item ticker-separador';
+    separador.textContent = '//';
+    return separador;
+  }
+
+  obtenerProvincia(grupo) {
+    return String(grupo.origen || '').split(',').pop().trim();
+  }
+
+  obtenerSiguienteCierre(grupos) {
+    const grupo = [...grupos]
+      .sort((primero, segundo) => new Date(primero.fechaCierre) - new Date(segundo.fechaCierre))[0];
+
+    if (!grupo) {
+      return '';
+    }
+
+    const fecha = new Date(grupo.fechaCierre);
+    const dia = fecha.toLocaleDateString('es-PA', { day: '2-digit', month: 'short' });
+    return `${grupo.producto} ${dia}`;
+  }
+}
+
 if (window.CajonLateral) {
   new window.CajonLateral().iniciar();
 }
 
+new CintaTerminal().iniciar();
 new SesionInterfaz().iniciar();
 new AccionesDemostracion().iniciar();

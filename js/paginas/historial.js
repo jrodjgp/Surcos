@@ -49,7 +49,7 @@ class HistorialOrdenes {
     }
 
     if (this.filtroActivo === 'canceladas') {
-      return ordenes.filter((orden) => orden.estadoEntrega === 'cancelado' || orden.estadoGrupo === 'fallido');
+      return ordenes.filter((orden) => window.OrdenesSurcos.ordenEstaCancelada(orden));
     }
 
     return ordenes;
@@ -80,7 +80,7 @@ class HistorialOrdenes {
     const enlace = orden.grupo
       ? `<a class="accion-tabla" href="pool_detail.html?id=${orden.grupoCompraId}">Ver</a>`
       : '';
-    const puedeSalir = orden.grupo && !['cancelado', 'entregado'].includes(orden.estadoEntrega);
+    const puedeSalir = orden.grupo && !window.OrdenesSurcos.ordenEstaFinalizada(orden);
     const puedeReentrar = orden.grupo?.estado === 'activo' && orden.estadoEntrega === 'cancelado';
     const salida = puedeSalir
       ? `<button class="accion-tabla peligro" type="button" data-accion-historial-orden="salir" data-grupo-id="${orden.grupoCompraId}">Salir</button>`

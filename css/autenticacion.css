@@ -14,7 +14,7 @@
 .autenticacion-panel {
   position: relative;
   z-index: 2;
-  padding: clamp(32px, 5vw, 68px);
+  padding: clamp(30px, 5vw, 64px);
   display: flex;
   align-items: center;
   justify-content: center
@@ -37,7 +37,8 @@
 .autenticacion-eyebrow {
   margin-bottom: 10px;
   color: #7b6258;
-  font-size: 11px;
+  font-size: 10px;
+  font-weight: 400;
   letter-spacing: .12em;
   text-transform: uppercase
 }
@@ -47,20 +48,22 @@
   max-width: none;
   font-family: 'Newsreader', serif;
   color: var(--leaf);
-  font-size: clamp(30px, 4vw, 42px);
-  line-height: 1.05
+  font-size: clamp(26px, 3.2vw, 34px);
+  font-weight: 700;
+  line-height: 1.08
 }
 
 .autenticacion-texto {
-  margin: 14px 0 34px;
+  margin: 12px 0 32px;
   color: #6f625a;
   max-width: 52ch;
-  font-size: 15px
+  font-size: 14px;
+  line-height: 1.55
 }
 
 .autenticacion-formulario {
   display: grid;
-  gap: 22px
+  gap: 20px
 }
 
 .campo-terminal {
@@ -83,10 +86,10 @@
 }
 
 .autenticacion-formulario .form-label {
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   color: #7d6860;
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: .12em;
   text-transform: uppercase
 }
@@ -97,9 +100,9 @@
   border-bottom: 1px solid var(--line);
   border-radius: 0;
   background: transparent;
-  padding: 9px 0 10px;
-  color: #5f5a55;
-  font-size: 15px;
+  padding: 7px 0 9px;
+  color: #6a625c;
+  font-size: 14px;
   font-weight: 400
 }
 
@@ -114,6 +117,27 @@
   color: #9d9288
 }
 
+.autenticacion-formulario .invalid-feedback {
+  margin-top: 6px;
+  color: #8a766e;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: 0
+}
+
+.autenticacion-formulario.was-validated .form-control:invalid,
+.autenticacion-formulario.was-validated .form-select:invalid {
+  border-color: rgba(200, 90, 50, .48);
+  background-image: none
+}
+
+.autenticacion-formulario.was-validated .form-control:valid,
+.autenticacion-formulario.was-validated .form-select:valid {
+  border-color: var(--line);
+  background-image: none
+}
+
 .autenticacion-acciones {
   margin-top: 2px;
   display: flex;
@@ -123,7 +147,7 @@
 }
 
 .autenticacion-boton {
-  min-height: 44px;
+  min-height: 42px;
   border: 1px solid var(--terra);
   background: var(--terra);
   color: var(--bg);
@@ -132,7 +156,7 @@
   align-items: center;
   justify-content: center;
   gap: 22px;
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: .1em;
   text-transform: uppercase;
   transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease
@@ -148,7 +172,7 @@
 
 .autenticacion-enlace {
   color: var(--leaf);
-  font-size: 13px;
+  font-size: 12px;
   text-decoration: underline;
   text-underline-offset: 4px
 }
@@ -157,7 +181,8 @@
   min-height: 20px;
   margin: 0;
   color: var(--terra);
-  font-size: 13px
+  font-size: 12px;
+  font-weight: 400
 }
 
 .autenticacion-prueba {
@@ -169,7 +194,7 @@
   justify-content: space-between;
   gap: 16px;
   color: #6f625a;
-  font-size: 13px;
+  font-size: 12px;
   background: rgba(244, 241, 234, .46)
 }
 

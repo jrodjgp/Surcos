@@ -37,8 +37,8 @@ class OrdenesSurcos {
       return candidata;
     }
 
-    const actualActiva = !this.ordenEstaCancelada(actual);
-    const candidataActiva = !this.ordenEstaCancelada(candidata);
+    const actualActiva = !this.ordenEstaFinalizada(actual);
+    const candidataActiva = !this.ordenEstaFinalizada(candidata);
 
     if (actualActiva !== candidataActiva) {
       return candidataActiva ? candidata : actual;
@@ -50,7 +50,12 @@ class OrdenesSurcos {
   }
 
   static ordenEstaCancelada(orden) {
-    return orden.estadoEntrega === 'cancelado' || orden.estadoGrupo === 'cancelado';
+    return orden.estadoEntrega === 'cancelado' || ['cancelado', 'fallido'].includes(orden.estadoGrupo);
+  }
+
+  static ordenEstaFinalizada(orden) {
+    return ['entregado', 'cancelado'].includes(orden.estadoEntrega)
+      || ['cancelado', 'fallido'].includes(orden.estadoGrupo);
   }
 
   static obtenerFechaOrden(orden) {
@@ -59,7 +64,7 @@ class OrdenesSurcos {
 
   static obtenerOrdenesActivas() {
     return this.obtenerOrdenesUsuario()
-      .filter((orden) => !['entregado', 'cancelado'].includes(orden.estadoEntrega));
+      .filter((orden) => !this.ordenEstaFinalizada(orden));
   }
 
   static completarOrden(orden) {
@@ -84,15 +89,16 @@ class OrdenesSurcos {
   }
 
   static calcularResumen(ordenes = this.obtenerOrdenesUsuario()) {
-    const total = ordenes.reduce((suma, orden) => suma + Number(orden.monto || 0), 0);
-    const ahorro = ordenes.reduce((suma, orden) => suma + Number(orden.ahorro || 0), 0);
-    const ganadas = ordenes.filter((orden) => orden.estadoGrupo === 'ganado').length;
+    const ordenesContables = ordenes.filter((orden) => !this.ordenEstaCancelada(orden));
+    const total = ordenesContables.reduce((suma, orden) => suma + Number(orden.monto || 0), 0);
+    const ahorro = ordenesContables.reduce((suma, orden) => suma + Number(orden.ahorro || 0), 0);
+    const ganadas = ordenesContables.filter((orden) => orden.estadoGrupo === 'ganado').length;
 
     return {
       total,
       ahorro,
       ganadas,
-      cantidad: ordenes.length
+      cantidad: ordenesContables.length
     };
   }
 

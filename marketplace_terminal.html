@@ -85,8 +85,7 @@
             <span>terminal en vivo - 08:24 PM</span>
         </div>
 
-        <!-- Demo UI: el cambio de rol es solo presentacional.
-             La autenticacion real se implementa en Proyecto 1 con sesiones PHP -->
+        <!-- Interfaz demo: el cambio de rol es presentacional y el flujo real se simula con estado local. -->
         <input type="checkbox" id="role-toggle" class="role-input">
         <label for="role-toggle" class="role-label">
           <span class="role-comprador">Comprador</span>
@@ -110,7 +109,7 @@
                         src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&q=80&fit=crop" />
                     <div class="card-badge">Tierras Altas Chiriqui</div>
                 </div>
-                <h3 class="name">Cafe Geisha · Micro-lote #42</h3>
+                <h3 class="name">Cafe Geisha - Micro-lote #42</h3>
                 <div class="price-row">
                     <span class="price tab">B/. 0.62<small>/lb</small></span>
                     <span class="retail tab">Retail: B/. 1.10</span>
@@ -119,8 +118,8 @@
                     <div class="prog-head"><span class="pool-cantidad">17/20 personas</span><span class="pool-porcentaje">85%</span></div>
                     <div class="bar"><i class="progress-fill terra" style="--pool-progress:85%"></i></div>
                 </div>
-                <div class="deadline">Cierra: Viernes 18 Abr · 11:59 PM</div>
-                <a href="pool_detail.html" class="btn">Comprometerse al Pool</a>
+                <div class="deadline">Cierra: Lunes 18 May - 11:59 PM</div>
+                <a href="pool_detail.html?id=grupo-geisha-42" class="btn">Comprometerse al Pool</a>
             </article>
             <!-- tarjeta 2 -->
             <article class="card">
@@ -129,7 +128,7 @@
                         src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=800&q=80&fit=crop" />
                     <div class="card-badge">Boquete Organico</div>
                 </div>
-                <h3 class="name">Tomates de Herencia · Lote 09</h3>
+                <h3 class="name">Tomates de Herencia - Lote 09</h3>
                 <div class="price-row">
                     <span class="price tab">B/. 0.45<small>/lb</small></span>
                     <span class="retail tab">Retail: B/. 0.85</span>
@@ -138,8 +137,8 @@
                     <div class="prog-head"><span class="pool-cantidad">21/50 personas</span><span class="pool-porcentaje">42%</span></div>
                     <div class="bar"><i class="progress-fill" style="--pool-progress:42%"></i></div>
                 </div>
-                <div class="deadline">Cierra: Viernes 18 Abr · 11:59 PM</div>
-                <a href="pool_detail.html" class="btn">Comprometerse al Pool</a>
+                <div class="deadline">Cierra: Viernes 15 May - 11:59 PM</div>
+                <a href="pool_detail.html?id=grupo-tomates-09" class="btn">Comprometerse al Pool</a>
             </article>
             <!-- tarjeta 3 -->
             <article class="card">
@@ -148,7 +147,7 @@
                         src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&q=80&fit=crop" />
                     <div class="card-badge">Bosque Silvestre</div>
                 </div>
-                <h3 class="name">Miel Silvestre Artesanal · Cruda</h3>
+                <h3 class="name">Miel Silvestre Artesanal - Cruda</h3>
                 <div class="price-row">
                     <span class="price tab">B/. 4.20<small>/lb</small></span>
                     <span class="retail tab">Retail: B/. 8.50</span>
@@ -157,8 +156,8 @@
                     <div class="prog-head"><span class="pool-cantidad">49/50 personas</span><span class="pool-porcentaje">98%</span></div>
                     <div class="bar"><i class="progress-fill" style="--pool-progress:98%"></i></div>
                 </div>
-                <div class="deadline">Cierra: Viernes 18 Abr · 11:59 PM</div>
-                <a href="pool_detail.html" class="btn">Comprometerse al Pool</a>
+                <div class="deadline">Cierra: Miercoles 20 May - 11:59 PM</div>
+                <a href="pool_detail.html?id=grupo-miel-cruda" class="btn">Comprometerse al Pool</a>
             </article>
           </section>
         </section>
@@ -414,9 +413,9 @@
         </div>
         <div>
             <div class="f-head">Red</div>
-            <a class="f-link" href="#">Logistica</a>
+            <a class="f-link" href="mi_terminal_dashboard.html">Logistica</a>
             <a class="f-link" href="contacto.html">Contacto</a>
-            <a class="f-link" href="#">Terminal API</a>
+            <a class="f-link" href="contacto.html">Terminal API</a>
       <a class="f-link f-social" href="mailto:contacto@surcos.pa">contacto@surcos.pa</a>
       <a class="f-link f-social" href="https://instagram.com/surcos.pa" target="_blank" rel="noopener">Instagram @surcos.pa</a>
       <a class="f-link f-social" href="https://x.com/surcos_pa" target="_blank" rel="noopener">X @surcos_pa</a>
@@ -424,13 +423,13 @@
         </div>
         <div>
             <div class="f-head">Legal</div>
-            <a class="f-link" href="#">Privacidad</a>
-            <a class="f-link" href="#">Terminos</a>
+            <a class="f-link" href="contacto.html">Privacidad</a>
+            <a class="f-link" href="contacto.html">Terminos</a>
         </div>
         <div>
             <div class="f-head">Idioma</div>
-            <a class="f-link" href="#">ES</a>
-            <a class="f-link" href="#">EN</a>
+            <a class="f-link" href="configuracion.html">ES</a>
+            <a class="f-link" href="configuracion.html">EN</a>
             <div class="f-small">ESTADO DE RED: OPTIMO</div>
             <div class="f-small">NODO: PTY-01</div>
         </div>
