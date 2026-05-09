@@ -1,0 +1,211 @@
+/* =========================================================
+   mapa.css — estilos del mapa svg de provincias de panama
+   cuatro contextos: pool_detail, productor, configuracion, nosotros
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   estilos base de las provincias del svg
+   --------------------------------------------------------- */
+.provincia {
+  fill: var(--surface);
+  stroke: #fff;
+  stroke-width: 1.5;
+  transition: fill .2s, stroke .2s
+}
+
+.provincia.activa {
+  fill: rgba(200, 90, 50, .2);
+  stroke: var(--terra);
+  stroke-width: 1.5
+}
+
+.provincia.activa:hover {
+  fill: rgba(200, 90, 50, .35)
+}
+
+/* provincia de origen del pool (finca) */
+.provincia.origen {
+  fill: var(--terra)
+}
+
+/* provincia de retiro (destino) */
+.provincia.retiro {
+  fill: var(--terra);
+  opacity: .5
+}
+
+/* etiquetas de texto dentro del svg */
+.provincia-label {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 9px;
+  fill: #766a62;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  pointer-events: none;
+  text-anchor: middle;
+  dominant-baseline: central
+}
+
+.provincia-label.activa {
+  fill: var(--terra);
+  font-weight: 700
+}
+
+.provincia-label.origen {
+  fill: #fff;
+  font-weight: 700
+}
+
+/* ---------------------------------------------------------
+   contenedor base del mapa
+   --------------------------------------------------------- */
+.mapa-contenedor {
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 20px
+}
+
+/* etiqueta superior en versalitas */
+.mapa-etiqueta {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--leaf);
+  font-weight: 700;
+  margin-bottom: 14px
+}
+
+/* mapa responsivo dentro del contenedor */
+.mapa-contenedor svg,
+.mapa-contenedor .mapa-recurso {
+  width: 100%;
+  height: auto;
+  display: block
+}
+
+/* leyenda debajo del mapa */
+.mapa-leyenda {
+  display: flex;
+  gap: 20px;
+  margin-top: 14px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #766a62
+}
+
+.mapa-leyenda span::before {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 6px;
+  vertical-align: middle;
+  content: ''
+}
+
+.mapa-leyenda .leyenda-origen::before {
+  background: var(--terra)
+}
+
+.mapa-leyenda .leyenda-retiro::before {
+  background: var(--terra);
+  opacity: .5
+}
+
+/* ---------------------------------------------------------
+   contexto A — pool_detail (380px, columna derecha)
+   --------------------------------------------------------- */
+.mapa-pool {
+  max-width: 380px;
+  margin-top: 40px
+}
+
+/* ---------------------------------------------------------
+   contexto B — vista productor (300px, sidebar compacto)
+   --------------------------------------------------------- */
+.mapa-productor {
+  max-width: 300px;
+  margin-bottom: 32px
+}
+
+/* ---------------------------------------------------------
+   contexto C — configuracion (420px, centrado, interactivo)
+   --------------------------------------------------------- */
+.mapa-config {
+  max-width: 420px;
+  margin: 0 auto 16px
+}
+
+/* cursor de seleccion en provincias interactivas */
+.mapa-config .provincia {
+  cursor: pointer
+}
+
+.mapa-config .provincia:hover {
+  fill: rgba(200, 90, 50, .15)
+}
+
+/* panel de provincia seleccionada */
+.provincia-seleccionada {
+  text-align: center;
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--leaf);
+  font-weight: 700
+}
+
+/* tabla de nodos por provincia */
+.nodos-tabla {
+  width: 100%;
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-collapse: collapse
+}
+
+.nodos-tabla td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px
+}
+
+.nodos-tabla td:first-child {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-size: 10px;
+  color: var(--leaf)
+}
+
+.nodos-tabla td:last-child {
+  color: #766a62;
+  text-align: right
+}
+
+.nodos-tabla tr:last-child td {
+  border-bottom: none
+}
+
+/* ---------------------------------------------------------
+   contexto D — nosotros (500px, decorativo, centrado)
+   --------------------------------------------------------- */
+.mapa-nosotros {
+  max-width: 500px;
+  margin: 0 auto;
+  border: none;
+  background: transparent;
+  padding: 0
+}
+
+.mapa-nota {
+  text-align: center;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #766a62;
+  margin-top: 12px;
+  font-style: italic
+}

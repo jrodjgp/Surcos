@@ -1,4 +1,7 @@
 DESIGN.md
+.env
+almacenamiento/sesiones/*
+!almacenamiento/sesiones/.gitkeep
 
 # Dependencias y salidas locales
 node_modules/
@@ -10,4 +13,3 @@ build/
 Thumbs.db
 .vscode/
 .idea/
-

@@ -1,0 +1,239 @@
+/* superficie principal de contacto */
+.contacto-shell {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 52px 24px 92px
+}
+
+.contacto-hero {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 28px;
+  margin-bottom: 32px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+  gap: 32px;
+  align-items: end
+}
+
+.contacto-hero h1 {
+  font-family: 'Newsreader', serif;
+  font-size: 56px;
+  line-height: .95;
+  color: var(--leaf);
+  margin-bottom: 14px
+}
+
+.contacto-hero p {
+  max-width: 62ch;
+  color: rgba(44, 76, 59, .82);
+  line-height: 1.7;
+  margin: 0
+}
+
+.contacto-meta {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 18px
+}
+
+.contacto-meta span {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: rgba(92, 75, 68, .78);
+  margin-bottom: 6px
+}
+
+.contacto-meta strong {
+  display: block;
+  font-size: 24px;
+  color: var(--leaf)
+}
+
+.contacto-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 32px;
+  align-items: start
+}
+
+.contacto-formulario,
+.contacto-aside {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 28px
+}
+
+.contacto-formulario h2,
+.contacto-aside h2 {
+  font-family: 'Newsreader', serif;
+  font-size: 30px;
+  color: var(--leaf);
+  margin-bottom: 18px
+}
+
+.contacto-campos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px
+}
+
+.contacto-campo--full {
+  grid-column: 1 / -1
+}
+
+.contacto-campo label,
+.contacto-check label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(92, 75, 68, .78);
+  margin-bottom: 4px
+}
+
+.contacto-campo input,
+.contacto-campo select,
+.contacto-campo textarea,
+.contacto-formulario .form-control,
+.contacto-formulario .form-select {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 0;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(31, 27, 22, .76);
+  font-family: 'Space Grotesk', sans-serif
+}
+
+.contacto-campo textarea {
+  resize: vertical;
+  min-height: 132px
+}
+
+.contacto-campo input:focus,
+.contacto-campo select:focus,
+.contacto-campo textarea:focus,
+.contacto-formulario .form-control:focus,
+.contacto-formulario .form-select:focus {
+  outline: none;
+  border-bottom: 2px solid var(--terra);
+  box-shadow: none;
+  color: var(--ink)
+}
+
+.contacto-formulario .invalid-feedback {
+  display: none;
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 400;
+  color: rgba(200, 90, 50, .78)
+}
+
+.contacto-formulario.was-validated .form-control:invalid ~ .invalid-feedback,
+.contacto-formulario.was-validated .form-select:invalid ~ .invalid-feedback,
+.contacto-formulario.was-validated .contacto-check:has(.form-check-input:invalid) .invalid-feedback {
+  display: block
+}
+
+.contacto-check {
+  margin: 18px 0
+}
+
+.contacto-check label {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(44, 76, 59, .86)
+}
+
+.contacto-check input {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  accent-color: var(--terra)
+}
+
+.contacto-insignia {
+  width: 74px;
+  height: 74px;
+  display: grid;
+  place-items: center;
+  background: var(--leaf);
+  color: var(--bg);
+  font-family: 'Newsreader', serif;
+  font-size: 28px;
+  margin-bottom: 18px
+}
+
+.contacto-lista {
+  display: grid;
+  gap: 14px
+}
+
+.contacto-lista article {
+  border-top: 1px solid var(--line);
+  padding-top: 14px
+}
+
+.contacto-lista h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--terra);
+  margin-bottom: 4px
+}
+
+.contacto-lista p {
+  margin: 0;
+  color: rgba(31, 27, 22, .78);
+  line-height: 1.55
+}
+
+.contacto-lista a {
+  color: var(--terra);
+  text-decoration: none;
+  font-weight: 700
+}
+
+.contacto-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px
+}
+
+.contacto-acciones a {
+  border: 1px solid rgba(26, 92, 42, .28);
+  color: var(--leaf);
+  padding: 8px 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: 10px
+}
+
+.contacto-acciones a:hover {
+  background: var(--leaf);
+  color: var(--bg)
+}
+
+@media (max-width: 860px) {
+  .contacto-hero,
+  .contacto-grid,
+  .contacto-campos {
+    grid-template-columns: 1fr
+  }
+
+  .contacto-hero h1 {
+    font-size: 42px
+  }
+}

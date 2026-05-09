@@ -103,6 +103,60 @@ cd surcos
 
 Abre `index.html` en el navegador. Tambien puede publicarse directamente en GitHub Pages, Netlify, Cloudflare Pages, AWS S3 + CloudFront o cualquier servicio de archivos estaticos.
 
+### Base PHP en migracion
+
+La nueva base PHP vive en `publico/` como document root. Esta fase no reemplaza aun las paginas HTML originales; prepara sesiones, CSRF, vistas parciales compartidas y recursos servidos desde `publico/recursos/`.
+
+```bash
+composer servir
+```
+
+Tambien puede correrse sin Composer:
+
+```bash
+php -S 127.0.0.1:8000 -t publico
+```
+
+Con XAMPP en Windows, si `php` no esta en el PATH:
+
+```powershell
+C:\xampp\php\php.exe -S 127.0.0.1:8000 -t publico
+```
+
+Luego abre `http://127.0.0.1:8000`. El endpoint `http://127.0.0.1:8000/salud.php` confirma que PHP esta activo.
+
+Variables esperadas para las siguientes fases:
+
+```bash
+cp .env.ejemplo .env
+```
+
+### Base de datos Supabase/PostgreSQL
+
+La fase de base de datos usa Supabase con PostgreSQL. Primero crea un proyecto en Supabase y copia el connection string tipo URI desde `Project Settings > Database > Connection string`.
+
+En `.env` coloca:
+
+```bash
+URL_BASE_DATOS=postgresql://postgres:[CLAVE]@[HOST]:5432/postgres
+```
+
+Despues ejecuta en Supabase SQL Editor:
+
+1. `base_datos/001_esquema.sql`
+2. `base_datos/002_semillas_demo.sql`
+
+El endpoint `http://surcos.local/salud.php` muestra si PHP tiene la extension `pdo_pgsql`, si la URL esta configurada y si la conexion responde.
+
+En XAMPP, si `driver_disponible` aparece como `false`, abre `C:\xampp\php\php.ini`, busca estas lineas y quitale el `;` inicial:
+
+```ini
+extension=pdo_pgsql
+extension=pgsql
+```
+
+Luego reinicia Apache desde XAMPP.
+
 ---
 
 ## Estructura

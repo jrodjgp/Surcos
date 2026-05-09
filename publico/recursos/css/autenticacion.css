@@ -1,0 +1,322 @@
+.autenticacion {
+  min-height: calc(100vh - 72px);
+  display: grid;
+  grid-template-columns: minmax(420px, 1fr) minmax(360px, .92fr);
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden
+}
+
+.autenticacion-registro {
+  grid-template-columns: minmax(520px, 1.08fr) minmax(360px, .92fr)
+}
+
+.autenticacion-panel {
+  position: relative;
+  z-index: 2;
+  padding: clamp(30px, 5vw, 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.autenticacion-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, var(--bg) 0%, rgba(253, 251, 247, .94) 78%, rgba(253, 251, 247, .68) 100%);
+  pointer-events: none
+}
+
+.autenticacion-contenido {
+  position: relative;
+  width: min(100%, 680px)
+}
+
+.autenticacion-eyebrow {
+  margin-bottom: 10px;
+  color: #7b6258;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: .12em;
+  text-transform: uppercase
+}
+
+.autenticacion-contenido h1 {
+  margin: 0;
+  max-width: none;
+  font-family: 'Newsreader', serif;
+  color: var(--leaf);
+  font-size: clamp(26px, 3.2vw, 34px);
+  font-weight: 700;
+  line-height: 1.08
+}
+
+.autenticacion-texto {
+  margin: 12px 0 32px;
+  color: #6f625a;
+  max-width: 52ch;
+  font-size: 14px;
+  line-height: 1.55
+}
+
+.autenticacion-formulario {
+  display: grid;
+  gap: 20px
+}
+
+.campo-terminal {
+  position: relative
+}
+
+.campo-terminal::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  height: 1px;
+  background: var(--terra);
+  transition: right .2s ease
+}
+
+.campo-terminal:focus-within::after {
+  right: 0
+}
+
+.autenticacion-formulario .form-label {
+  margin-bottom: 4px;
+  color: #7d6860;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: .12em;
+  text-transform: uppercase
+}
+
+.autenticacion-formulario .form-control,
+.autenticacion-formulario .form-select {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  padding: 7px 0 9px;
+  color: #6a625c;
+  font-size: 14px;
+  font-weight: 400
+}
+
+.autenticacion-formulario .form-control:focus,
+.autenticacion-formulario .form-select:focus {
+  border-color: var(--terra);
+  color: var(--ink);
+  box-shadow: none
+}
+
+.autenticacion-formulario .form-control::placeholder {
+  color: #9d9288
+}
+
+.autenticacion-formulario .invalid-feedback {
+  margin-top: 6px;
+  color: #8a766e;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: 0
+}
+
+.autenticacion-formulario.was-validated .form-control:invalid,
+.autenticacion-formulario.was-validated .form-select:invalid {
+  border-color: rgba(200, 90, 50, .48);
+  background-image: none
+}
+
+.autenticacion-formulario.was-validated .form-control:valid,
+.autenticacion-formulario.was-validated .form-select:valid {
+  border-color: var(--line);
+  background-image: none
+}
+
+.autenticacion-acciones {
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap
+}
+
+.autenticacion-boton {
+  min-height: 42px;
+  border: 1px solid var(--terra);
+  background: var(--terra);
+  color: var(--bg);
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease
+}
+
+.autenticacion-boton:hover,
+.autenticacion-boton:focus-visible {
+  background: var(--leaf);
+  border-color: var(--leaf);
+  color: var(--bg);
+  transform: translateY(-1px)
+}
+
+.autenticacion-enlace {
+  color: var(--leaf);
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 4px
+}
+
+.autenticacion-mensaje {
+  min-height: 20px;
+  margin: 0;
+  color: var(--terra);
+  font-size: 12px;
+  font-weight: 400
+}
+
+.autenticacion-prueba {
+  margin-top: 30px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: #6f625a;
+  font-size: 12px;
+  background: rgba(244, 241, 234, .46)
+}
+
+.autenticacion-prueba strong,
+.autenticacion-prueba span {
+  display: block
+}
+
+.autenticacion-prueba strong {
+  color: var(--leaf)
+}
+
+.autenticacion-prueba button {
+  border: 1px solid var(--leaf);
+  background: transparent;
+  color: var(--leaf);
+  padding: 8px 12px;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  white-space: nowrap
+}
+
+.autenticacion-lateral {
+  position: relative;
+  min-height: 100%;
+  padding: 0;
+  display: block;
+  overflow: hidden
+}
+
+.autenticacion-imagen {
+  position: relative;
+  height: 100%;
+  min-height: calc(100vh - 72px);
+  margin: 0
+}
+
+.autenticacion-imagen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  object-position: center
+}
+
+.autenticacion-imagen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(44, 76, 59, .08), rgba(44, 76, 59, .28));
+  pointer-events: none
+}
+
+.autenticacion-imagen figcaption {
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  z-index: 1;
+  max-width: 34ch;
+  color: rgba(253, 251, 247, .8);
+  font-size: 10px;
+  line-height: 1.35;
+  text-align: right
+}
+
+@media (max-width: 980px) {
+  .autenticacion,
+  .autenticacion-registro {
+    grid-template-columns: 1fr
+  }
+
+  .autenticacion-panel {
+    padding-top: 38px
+  }
+
+  .autenticacion-lateral {
+    min-height: 360px
+  }
+
+  .autenticacion-imagen,
+  .autenticacion-imagen img {
+    min-height: 360px
+  }
+}
+
+@media (max-width: 640px) {
+  .autenticacion {
+    background-size: 28px 28px
+  }
+
+  .autenticacion-panel {
+    padding: 28px 18px
+  }
+
+  .autenticacion-contenido h1 {
+    font-size: clamp(28px, 10vw, 36px)
+  }
+
+  .autenticacion-prueba,
+  .autenticacion-acciones {
+    align-items: stretch;
+    flex-direction: column
+  }
+
+  .autenticacion-boton,
+  .autenticacion-prueba button,
+  .autenticacion-enlace {
+    width: 100%
+  }
+
+  .autenticacion-enlace {
+    text-align: center
+  }
+
+  .autenticacion-lateral {
+    min-height: 300px
+  }
+
+  .autenticacion-imagen,
+  .autenticacion-imagen img {
+    min-height: 300px
+  }
+}
