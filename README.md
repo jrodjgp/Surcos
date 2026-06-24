@@ -1,293 +1,116 @@
-<div align="center">
+# Surcos - Proyecto 2
 
-# 🌱 Surcos
+Surcos es un marketplace agricola panameno donde compradores se unen a pools de compra colectiva y productores publican lotes de cosecha. Esta version esta orientada a la rubrica de Proyecto 2: PHP, MySQL/MariaDB, MVC, sesiones, procedimiento almacenado y web service.
 
-**Marketplace agricola de compras grupales que conecta productores panameños directamente con consumidores.**
+## Stack
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-22863a?style=for-the-badge&logo=github)](https://jrodjgp.github.io/surcos)
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/es/docs/Web/HTML)
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/es/docs/Web/CSS)
-[![Bootstrap](https://img.shields.io/badge/Bootstrap_5-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/es/docs/Web/JavaScript)
+- PHP 8 con PDO
+- MySQL/MariaDB en XAMPP
+- HTML5 y CSS3
+- MVC liviano sin framework externo
+- Sesiones PHP y token CSRF
 
-[Ver demo](https://jrodjgp.github.io/surcos) · [Reportar problema](https://github.com/jrodjgp/surcos/issues) · [Solicitar mejora](https://github.com/jrodjgp/surcos/issues)
+## Credenciales Demo
 
-</div>
+- Admin: `admin@surcos.pa` / `Admin123!`
+- Comprador: `comprador@surcos.pa` / `Surcos123!`
 
----
+## Instalacion Local
 
-## Problema
+1. En XAMPP, enciende Apache y MySQL.
+2. Copia `.env.ejemplo` como `.env`.
+3. Confirma estas variables para XAMPP:
 
-En la cadena agricola tradicional de Panama, varios intermediarios pueden capturar entre **40-60% del precio final** (MIDA, 2023). El productor recibe menos por su cosecha y el consumidor termina pagando mas por el mismo producto.
-
-Surcos reduce esa friccion organizando compradores en **pools de compra**. Cuando un pool alcanza su volumen minimo, se activa un mejor precio grupal para todos. Si no se completa el pool, no se cobra la orden.
-
-La experiencia esta pensada como un terminal agricola: los productores publican lotes de cosecha, los compradores se comprometen a una cantidad compartida y la entrega se coordina por nodos de retiro o despacho directo.
-
----
-
-## Alcance Academico
-
-Este sitio fue preparado para **Proyecto 1, Desarrollo de Software VII**. Cubre los puntos principales del entregable:
-
-- Estructura semantica HTML5 con `header`, `nav`, `main`, `section`, `article`, `aside` y `footer`
-- CSS3 con variables de diseño, Flexbox, Grid, animaciones y estilos responsivos
-- Bootstrap 5 para grilla, formularios, estados de validacion y componentes base
-- Programacion orientada a objetos en JavaScript mediante clases ES6
-- Varias paginas conectadas por navegacion y cajon lateral
-- Logo propio, identidad visual, footers con redes sociales y contenido editorial
-- Formulario de contacto validado y formulario de publicacion de cosecha
-- Compatibilidad con hosting estatico como GitHub Pages, Netlify o Cloudflare Pages
-
----
-
-## Funcionalidades
-
-- **Marketplace activo**: muestra pools abiertos por producto, provincia, progreso y fecha limite
-- **Panel de productor**: publica una cosecha con precio minimo, volumen, ubicacion, ventana y modelo de entrega
-- **Detalle de pool**: permite comprometerse, cancelar compromiso, ver progreso, precio, cobertura y entrega
-- **Mi Terminal**: dashboard del usuario con ordenes, manifiestos, pagos, perfil y configuracion
-- **Historial de ordenes**: conserva el estado de cada pool sin duplicar registros al entrar y salir varias veces
-- **Metodos de pago**: permite seleccionar metodo principal y agregar tarjetas demo
-- **Perfil**: actualiza datos de usuario, provincia, nodo de retiro y acciones de datos
-- **Configuracion**: controla notificaciones, umbral de compromiso, nodo de retiro y unidades metricas/imperiales
-- **Historias de productor**: pagina editorial con perfiles, fincas y lotes relacionados
-- **Contacto**: formulario validado con HTML5, Bootstrap y JavaScript orientado a objetos
-- **Mapa SVG compartido**: recurso unico para visualizar cobertura de provincias sin repetir el SVG completo en cada pagina
-- **Reloj y cinta dinamica**: terminal con hora local y datos vivos tomados del estado demo
-
----
-
-## Paginas
-
-| Pagina | Proposito |
-|---|---|
-| `index.html` | Entrada principal: marketplace de pools y formulario de publicacion de cosecha |
-| `pool_detail.html` | Detalle de pool con progreso, precio, mapa, compromiso y cancelacion |
-| `historias_productor.html` | Historia editorial de productores y lotes relacionados |
-| `nosotros.html` | Problema, solucion, equipo, cobertura e impacto |
-| `contacto.html` | Formulario de contacto para compradores, productores e instituciones |
-| `mi_terminal_dashboard.html` | Dashboard del usuario con ordenes, metricas y manifiestos |
-| `historial_ordenes.html` | Archivo de ordenes con filtros por estado |
-| `metodos_pago.html` | Metodos guardados, seleccion principal y nuevo metodo demo |
-| `perfil.html` | Perfil, preferencias, actividad y acciones de datos |
-| `configuracion.html` | Ajustes de terminal, nodo de retiro, notificaciones, umbral y unidades |
-| `ingreso.html` | Inicio de sesion demo |
-| `registro.html` | Registro demo de comprador o productor |
-| `marketplace_terminal.html` | Redireccion de compatibilidad hacia `index.html` |
-
----
-
-## Stack Tecnico
-
-| Capa | Tecnologia |
-|---|---|
-| Marcado | HTML5 semantico |
-| Estilos | CSS3, variables, Flexbox, Grid y animaciones |
-| Framework | Bootstrap 5 |
-| Logica | JavaScript vanilla con clases ES6 |
-| Persistencia demo | `localStorage` |
-| Formularios | HTML5, Bootstrap validation y estructura lista para Netlify |
-| Hosting | GitHub Pages o cualquier hosting estatico |
-
----
-
-## Ejecucion Local
-
-No hay paso de compilacion ni dependencias externas.
-
-```bash
-git clone https://github.com/jrodjgp/surcos.git
-cd surcos
+```env
+MYSQL_HOST=127.0.0.1
+MYSQL_PORT=3306
+MYSQL_DATABASE=surcos
+MYSQL_USER=root
+MYSQL_PASSWORD=
 ```
 
-Abre `index.html` en el navegador. Tambien puede publicarse directamente en GitHub Pages, Netlify, Cloudflare Pages, AWS S3 + CloudFront o cualquier servicio de archivos estaticos.
+4. Importa los SQL en phpMyAdmin, en este orden:
 
-### Base PHP en migracion
-
-La nueva base PHP vive en `publico/` como document root. Esta fase no reemplaza aun las paginas HTML originales; prepara sesiones, CSRF, vistas parciales compartidas y recursos servidos desde `publico/recursos/`.
-
-```bash
-composer servir
+```text
+base_datos/001_esquema.sql
+base_datos/002_semillas_demo.sql
 ```
 
-Tambien puede correrse sin Composer:
+5. Abre el sitio desde el virtual host:
 
-```bash
-php -S 127.0.0.1:8000 -t publico
+```text
+http://surcos.local/
 ```
 
-Con XAMPP en Windows, si `php` no esta en el PATH:
+Tambien puedes usar el servidor embebido:
 
-```powershell
+```bash
 C:\xampp\php\php.exe -S 127.0.0.1:8000 -t publico
 ```
 
-Luego abre `http://127.0.0.1:8000`. El endpoint `http://127.0.0.1:8000/salud.php` confirma que PHP esta activo.
+## Rutas Principales
 
-Variables esperadas para las siguientes fases:
+- `/` Marketplace de pools y registro de cosecha.
+- `/contacto.php` Solicitud de afiliacion guardada en MySQL.
+- `/ingreso.php` Login de comprador/productor.
+- `/pool.php?id=grupo-geisha-42` Detalle de pool.
+- `/bandeja.php` Bandeja de Pools con compromisos en borrador.
+- `/admin/` Login de administrador.
+- `/admin/solicitudes.php` Gestion de solicitudes.
+- `/admin/pools.php` Revision de pools publicados.
+- `/api/pools.php` Web service JSON de pools activos.
+- `/salud.php` Diagnostico de PHP, sesiones y MySQL.
 
-```bash
-cp .env.ejemplo .env
-```
+## MVC
 
-### Base de datos Supabase/PostgreSQL
+La aplicacion PHP vive en `aplicacion/`:
 
-La fase de base de datos usa Supabase con PostgreSQL. Primero crea un proyecto en Supabase y copia el connection string tipo URI desde `Project Settings > Database > Connection string`.
+- `Controladores`: reciben solicitudes HTTP, validan CSRF y coordinan modelos/vistas.
+- `Modelos`: encapsulan consultas PDO y llamadas al procedimiento almacenado.
+- `Vistas`: plantillas HTML5 reutilizables.
+- `Soporte`: sesiones, CSRF, conexion PDO, helpers y autenticacion.
 
-En `.env` coloca:
+`publico/` es el document root y contiene los entrypoints publicos.
 
-```bash
-URL_BASE_DATOS=postgresql://postgres:[CLAVE]@[HOST]:5432/postgres
-```
+## Base de Datos
 
-Despues ejecuta en Supabase SQL Editor:
+El esquema usa varias tablas relacionadas:
 
-1. `base_datos/001_esquema.sql`
-2. `base_datos/002_semillas_demo.sql`
+- `administradores`
+- `usuarios`
+- `productores`
+- `solicitudes_contacto`
+- `eventos_solicitud`
+- `pools`
+- `compromisos`
+- `metodos_pago`
+- `intentos_pago`
+- `actividad`
 
-El endpoint `http://surcos.local/salud.php` muestra si PHP tiene la extension `pdo_pgsql`, si la URL esta configurada y si la conexion responde.
+El procedimiento almacenado principal es `sp_confirmar_compromiso_pool`. Valida que el pool este activo, que exista cupo y que el metodo de pago simulado pertenezca al usuario antes de confirmar un compromiso.
 
-En XAMPP, si `driver_disponible` aparece como `false`, abre `C:\xampp\php\php.ini`, busca estas lineas y quitale el `;` inicial:
+## Seguridad
 
-```ini
-extension=pdo_pgsql
-extension=pgsql
-```
+- Formularios POST con token CSRF.
+- Contrasenas con `password_hash` y `password_verify`.
+- Sesiones PHP con cookie `httponly` y `samesite=Lax`.
+- Consultas PDO preparadas.
+- Salida HTML escapada con `htmlspecialchars`.
+- Pagos solo simulados: se guardan marca, ultimos 4 ficticios, monto, estado y referencia simulada. No se guarda numero completo ni CVV.
 
-Luego reinicia Apache desde XAMPP.
+## Checklist Rubrica
 
----
+- HTML5: si.
+- CSS3: si.
+- PHP: si, visible en rutas, controladores y vistas.
+- MySQL/MariaDB: si.
+- Mas de una tabla: si.
+- MVC: si, estructura `Controladores`, `Modelos`, `Vistas`.
+- Procedimiento almacenado: si, `sp_confirmar_compromiso_pool`.
+- Web service: si, `/api/pools.php`.
+- Cookies/sesiones: si, login comprador y admin.
+- Seguridad en formularios: si, CSRF, validacion, PDO y escape.
 
-## Estructura
+## Notas
 
-```text
-surcos/
-├── css/
-│   ├── styles.css              # Variables globales y base visual
-│   ├── navbar.css              # Navegacion, footer, cajon lateral y avisos demo
-│   ├── marketplace.css         # Marketplace, detalle de pool e historias
-│   ├── dashboard.css           # Dashboard, perfil, historial, pagos y configuracion
-│   ├── contacto.css            # Pagina de contacto
-│   ├── nosotros.css            # Pagina nosotros
-│   └── mapa.css                # Contenedores y estados del mapa
-├── img/
-│   ├── logo-surcos.svg
-│   ├── panama-provincias.svg
-│   └── imagenes del sitio
-├── js/
-│   ├── componentes/
-│   │   └── CajonLateral.js
-│   ├── datos/
-│   │   └── datosIniciales.js
-│   ├── formularios/
-│   │   ├── FormularioContacto.js
-│   │   └── FormularioCosecha.js
-│   ├── modelos/
-│   │   ├── Contacto.js
-│   │   └── Cosecha.js
-│   ├── paginas/
-│   │   ├── autenticacion.js
-│   │   ├── historial.js
-│   │   ├── pagos.js
-│   │   ├── perfil.js
-│   │   ├── pool.js
-│   │   └── terminal.js
-│   ├── servicios/
-│   │   ├── AutenticacionSurcos.js
-│   │   ├── EstadoSurcos.js
-│   │   ├── GruposCompraSurcos.js
-│   │   ├── MetodosPagoSurcos.js
-│   │   ├── OrdenesSurcos.js
-│   │   └── PublicacionesProductorSurcos.js
-│   ├── configuracion.js
-│   ├── contacto.js
-│   ├── global.js
-│   └── marketplace.js
-├── index.html
-├── pool_detail.html
-├── historias_productor.html
-├── nosotros.html
-├── contacto.html
-├── mi_terminal_dashboard.html
-├── historial_ordenes.html
-├── metodos_pago.html
-├── perfil.html
-├── configuracion.html
-├── ingreso.html
-├── registro.html
-└── marketplace_terminal.html
-```
-
----
-
-## Arquitectura JavaScript
-
-Surcos mantiene la logica separada del marcado mediante clases reutilizables:
-
-| Clase | Responsabilidad |
-|---|---|
-| `Cosecha` | Modelo de cosecha y calculo de ingreso estimado |
-| `Contacto` | Modelo de mensaje de contacto |
-| `FormularioCosecha` | Validacion y publicacion demo de cosechas |
-| `FormularioContacto` | Validacion y envio demo del formulario de contacto |
-| `CajonLateral` | Apertura y cierre del menu lateral Mi Terminal |
-| `EstadoSurcos` | Estado demo persistido en `localStorage` |
-| `AutenticacionSurcos` | Sesion demo, registro e inicio de sesion |
-| `GruposCompraSurcos` | Lectura, compromiso y cancelacion de pools |
-| `OrdenesSurcos` | Historial, estados de entrega y orden activa |
-| `MetodosPagoSurcos` | Metodos de pago demo y seleccion principal |
-| `PublicacionesProductorSurcos` | Publicaciones creadas desde el formulario de cosecha |
-| `ConfiguracionTerminal` | Umbral, unidades, notificaciones y reinicio de demo |
-| `AccionesDemostracion` | Avisos para acciones simuladas |
-| `RelojTerminal` | Hora local dinamica del marketplace |
-| `CintaTerminal` | Datos dinamicos de la cinta del terminal |
-
----
-
-## Formularios
-
-Surcos incluye dos formularios clave:
-
-- **Contacto** (`contacto.html`)
-  - Nombre, correo, telefono, tipo de usuario, asunto, mensaje y consentimiento
-  - Validacion HTML5, Bootstrap y retroalimentacion con `FormularioContacto`
-  - Marcado listo para Netlify mediante `data-netlify="true"`
-
-- **Publicar nueva cosecha** (`index.html`)
-  - Producto, variedad/lote, cantidad, precio minimo, ubicacion, ventana de cosecha y modelo de entrega
-  - Validacion HTML5, Bootstrap y logica OOP con `FormularioCosecha` y `Cosecha`
-
----
-
-## Sistema Visual
-
-Surcos usa una paleta agricola sobria con lenguaje de terminal operativo:
-
-| Rol | Color | Hex |
-|---|---|---|
-| Marca y navegacion | Verde hoja | `#1A5C2A` |
-| Acciones principales | Terracota | `#C0522A` |
-| Progreso y tiempo | Ocre | `#C07A2A` |
-| Fondo | Tierra clara | `#F5F1E8` |
-
-La tipografia mezcla titulares editoriales con cuerpo sans-serif y numeros de estilo terminal para precios, cantidades, porcentajes y datos operativos.
-
----
-
-## Estado Actual
-
-El sitio ya cumple con la estructura base del entregable: varias paginas, navegacion, logo, footer, HTML5 semantico, CSS3, Bootstrap, formularios validados, comportamiento responsivo y JavaScript orientado a objetos. Tambien incluye un flujo demo sin base de datos para presentar la experiencia completa de comprador y productor.
-
-Pendientes recomendados antes de la sustentacion:
-
-- Publicar el sitio en el hosting elegido y probar la URL final
-- Revisar el contenido oral de la presentacion con el flujo principal: registro, pool, cancelacion, historial, cosecha y contacto
-- Comprimir imagenes grandes si el sitio se siente pesado en internet real
-- Confirmar referencias academicas o institucionales que el grupo quiera citar en clase
-
----
-
-<div align="center">
-Hecho en Panama 🇵🇦 · <a href="https://jrodjgp.github.io/surcos">jrodjgp.github.io/surcos</a>
-</div>
+Supabase/PostgreSQL quedo fuera de la ruta principal para evitar conflicto con la rubrica literal que pide MySQL. Puede retomarse despues como version de portafolio o despliegue alternativo.

@@ -20,6 +20,13 @@ return [
         'ruta' => valor_entorno('RUTA_SESIONES', RUTA_RAIZ . '/almacenamiento/sesiones'),
     ],
     'base_datos' => [
-        'url' => valor_entorno('URL_BASE_DATOS', valor_entorno('DATABASE_URL', '')),
+        'motor' => valor_entorno('MOTOR_BASE_DATOS', 'mysql'),
+        'url' => valor_entorno('URL_MYSQL', valor_entorno('MYSQL_URL', '')),
+        'host' => valor_entorno('MYSQL_HOST', '127.0.0.1'),
+        'puerto' => valor_entorno('MYSQL_PORT', 3306),
+        'base' => valor_entorno('MYSQL_DATABASE', 'surcos'),
+        'usuario' => valor_entorno('MYSQL_USER', 'root'),
+        'clave' => valor_entorno('MYSQL_PASSWORD', ''),
+        'charset' => valor_entorno('MYSQL_CHARSET', 'utf8mb4'),
     ],
 ];

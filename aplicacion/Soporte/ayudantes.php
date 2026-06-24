@@ -97,10 +97,7 @@ function ruta_actual(): string
 
 function url_para(string $ruta = ''): string
 {
-    $base = rtrim((string) configuracion('aplicacion.url', ''), '/');
-    $ruta = '/' . ltrim($ruta, '/');
-
-    return $base !== '' ? $base . $ruta : $ruta;
+    return '/' . ltrim($ruta, '/');
 }
 
 function url_recurso(string $ruta): string
@@ -127,4 +124,27 @@ function token_csrf(): string
 function campo_csrf(): string
 {
     return '<input type="hidden" name="_token" value="' . escapar(token_csrf()) . '" />';
+}
+
+function dinero(mixed $valor): string
+{
+    return 'B/. ' . number_format((float) $valor, 2);
+}
+
+function fecha_corta(mixed $valor): string
+{
+    if ($valor === null || $valor === '') {
+        return 'Sin fecha';
+    }
+
+    return date('d M Y', strtotime((string) $valor));
+}
+
+function fecha_hora_corta(mixed $valor): string
+{
+    if ($valor === null || $valor === '') {
+        return 'Sin fecha';
+    }
+
+    return date('d M Y - h:i A', strtotime((string) $valor));
 }

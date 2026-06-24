@@ -11,6 +11,7 @@ echo json_encode([
     'aplicacion' => configuracion('aplicacion.nombre', 'Surcos'),
     'entorno' => configuracion('aplicacion.entorno', 'local'),
     'php' => PHP_VERSION,
+    'requisito' => 'PHP + MySQL/MariaDB + sesiones',
     'base_datos' => BaseDatos::verificar(),
     'hora' => date(DATE_ATOM),
 ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);

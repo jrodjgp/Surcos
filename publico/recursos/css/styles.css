@@ -201,3 +201,213 @@ a {
     padding: 24px 16px 60px
   }
 }
+
+/* =========================================================
+   pantallas PHP MVC: estados, detalle, bandeja y auth
+   ========================================================= */
+.btn-primary:active,
+.btn-outline:active {
+  transform: translateY(1px)
+}
+
+.alert {
+  max-width: 1180px;
+  margin: 16px auto 0;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 13px;
+  letter-spacing: .02em
+}
+
+.alert-success {
+  border-color: rgba(44, 76, 59, .28);
+  background: rgba(44, 76, 59, .08);
+  color: var(--leaf)
+}
+
+.alert-danger,
+.aviso-bd {
+  border-color: rgba(200, 90, 50, .34);
+  background: rgba(200, 90, 50, .08);
+  color: var(--terra)
+}
+
+.aviso-bd {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  font-size: 13px;
+  font-weight: 700
+}
+
+.estado-vacio {
+  margin: 28px 0;
+  padding: 28px;
+  border: 1px solid var(--line);
+  background: var(--surface)
+}
+
+.estado-vacio strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--leaf);
+  font-family: 'Newsreader', serif;
+  font-size: 30px
+}
+
+.estado-vacio p {
+  max-width: 62ch;
+  color: #685d54;
+  line-height: 1.6
+}
+
+.auth-shell,
+.pool-detalle,
+.terminal-head,
+.confirmar-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, .7fr);
+  gap: 28px;
+  align-items: start;
+  margin-top: 38px
+}
+
+.auth-copy,
+.pool-detalle-cuerpo,
+.confirmar-panel,
+.tabla-panel {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 28px
+}
+
+.auth-copy h1,
+.pool-detalle h1,
+.terminal-head h1 {
+  font-family: 'Newsreader', serif;
+  color: var(--leaf);
+  font-size: clamp(38px, 6vw, 72px);
+  line-height: .95
+}
+
+.demo-credenciales {
+  margin-top: 18px;
+  color: var(--terra);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase
+}
+
+.autenticacion-formulario,
+.pool-compromiso {
+  display: grid;
+  gap: 12px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  padding: 28px
+}
+
+.autenticacion-formulario label,
+.pool-compromiso label,
+.confirmar-panel label {
+  color: var(--leaf);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase
+}
+
+.autenticacion-formulario input,
+.pool-compromiso input,
+.confirmar-panel select {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  padding: 10px 12px;
+  font: inherit
+}
+
+.pool-detalle-media img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid var(--line)
+}
+
+.detalle-lista {
+  display: grid;
+  gap: 10px;
+  margin: 20px 0
+}
+
+.detalle-lista div {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  border-top: 1px solid var(--line);
+  padding-top: 10px
+}
+
+.detalle-lista dt {
+  color: #786a61;
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase
+}
+
+.tabla-surcos {
+  width: 100%;
+  border-collapse: collapse
+}
+
+.tabla-surcos th,
+.tabla-surcos td {
+  border-bottom: 1px solid var(--line);
+  padding: 14px 12px;
+  text-align: left;
+  vertical-align: top
+}
+
+.tabla-surcos th {
+  color: var(--leaf);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase
+}
+
+.tabla-surcos small {
+  color: #786a61
+}
+
+.terminal-head {
+  grid-template-columns: 1fr auto;
+  align-items: end
+}
+
+.confirmar-panel {
+  grid-template-columns: 1fr minmax(260px, .8fr) auto;
+  align-items: end
+}
+
+.confirmar-panel strong {
+  display: block;
+  color: var(--terra);
+  font-size: 34px
+}
+
+@media (max-width: 980px) {
+  .auth-shell,
+  .pool-detalle,
+  .terminal-head,
+  .confirmar-panel {
+    grid-template-columns: 1fr
+  }
+
+  .tabla-panel {
+    overflow-x: auto
+  }
+}

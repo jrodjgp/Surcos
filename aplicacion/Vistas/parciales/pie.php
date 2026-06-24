@@ -1,14 +1,14 @@
   <footer class="footer">
     <div>
       <div class="f-brand"><img src="<?= escapar(url_recurso('img/logo-surcos-claro.svg')) ?>" alt="Surcos" /></div>
-      <div class="f-small">Del campo al terminal.</div>
-      <div class="f-small">&copy; 2026 SURCOS. DEL CAMPO AL TERMINAL.</div>
+      <div class="f-small">Del campo al registro colectivo.</div>
+      <div class="f-small">&copy; 2026 SURCOS. MERCADO DE POOLS.</div>
     </div>
     <div>
       <div class="f-head">Red</div>
-      <a class="f-link" href="<?= escapar(url_para('/mi_terminal_dashboard.php')) ?>">Logistica</a>
+      <a class="f-link" href="<?= escapar(url_para('/bandeja.php')) ?>">Bandeja de Pools</a>
       <a class="f-link" href="<?= escapar(url_para('/contacto.php')) ?>">Contacto</a>
-      <a class="f-link" href="<?= escapar(url_para('/salud.php')) ?>">Terminal API</a>
+      <a class="f-link" href="<?= escapar(url_para('/api/pools.php')) ?>">WS Pools</a>
       <a class="f-link f-social" href="mailto:contacto@surcos.pa">contacto@surcos.pa</a>
     </div>
     <div>
@@ -19,6 +19,7 @@
     <div>
       <div class="f-head">Entorno</div>
       <div class="f-small">PHP <?= escapar(PHP_VERSION) ?></div>
+      <div class="f-small">BD: MySQL/MariaDB</div>
       <div class="f-small">ENTORNO: <?= escapar(strtoupper((string) configuracion('aplicacion.entorno', 'local'))) ?></div>
     </div>
   </footer>

@@ -8,7 +8,7 @@ final class BaseDatos
 
     public static function configurada(): bool
     {
-        return trim((string) configuracion('base_datos.url', '')) !== '';
+        return trim((string) configuracion('base_datos.base', '')) !== '';
     }
 
     public static function conexion(): PDO
@@ -17,14 +17,8 @@ final class BaseDatos
             return self::$conexion;
         }
 
-        if (!extension_loaded('pdo_pgsql')) {
-            throw new RuntimeException('La extension pdo_pgsql no esta habilitada en PHP.');
-        }
-
-        $url = trim((string) configuracion('base_datos.url', ''));
-
-        if ($url === '') {
-            throw new RuntimeException('La variable URL_BASE_DATOS no esta configurada.');
+        if (!extension_loaded('pdo_mysql')) {
+            throw new RuntimeException('La extension pdo_mysql no esta habilitada en PHP.');
         }
 
         $opciones = [
@@ -33,8 +27,8 @@ final class BaseDatos
             PDO::ATTR_EMULATE_PREPARES => false,
         ];
 
-        self::$conexion = new PDO(self::crearDsn($url), self::obtenerUsuario($url), self::obtenerClave($url), $opciones);
-        self::$conexion->exec("SET TIME ZONE 'America/Bogota'");
+        self::$conexion = new PDO(self::crearDsn(), self::obtenerUsuario(), self::obtenerClave(), $opciones);
+        self::$conexion->exec("SET time_zone = '-05:00'");
 
         return self::$conexion;
     }
@@ -45,18 +39,19 @@ final class BaseDatos
             return [
                 'configurada' => false,
                 'conectada' => false,
-                'driver_disponible' => extension_loaded('pdo_pgsql'),
-                'mensaje' => 'URL_BASE_DATOS pendiente.',
+                'driver_disponible' => extension_loaded('pdo_mysql'),
+                'mensaje' => 'MYSQL_DATABASE pendiente.',
             ];
         }
 
         try {
-            $resultado = self::conexion()->query('select current_database() as base, current_user as usuario')->fetch();
+            $resultado = self::conexion()->query('select database() as base, current_user() as usuario')->fetch();
 
             return [
                 'configurada' => true,
                 'conectada' => true,
-                'driver_disponible' => extension_loaded('pdo_pgsql'),
+                'driver_disponible' => extension_loaded('pdo_mysql'),
+                'motor' => configuracion('base_datos.motor', 'mysql'),
                 'base' => $resultado['base'] ?? null,
                 'usuario' => $resultado['usuario'] ?? null,
             ];
@@ -64,55 +59,65 @@ final class BaseDatos
             return [
                 'configurada' => true,
                 'conectada' => false,
-                'driver_disponible' => extension_loaded('pdo_pgsql'),
+                'driver_disponible' => extension_loaded('pdo_mysql'),
+                'motor' => configuracion('base_datos.motor', 'mysql'),
                 'mensaje' => $excepcion->getMessage(),
             ];
         }
     }
 
-    private static function crearDsn(string $url): string
+    private static function crearDsn(): string
     {
-        if (str_starts_with($url, 'pgsql:')) {
-            return $url;
+        $url = trim((string) configuracion('base_datos.url', ''));
+
+        if ($url !== '') {
+            if (str_starts_with($url, 'mysql:') && !str_starts_with($url, 'mysql://')) {
+                return $url;
+            }
+
+            $partes = parse_url($url);
+
+            if (!is_array($partes) || empty($partes['host']) || ($partes['scheme'] ?? '') !== 'mysql') {
+                throw new InvalidArgumentException('URL_MYSQL debe ser una URI MySQL valida.');
+            }
+
+            $host = $partes['host'];
+            $puerto = $partes['port'] ?? 3306;
+            $base = ltrim((string) ($partes['path'] ?? '/surcos'), '/');
+            $charset = configuracion('base_datos.charset', 'utf8mb4');
+
+            return "mysql:host={$host};port={$puerto};dbname={$base};charset={$charset}";
         }
 
-        $partes = parse_url($url);
+        $host = configuracion('base_datos.host', '127.0.0.1');
+        $puerto = configuracion('base_datos.puerto', 3306);
+        $base = configuracion('base_datos.base', 'surcos');
+        $charset = configuracion('base_datos.charset', 'utf8mb4');
 
-        if (!is_array($partes) || empty($partes['host'])) {
-            throw new InvalidArgumentException('URL_BASE_DATOS debe ser una URI PostgreSQL valida.');
-        }
-
-        $host = $partes['host'];
-        $puerto = $partes['port'] ?? 5432;
-        $base = ltrim((string) ($partes['path'] ?? '/postgres'), '/');
-        $consulta = [];
-
-        if (!empty($partes['query'])) {
-            parse_str($partes['query'], $consulta);
-        }
-
-        $ssl = (($consulta['sslmode'] ?? '') === 'disable') ? '' : ';sslmode=require';
-
-        return "pgsql:host={$host};port={$puerto};dbname={$base}{$ssl}";
+        return "mysql:host={$host};port={$puerto};dbname={$base};charset={$charset}";
     }
 
-    private static function obtenerUsuario(string $url): ?string
+    private static function obtenerUsuario(): ?string
     {
-        if (str_starts_with($url, 'pgsql:')) {
-            return valor_entorno('USUARIO_BASE_DATOS');
+        $url = trim((string) configuracion('base_datos.url', ''));
+
+        if ($url !== '' && str_starts_with($url, 'mysql://')) {
+            $partes = parse_url($url);
+            return isset($partes['user']) ? urldecode((string) $partes['user']) : null;
         }
 
-        $partes = parse_url($url);
-        return isset($partes['user']) ? urldecode((string) $partes['user']) : null;
+        return (string) configuracion('base_datos.usuario', 'root');
     }
 
-    private static function obtenerClave(string $url): ?string
+    private static function obtenerClave(): ?string
     {
-        if (str_starts_with($url, 'pgsql:')) {
-            return valor_entorno('CLAVE_BASE_DATOS');
+        $url = trim((string) configuracion('base_datos.url', ''));
+
+        if ($url !== '' && str_starts_with($url, 'mysql://')) {
+            $partes = parse_url($url);
+            return isset($partes['pass']) ? urldecode((string) $partes['pass']) : null;
         }
 
-        $partes = parse_url($url);
-        return isset($partes['pass']) ? urldecode((string) $partes['pass']) : null;
+        return (string) configuracion('base_datos.clave', '');
     }
 }

@@ -1,6 +1,6 @@
 {
-  "name": "surcos/php-supabase-administracion",
-  "description": "Base PHP de Surcos para Supabase, solicitudes admin y compromisos de pools.",
+  "name": "surcos/php-mysql-mvc",
+  "description": "Surcos Proyecto 2 con PHP MVC, MySQL, sesiones, admin y pools.",
   "type": "project",
   "require": {
     "php": ">=8.1"

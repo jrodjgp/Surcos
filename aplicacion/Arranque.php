@@ -10,6 +10,20 @@ require_once RUTA_APLICACION . '/Soporte/ayudantes.php';
 require_once RUTA_APLICACION . '/Soporte/Sesion.php';
 require_once RUTA_APLICACION . '/Soporte/ProteccionCsrf.php';
 require_once RUTA_APLICACION . '/Soporte/BaseDatos.php';
+require_once RUTA_APLICACION . '/Soporte/Autenticacion.php';
+
+spl_autoload_register(function (string $clase): void {
+    $directorios = ['Modelos', 'Controladores'];
+
+    foreach ($directorios as $directorio) {
+        $ruta = RUTA_APLICACION . '/' . $directorio . '/' . $clase . '.php';
+
+        if (is_file($ruta)) {
+            require_once $ruta;
+            return;
+        }
+    }
+});
 
 cargar_archivo_entorno(RUTA_RAIZ . '/.env');
 
