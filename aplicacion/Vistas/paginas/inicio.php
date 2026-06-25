@@ -24,7 +24,7 @@
 
   <section class="hero hero-inicio" aria-labelledby="titulo-inicio">
     <img alt="Vista aerea de plantaciones en tierras volcanicas de Chiriqui Panama"
-      src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1600&q=85&fit=crop" />
+      src="<?= escapar(url_recurso('img/cosechas/hero-volcan.jpg')) ?>" />
     <div class="hero-overlay"></div>
     <div class="hero-copy">
       <p class="eyebrow">Mercado de pools agricolas</p>
@@ -83,7 +83,7 @@
           <?php $avance = $poolModelo->avance($pool); ?>
           <article class="card card--pool">
             <div class="card-img">
-              <img alt="<?= escapar($pool['producto'] . ' de ' . $pool['origen']) ?>" src="<?= escapar($pool['imagen_url']) ?>" />
+              <img alt="<?= escapar($pool['producto'] . ' de ' . $pool['origen']) ?>" src="<?= escapar(imagen_cosecha($pool)) ?>" />
               <div class="card-badge"><?= escapar($pool['origen']) ?></div>
             </div>
             <h3 class="name"><?= escapar($pool['producto'] . ' - ' . $pool['variedad']) ?></h3>

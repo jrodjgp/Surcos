@@ -1,7 +1,7 @@
 <main class="wrap wrap--md">
   <article class="pool-detalle">
     <div class="pool-detalle-media">
-      <img src="<?= escapar($pool['imagen_url']) ?>" alt="<?= escapar($pool['producto'] . ' en Surcos') ?>" />
+      <img src="<?= escapar(imagen_cosecha($pool)) ?>" alt="<?= escapar($pool['producto'] . ' en Surcos') ?>" />
     </div>
     <div class="pool-detalle-cuerpo">
       <p class="eyebrow"><?= escapar($pool['origen']) ?></p>

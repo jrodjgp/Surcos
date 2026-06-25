@@ -27,11 +27,11 @@
         <tbody>
           <?php foreach ($borradores as $borrador): ?>
             <tr>
-              <td><?= escapar($borrador['producto_snapshot']) ?><br><small><?= escapar($borrador['origen_snapshot']) ?></small></td>
-              <td><?= escapar($borrador['cantidad'] . ' ' . $borrador['unidad']) ?></td>
-              <td><?= escapar(dinero($borrador['monto'])) ?></td>
-              <td><?= escapar(fecha_hora_corta($borrador['fecha_cierre'])) ?></td>
-              <td>
+              <td data-label="Pool"><?= escapar($borrador['producto_snapshot']) ?><br><small><?= escapar($borrador['origen_snapshot']) ?></small></td>
+              <td data-label="Cantidad"><?= escapar($borrador['cantidad'] . ' ' . $borrador['unidad']) ?></td>
+              <td data-label="Monto"><?= escapar(dinero($borrador['monto'])) ?></td>
+              <td data-label="Cierre"><?= escapar(fecha_hora_corta($borrador['fecha_cierre'])) ?></td>
+              <td data-label="Accion">
                 <form method="post" action="<?= escapar(url_para('/bandeja_quitar.php')) ?>">
                   <?= campo_csrf() ?>
                   <input type="hidden" name="compromiso_id" value="<?= escapar($borrador['id']) ?>" />

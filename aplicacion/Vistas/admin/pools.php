@@ -21,11 +21,11 @@
       <tbody>
         <?php foreach ($pools as $pool): ?>
           <tr>
-            <td><?= escapar($pool['producto'] . ' - ' . $pool['variedad']) ?><br><small><?= escapar($pool['origen']) ?></small></td>
-            <td><?= escapar($pool['productor_nombre']) ?></td>
-            <td><span class="estado-chip"><?= escapar($pool['estado']) ?></span></td>
-            <td><?= escapar($pool['personas_actuales'] . '/' . $pool['personas_objetivo']) ?></td>
-            <td><?= escapar(fecha_hora_corta($pool['fecha_cierre'])) ?></td>
+            <td data-label="Pool"><?= escapar($pool['producto'] . ' - ' . $pool['variedad']) ?><br><small><?= escapar($pool['origen']) ?></small></td>
+            <td data-label="Productor"><?= escapar($pool['productor_nombre']) ?></td>
+            <td data-label="Estado"><span class="estado-chip"><?= escapar($pool['estado']) ?></span></td>
+            <td data-label="Progreso"><?= escapar($pool['personas_actuales'] . '/' . $pool['personas_objetivo']) ?></td>
+            <td data-label="Cierre"><?= escapar(fecha_hora_corta($pool['fecha_cierre'])) ?></td>
           </tr>
         <?php endforeach; ?>
       </tbody>

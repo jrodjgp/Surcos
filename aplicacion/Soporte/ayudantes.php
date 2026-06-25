@@ -105,6 +105,31 @@ function url_recurso(string $ruta): string
     return url_para('recursos/' . ltrim($ruta, '/'));
 }
 
+function imagen_cosecha(array $pool): string
+{
+    $imagenesPorPool = [
+        'grupo-geisha-42' => 'cafe-geisha.jpg',
+        'grupo-tomates-09' => 'tomates-herencia.jpg',
+        'grupo-miel-cruda' => 'miel-silvestre.jpg',
+        'grupo-cacao-07' => 'cacao-crudo.jpg',
+        'grupo-arbequina-azuero' => 'aceite-arbequina.jpg',
+    ];
+
+    $imagenesPorCategoria = [
+        'cafe' => 'cafe-geisha.jpg',
+        'hortalizas' => 'tomates-herencia.jpg',
+        'miel' => 'miel-silvestre.jpg',
+        'cacao' => 'cacao-crudo.jpg',
+        'aceite' => 'aceite-arbequina.jpg',
+    ];
+
+    $archivo = $imagenesPorPool[(string) ($pool['id'] ?? '')]
+        ?? $imagenesPorCategoria[(string) ($pool['categoria'] ?? '')]
+        ?? 'cosecha-generica.jpg';
+
+    return url_recurso('img/cosechas/' . $archivo);
+}
+
 function pagina_activa(string $ruta): bool
 {
     return ruta_actual() === '/' . trim($ruta, '/');

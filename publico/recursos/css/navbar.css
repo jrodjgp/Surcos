@@ -389,3 +389,43 @@
     grid-template-columns: 1fr
   }
 }
+
+@media (max-width: 720px) {
+  .navbar {
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    padding: 14px 16px
+  }
+
+  .navbar .brand {
+    width: 118px;
+    min-width: 118px
+  }
+
+  .navbar .nav-links {
+    order: 3;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    gap: 18px;
+    overflow-x: auto;
+    padding-top: 6px;
+    scrollbar-width: none
+  }
+
+  .navbar .nav-links::-webkit-scrollbar {
+    display: none
+  }
+
+  .navbar .nav-links a {
+    white-space: nowrap
+  }
+
+  .navbar .nav-user {
+    margin-left: auto
+  }
+
+  .footer {
+    padding: 42px 18px
+  }
+}

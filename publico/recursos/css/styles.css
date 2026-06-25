@@ -122,14 +122,14 @@ a {
   display: inline-block;
   padding: 14px 28px;
   background: var(--terra);
-  color: #fff;
+  color: var(--bg);
   border: none;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: .1em;
   font-weight: 700;
   cursor: pointer;
-  transition: background .2s
+  transition: background .2s, transform .15s ease
 }
 
 .btn-primary:hover {
@@ -147,7 +147,8 @@ a {
   text-transform: uppercase;
   letter-spacing: .1em;
   cursor: pointer;
-  font-family: 'Space Grotesk', sans-serif
+  font-family: 'Space Grotesk', sans-serif;
+  transition: background .2s, color .2s, transform .15s ease
 }
 
 /* bloque de estado con borde izquierdo terra */
@@ -268,9 +269,9 @@ a {
 .confirmar-panel {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, .7fr);
-  gap: 28px;
+  gap: 32px;
   align-items: start;
-  margin-top: 38px
+  margin-top: 46px
 }
 
 .auth-copy,
@@ -279,7 +280,15 @@ a {
 .tabla-panel {
   border: 1px solid var(--line);
   background: var(--surface);
-  padding: 28px
+  padding: clamp(24px, 3vw, 34px)
+}
+
+.auth-copy p,
+.pool-detalle-cuerpo > p {
+  max-width: 62ch;
+  margin-top: 12px;
+  color: #5f544d;
+  line-height: 1.55
 }
 
 .auth-copy h1,
@@ -303,10 +312,10 @@ a {
 .autenticacion-formulario,
 .pool-compromiso {
   display: grid;
-  gap: 12px;
+  gap: 14px;
   border: 1px solid var(--line);
   background: var(--bg);
-  padding: 28px
+  padding: clamp(24px, 3vw, 30px)
 }
 
 .autenticacion-formulario label,
@@ -324,11 +333,19 @@ a {
 .confirmar-panel select {
   width: 100%;
   min-height: 46px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(44, 76, 59, .2);
   background: var(--bg);
   color: var(--ink);
-  padding: 10px 12px;
+  padding: 11px 12px;
   font: inherit
+}
+
+.autenticacion-formulario input:focus,
+.pool-compromiso input:focus,
+.confirmar-panel select:focus {
+  outline: none;
+  border-color: var(--terra);
+  box-shadow: 0 0 0 3px rgba(200, 90, 50, .12)
 }
 
 .pool-detalle-media img {
@@ -338,10 +355,48 @@ a {
   border: 1px solid var(--line)
 }
 
+.pool-detalle-media {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 10px
+}
+
+.pool-detalle-media img {
+  border-color: rgba(31, 27, 22, .12);
+  box-shadow: 0 18px 44px rgba(35, 29, 22, .08)
+}
+
+.pool-detalle-cuerpo .price-row {
+  gap: 18px;
+  margin-top: 18px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line)
+}
+
+.pool-detalle-cuerpo .prog {
+  margin-top: 18px
+}
+
 .detalle-lista {
   display: grid;
   gap: 10px;
-  margin: 20px 0
+  margin: 22px 0
+}
+
+.pool-compromiso {
+  margin-top: 24px
+}
+
+.pool-compromiso .btn-primary,
+.autenticacion-formulario .btn-primary,
+.autenticacion-formulario .btn-outline,
+.confirmar-panel .btn-primary {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center
 }
 
 .detalle-lista div {
@@ -361,13 +416,14 @@ a {
 
 .tabla-surcos {
   width: 100%;
-  border-collapse: collapse
+  border-collapse: collapse;
+  min-width: 680px
 }
 
 .tabla-surcos th,
 .tabla-surcos td {
   border-bottom: 1px solid var(--line);
-  padding: 14px 12px;
+  padding: 16px 12px;
   text-align: left;
   vertical-align: top
 }
@@ -388,9 +444,23 @@ a {
   align-items: end
 }
 
+.tabla-panel {
+  margin-top: 24px;
+  overflow-x: auto
+}
+
 .confirmar-panel {
   grid-template-columns: 1fr minmax(260px, .8fr) auto;
-  align-items: end
+  align-items: end;
+  margin-top: 22px
+}
+
+.confirmar-panel span {
+  display: block;
+  color: #786a61;
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase
 }
 
 .confirmar-panel strong {
@@ -409,5 +479,84 @@ a {
 
   .tabla-panel {
     overflow-x: auto
+  }
+}
+
+@media (max-width: 760px) {
+  .pool-detalle-media,
+  .pool-detalle-cuerpo,
+  .auth-copy,
+  .autenticacion-formulario,
+  .tabla-panel,
+  .confirmar-panel {
+    padding: 20px
+  }
+
+  .pool-detalle h1,
+  .auth-copy h1,
+  .terminal-head h1 {
+    font-size: clamp(36px, 12vw, 52px)
+  }
+
+  .pool-detalle-cuerpo .price-row {
+    align-items: flex-start;
+    flex-direction: column
+  }
+
+  .detalle-lista div {
+    grid-template-columns: 1fr;
+    gap: 4px
+  }
+
+  .terminal-head {
+    gap: 18px
+  }
+
+  .terminal-head .btn-outline {
+    width: 100%;
+    text-align: center
+  }
+
+  .tabla-surcos {
+    min-width: 0
+  }
+
+  .tabla-surcos thead {
+    display: none
+  }
+
+  .tabla-surcos,
+  .tabla-surcos tbody,
+  .tabla-surcos tr,
+  .tabla-surcos td {
+    display: block;
+    width: 100%
+  }
+
+  .tabla-surcos tr {
+    border: 1px solid var(--line);
+    background: var(--bg);
+    margin-bottom: 12px
+  }
+
+  .tabla-surcos td {
+    display: grid;
+    grid-template-columns: 118px 1fr;
+    gap: 12px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line)
+  }
+
+  .tabla-surcos td:last-child {
+    border-bottom: 0
+  }
+
+  .tabla-surcos td::before {
+    content: attr(data-label);
+    color: #786a61;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase
   }
 }

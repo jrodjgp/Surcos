@@ -29,11 +29,11 @@
       <tbody>
         <?php foreach ($solicitudes as $solicitud): ?>
           <tr>
-            <td><?= escapar($solicitud['nombre']) ?><br><small><?= escapar($solicitud['correo']) ?></small></td>
-            <td><?= escapar(str_replace('_', ' ', $solicitud['tipo_usuario'])) ?></td>
-            <td><span class="estado-chip"><?= escapar(str_replace('_', ' ', $solicitud['estado'])) ?></span></td>
-            <td><?= escapar(fecha_hora_corta($solicitud['creada_en'])) ?></td>
-            <td><a class="btn-outline" href="<?= escapar(url_para('/admin/solicitud.php?id=' . $solicitud['id'])) ?>">Abrir</a></td>
+            <td data-label="Nombre"><?= escapar($solicitud['nombre']) ?><br><small><?= escapar($solicitud['correo']) ?></small></td>
+            <td data-label="Tipo"><?= escapar(str_replace('_', ' ', $solicitud['tipo_usuario'])) ?></td>
+            <td data-label="Estado"><span class="estado-chip"><?= escapar(str_replace('_', ' ', $solicitud['estado'])) ?></span></td>
+            <td data-label="Creada"><?= escapar(fecha_hora_corta($solicitud['creada_en'])) ?></td>
+            <td data-label="Accion"><a class="btn-outline" href="<?= escapar(url_para('/admin/solicitud.php?id=' . $solicitud['id'])) ?>">Abrir</a></td>
           </tr>
         <?php endforeach; ?>
       </tbody>
