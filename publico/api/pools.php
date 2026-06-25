@@ -19,10 +19,15 @@ try {
                 'variedad' => $pool['variedad'],
                 'origen' => $pool['origen'],
                 'precio_grupal' => (float) $pool['precio_grupal'],
+                'precio_vigente' => (float) $pool['precio_vigente'],
                 'unidad' => $pool['unidad'],
                 'personas_actuales' => (int) $pool['personas_actuales'],
                 'personas_objetivo' => (int) $pool['personas_objetivo'],
                 'fecha_cierre' => $pool['fecha_cierre'],
+                'siguiente_tramo' => $pool['siguiente_tramo'] ? [
+                    'compradores_minimos' => (int) $pool['siguiente_tramo']['compradores_minimos'],
+                    'precio_unitario' => (float) $pool['siguiente_tramo']['precio_unitario'],
+                ] : null,
             ];
         }, $pools),
     ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);

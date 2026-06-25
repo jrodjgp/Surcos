@@ -4,6 +4,7 @@
     $boletinesMercado = [
         ['etiqueta' => 'Pools activos', 'valor' => (string) ($resumen['pools'] ?? 0)],
         ['etiqueta' => 'Cosechas publicadas', 'valor' => ($resumen['cosechas'] ?? 0) . ' lotes'],
+        ['etiqueta' => 'Compradores en pools', 'valor' => (string) ($resumen['compradores_en_pool'] ?? 0)],
         ['etiqueta' => 'Provincias activas', 'valor' => (string) ($resumen['provincias'] ?? 0)],
         ['etiqueta' => 'Proximo cierre', 'valor' => fecha_hora_corta($resumen['proximo_cierre'] ?? null)],
     ];
@@ -39,7 +40,7 @@
       <p>Compradores se unen a pools de compra colectiva. Productores publican lotes de cosecha con precio, cupo y cierre claros.</p>
       <div class="hero-actions">
         <a class="btn btn--compact" href="#pools-activos">Ver pools activos</a>
-        <a class="btn-outline btn-outline--hero" href="#registro-cosecha"><?= $productorPuedePublicar ? 'Publicar cosecha' : 'Afiliar productor' ?></a>
+        <a class="btn-outline btn-outline--hero" href="<?= escapar($productorPuedePublicar ? url_para('/productor/') : '#registro-cosecha') ?>"><?= $productorPuedePublicar ? 'Panel productor' : 'Afiliar productor' ?></a>
       </div>
     </div>
   </section>
@@ -95,7 +96,7 @@
             </div>
             <h3 class="name"><?= escapar($pool['producto'] . ' - ' . $pool['variedad']) ?></h3>
             <div class="price-row">
-              <span class="price tab"><?= escapar(dinero($pool['precio_grupal'])) ?><small>/<?= escapar($pool['unidad']) ?></small></span>
+              <span class="price tab"><?= escapar(dinero($pool['precio_vigente'])) ?><small>/<?= escapar($pool['unidad']) ?></small></span>
               <span class="retail tab">Retail: <?= escapar(dinero($pool['precio_mercado'])) ?></span>
             </div>
             <div class="prog">
@@ -108,6 +109,13 @@
               </div>
             </div>
             <div class="deadline">Cierra: <?= escapar(fecha_hora_corta($pool['fecha_cierre'])) ?></div>
+            <?php if (!empty($pool['siguiente_tramo'])): ?>
+              <div class="tramo-callout">
+                Faltan <?= escapar((string) $pool['faltan_siguiente_tramo']) ?> para <?= escapar(dinero($pool['siguiente_tramo']['precio_unitario'])) ?>/<?= escapar($pool['unidad']) ?>
+              </div>
+            <?php else: ?>
+              <div class="tramo-callout">Mejor precio del pool activo</div>
+            <?php endif; ?>
             <a class="pool-historia-link" href="<?= escapar(url_para('/historias_productor.php?productor=' . $pool['productor_id'])) ?>">Historia del productor</a>
             <a href="<?= escapar(url_para('/pool.php?id=' . $pool['id'])) ?>" class="btn">Comprometerse al Pool</a>
           </article>

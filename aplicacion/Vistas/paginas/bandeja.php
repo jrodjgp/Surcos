@@ -22,6 +22,7 @@
           <tr>
             <th>Pool</th>
             <th>Cantidad</th>
+            <th>Precio vigente</th>
             <th>Monto</th>
             <th>Cierre</th>
             <th></th>
@@ -29,10 +30,12 @@
         </thead>
         <tbody>
           <?php foreach ($borradores as $borrador): ?>
+            <?php $montoVigente = round((float) $borrador['cantidad'] * (float) $borrador['precio_vigente'], 2); ?>
             <tr>
               <td data-label="Pool"><?= escapar($borrador['producto_snapshot']) ?><br><small><?= escapar($borrador['origen_snapshot']) ?></small></td>
               <td data-label="Cantidad"><?= escapar($borrador['cantidad'] . ' ' . $borrador['unidad']) ?></td>
-              <td data-label="Monto"><?= escapar(dinero($borrador['monto'])) ?></td>
+              <td data-label="Precio vigente"><?= escapar(dinero($borrador['precio_vigente'])) ?>/<?= escapar($borrador['unidad']) ?></td>
+              <td data-label="Monto"><?= escapar(dinero($montoVigente)) ?></td>
               <td data-label="Cierre"><?= escapar(fecha_hora_corta($borrador['fecha_cierre'])) ?></td>
               <td data-label="Accion">
                 <form method="post" action="<?= escapar(url_para('/bandeja_quitar.php')) ?>">
@@ -52,6 +55,7 @@
       <div>
         <span>Total simulado</span>
         <strong><?= escapar(dinero($total)) ?></strong>
+        <small>El procedimiento almacenado recalcula el precio vigente antes de autorizar.</small>
       </div>
       <label for="metodoPago">metodo de pago simulado</label>
       <select id="metodoPago" name="metodo_pago_id" required>

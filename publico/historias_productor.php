@@ -36,7 +36,10 @@ require dirname(__DIR__) . '/aplicacion/Arranque.php';
             }
 
             if ($productor) {
-                $poolsProductor = $productorModelo->poolsActivos((string) $productor['id']);
+                $poolsProductor = array_values(array_filter(
+                    $poolModelo->poolsProductor((string) $productor['id']),
+                    static fn (array $pool): bool => $pool['estado'] === 'activo' && strtotime((string) $pool['fecha_cierre']) >= time()
+                ));
                 $relacionados = $productorModelo->relacionados((string) $productor['id']);
                 $poolPrincipal = $poolPrincipal ?: ($poolsProductor[0] ?? null);
             }

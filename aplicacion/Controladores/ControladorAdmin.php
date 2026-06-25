@@ -78,10 +78,21 @@ final class ControladorAdmin extends Controlador
     public function pools(): void
     {
         Autenticacion::requiereAdmin();
+        $poolModelo = new Pool();
+        $estado = trim((string) ($_GET['estado'] ?? ''));
+
+        try {
+            $poolModelo->cerrarVencidos();
+        } catch (Throwable $excepcion) {
+            Sesion::mensajeTemporal('error', 'No se pudieron cerrar pools vencidos automaticamente.');
+        }
 
         $this->vistaAdmin('pools', [
             'tituloPagina' => 'Pools | Admin Surcos',
-            'pools' => (new Pool())->todosAdmin(),
+            'pools' => $poolModelo->todosAdmin($estado !== '' ? $estado : null),
+            'metricas' => $poolModelo->metricasAdmin(),
+            'estadoActual' => $estado,
+            'poolModelo' => $poolModelo,
         ]);
     }
 

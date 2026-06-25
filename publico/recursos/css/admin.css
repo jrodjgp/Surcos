@@ -58,7 +58,8 @@
 .admin-login,
 .admin-panel,
 .admin-hero,
-.admin-metricas a {
+.admin-metricas a,
+.admin-metricas article {
   border: 1px solid var(--line);
   background: var(--surface);
   padding: clamp(24px, 3vw, 34px)
@@ -166,6 +167,33 @@
   font-size: 34px
 }
 
+.admin-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 24px 0 4px
+}
+
+.admin-filtros a {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  color: var(--leaf);
+  padding: 9px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase
+}
+
+.admin-filtros a.activo,
+.admin-filtros a:hover {
+  border-color: var(--terra);
+  background: rgba(200, 90, 50, .08);
+  color: var(--terra)
+}
+
 .admin-panel h2 {
   color: var(--leaf);
   font-family: 'Newsreader', serif;
@@ -238,6 +266,26 @@
 }
 
 .admin-vacio p {
+  color: #6c6058;
+  line-height: 1.5
+}
+
+.admin-empty {
+  margin-top: 24px;
+  border: 1px dashed rgba(44, 76, 59, .24);
+  background: rgba(253, 251, 247, .62);
+  padding: 20px
+}
+
+.admin-empty strong {
+  display: block;
+  color: var(--leaf);
+  font-family: 'Newsreader', serif;
+  font-size: 22px;
+  margin-bottom: 4px
+}
+
+.admin-empty p {
   color: #6c6058;
   line-height: 1.5
 }

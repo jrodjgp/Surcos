@@ -85,6 +85,27 @@ on duplicate key update
     fecha_entrega = values(fecha_entrega),
     estado = values(estado);
 
+insert into tramos_precio_pool (id, pool_id, compradores_minimos, precio_unitario, etiqueta)
+values
+    ('tramo-geisha-base', 'grupo-geisha-42', 1, 0.62, 'Precio base del pool'),
+    ('tramo-geisha-volumen', 'grupo-geisha-42', 10, 0.58, 'Precio por volumen medio'),
+    ('tramo-geisha-meta', 'grupo-geisha-42', 20, 0.52, 'Precio al completar meta'),
+    ('tramo-tomates-base', 'grupo-tomates-09', 1, 0.45, 'Precio base del pool'),
+    ('tramo-tomates-volumen', 'grupo-tomates-09', 25, 0.40, 'Precio por volumen medio'),
+    ('tramo-tomates-meta', 'grupo-tomates-09', 50, 0.36, 'Precio al completar meta'),
+    ('tramo-miel-base', 'grupo-miel-cruda', 1, 4.20, 'Precio base del pool'),
+    ('tramo-miel-volumen', 'grupo-miel-cruda', 25, 3.95, 'Precio por volumen medio'),
+    ('tramo-miel-meta', 'grupo-miel-cruda', 50, 3.70, 'Precio al completar meta'),
+    ('tramo-cacao-base', 'grupo-cacao-07', 1, 2.35, 'Precio base del pool'),
+    ('tramo-cacao-volumen', 'grupo-cacao-07', 20, 2.15, 'Precio por volumen medio'),
+    ('tramo-cacao-meta', 'grupo-cacao-07', 35, 1.98, 'Precio al completar meta'),
+    ('tramo-arbequina-base', 'grupo-arbequina-azuero', 1, 9.75, 'Precio base del pool'),
+    ('tramo-arbequina-volumen', 'grupo-arbequina-azuero', 12, 8.90, 'Precio por volumen medio'),
+    ('tramo-arbequina-meta', 'grupo-arbequina-azuero', 25, 8.20, 'Precio al completar meta')
+on duplicate key update
+    precio_unitario = values(precio_unitario),
+    etiqueta = values(etiqueta);
+
 insert into metodos_pago (id, usuario_id, tipo, etiqueta, marca, ultimos, principal, activo)
 values
     ('pago-demo-visa', 'usr-comprador-demo', 'tarjeta_simulada', 'Visa simulada terminada en 4242', 'Visa', '4242', 1, 1),

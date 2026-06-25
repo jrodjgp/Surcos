@@ -39,7 +39,12 @@ final class ControladorPool extends Controlador
         $pool = (new Pool())->buscar((string) ($_POST['pool_id'] ?? ''));
         $cantidad = max(1, (float) ($_POST['cantidad'] ?? 1));
 
-        if (!$pool || $pool['estado'] !== 'activo') {
+        if (
+            !$pool
+            || $pool['estado'] !== 'activo'
+            || strtotime((string) $pool['fecha_cierre']) < time()
+            || (int) $pool['personas_actuales'] >= (int) $pool['personas_objetivo']
+        ) {
             Sesion::mensajeTemporal('error', 'El pool ya no esta disponible.');
             redirigir('/');
         }

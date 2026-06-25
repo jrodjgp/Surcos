@@ -7,7 +7,21 @@ final class Compromiso extends Modelo
     public function borradores(string $usuarioId): array
     {
         return $this->todos(
-            'select c.*, p.fecha_cierre, p.personas_actuales, p.personas_objetivo, p.estado as estado_pool
+            'select c.*, p.fecha_cierre, p.personas_actuales, p.personas_objetivo, p.estado as estado_pool,
+                    coalesce((
+                        select t.precio_unitario
+                          from tramos_precio_pool t
+                         where t.pool_id = p.id
+                           and t.compradores_minimos <= p.personas_actuales + 1
+                      order by t.compradores_minimos desc
+                         limit 1
+                    ), p.precio_grupal) as precio_vigente,
+                    coalesce((
+                        select min(t.compradores_minimos)
+                          from tramos_precio_pool t
+                         where t.pool_id = p.id
+                           and t.compradores_minimos > p.personas_actuales + 1
+                    ), 0) as proximo_tramo_compradores
                from compromisos c
                join pools p on p.id = c.pool_id
               where c.usuario_id = :usuario_id
@@ -26,7 +40,8 @@ final class Compromiso extends Modelo
             ['usuario_id' => $usuarioId, 'pool_id' => $pool['id']]
         );
 
-        $monto = round($cantidad * (float) $pool['precio_grupal'], 2);
+        $precioVigente = (float) ($pool['precio_vigente'] ?? $pool['precio_grupal']);
+        $monto = round($cantidad * $precioVigente, 2);
 
         if ($existente) {
             $this->ejecutar(
@@ -94,7 +109,18 @@ final class Compromiso extends Modelo
     public function totalBorradores(string $usuarioId): float
     {
         $fila = $this->uno(
-            'select coalesce(sum(monto), 0) as total from compromisos where usuario_id = :usuario_id and estado_compromiso = "borrador"',
+            'select coalesce(sum(c.cantidad * coalesce((
+                        select t.precio_unitario
+                          from tramos_precio_pool t
+                         where t.pool_id = p.id
+                           and t.compradores_minimos <= p.personas_actuales + 1
+                      order by t.compradores_minimos desc
+                         limit 1
+                    ), p.precio_grupal)), 0) as total
+               from compromisos c
+               join pools p on p.id = c.pool_id
+              where c.usuario_id = :usuario_id
+                and c.estado_compromiso = "borrador"',
             ['usuario_id' => $usuarioId]
         );
 

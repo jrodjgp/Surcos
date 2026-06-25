@@ -37,6 +37,12 @@ base_datos/001_esquema.sql
 base_datos/002_semillas_demo.sql
 ```
 
+Si ya tenias una base `surcos` creada antes de la capa marketplace real, ejecuta tambien:
+
+```text
+base_datos/003_marketplace_real.sql
+```
+
 5. Configura Apache o el virtual host para que el document root apunte a `publico/`. Abre el sitio desde:
 
 ```text
@@ -60,10 +66,13 @@ C:\xampp\php\php.exe -S 127.0.0.1:8000 -t publico
 - `/pool.php?id=grupo-geisha-42` Detalle de pool.
 - `/bandeja.php` Bandeja de Pools con compromisos en borrador.
 - `/historial_pools.php` Actividad e historial comercial del comprador.
+- `/productor/` Panel del productor activo: pools, tramos, cierres y monto simulado.
 - `/admin/` Login de administrador.
 - `/admin/solicitudes.php` Gestion de solicitudes.
 - `/admin/pools.php` Revision de pools publicados.
 - `/api/pools.php` Web service JSON de pools activos.
+- `/api/pool.php?id=grupo-geisha-42` Web service JSON de un pool con tramos.
+- `/api/productores.php` Web service JSON de productores activos.
 - `/salud.php` Diagnostico de PHP, sesiones y MySQL.
 
 ## MVC
@@ -89,12 +98,16 @@ El esquema usa varias tablas relacionadas:
 - `solicitudes_contacto`
 - `eventos_solicitud`
 - `pools`
+- `tramos_precio_pool`
 - `compromisos`
 - `metodos_pago`
 - `intentos_pago`
 - `actividad`
 
-El procedimiento almacenado principal es `sp_confirmar_compromiso_pool`. Valida que el pool este activo, que exista cupo y que el metodo de pago simulado pertenezca al usuario antes de confirmar un compromiso.
+Los procedimientos almacenados principales son:
+
+- `sp_confirmar_compromiso_pool`: valida que el pool este activo, que exista cupo y que el metodo de pago simulado pertenezca al usuario. Recalcula el precio vigente por tramo antes de confirmar el compromiso y crear el pago simulado.
+- `sp_cerrar_pools_vencidos`: cierra pools vencidos como `cerrado` o `fallido` segun hayan alcanzado el objetivo.
 
 El seed incluye un productor activo vinculado a `productor@surcos.pa` para probar la publicacion real simple de cosechas. Las solicitudes aprobadas desde admin crean una cuenta pendiente; si el tipo es productor, tambien crean un perfil productor pendiente vinculado.
 
@@ -116,8 +129,8 @@ El seed incluye un productor activo vinculado a `productor@surcos.pa` para proba
 - MySQL/MariaDB: si.
 - Mas de una tabla: si.
 - MVC: si, estructura `Controladores`, `Modelos`, `Vistas`.
-- Procedimiento almacenado: si, `sp_confirmar_compromiso_pool`.
-- Web service: si, `/api/pools.php`.
+- Procedimiento almacenado: si, `sp_confirmar_compromiso_pool` y `sp_cerrar_pools_vencidos`.
+- Web service: si, `/api/pools.php`, `/api/pool.php` y `/api/productores.php`.
 - Cookies/sesiones: si, login comprador y admin.
 - Seguridad en formularios: si, CSRF, validacion, PDO y escape.
 

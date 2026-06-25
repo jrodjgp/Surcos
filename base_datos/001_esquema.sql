@@ -13,6 +13,7 @@ drop table if exists actividad;
 drop table if exists intentos_pago;
 drop table if exists compromisos;
 drop table if exists metodos_pago;
+drop table if exists tramos_precio_pool;
 drop table if exists pools;
 drop table if exists eventos_solicitud;
 drop table if exists solicitudes_contacto;
@@ -131,6 +132,19 @@ create table pools (
     constraint pools_cantidad_chk check (cantidad_minima > 0)
 ) engine=InnoDB;
 
+create table tramos_precio_pool (
+    id varchar(64) primary key,
+    pool_id varchar(64) not null,
+    compradores_minimos int not null,
+    precio_unitario decimal(10, 2) not null,
+    etiqueta varchar(120) not null,
+    creado_en timestamp not null default current_timestamp,
+    constraint tramos_pool_fk foreign key (pool_id) references pools(id) on delete cascade,
+    constraint tramos_compradores_chk check (compradores_minimos >= 1),
+    constraint tramos_precio_chk check (precio_unitario > 0),
+    unique key tramos_pool_compradores_unico (pool_id, compradores_minimos)
+) engine=InnoDB;
+
 create table metodos_pago (
     id varchar(64) primary key,
     usuario_id varchar(64) not null,
@@ -197,6 +211,7 @@ create table actividad (
 
 create index solicitudes_contacto_estado_idx on solicitudes_contacto(estado);
 create index pools_estado_idx on pools(estado);
+create index tramos_pool_idx on tramos_precio_pool(pool_id, compradores_minimos);
 create index compromisos_usuario_idx on compromisos(usuario_id, estado_compromiso);
 create index actividad_usuario_idx on actividad(usuario_id, fecha);
 
@@ -218,6 +233,8 @@ begin
     declare v_actuales int;
     declare v_objetivo int;
     declare v_fecha_cierre datetime;
+    declare v_cantidad decimal(10, 2);
+    declare v_precio_vigente decimal(10, 2);
     declare v_monto decimal(10, 2);
     declare v_metodo_activo tinyint default 0;
     declare v_metodo_etiqueta varchar(120);
@@ -232,9 +249,9 @@ begin
 
     start transaction;
 
-    select c.pool_id, c.producto_snapshot, c.monto, p.estado, p.personas_actuales,
+    select c.pool_id, c.producto_snapshot, c.cantidad, p.estado, p.personas_actuales,
            p.personas_objetivo, p.fecha_cierre
-      into v_pool_id, v_producto, v_monto, v_estado_pool, v_actuales,
+      into v_pool_id, v_producto, v_cantidad, v_estado_pool, v_actuales,
            v_objetivo, v_fecha_cierre
       from compromisos c
       join pools p on p.id = c.pool_id
@@ -266,12 +283,27 @@ begin
         signal sqlstate '45000' set message_text = 'Metodo de pago simulado no disponible.';
     end if;
 
+    select coalesce((
+        select t.precio_unitario
+          from tramos_precio_pool t
+         where t.pool_id = v_pool_id
+           and t.compradores_minimos <= v_actuales + 1
+      order by t.compradores_minimos desc
+         limit 1
+    ), p.precio_grupal)
+      into v_precio_vigente
+      from pools p
+     where p.id = v_pool_id;
+
+    set v_monto = round(v_cantidad * v_precio_vigente, 2);
+
     set p_compromiso_id = p_borrador_id;
     set p_referencia = concat('SIM-', upper(substr(replace(uuid(), '-', ''), 1, 12)));
 
     update compromisos
        set estado_compromiso = 'confirmado',
            estado_grupo = if(v_actuales + 1 >= v_objetivo, 'ganado', 'pendiente'),
+           monto = v_monto,
            metodo_pago_id = p_metodo_pago_id,
            metodo_pago_etiqueta = v_metodo_etiqueta,
            fecha = current_date
@@ -307,6 +339,41 @@ begin
     );
 
     commit;
+end//
+
+drop procedure if exists sp_cerrar_pools_vencidos//
+
+create procedure sp_cerrar_pools_vencidos()
+begin
+    update compromisos c
+    join pools p on p.id = c.pool_id
+       set c.estado_grupo = 'ganado'
+     where p.estado = 'activo'
+       and p.fecha_cierre < now()
+       and p.personas_actuales >= p.personas_objetivo
+       and c.estado_compromiso = 'confirmado'
+       and c.estado_grupo = 'pendiente';
+
+    update pools
+       set estado = 'cerrado'
+     where estado = 'activo'
+       and fecha_cierre < now()
+       and personas_actuales >= personas_objetivo;
+
+    update compromisos c
+    join pools p on p.id = c.pool_id
+       set c.estado_grupo = 'fallido'
+     where p.estado = 'activo'
+       and p.fecha_cierre < now()
+       and p.personas_actuales < p.personas_objetivo
+       and c.estado_compromiso = 'confirmado'
+       and c.estado_grupo = 'pendiente';
+
+    update pools
+       set estado = 'fallido'
+     where estado = 'activo'
+       and fecha_cierre < now()
+       and personas_actuales < personas_objetivo;
 end//
 
 delimiter ;

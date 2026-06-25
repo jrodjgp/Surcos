@@ -13,7 +13,7 @@ La cadena de alimentos en Panama puede dejar demasiado valor en manos de interme
 Surcos organiza demanda antes de mover producto:
 
 - El productor publica un lote con origen, volumen, precio grupal, fecha de cierre y modelo de entrega.
-- Los compradores se comprometen a un pool.
+- Los compradores se comprometen a un pool y el precio vigente baja por tramos cuando se alcanza mas volumen.
 - Cuando el pool alcanza volumen suficiente, el productor tiene una venta mas predecible y el comprador obtiene un precio mas directo.
 - La plataforma conserva la trazabilidad basica del compromiso, el pago simulado y la actividad del usuario.
 

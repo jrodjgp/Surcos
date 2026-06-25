@@ -9,9 +9,14 @@
       <p><?= escapar($pool['productor_nombre']) ?> publica este lote con entrega <?= escapar($pool['modelo_entrega']) ?>.</p>
       <a class="pool-historia-link" href="<?= escapar(url_para('/historias_productor.php?productor=' . $pool['productor_id'])) ?>">Leer historia del productor</a>
       <div class="price-row">
-        <span class="price tab"><?= escapar(dinero($pool['precio_grupal'])) ?><small>/<?= escapar($pool['unidad']) ?></small></span>
+        <span class="price tab"><?= escapar(dinero($pool['precio_vigente'])) ?><small>/<?= escapar($pool['unidad']) ?></small></span>
         <span class="retail tab">Retail: <?= escapar(dinero($pool['precio_mercado'])) ?></span>
       </div>
+      <?php if (!empty($pool['siguiente_tramo'])): ?>
+        <p class="nota-tramo">Faltan <?= escapar((string) $pool['faltan_siguiente_tramo']) ?> comprador(es) para bajar a <?= escapar(dinero($pool['siguiente_tramo']['precio_unitario'])) ?>/<?= escapar($pool['unidad']) ?>.</p>
+      <?php else: ?>
+        <p class="nota-tramo">Este pool ya esta en su mejor tramo de precio.</p>
+      <?php endif; ?>
       <div class="prog">
         <div class="prog-head">
           <span><?= escapar($pool['personas_actuales'] . '/' . $pool['personas_objetivo']) ?> personas</span>
@@ -24,6 +29,21 @@
         <div><dt>Entrega</dt><dd><?= escapar(fecha_corta($pool['fecha_entrega'])) ?></dd></div>
         <div><dt>Nodo</dt><dd><?= escapar($pool['nodo_nombre'] ?? 'Por confirmar') ?></dd></div>
       </dl>
+      <?php if (!empty($pool['tramos'])): ?>
+        <section class="tramos-panel" aria-label="Tramos de precio del pool">
+          <h2>Tramos de precio</h2>
+          <div class="tramos-grid">
+            <?php foreach ($pool['tramos'] as $tramo): ?>
+              <?php $activoTramo = (int) $tramo['compradores_minimos'] <= ((int) $pool['personas_actuales'] + 1); ?>
+              <div class="<?= $activoTramo ? 'tramo activo' : 'tramo' ?>">
+                <span><?= escapar((string) $tramo['compradores_minimos']) ?>+ compradores</span>
+                <strong><?= escapar(dinero($tramo['precio_unitario'])) ?></strong>
+                <small><?= escapar($tramo['etiqueta']) ?></small>
+              </div>
+            <?php endforeach; ?>
+          </div>
+        </section>
+      <?php endif; ?>
       <form method="post" action="<?= escapar(url_para('/pool_agregar.php')) ?>" class="pool-compromiso">
         <?= campo_csrf() ?>
         <input type="hidden" name="pool_id" value="<?= escapar($pool['id']) ?>" />

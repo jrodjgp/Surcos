@@ -6,7 +6,7 @@ final class Pool extends Modelo
 {
     public function activos(): array
     {
-        return $this->todos(
+        return $this->enriquecerConTramos($this->todos(
             'select p.*, pr.nombre as productor_nombre, pr.responsable as productor_responsable,
                     n.nombre as nodo_nombre
                from pools p
@@ -14,22 +14,33 @@ final class Pool extends Modelo
           left join nodos_retiro n on n.id = p.nodo_retiro_id
               where p.estado = "activo" and p.fecha_cierre >= now()
            order by p.fecha_cierre asc'
-        );
+        ));
     }
 
-    public function todosAdmin(): array
+    public function todosAdmin(?string $estado = null): array
     {
-        return $this->todos(
-            'select p.*, pr.nombre as productor_nombre
+        $parametros = [];
+        $filtro = '';
+
+        if (in_array($estado, ['activo', 'cerrado', 'fallido'], true)) {
+            $filtro = ' where p.estado = :estado';
+            $parametros['estado'] = $estado;
+        }
+
+        return $this->enriquecerConTramos($this->todos(
+            'select p.*, pr.nombre as productor_nombre, n.nombre as nodo_nombre
                from pools p
                join productores pr on pr.id = p.productor_id
-           order by p.fecha_cierre desc'
-        );
+          left join nodos_retiro n on n.id = p.nodo_retiro_id'
+            . $filtro .
+            ' order by p.fecha_cierre desc',
+            $parametros
+        ));
     }
 
     public function buscar(string $id): ?array
     {
-        return $this->uno(
+        $pool = $this->uno(
             'select p.*, pr.nombre as productor_nombre, pr.responsable as productor_responsable,
                     pr.historia as productor_historia, pr.provincia as productor_provincia,
                     pr.zona as productor_zona, pr.especialidad as productor_especialidad,
@@ -41,6 +52,8 @@ final class Pool extends Modelo
               limit 1',
             ['id' => $id]
         );
+
+        return $pool ? $this->enriquecerPool($pool) : null;
     }
 
     public function resumenMercado(): array
@@ -49,7 +62,8 @@ final class Pool extends Modelo
             'select count(*) as pools,
                     count(distinct pr.provincia) as provincias,
                     coalesce(sum(case when p.estado = "activo" then 1 else 0 end), 0) as activos,
-                    min(case when p.estado = "activo" and p.fecha_cierre >= now() then p.fecha_cierre end) as proximo_cierre
+                    min(case when p.estado = "activo" and p.fecha_cierre >= now() then p.fecha_cierre end) as proximo_cierre,
+                    coalesce(sum(case when p.estado = "activo" then p.personas_actuales else 0 end), 0) as compradores_en_pool
                from pools p
                join productores pr on pr.id = p.productor_id'
         ) ?? [];
@@ -58,6 +72,59 @@ final class Pool extends Modelo
             'pools' => (int) ($fila['activos'] ?? 0),
             'cosechas' => (int) ($fila['pools'] ?? 0),
             'provincias' => (int) ($fila['provincias'] ?? 0),
+            'compradores_en_pool' => (int) ($fila['compradores_en_pool'] ?? 0),
+            'proximo_cierre' => $fila['proximo_cierre'] ?? null,
+        ];
+    }
+
+    public function metricasAdmin(): array
+    {
+        $fila = $this->uno(
+            'select
+                (select count(*) from pools) as total,
+                (select count(*) from pools where estado = "activo" and fecha_cierre >= now()) as activos,
+                (select count(*) from pools where estado = "activo" and fecha_cierre between now() and date_add(now(), interval 3 day)) as por_cerrar,
+                (select count(distinct productor_id) from pools) as productores_con_pools,
+                (select coalesce(sum(monto), 0) from compromisos where estado_compromiso = "confirmado") as monto_confirmado'
+        ) ?? [];
+
+        return [
+            'total' => (int) ($fila['total'] ?? 0),
+            'activos' => (int) ($fila['activos'] ?? 0),
+            'por_cerrar' => (int) ($fila['por_cerrar'] ?? 0),
+            'productores_con_pools' => (int) ($fila['productores_con_pools'] ?? 0),
+            'monto_confirmado' => (float) ($fila['monto_confirmado'] ?? 0),
+        ];
+    }
+
+    public function metricasProductor(string $productorId): array
+    {
+        $fila = $this->uno(
+            'select
+                (select count(*) from pools where productor_id = :productor_total) as total,
+                (select count(*) from pools where productor_id = :productor_activo and estado = "activo" and fecha_cierre >= now()) as activos,
+                (select coalesce(sum(c.monto), 0)
+                   from compromisos c
+                   join pools p on p.id = c.pool_id
+                  where p.productor_id = :productor_monto
+                    and c.estado_compromiso = "confirmado") as monto_confirmado,
+                (select min(fecha_cierre)
+                   from pools
+                  where productor_id = :productor_cierre
+                    and estado = "activo"
+                    and fecha_cierre >= now()) as proximo_cierre',
+            [
+                'productor_total' => $productorId,
+                'productor_activo' => $productorId,
+                'productor_monto' => $productorId,
+                'productor_cierre' => $productorId,
+            ]
+        ) ?? [];
+
+        return [
+            'total' => (int) ($fila['total'] ?? 0),
+            'activos' => (int) ($fila['activos'] ?? 0),
+            'monto_confirmado' => (float) ($fila['monto_confirmado'] ?? 0),
             'proximo_cierre' => $fila['proximo_cierre'] ?? null,
         ];
     }
@@ -113,6 +180,8 @@ final class Pool extends Modelo
             ]
         );
 
+        $this->crearTramosIniciales($id, $precio, $objetivo);
+
         return $id;
     }
 
@@ -124,7 +193,7 @@ final class Pool extends Modelo
 
     public function activosRelacionados(string $productorId, string $poolId): array
     {
-        return $this->todos(
+        return $this->enriquecerConTramos($this->todos(
             'select p.*, pr.nombre as productor_nombre, pr.responsable as productor_responsable,
                     n.nombre as nodo_nombre
                from pools p
@@ -136,6 +205,114 @@ final class Pool extends Modelo
                 and p.fecha_cierre >= now()
            order by p.fecha_cierre asc',
             ['productor_id' => $productorId, 'pool_id' => $poolId]
+        ));
+    }
+
+    public function poolsProductor(string $productorId): array
+    {
+        return $this->enriquecerConTramos($this->todos(
+            'select p.*, pr.nombre as productor_nombre, n.nombre as nodo_nombre,
+                    (select count(*)
+                       from compromisos c
+                      where c.pool_id = p.id
+                        and c.estado_compromiso = "confirmado") as compromisos_confirmados,
+                    (select coalesce(sum(c.monto), 0)
+                       from compromisos c
+                      where c.pool_id = p.id
+                        and c.estado_compromiso = "confirmado") as monto_confirmado
+               from pools p
+               join productores pr on pr.id = p.productor_id
+          left join nodos_retiro n on n.id = p.nodo_retiro_id
+              where p.productor_id = :productor_id
+           order by p.fecha_cierre desc',
+            ['productor_id' => $productorId]
+        ));
+    }
+
+    public function tramos(string $poolId): array
+    {
+        return $this->todos(
+            'select *
+               from tramos_precio_pool
+              where pool_id = :pool_id
+           order by compradores_minimos asc',
+            ['pool_id' => $poolId]
         );
+    }
+
+    public function cerrarVencidos(): void
+    {
+        $this->ejecutar('call sp_cerrar_pools_vencidos()');
+    }
+
+    private function crearTramosIniciales(string $poolId, float $precio, int $objetivo): void
+    {
+        $medio = max(2, (int) floor($objetivo / 2));
+        $tramos = [
+            ['minimo' => 1, 'precio' => $precio, 'etiqueta' => 'Precio base del pool'],
+            ['minimo' => $medio, 'precio' => round($precio * 0.92, 2), 'etiqueta' => 'Precio por volumen medio'],
+            ['minimo' => $objetivo, 'precio' => round($precio * 0.85, 2), 'etiqueta' => 'Precio al completar meta'],
+        ];
+
+        foreach ($tramos as $tramo) {
+            $this->ejecutar(
+                'insert into tramos_precio_pool (id, pool_id, compradores_minimos, precio_unitario, etiqueta)
+                 values (:id, :pool_id, :compradores_minimos, :precio_unitario, :etiqueta)',
+                [
+                    'id' => $this->id('tramo'),
+                    'pool_id' => $poolId,
+                    'compradores_minimos' => $tramo['minimo'],
+                    'precio_unitario' => $tramo['precio'],
+                    'etiqueta' => $tramo['etiqueta'],
+                ]
+            );
+        }
+    }
+
+    private function enriquecerConTramos(array $pools): array
+    {
+        return array_map(fn (array $pool): array => $this->enriquecerPool($pool), $pools);
+    }
+
+    private function enriquecerPool(array $pool): array
+    {
+        $tramos = $this->tramos((string) $pool['id']);
+        $compradoresParaPrecio = max(1, (int) $pool['personas_actuales'] + 1);
+        $tramoActual = $this->tramoParaCompradores($tramos, $compradoresParaPrecio);
+        $siguienteTramo = $this->siguienteTramo($tramos, $compradoresParaPrecio);
+
+        $pool['tramos'] = $tramos;
+        $pool['tramo_actual'] = $tramoActual;
+        $pool['siguiente_tramo'] = $siguienteTramo;
+        $pool['precio_vigente'] = (float) ($tramoActual['precio_unitario'] ?? $pool['precio_grupal']);
+        $pool['faltan_siguiente_tramo'] = $siguienteTramo
+            ? max(0, (int) $siguienteTramo['compradores_minimos'] - (int) $pool['personas_actuales'])
+            : 0;
+
+        return $pool;
+    }
+
+    private function tramoParaCompradores(array $tramos, int $compradores): ?array
+    {
+        $vigente = null;
+
+        foreach ($tramos as $tramo) {
+            if ((int) $tramo['compradores_minimos'] <= $compradores) {
+                $vigente = $tramo;
+            }
+        }
+
+        return $vigente;
+    }
+
+    private function siguienteTramo(array $tramos, int $compradores): ?array
+    {
+        foreach ($tramos as $tramo) {
+            if ((int) $tramo['compradores_minimos'] > $compradores) {
+                return $tramo;
+            }
+        }
+
+        return null;
     }
 }

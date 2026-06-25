@@ -68,7 +68,7 @@ $lineasHistoria = array_filter([
           <h2 class="lbl">Registro activo</h2>
           <?php if ($poolHero): ?>
             <div class="batch-row"><span>Pool</span><span><?= escapar($poolHero['producto']) ?></span></div>
-            <div class="batch-row"><span>Precio grupal</span><span class="terra"><?= escapar(dinero($poolHero['precio_grupal'])) ?></span></div>
+            <div class="batch-row"><span>Precio vigente</span><span class="terra"><?= escapar(dinero($poolHero['precio_vigente'])) ?></span></div>
             <div class="batch-row"><span>Avance</span><span><?= escapar($poolHero['personas_actuales'] . '/' . $poolHero['personas_objetivo']) ?> personas</span></div>
             <div class="mini-bar"><i style="width:<?= escapar((string) $avanceHero) ?>%"></i></div>
             <a class="historia-mini-cta" href="<?= escapar(url_para('/pool.php?id=' . $poolHero['id'])) ?>">Ver detalle del pool</a>
@@ -139,7 +139,7 @@ $lineasHistoria = array_filter([
                 <div class="body">
                   <h3 class="sname"><?= escapar($pool['producto']) ?></h3>
                   <p class="lot"><?= escapar($pool['variedad'] . ' - ' . $pool['origen']) ?></p>
-                  <div class="sprice tab"><?= escapar(dinero($pool['precio_grupal'])) ?></div>
+                  <div class="sprice tab"><?= escapar(dinero($pool['precio_vigente'])) ?></div>
                   <div class="mini-bar"><i style="width:<?= escapar((string) $avance) ?>%"></i></div>
                   <a class="sbtn" href="<?= escapar(url_para('/pool.php?id=' . $pool['id'])) ?>">Ver pool</a>
                 </div>
