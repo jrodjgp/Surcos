@@ -27,7 +27,7 @@ final class ControladorMarketplace extends Controlador
             'tituloPagina' => 'Surcos | Mercado de Pools',
             'descripcionPagina' => 'Surcos conecta compradores en pools de compra colectiva con productores que publican lotes de cosecha.',
             'paginaActiva' => 'marketplace',
-            'estilosExtra' => ['marketplace.css', 'mapa.css', 'pulido-landing.css'],
+            'estilosExtra' => ['marketplace.css', 'mapa.css', 'historias.css', 'pulido-landing.css'],
             'poolsActivos' => $poolsActivos,
             'resumen' => $resumen,
             'errorDatos' => $errorDatos,

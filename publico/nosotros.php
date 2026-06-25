@@ -7,12 +7,11 @@ require dirname(__DIR__) . '/aplicacion/Arranque.php';
 (new class extends Controlador {
     public function mostrar(): void
     {
-        $this->vistaPublica('simple', [
+        $this->vistaPublica('nosotros', [
             'tituloPagina' => 'Nosotros | Surcos',
+            'descripcionPagina' => 'Surcos reduce intermediarios entre productores panamenos y compradores de volumen mediante pools de compra.',
             'paginaActiva' => 'nosotros',
             'estilosExtra' => ['nosotros.css'],
-            'titulo' => 'Surcos conecta demanda y cosecha',
-            'texto' => 'Marketplace agricola panameno para pools de compra colectiva y lotes de productores.',
         ]);
     }
 })->mostrar();

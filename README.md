@@ -1,6 +1,6 @@
 # Surcos - Proyecto 2
 
-Surcos es un marketplace agricola panameno donde compradores se unen a pools de compra colectiva y productores publican lotes de cosecha. Esta version esta orientada a la rubrica de Proyecto 2: PHP, MySQL/MariaDB, MVC, sesiones, procedimiento almacenado y web service.
+Surcos es un marketplace agricola panameno que reduce la distancia entre productores y compradores de volumen. Compradores se unen a pools de compra colectiva y productores publican lotes de cosecha con precio, cupo, origen y cierre claros. Esta version esta orientada a la rubrica de Proyecto 2: PHP, MySQL/MariaDB, MVC, sesiones, procedimiento almacenado y web service.
 
 ## Stack
 
@@ -51,10 +51,14 @@ C:\xampp\php\php.exe -S 127.0.0.1:8000 -t publico
 ## Rutas Principales
 
 - `/` Marketplace de pools y registro de cosecha.
+- `/nosotros.php` Historia, problema y modelo comercial de Surcos.
+- `/historias_productor.php` Historias de productores conectadas a sus pools activos.
+- `/historias_productor.php?productor=prod-heredia` Historia de un productor especifico.
 - `/contacto.php` Solicitud de afiliacion guardada en MySQL.
 - `/ingreso.php` Login de comprador/productor.
 - `/pool.php?id=grupo-geisha-42` Detalle de pool.
 - `/bandeja.php` Bandeja de Pools con compromisos en borrador.
+- `/historial_pools.php` Actividad e historial comercial del comprador.
 - `/admin/` Login de administrador.
 - `/admin/solicitudes.php` Gestion de solicitudes.
 - `/admin/pools.php` Revision de pools publicados.

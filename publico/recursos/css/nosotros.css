@@ -397,3 +397,151 @@
     border-right: none
   }
 }
+
+/* Pulido PHP: pagina Nosotros restaurada sin Bootstrap ni emojis. */
+.nosotros-pagina {
+  background: var(--bg);
+}
+
+.nosotros-pagina .nosotros-hero {
+  padding: clamp(72px, 9vw, 118px) 24px clamp(64px, 8vw, 92px);
+  max-width: 1020px;
+  text-align: left;
+}
+
+.nosotros-pagina .nosotros-hero h1 {
+  max-width: 860px;
+  font-size: clamp(48px, 8vw, 88px);
+}
+
+.nosotros-pagina .nosotros-hero p {
+  max-width: 700px;
+  margin: 0;
+}
+
+.nosotros-intro {
+  padding-bottom: 56px;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--line);
+  background: rgba(253, 251, 247, .9);
+}
+
+.intro-grid article {
+  min-height: 180px;
+  padding: clamp(22px, 3vw, 34px);
+  border-right: 1px solid var(--line);
+}
+
+.intro-grid article:last-child {
+  border-right: 0;
+}
+
+.intro-grid span {
+  display: block;
+  color: var(--terra);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.intro-grid p {
+  color: #4f443d;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.nosotros-pagina .paso-icono {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(44, 76, 59, .22);
+  background: rgba(44, 76, 59, .06);
+  font-size: 18px;
+  margin-bottom: 18px;
+  color: var(--leaf);
+  font-weight: 700;
+}
+
+.nosotros-pagina .flecha {
+  font-size: 18px;
+}
+
+.respaldo-texto {
+  color: var(--leaf);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.provincias-panel {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(135deg, rgba(44, 76, 59, .06), transparent 42%),
+    rgba(253, 251, 247, .9);
+}
+
+.provincias-panel span {
+  min-height: 96px;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  border-right: 1px solid var(--line);
+  color: var(--leaf);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.provincias-panel span:nth-child(2n) {
+  background: rgba(44, 76, 59, .05);
+}
+
+.provincias-panel span:last-of-type {
+  border-right: 0;
+}
+
+.provincias-panel p {
+  grid-column: 1 / -1;
+  padding: 16px 18px;
+  border-top: 1px solid var(--line);
+  color: #5f544d;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+@media (max-width: 980px) {
+  .intro-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .provincias-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .provincias-panel span {
+    min-height: 72px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .intro-grid article {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .intro-grid article:last-child {
+    border-bottom: 0;
+  }
+}

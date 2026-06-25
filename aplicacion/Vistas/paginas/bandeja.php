@@ -4,7 +4,10 @@
       <p class="eyebrow">Bandeja de Pools</p>
       <h1>Compromisos en borrador</h1>
     </div>
-    <a class="btn-outline" href="<?= escapar(url_para('/')) ?>#pools-activos">Agregar mas pools</a>
+    <div class="terminal-actions">
+      <a class="btn-outline" href="<?= escapar(url_para('/historial_pools.php')) ?>">Historial de Pools</a>
+      <a class="btn-outline" href="<?= escapar(url_para('/')) ?>#pools-activos">Agregar mas pools</a>
+    </div>
   </section>
 
   <?php if (empty($borradores)): ?>

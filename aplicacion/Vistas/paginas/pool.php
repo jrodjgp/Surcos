@@ -7,6 +7,7 @@
       <p class="eyebrow"><?= escapar($pool['origen']) ?></p>
       <h1><?= escapar($pool['producto'] . ' - ' . $pool['variedad']) ?></h1>
       <p><?= escapar($pool['productor_nombre']) ?> publica este lote con entrega <?= escapar($pool['modelo_entrega']) ?>.</p>
+      <a class="pool-historia-link" href="<?= escapar(url_para('/historias_productor.php?productor=' . $pool['productor_id'])) ?>">Leer historia del productor</a>
       <div class="price-row">
         <span class="price tab"><?= escapar(dinero($pool['precio_grupal'])) ?><small>/<?= escapar($pool['unidad']) ?></small></span>
         <span class="retail tab">Retail: <?= escapar(dinero($pool['precio_mercado'])) ?></span>
@@ -32,4 +33,17 @@
       </form>
     </div>
   </article>
+
+  <section class="productor-pool-panel">
+    <div>
+      <p class="eyebrow">Productor</p>
+      <h2><?= escapar($pool['productor_nombre']) ?></h2>
+      <p><?= escapar($pool['productor_historia'] ?: 'Productor afiliado a Surcos con lotes publicados en el marketplace.') ?></p>
+    </div>
+    <dl class="detalle-lista">
+      <div><dt>Responsable</dt><dd><?= escapar($pool['productor_responsable']) ?></dd></div>
+      <div><dt>Zona</dt><dd><?= escapar(($pool['productor_zona'] ?? 'Sin zona') . ', ' . ($pool['productor_provincia'] ?? 'Panama')) ?></dd></div>
+      <div><dt>Especialidad</dt><dd><?= escapar($pool['productor_especialidad'] ?? $pool['producto']) ?></dd></div>
+    </dl>
+  </section>
 </main>

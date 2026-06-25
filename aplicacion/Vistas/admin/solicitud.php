@@ -4,7 +4,7 @@
     <div>
       <p class="admin-kicker"><?= escapar(str_replace('_', ' ', $solicitud['estado'])) ?></p>
       <h1><?= escapar($solicitud['nombre']) ?></h1>
-      <p><?= escapar($solicitud['correo']) ?> · <?= escapar($solicitud['telefono'] ?: 'sin telefono') ?></p>
+      <p class="admin-contacto"><?= escapar($solicitud['correo']) ?> <span>/</span> <?= escapar($solicitud['telefono'] ?: 'sin telefono') ?></p>
     </div>
     <a class="btn-outline" href="<?= escapar(url_para('/admin/solicitudes.php')) ?>">Volver</a>
   </section>
@@ -35,13 +35,25 @@
   </section>
 
   <section class="admin-panel">
-    <h2>Eventos</h2>
-    <?php foreach ($eventos as $evento): ?>
-      <div class="evento-admin">
-        <strong><?= escapar($evento['tipo']) ?></strong>
-        <span><?= escapar(fecha_hora_corta($evento['creado_en'])) ?></span>
-        <p><?= escapar($evento['detalle']) ?></p>
+    <h2>Bitacora de solicitud</h2>
+    <p class="admin-ayuda">Estos registros pertenecen al proceso de revision administrativa. No son ventas ni historial de pools.</p>
+    <?php if (empty($eventos)): ?>
+      <div class="admin-vacio">
+        <strong>Sin eventos registrados.</strong>
+        <p>Cuando guardes una nota, apruebes o rechaces la solicitud, la bitacora aparecera aqui.</p>
       </div>
-    <?php endforeach; ?>
+    <?php else: ?>
+      <div class="bitacora-lista">
+        <?php foreach ($eventos as $evento): ?>
+          <div class="evento-admin">
+            <div>
+              <strong><?= escapar(str_replace('_', ' ', $evento['tipo'])) ?></strong>
+              <span><?= escapar(fecha_hora_corta($evento['creado_en'])) ?><?= !empty($evento['admin_nombre']) ? ' / ' . escapar($evento['admin_nombre']) : '' ?></span>
+            </div>
+            <p><?= escapar($evento['detalle'] ?: 'Evento registrado sin detalle adicional.') ?></p>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
   </section>
 </main>

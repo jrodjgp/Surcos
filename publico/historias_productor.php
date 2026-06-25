@@ -7,12 +7,55 @@ require dirname(__DIR__) . '/aplicacion/Arranque.php';
 (new class extends Controlador {
     public function mostrar(): void
     {
-        $this->vistaPublica('simple', [
+        $productorModelo = new Productor();
+        $poolModelo = new Pool();
+        $productor = null;
+        $poolsProductor = [];
+        $productores = [];
+        $relacionados = [];
+        $poolPrincipal = null;
+        $errorDatos = null;
+
+        try {
+            $productorId = trim((string) ($_GET['productor'] ?? ''));
+            $poolId = trim((string) ($_GET['pool'] ?? $_GET['grupo'] ?? $_GET['id'] ?? ''));
+
+            if ($productorId !== '') {
+                $productor = $productorModelo->buscar($productorId);
+            }
+
+            if (!$productor && $poolId !== '') {
+                $productor = $productorModelo->buscarPorPool($poolId);
+                $poolPrincipal = $poolModelo->buscar($poolId);
+            }
+
+            $productores = $productorModelo->todosConResumen();
+
+            if (!$productor && !empty($productores)) {
+                $productor = $productores[0];
+            }
+
+            if ($productor) {
+                $poolsProductor = $productorModelo->poolsActivos((string) $productor['id']);
+                $relacionados = $productorModelo->relacionados((string) $productor['id']);
+                $poolPrincipal = $poolPrincipal ?: ($poolsProductor[0] ?? null);
+            }
+        } catch (Throwable $excepcion) {
+            $errorDatos = 'No se pudieron cargar las historias. Revisa la base de datos y /salud.php.';
+        }
+
+        $this->vistaPublica('historias', [
             'tituloPagina' => 'Historias | Surcos',
+            'descripcionPagina' => 'Historias de productores y pools activos en Surcos.',
             'paginaActiva' => 'historias',
-            'estilosExtra' => ['marketplace.css'],
-            'titulo' => 'Historias de productores',
-            'texto' => 'Esta seccion se migrara despues de cerrar los requisitos PHP, MySQL y admin.',
+            'estilosExtra' => ['marketplace.css', 'historias.css', 'pulido-landing.css'],
+            'productor' => $productor,
+            'productores' => $productores,
+            'relacionados' => $relacionados,
+            'poolsProductor' => $poolsProductor,
+            'poolPrincipal' => $poolPrincipal,
+            'poolModelo' => $poolModelo,
+            'errorDatos' => $errorDatos,
         ]);
     }
 })->mostrar();

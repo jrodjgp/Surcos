@@ -7,6 +7,7 @@
     <div>
       <div class="f-head">Red</div>
       <a class="f-link" href="<?= escapar(url_para('/bandeja.php')) ?>">Bandeja de Pools</a>
+      <a class="f-link" href="<?= escapar(url_para('/historial_pools.php')) ?>">Historial de Pools</a>
       <a class="f-link" href="<?= escapar(url_para('/contacto.php')) ?>">Contacto</a>
       <a class="f-link" href="<?= escapar(url_para('/api/pools.php')) ?>">WS Pools</a>
       <a class="f-link f-social" href="mailto:contacto@surcos.pa">contacto@surcos.pa</a>

@@ -31,7 +31,9 @@ final class Pool extends Modelo
     {
         return $this->uno(
             'select p.*, pr.nombre as productor_nombre, pr.responsable as productor_responsable,
-                    pr.historia as productor_historia, n.nombre as nodo_nombre
+                    pr.historia as productor_historia, pr.provincia as productor_provincia,
+                    pr.zona as productor_zona, pr.especialidad as productor_especialidad,
+                    n.nombre as nodo_nombre
                from pools p
                join productores pr on pr.id = p.productor_id
           left join nodos_retiro n on n.id = p.nodo_retiro_id
@@ -99,5 +101,22 @@ final class Pool extends Modelo
     {
         $objetivo = max(1, (int) $pool['personas_objetivo']);
         return min(100, (int) round(((int) $pool['personas_actuales'] / $objetivo) * 100));
+    }
+
+    public function activosRelacionados(string $productorId, string $poolId): array
+    {
+        return $this->todos(
+            'select p.*, pr.nombre as productor_nombre, pr.responsable as productor_responsable,
+                    n.nombre as nodo_nombre
+               from pools p
+               join productores pr on pr.id = p.productor_id
+          left join nodos_retiro n on n.id = p.nodo_retiro_id
+              where p.productor_id = :productor_id
+                and p.id <> :pool_id
+                and p.estado = "activo"
+                and p.fecha_cierre >= now()
+           order by p.fecha_cierre asc',
+            ['productor_id' => $productorId, 'pool_id' => $poolId]
+        );
     }
 }

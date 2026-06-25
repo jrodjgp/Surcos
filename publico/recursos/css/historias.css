@@ -1,0 +1,159 @@
+.pagina-historias {
+  background: var(--bg);
+}
+
+.historia-hero {
+  height: min(760px, calc(100dvh - 70px));
+  min-height: 560px;
+}
+
+.historia-hero img {
+  filter: saturate(1.04) contrast(1.02);
+}
+
+.historia-hero .grad {
+  background:
+    linear-gradient(to top, rgba(31, 44, 32, .82), rgba(31, 44, 32, .2) 60%, rgba(31, 44, 32, .06)),
+    linear-gradient(90deg, rgba(31, 44, 32, .42), transparent 55%);
+}
+
+.historia-hero .content {
+  gap: 24px;
+}
+
+.historia-hero h1 {
+  max-width: 9ch;
+  font-size: clamp(54px, 10vw, 112px);
+  text-wrap: balance;
+}
+
+.historia-hero-link,
+.historia-mini-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 11px 14px;
+  border: 1px solid rgba(253, 251, 247, .62);
+  background: rgba(253, 251, 247, .16);
+  color: var(--bg);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.historia-hero-link:hover {
+  background: var(--bg);
+  color: var(--leaf);
+}
+
+.historia-editorial {
+  align-items: start;
+}
+
+.historia-editorial .article {
+  max-width: 68ch;
+}
+
+.historia-editorial .sidebar-img,
+.historia-tira figure img,
+.historia-editorial .sidebar-img img,
+.shop-card figure img {
+  filter: saturate(1.03) contrast(1.01);
+}
+
+.historia-editorial .sidebar-img:hover img,
+.historia-tira figure:hover img,
+.shop-card:hover figure img {
+  filter: saturate(1.06) contrast(1.02);
+}
+
+.historia-mini-cta {
+  width: 100%;
+  margin-top: 16px;
+  border-color: var(--terra);
+  background: var(--terra);
+  color: var(--bg);
+}
+
+.historia-mini-cta:hover {
+  background: var(--leaf);
+  border-color: var(--leaf);
+}
+
+.historia-tira {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.historia-tira figure {
+  min-height: 260px;
+}
+
+.shop-card .mini-bar {
+  margin: 12px 0 14px;
+}
+
+.pool-historia-link {
+  display: inline-flex;
+  margin-top: 10px;
+  color: var(--leaf);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.pool-historia-link:hover {
+  color: var(--terra);
+}
+
+.productor-pool-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
+  gap: 28px;
+  margin-top: 28px;
+  padding: clamp(24px, 4vw, 34px);
+  border: 1px solid var(--line);
+  background: rgba(253, 251, 247, .9);
+}
+
+.productor-pool-panel h2 {
+  color: var(--leaf);
+  font-family: 'Newsreader', serif;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: .98;
+  margin-bottom: 12px;
+}
+
+.productor-pool-panel p {
+  max-width: 68ch;
+  color: #4f443d;
+  line-height: 1.65;
+}
+
+@media (max-width: 900px) {
+  .historia-hero {
+    height: auto;
+    min-height: 560px;
+  }
+
+  .historia-hero .content {
+    align-items: flex-start;
+    flex-direction: column;
+    padding-bottom: 48px;
+  }
+
+  .historia-hero h1 {
+    font-size: clamp(46px, 16vw, 74px);
+  }
+
+  .historia-hero-link {
+    width: 100%;
+  }
+
+  .productor-pool-panel {
+    grid-template-columns: 1fr;
+  }
+}

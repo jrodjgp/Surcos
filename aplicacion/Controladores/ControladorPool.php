@@ -25,7 +25,7 @@ final class ControladorPool extends Controlador
             'tituloPagina' => $pool['producto'] . ' | Surcos',
             'descripcionPagina' => 'Detalle de pool agricola en Surcos.',
             'paginaActiva' => 'marketplace',
-            'estilosExtra' => ['marketplace.css', 'dashboard.css', 'pulido-landing.css'],
+            'estilosExtra' => ['marketplace.css', 'dashboard.css', 'historias.css', 'pulido-landing.css'],
             'pool' => $pool,
             'avance' => (new Pool())->avance($pool),
         ]);

@@ -100,4 +100,19 @@ final class Compromiso extends Modelo
 
         return (float) ($fila['total'] ?? 0);
     }
+
+    public function historialUsuario(string $usuarioId): array
+    {
+        return $this->todos(
+            'select c.*, p.fecha_cierre, p.fecha_entrega, p.productor_id,
+                    pr.nombre as productor_nombre
+               from compromisos c
+               join pools p on p.id = c.pool_id
+               join productores pr on pr.id = p.productor_id
+              where c.usuario_id = :usuario_id
+                and c.estado_compromiso <> "borrador"
+           order by c.actualizado_en desc, c.creado_en desc',
+            ['usuario_id' => $usuarioId]
+        );
+    }
 }

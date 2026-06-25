@@ -69,6 +69,33 @@
   line-height: .95
 }
 
+.admin-detalle .admin-hero {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  row-gap: 18px
+}
+
+.admin-detalle .admin-hero h1 {
+  max-width: 760px;
+  font-size: clamp(38px, 5vw, 58px);
+  line-height: 1.02;
+  overflow-wrap: anywhere;
+  margin: 8px 0 10px
+}
+
+.admin-contacto {
+  max-width: 760px;
+  color: #5f544d;
+  font-size: 14px;
+  line-height: 1.55;
+  overflow-wrap: anywhere
+}
+
+.admin-contacto span {
+  color: var(--terra);
+  margin: 0 8px
+}
+
 .admin-kicker {
   color: var(--terra);
   font-size: 11px;
@@ -157,8 +184,11 @@
 }
 
 .evento-admin {
+  display: grid;
+  grid-template-columns: minmax(180px, .42fr) minmax(0, 1fr);
+  gap: 18px;
   border-top: 1px solid var(--line);
-  padding: 12px 0
+  padding: 16px 0
 }
 
 .evento-admin strong {
@@ -172,10 +202,46 @@
   font-size: 11px
 }
 
+.evento-admin p {
+  color: #4f443d;
+  line-height: 1.55
+}
+
+.admin-ayuda {
+  color: #6c6058;
+  font-size: 13px;
+  line-height: 1.55;
+  max-width: 68ch
+}
+
+.admin-vacio {
+  border: 1px dashed rgba(44, 76, 59, .24);
+  background: rgba(253, 251, 247, .62);
+  padding: 18px
+}
+
+.admin-vacio strong {
+  display: block;
+  color: var(--leaf);
+  font-family: 'Newsreader', serif;
+  font-size: 20px;
+  margin-bottom: 4px
+}
+
+.admin-vacio p {
+  color: #6c6058;
+  line-height: 1.5
+}
+
 @media (max-width: 860px) {
   .admin-login,
   .admin-hero,
+  .admin-detalle .admin-hero,
   .admin-grid {
+    grid-template-columns: 1fr
+  }
+
+  .evento-admin {
     grid-template-columns: 1fr
   }
 

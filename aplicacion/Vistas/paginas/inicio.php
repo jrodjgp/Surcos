@@ -101,6 +101,7 @@
               </div>
             </div>
             <div class="deadline">Cierra: <?= escapar(fecha_hora_corta($pool['fecha_cierre'])) ?></div>
+            <a class="pool-historia-link" href="<?= escapar(url_para('/historias_productor.php?productor=' . $pool['productor_id'])) ?>">Historia del productor</a>
             <a href="<?= escapar(url_para('/pool.php?id=' . $pool['id'])) ?>" class="btn">Comprometerse al Pool</a>
           </article>
         <?php endforeach; ?>
