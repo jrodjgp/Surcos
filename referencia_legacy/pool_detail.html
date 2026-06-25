@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="img/logo-surcos-icono.svg" />
+  <title>Surcos | Detalle del Pool</title>
+  <meta name="description" content="Surcos - Del campo al terminal." />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&family=Space+Grotesk:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9Oer+RExp5H92yM9LL3G8G2CkXn5c5L7+AMvyTG2x" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/marketplace.css" />
+    <link rel="stylesheet" href="css/mapa.css" />
+</head>
+
+<body>
+  <!-- barra superior -->
+  <header class="navbar navbar--fixed">
+    <a class="brand" href="index.html"><img src="img/logo-surcos.svg" alt="Surcos" /></a>
+    <nav class="nav-links"><a class="active" href="index.html">Marketplace</a><a
+        href="historias_productor.html">Historias</a><a href="nosotros.html">Nosotros</a><a href="contacto.html">Contacto</a></nav>
+    <a class="nav-user" href="ingreso.html" aria-label="ingresar a Surcos"><svg viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4"></circle>
+        <path d="M4 20c0-4 4-7 8-7s8 3 8 7"></path>
+      </svg></a>
+  </header>
+  <!-- ticker animado fijo â€” css only, sin javascript -->
+  <div class="ticker-wrap ticker--fixed">
+    <div class="ticker-track">
+      <span class="ticker-item">Pools Activos: <b>142</b></span>
+      <span class="ticker-item ticker-separador">&#9632;</span>
+      <span class="ticker-item">Entregas Recientes: <b>28</b></span>
+      <span class="ticker-item ticker-separador">&#9632;</span>
+      <span class="ticker-item">Tendencia: <span class="ticker-positivo">Tomates +12%</span></span>
+      <span class="ticker-item ticker-separador">&#9632;</span>
+      <span class="ticker-item">Tendencia: <span class="ticker-positivo">Cacao Darien +8%</span></span>
+      <span class="ticker-item ticker-separador">&#9632;</span>
+      <span class="ticker-item">Pools Cerrados Hoy: <b>9</b></span>
+      <span class="ticker-item ticker-separador">&#9632;</span>
+      <span class="ticker-item">Provincias Activas: <b>4</b></span>
+      <span class="ticker-item ticker-separador">&#9632;</span>
+      <span class="ticker-item">Proximo Cierre: Tomates Herrera Â· 06h 22m</span>
+      <span class="ticker-item ticker-separador">&#9632;</span>
+      <!-- duplicado para loop seamless -->
+      <span class="ticker-item">Pools Activos: <b>142</b></span>
+      <span class="ticker-item ticker-separador">&#9632;</span>
+      <span class="ticker-item">Entregas Recientes: <b>28</b></span>
+      <span class="ticker-item ticker-separador">&#9632;</span>
+      <span class="ticker-item">Tendencia: <span class="ticker-positivo">Tomates +12%</span></span>
+      <span class="ticker-item ticker-separador">&#9632;</span>
+      <span class="ticker-item">Tendencia: <span class="ticker-positivo">Cacao Darien +8%</span></span>
+      <span class="ticker-item ticker-separador">&#9632;</span>
+      <span class="ticker-item">Pools Cerrados Hoy: <b>9</b></span>
+      <span class="ticker-item ticker-separador">&#9632;</span>
+      <span class="ticker-item">Provincias Activas: <b>4</b></span>
+      <span class="ticker-item ticker-separador">&#9632;</span>
+      <span class="ticker-item">Proximo Cierre: Tomates Herrera Â· 06h 22m</span>
+      <span class="ticker-item ticker-separador">&#9632;</span>
+    </div>
+  </div>
+
+  <!-- diseno dividido -->
+  <main class="split">
+    <section class="hero-col">
+      <div class="arch">
+        <img data-grupo-imagen alt="Tomates de herencia frescos cultivados en tierras altas de Panama"
+          src="recursos/img/cosechas/cosecha-generica.jpg" />
+      </div>
+      <div class="hero-meta">
+        <p data-grupo-cosecha>Cosecha programada para 2026</p>
+        <p data-grupo-frase>"El sabor de la tierra banada por el sol."</p>
+      </div>
+    </section>
+
+    <section class="terminal-col">
+      <div class="terminal-inner">
+        <h1 class="pool-title" data-grupo-titulo>Tomates de Herencia Finca Oasis</h1>
+        <div class="pool-meta">
+          <span data-grupo-origen>Origen: Tierras Altas, PA</span>
+          <span class="divider"></span>
+          <span class="batch" data-grupo-variedad>Lote Limitado #042</span>
+        </div>
+
+        <div class="terminal-box">
+          <div class="ver">TERMINAL v.2.0</div>
+          <div class="status-row">
+            <div>
+              <div class="label">Estado del Pool</div>
+              <div class="val">Llenado Activo</div>
+            </div>
+            <div class="text-right">
+              <div class="label">Fecha Limite</div>
+              <div class="val terra" data-grupo-fecha-limite>Viernes 18 Abr</div>
+              <div class="deadline" data-grupo-hora>Cierra: 11:59 PM</div>
+            </div>
+          </div>
+          <div class="progress-labels"><span class="pool-cantidad" data-grupo-cantidad>33/50 personas</span><span class="pool-porcentaje" data-grupo-porcentaje>66%</span></div>
+          <div class="progress-track"><i class="progress-fill" data-grupo-progreso style="--pool-progress:66%; width:66%"></i>
+            <div class="mark" style="left:33.3%"></div>
+            <div class="mark" style="left:66.6%"></div>
+          </div>
+          <div class="pricing">
+            <div>
+              <div class="label">Precio de Mercado</div><span class="market-price tab"><span data-grupo-precio-mercado>B/.8.50</span><small>/kg</small></span>
+            </div>
+            <div>
+              <div class="label ochre">Precio del Pool</div><span
+                class="pool-price tab"><span data-grupo-precio>B/.4.95</span><small>/kg</small></span>
+            </div>
+          </div>
+          <button class="btn-pool" data-accion-grupo="unirse">Unirse al Pool <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <path d="M22 17l-5 5m0 0l-5-5m5 5V3"></path>
+            </svg></button>
+          <button class="btn-pool btn-pool-secundario" data-accion-grupo="cancelar" hidden>Salir del Pool</button>
+        </div>
+
+        <div class="details">
+          <div>
+            <h3>El Origen</h3>
+            <p class="text" data-grupo-historia>Cultivados en los suelos volcanicos de las tierras altas, estos tomates se riegan con agua
+              de manantial. La oscilacion termica extrema de la region concentra los azucares, creando una complejidad
+              raramente encontrada en la agricultura industrial.</p>
+          </div>
+          <div>
+            <h3>Terminal de Logistica</h3>
+            <div class="log-row"><span>Fecha de Entrega</span><span data-grupo-entrega>31 Oct</span></div>
+            <div class="log-row"><span>Punto de Recogida</span><span data-grupo-nodo>Mercado Central</span></div>
+            <div class="log-row"><span>Compromiso Minimo</span><span data-grupo-minimo>2.5 kg</span></div>
+          </div>
+        </div>
+
+        <!-- modelo de entrega â€” badge -->
+        <div class="modelo-entrega modelo-nodo">
+          <span class="modelo-icon">â¬¡</span>
+          <div>
+            <p class="modelo-titulo" data-grupo-modelo-titulo>Retiro en Nodo</p>
+            <p class="modelo-desc" data-grupo-modelo-desc>Retiras en PTY Terminal Oeste Â· Via Espana, frente al Rey</p>
+          </div>
+        </div>
+
+        <div class="mensaje-grupo" data-mensaje-grupo role="status" aria-live="polite" hidden></div>
+
+        <!-- mapa de cobertura del pool â€” contexto A, inline svg -->
+        <div class="mapa-contenedor mapa-pool">
+          <div class="mapa-etiqueta">Cobertura de Este Pool</div>
+          <img class="mapa-recurso" src="img/panama-provincias.svg" alt="Mapa de cobertura del pool" loading="lazy" />
+          <div class="mapa-leyenda">
+            <span class="leyenda-origen">Finca origen</span>
+            <span class="leyenda-retiro">Puntos de retiro</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- drawer -->
+  <button class="drawer-trigger" id="drawerTrigger" aria-label="abrir terminal"><span>MI TERMINAL</span></button>
+  <div class="overlay" id="drawerOverlay"></div>
+  <aside class="drawer" id="drawer">
+    <button class="x" id="drawerClose" aria-label="cerrar">&times;</button>
+    <div class="d-head">
+      <h3>Mi Terminal</h3>
+      <p>Estado de Pools Activos</p>
+    </div>
+    <a class="live" href="mi_terminal_dashboard.html">VER TERMINAL ACTIVO</a>
+    <nav class="d-nav">
+      <a href="mi_terminal_dashboard.html"><svg viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+        </svg><span>Mi Terminal</span></a>
+      <a href="historial_ordenes.html"><svg viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg><span>Historial de Ordenes</span></a>
+      <a href="metodos_pago.html"><svg viewBox="0 0 24 24">
+          <rect x="3" y="5" width="18" height="14"></rect>
+          <path d="M3 10h18"></path>
+        </svg><span>Metodos de Pago</span></a>
+      <a href="configuracion.html"><svg viewBox="0 0 24 24">
+          <path d="M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
+          <path d="M4 12h2m12 0h2M12 4v2m0 12v2"></path>
+        </svg><span>Ajustes</span></a>
+    </nav>
+    <div class="port">
+      <p>Valor del Portafolio</p><strong class="tab">B/. 1,248.00</strong>
+      <div class="yield"><span>Ahorro de Rendimiento</span><b class="tab">+18.4%</b></div>
+    </div>
+  </aside>
+
+  <!-- pie -->
+  <footer class="footer">
+    <div>
+      <div class="f-brand"><img src="img/logo-surcos-claro.svg" alt="Surcos" /></div>
+      <div class="f-small">Del campo al terminal.</div>
+      <div class="f-small">&copy; 2026 SURCOS. DEL CAMPO AL TERMINAL.</div>
+    </div>
+    <div>
+      <div class="f-head">Red</div><a class="f-link" href="mi_terminal_dashboard.html">Logistica</a><a class="f-link" href="contacto.html">Contacto</a><a class="f-link" href="contacto.html">API de Pools</a>
+      <a class="f-link f-social" href="mailto:contacto@surcos.pa">contacto@surcos.pa</a>
+      <a class="f-link f-social" href="https://instagram.com/surcos.pa" target="_blank" rel="noopener">Instagram @surcos.pa</a>
+      <a class="f-link f-social" href="https://x.com/surcos_pa" target="_blank" rel="noopener">X @surcos_pa</a>
+      <a class="f-link f-social" href="https://facebook.com/surcos.pa" target="_blank" rel="noopener">Facebook /surcos.pa</a>
+    </div>
+    <div>
+      <div class="f-head">Legal</div><a class="f-link" href="contacto.html">Privacidad</a><a class="f-link" href="contacto.html">Terminos</a>
+    </div>
+    <div>
+      <div class="f-head">Idioma</div><a class="f-link" href="configuracion.html">ES</a><a class="f-link" href="configuracion.html">EN</a>
+      <div class="f-small">ESTADO DE RED: OPTIMO</div>
+      <div class="f-small">NODO: PTY-01</div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="js/componentes/CajonLateral.js"></script>
+  <script src="js/datos/datosIniciales.js"></script>
+  <script src="js/servicios/FormatoSurcos.js"></script>
+  <script src="js/servicios/EstadoSurcos.js"></script>
+  <script src="js/servicios/AutenticacionSurcos.js"></script>
+  <script src="js/servicios/MetodosPagoSurcos.js"></script>
+  <script src="js/servicios/GruposCompraSurcos.js"></script>
+  <script src="js/global.js"></script>
+  <script src="js/paginas/detalleGrupo.js"></script>
+</body>
+
+</html>
+

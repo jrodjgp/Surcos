@@ -62,13 +62,26 @@ final class Pool extends Modelo
         ];
     }
 
-    public function crearDesdeFormulario(array $datos): string
+    public function nodosActivos(): array
+    {
+        return $this->todos(
+            'select id, provincia, nombre
+               from nodos_retiro
+              where activo = 1
+           order by provincia asc, nombre asc'
+        );
+    }
+
+    public function crearDesdeFormulario(array $datos, array $productor): string
     {
         $id = $this->id('grupo');
         $producto = trim((string) $datos['producto']);
         $variedad = trim((string) $datos['variedad']);
         $precio = (float) $datos['precioMinimo'];
         $cantidad = (float) $datos['cantidadKg'];
+        $objetivo = max(5, (int) ($datos['personasObjetivo'] ?? 20));
+        $fechaCierre = (string) $datos['fechaCierre'] . ' 23:59:00';
+        $fechaEntrega = (string) $datos['fechaEntrega'];
 
         $this->ejecutar(
             'insert into pools (
@@ -76,21 +89,27 @@ final class Pool extends Modelo
                 precio_mercado, precio_grupal, unidad, personas_actuales, personas_objetivo,
                 cantidad_minima, fecha_cierre, fecha_entrega, estado, modelo_entrega, nodo_retiro_id
             ) values (
-                :id, "prod-oasis", :producto, :variedad, "hortalizas", :origen, :imagen,
-                :precio_mercado, :precio_grupal, "kg", 0, 20,
-                :cantidad_minima, date_add(now(), interval 10 day), date_add(curdate(), interval 17 day),
-                "activo", :modelo_entrega, "nodo-mercado-central"
+                :id, :productor_id, :producto, :variedad, :categoria, :origen, null,
+                :precio_mercado, :precio_grupal, :unidad, 0, :personas_objetivo,
+                :cantidad_minima, :fecha_cierre, :fecha_entrega,
+                "activo", :modelo_entrega, :nodo_retiro_id
             )',
             [
                 'id' => $id,
+                'productor_id' => $productor['id'],
                 'producto' => $producto,
                 'variedad' => $variedad,
+                'categoria' => $datos['categoria'],
                 'origen' => trim((string) $datos['ubicacion']),
-                'imagen' => 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=800&q=80&fit=crop',
                 'precio_mercado' => round($precio * 1.55, 2),
                 'precio_grupal' => $precio,
-                'cantidad_minima' => max(1, round($cantidad / 20, 2)),
+                'unidad' => $datos['unidad'],
+                'personas_objetivo' => $objetivo,
+                'cantidad_minima' => max(1, round($cantidad / $objetivo, 2)),
+                'fecha_cierre' => $fechaCierre,
+                'fecha_entrega' => $fechaEntrega,
                 'modelo_entrega' => $datos['modeloEntrega'] ?? 'Retiro en Nodo',
+                'nodo_retiro_id' => $datos['nodoRetiro'],
             ]
         );
 

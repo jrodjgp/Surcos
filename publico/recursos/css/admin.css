@@ -24,6 +24,9 @@
 }
 
 .admin-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
   color: var(--leaf);
   font-size: 12px;
   font-weight: 700;
@@ -94,6 +97,12 @@
 .admin-contacto span {
   color: var(--terra);
   margin: 0 8px
+}
+
+.detalle-lista dd {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.5
 }
 
 .admin-kicker {

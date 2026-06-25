@@ -97,9 +97,13 @@
 
 .pool-historia-link {
   display: inline-flex;
-  margin-top: 10px;
+  align-items: center;
+  min-height: 38px;
+  width: fit-content;
+  margin: 6px 0 12px;
+  padding: 4px 0;
   color: var(--leaf);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: .08em;
   text-transform: uppercase;

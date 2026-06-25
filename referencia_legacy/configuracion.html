@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="img/logo-surcos-icono.svg" />
+  <title>Surcos | Ajustes</title>
+  <meta name="description" content="Surcos - Del campo al terminal." />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&family=Space+Grotesk:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9Oer+RExp5H92yM9LL3G8G2CkXn5c5L7+AMvyTG2x" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/mapa.css" />
+</head>
+
+<body>
+  <!-- barra superior -->
+  <header class="navbar"><a class="brand" href="index.html"><img src="img/logo-surcos.svg" alt="Surcos" /></a>
+    <nav class="nav-links"><a href="index.html">Marketplace</a><a
+        href="historias_productor.html">Historias</a><a href="nosotros.html">Nosotros</a><a href="contacto.html">Contacto</a></nav><a class="nav-user" href="ingreso.html" aria-label="ingresar a Surcos"><svg
+        viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4"></circle>
+        <path d="M4 20c0-4 4-7 8-7s8 3 8 7"></path>
+      </svg></a>
+  </header>
+
+  <!-- configuracion -->
+  <main class="wrap wrap--config">
+    <h1>Ajustes del Terminal</h1>
+
+    <section class="sec">
+      <h2>Perfil y Notificaciones</h2>
+      <div class="grid">
+        <div><label for="nombreConfiguracion">nombre para mostrar</label><input id="nombreConfiguracion" data-configuracion="nombre" type="text" value="Juan Juanes" /></div>
+        <div><label for="correoConfiguracion">correo electronico</label><input id="correoConfiguracion" data-configuracion="correo" type="email" value="comprador@surcos.pa" /></div>
+        <div><label for="idiomaConfiguracion">idioma preferido</label><select id="idiomaConfiguracion" data-configuracion="idioma">
+            <option>EN</option>
+            <option selected>ES</option>
+          </select></div>
+      </div>
+      <div class="tog">
+        <div class="tog-row"><span>Alertas de Pool</span><label class="switch"><input data-notificacion="alertasPool" checked type="checkbox" /><span
+              class="track"></span><span class="knob"></span></label></div>
+        <div class="tog-row"><span>Actualizaciones de Entrega</span><label class="switch"><input data-notificacion="actualizacionesEntrega" checked
+              type="checkbox" /><span class="track"></span><span class="knob"></span></label></div>
+        <div class="tog-row"><span>Bajas de Precio</span><label class="switch"><input data-notificacion="bajasPrecio" type="checkbox" /><span
+              class="track"></span><span class="knob"></span></label></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h2>Preferencias del Terminal</h2>
+
+      <!-- mapa interactivo de seleccion de provincia â€” contexto C -->
+      <!-- seleccion css-only con radio inputs -->
+      <label>punto de recogida predeterminado</label>
+      <div class="mapa-contenedor mapa-config">
+        <div class="mapa-etiqueta">Selecciona Tu Provincia de Retiro</div>
+        <img class="mapa-recurso" src="img/panama-provincias.svg" alt="Mapa de provincias para seleccionar retiro" loading="lazy" />
+      </div>
+
+      <!-- nodo mas cercano por provincia â€” datos estaticos -->
+      <table class="nodos-tabla">
+        <tr><td>Chiriqui</td><td>Nodo David Centro</td></tr>
+        <tr><td>Herrera</td><td>Nodo Chitre Norte</td></tr>
+        <tr><td>Los Santos</td><td>Nodo Las Tablas</td></tr>
+        <tr><td>Cocle</td><td>Nodo Penonome</td></tr>
+        <tr><td>Panama</td><td>Nodo PTY Terminal Oeste</td></tr>
+        <tr><td>Colon</td><td>Nodo Colon Puerto</td></tr>
+      </table>
+
+      <div class="grid field-mt">
+        <div><label for="provinciaRetiro">provincia de retiro</label><select id="provinciaRetiro" data-configuracion="provinciaRetiro"></select></div>
+        <div><label for="nodoRetiro">nodo de retiro</label><select id="nodoRetiro" data-configuracion="nodoRetiro"></select></div>
+      </div>
+
+      <!-- umbral de compromiso con control de rango estilizado -->
+      <div class="field-mt">
+        <label>umbral de compromiso</label>
+        <p class="sub">Solo notificarme de pools con al menos <b id="valorUmbral">60%</b> completado</p>
+        <input class="tab control-rango" id="umbralCompromiso" type="range" min="0" max="100" value="60" />
+        <p class="sub sub-sm">Pools por debajo de este umbral no apareceran en tus notificaciones</p>
+      </div>
+
+      <div class="field-mt"><label>visualizacion de datos</label>
+        <div class="rad"><label><input checked name="unidadDatos" type="radio" value="metrico" />Metrico</label><label><input name="unidadDatos"
+              type="radio" value="imperial" />Imperial</label></div>
+        <p class="sub sub-sm vista-unidad">Vista previa: <b id="vistaVolumen" class="tab">1,240 kg</b>. <span id="notaUnidad">Los volumenes del terminal se mostraran en kilogramos.</span></p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h2>Seguridad y Nodo</h2>
+      <button class="outline" type="button" data-accion-configuracion="clave">Cambiar Contrasena</button>
+
+      <!-- Alcance de servidor: hash generado en el servidor,
+           almacenado en tabla de usuarios. Regenerar invalida hash previo.
+           Implementacion Proyecto 1. -->
+      <div class="node-block">
+        NODO CIFRADO ID: <code>0x71C9A2FF4A...8a42</code>
+      </div>
+      <div class="sec-links">
+        <button class="btn-ghost-peligro" type="button" data-accion-configuracion="regenerar">REGENERAR</button>
+        <button class="outline" type="button" data-accion-configuracion="exportar">Exportar Datos del Terminal</button>
+        <button class="outline" type="button" data-accion-configuracion="reiniciar">Reiniciar Demo</button>
+        <button class="danger danger-boton" type="button" data-accion-configuracion="eliminar">Eliminar Cuenta</button>
+      </div>
+    </section>
+
+    <p class="mensaje-configuracion" data-mensaje-configuracion hidden></p>
+    <button class="save" type="button" data-accion-configuracion="guardar">Guardar Ajustes</button>
+  </main>
+
+  <!-- drawer -->
+  <button class="drawer-trigger" id="drawerTrigger" aria-label="abrir terminal"><span>MI TERMINAL</span></button>
+  <div class="overlay" id="drawerOverlay"></div>
+  <aside class="drawer" id="drawer">
+    <button class="x" id="drawerClose" aria-label="cerrar">&times;</button>
+    <div class="d-head">
+      <h3>Mi Terminal</h3>
+      <p>Estado de Pools Activos</p>
+    </div>
+    <a class="live" href="mi_terminal_dashboard.html">VER TERMINAL ACTIVO</a>
+    <nav class="d-nav">
+      <a href="mi_terminal_dashboard.html"><svg viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+        </svg><span>Mi Terminal</span></a>
+      <a href="historial_ordenes.html"><svg viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg><span>Historial de Ordenes</span></a>
+      <a href="metodos_pago.html"><svg viewBox="0 0 24 24">
+          <rect x="3" y="5" width="18" height="14"></rect>
+          <path d="M3 10h18"></path>
+        </svg><span>Metodos de Pago</span></a>
+      <a href="configuracion.html"><svg viewBox="0 0 24 24">
+          <path d="M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
+          <path d="M4 12h2m12 0h2M12 4v2m0 12v2"></path>
+        </svg><span>Ajustes</span></a>
+    </nav>
+    <div class="port">
+      <p>Valor del Portafolio</p><strong class="tab">B/. 1,248.00</strong>
+      <div class="yield"><span>Ahorro de Rendimiento</span><b class="tab">+18.4%</b></div>
+    </div>
+  </aside>
+
+  <!-- pie -->
+  <footer class="footer">
+    <div>
+      <div class="f-brand"><img src="img/logo-surcos-claro.svg" alt="Surcos" /></div>
+      <div class="f-small">Del campo al terminal.</div>
+      <div class="f-small">&copy; 2026 SURCOS. DEL CAMPO AL TERMINAL.</div>
+    </div>
+    <div>
+      <div class="f-head">Red</div><a class="f-link" href="mi_terminal_dashboard.html">Logistica</a><a class="f-link" href="contacto.html">Contacto</a><a class="f-link" href="contacto.html">API de Pools</a>
+      <a class="f-link f-social" href="mailto:contacto@surcos.pa">contacto@surcos.pa</a>
+      <a class="f-link f-social" href="https://instagram.com/surcos.pa" target="_blank" rel="noopener">Instagram @surcos.pa</a>
+      <a class="f-link f-social" href="https://x.com/surcos_pa" target="_blank" rel="noopener">X @surcos_pa</a>
+      <a class="f-link f-social" href="https://facebook.com/surcos.pa" target="_blank" rel="noopener">Facebook /surcos.pa</a>
+    </div>
+    <div>
+      <div class="f-head">Legal</div><a class="f-link" href="contacto.html">Privacidad</a><a class="f-link" href="contacto.html">Terminos</a>
+    </div>
+    <div>
+      <div class="f-head">Idioma</div><a class="f-link" href="configuracion.html">ES</a><a class="f-link" href="configuracion.html">EN</a>
+      <div class="f-small">ESTADO DE RED: OPTIMO</div>
+      <div class="f-small">NODO: PTY-01</div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="js/componentes/CajonLateral.js"></script>
+  <script src="js/datos/datosIniciales.js"></script>
+  <script src="js/servicios/FormatoSurcos.js"></script>
+  <script src="js/servicios/EstadoSurcos.js"></script>
+  <script src="js/servicios/AutenticacionSurcos.js"></script>
+  <script src="js/global.js"></script>
+  <script src="js/configuracion.js"></script>
+</body>
+
+</html>
+

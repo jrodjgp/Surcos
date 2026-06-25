@@ -14,6 +14,7 @@ Surcos es un marketplace agricola panameno que reduce la distancia entre product
 
 - Admin: `admin@surcos.pa` / `Admin123!`
 - Comprador: `comprador@surcos.pa` / `Surcos123!`
+- Productor: `productor@surcos.pa` / `Surcos123!`
 
 ## Instalacion Local
 
@@ -36,7 +37,7 @@ base_datos/001_esquema.sql
 base_datos/002_semillas_demo.sql
 ```
 
-5. Abre el sitio desde el virtual host:
+5. Configura Apache o el virtual host para que el document root apunte a `publico/`. Abre el sitio desde:
 
 ```text
 http://surcos.local/
@@ -76,6 +77,8 @@ La aplicacion PHP vive en `aplicacion/`:
 
 `publico/` es el document root y contiene los entrypoints publicos.
 
+Los archivos HTML/JS del primer prototipo quedaron archivados en `referencia_legacy/`. No forman parte de la demo oficial de Proyecto 2.
+
 ## Base de Datos
 
 El esquema usa varias tablas relacionadas:
@@ -93,6 +96,8 @@ El esquema usa varias tablas relacionadas:
 
 El procedimiento almacenado principal es `sp_confirmar_compromiso_pool`. Valida que el pool este activo, que exista cupo y que el metodo de pago simulado pertenezca al usuario antes de confirmar un compromiso.
 
+El seed incluye un productor activo vinculado a `productor@surcos.pa` para probar la publicacion real simple de cosechas. Las solicitudes aprobadas desde admin crean una cuenta pendiente; si el tipo es productor, tambien crean un perfil productor pendiente vinculado.
+
 ## Seguridad
 
 - Formularios POST con token CSRF.
@@ -101,6 +106,7 @@ El procedimiento almacenado principal es `sp_confirmar_compromiso_pool`. Valida 
 - Consultas PDO preparadas.
 - Salida HTML escapada con `htmlspecialchars`.
 - Pagos solo simulados: se guardan marca, ultimos 4 ficticios, monto, estado y referencia simulada. No se guarda numero completo ni CVV.
+- Las claves temporales de aprobacion se muestran una sola vez en mensaje de sesion y no se guardan en notas ni bitacora.
 
 ## Checklist Rubrica
 

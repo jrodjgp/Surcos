@@ -11,6 +11,7 @@ Credenciales demo:
 
 - Admin: `admin@surcos.pa` / `Admin123!`
 - Comprador: `comprador@surcos.pa` / `Surcos123!`
+- Productor: `productor@surcos.pa` / `Surcos123!`
 
 Notas:
 
@@ -18,3 +19,5 @@ Notas:
 - No se guarda numero completo de tarjeta ni CVV.
 - Las solicitudes demo existen para probar el panel admin.
 - `eventos_solicitud` guarda la bitacora de revision administrativa de una solicitud. No representa ventas ni historial de pools.
+- `usr-productor-demo` esta vinculado a `prod-oasis` para probar publicacion de pools sin crear tablas extra.
+- Las imagenes de cosecha se resuelven desde assets locales en PHP; el seed no depende de URLs externas.

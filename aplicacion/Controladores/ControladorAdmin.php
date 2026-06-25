@@ -52,15 +52,25 @@ final class ControladorAdmin extends Controlador
         }
 
         $solicitud = $modelo->buscar($id);
+        $usuarioCreado = null;
+        $productorCreado = null;
 
         if (!$solicitud) {
             Sesion::mensajeTemporal('error', 'Solicitud no encontrada.');
             redirigir('/admin/solicitudes.php');
         }
 
+        if (!empty($solicitud['usuario_creado_id'])) {
+            $usuarioModelo = new Usuario();
+            $usuarioCreado = $usuarioModelo->buscar((string) $solicitud['usuario_creado_id']);
+            $productorCreado = (new Productor())->buscarPorUsuario((string) $solicitud['usuario_creado_id']);
+        }
+
         $this->vistaAdmin('solicitud', [
             'tituloPagina' => 'Detalle de solicitud | Admin Surcos',
             'solicitud' => $solicitud,
+            'usuarioCreado' => $usuarioCreado,
+            'productorCreado' => $productorCreado,
             'eventos' => $modelo->eventos($id),
         ]);
     }
@@ -104,17 +114,33 @@ final class ControladorAdmin extends Controlador
         }
 
         if ($accion === 'aprobar') {
-            $claveTemporal = 'Surcos-' . random_int(1000, 9999);
-
             try {
+                $claveTemporal = null;
+                $usuarioCreadoAhora = false;
+
                 if (empty($solicitud['usuario_creado_id'])) {
+                    $claveTemporal = 'Surcos-' . random_int(1000, 9999);
                     $usuarioId = (new Usuario())->crearPendienteDesdeSolicitud($solicitud, $claveTemporal);
                     $modelo->vincularUsuario($id, $usuarioId);
-                    $nota = trim($nota . "\nClave temporal mostrada una vez: {$claveTemporal}");
+                    $usuarioCreadoAhora = true;
+
+                    if ($solicitud['tipo_usuario'] === 'productor') {
+                        (new Productor())->crearDesdeSolicitud($solicitud, $usuarioId);
+                    }
                 }
 
-                $modelo->cambiarEstado($id, 'aprobada', $adminId, $nota ?: 'Solicitud aprobada.');
-                Sesion::mensajeTemporal('exito', 'Solicitud aprobada. Clave temporal: ' . $claveTemporal);
+                $notaAdmin = $nota ?: 'Solicitud aprobada.';
+                $detalleEvento = $usuarioCreadoAhora
+                    ? $notaAdmin . ' Cuenta pendiente creada. Clave temporal generada y mostrada una vez.'
+                    : $notaAdmin . ' La solicitud ya tenia una cuenta vinculada; no se genero otra clave.';
+
+                $modelo->cambiarEstado($id, 'aprobada', $adminId, $notaAdmin, $detalleEvento);
+
+                if ($claveTemporal !== null) {
+                    Sesion::mensajeTemporal('exito', 'Solicitud aprobada. Clave temporal: ' . $claveTemporal);
+                } else {
+                    Sesion::mensajeTemporal('exito', 'Solicitud aprobada. Ya existia una cuenta vinculada.');
+                }
             } catch (Throwable $excepcion) {
                 Sesion::mensajeTemporal('error', 'No se pudo aprobar la solicitud. Puede existir un usuario con ese correo.');
             }

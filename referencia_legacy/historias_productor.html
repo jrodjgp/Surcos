@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="img/logo-surcos-icono.svg" />
+  <title>Surcos | Historias del Productor</title>
+  <meta name="description" content="Surcos - Del campo al terminal." />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&family=Space+Grotesk:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9Oer+RExp5H92yM9LL3G8G2CkXn5c5L7+AMvyTG2x" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/marketplace.css" />
+</head>
+
+<body>
+  <!-- barra superior -->
+  <header class="navbar">
+    <a class="brand" href="index.html"><img src="img/logo-surcos.svg" alt="Surcos" /></a>
+    <nav class="nav-links"><a href="index.html">Marketplace</a><a class="active"
+        href="historias_productor.html">Historias</a><a href="nosotros.html">Nosotros</a><a href="contacto.html">Contacto</a></nav>
+    <a class="nav-user" href="ingreso.html" aria-label="ingresar a Surcos"><svg viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4"></circle>
+        <path d="M4 20c0-4 4-7 8-7s8 3 8 7"></path>
+      </svg></a>
+  </header>
+
+
+
+  <!-- hero editorial -->
+  <section class="story-hero">
+    <img data-historia-imagen alt="Caficultor en las tierras altas de Boquete Panama"
+      src="recursos/img/cosechas/cosecha-generica.jpg" />
+    <div class="grad"></div>
+    <div class="content">
+      <div>
+        <p class="label" data-historia-volumen>Volumen IV: Las Tierras Altas</p>
+        <h1 data-historia-titulo>La Leyenda del<br>Geisha.</h1>
+      </div>
+      <div class="arrow">&darr;</div>
+    </div>
+  </section>
+
+  <!-- contenido editorial -->
+  <main>
+  <section class="editorial">
+    <!-- metadatos del productor -->
+    <aside class="sidebar-meta">
+      <div class="block">
+        <h4 class="lbl">Productor</h4>
+        <p class="val" data-productor-responsable>Don Sebastian Heredia</p>
+      </div>
+      <div class="block">
+        <h4 class="lbl">Ubicacion</h4>
+        <p class="val" data-productor-ubicacion>Boquete, Chiriqui<br>1,800 MSNM</p>
+      </div>
+      <div class="block">
+        <h4 class="lbl">Varietal</h4>
+        <p class="val" data-productor-varietal>Panama Geisha T.2722</p>
+      </div>
+    </aside>
+
+    <!-- articulo principal -->
+    <article class="article" data-historia-articulo>
+      <p class="dropcap">La historia del Geisha no comienza en los suelos volcanicos de Panama, sino en el bosque de
+        Gori Gesha en Etiopia. Sin embargo, fue aqui, a la sombra del Volcan Baru, donde el grano encontro su maxima
+        expresion. Don Sebastian recuerda cuando se plantaron las primeras semillas â€” una apuesta que pocos creian que
+        rendiria algo mas que una curiosidad.</p>
+      <p>"No sabiamos lo que teniamos," reflexiona Sebastian, mirando las empinadas y vertiginosas laderas de su finca.
+        "Los arboles eran altos, desgarbados, y resistentes a la roya que estaba matando nuestro Caturra tradicional.
+        Pero la cereza... la cereza sabia a jazmin y durazno."</p>
+      <p>La cosecha es un ritual minucioso. Solo las cerezas de color bermejo mas profundo son seleccionadas, recogidas
+        a mano por las familias Ngabe-Bugle que han trabajado estas laderas por tres generaciones. Cada grano es un
+        registro del micro-clima: la humedad especifica de los vientos del Pacifico encontrandose con las corrientes del
+        Atlantico sobre la cresta.</p>
+
+      <blockquote class="bq">
+        <p>"Esto no es cafe en el sentido tradicional; es una infusion similar al te del alma misma de la montana."</p>
+      </blockquote>
+
+      <p>El procesamiento en la finca Heredia sigue el metodo 'honey', dejando una cantidad precisa de mucilago en el
+        grano durante el secado. Esto crea un perfil que es famosamente complejo â€” notas de bergamota, hierba limon, y
+        un acabado floral distintivo que ha roto records mundiales en las subastas Best of Panama.</p>
+      <p>A traves de Surcos, Don Sebastian ahora puede esquivar las casas centralizadas de exportacion, llevando estos
+        raros micro-lotes directamente a tostadores y conocedores que valoran el linaje del grano tanto como la
+        preparacion.</p>
+    </article>
+
+    <!-- barra lateral derecha -->
+    <aside class="sidebar-detail">
+      <div class="batch-card">
+        <h4 class="lbl">Estado del Lote</h4>
+        <div class="batch-row"><span>Cosecha Total</span><span data-historia-cosecha>420 KG</span></div>
+        <div class="batch-row"><span>Asignacion Surcos</span><span class="terra" data-historia-asignacion>120 KG</span></div>
+        <div class="batch-row"><span>Estado del Pool</span><span><b class="pool-cantidad" data-historia-cantidad>44/50 personas</b> - <span class="pool-porcentaje" data-historia-porcentaje>88%</span></span></div>
+        <div class="mini-bar"><i data-historia-progreso style="width:88%"></i></div>
+      </div>
+      <div class="sidebar-img">
+        <img data-historia-imagen-detalle alt="Granos de cafe geisha secandose en camas africanas en Boquete"
+          src="recursos/img/cosechas/cosecha-generica.jpg" />
+      </div>
+    </aside>
+  </section>
+  <!-- galeria de fotos del productor -->
+  <section class="photo-strip" aria-label="Galeria de la finca Heredia" data-historia-galeria>
+    <figure>
+      <img alt="Manos de agricultor clasificando cerezas de cafe geisha en Panama"
+        src="recursos/img/cosechas/cosecha-generica.jpg" />
+      <figcaption>Seleccion manual Â· Finca Heredia</figcaption>
+    </figure>
+    <figure>
+      <img alt="Cafetal en las montanas de Chiriqui Panama bajo la niebla"
+        src="recursos/img/cosechas/cosecha-generica.jpg" />
+      <figcaption>Cultivos a 1,800 MSNM Â· Boquete</figcaption>
+    </figure>
+    <figure>
+      <img alt="Taza de cafe especial de origen Panama sobre fondo rustico"
+        src="recursos/img/cosechas/cosecha-generica.jpg" />
+      <figcaption>Panama Geisha Honey Â· Perfil Floral</figcaption>
+    </figure>
+  </section>
+
+  <section class="productores-relacionados" data-lista-productores></section>
+
+  <!-- seccion de compra del productor -->
+  <section class="shop">
+    <div class="shop-inner">
+      <div class="shop-header">
+        <h2 data-historia-shop-titulo>Compra de este Productor</h2>
+        <a href="index.html">VER TODOS LOS LOTES</a>
+      </div>
+      <div class="shop-grid" data-historia-lotes>
+        <p class="historia-vacia">Cargando lotes del productor.</p>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <!-- drawer -->
+  <button class="drawer-trigger" id="drawerTrigger" aria-label="abrir terminal"><span>MI TERMINAL</span></button>
+  <div class="overlay" id="drawerOverlay"></div>
+  <aside class="drawer" id="drawer">
+    <button class="x" id="drawerClose" aria-label="cerrar">&times;</button>
+    <div class="d-head">
+      <h3>Mi Terminal</h3>
+      <p>Estado de Pools Activos</p>
+    </div>
+    <a class="live" href="mi_terminal_dashboard.html">VER TERMINAL ACTIVO</a>
+    <nav class="d-nav">
+      <a href="mi_terminal_dashboard.html"><svg viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+        </svg><span>Mi Terminal</span></a>
+      <a href="historial_ordenes.html"><svg viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg><span>Historial de Ordenes</span></a>
+      <a href="metodos_pago.html"><svg viewBox="0 0 24 24">
+          <rect x="3" y="5" width="18" height="14"></rect>
+          <path d="M3 10h18"></path>
+        </svg><span>Metodos de Pago</span></a>
+      <a href="configuracion.html"><svg viewBox="0 0 24 24">
+          <path d="M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
+          <path d="M4 12h2m12 0h2M12 4v2m0 12v2"></path>
+        </svg><span>Ajustes</span></a>
+    </nav>
+    <div class="port">
+      <p>Valor del Portafolio</p><strong class="tab">B/. 1,248.00</strong>
+      <div class="yield"><span>Ahorro de Rendimiento</span><b class="tab">+18.4%</b></div>
+    </div>
+  </aside>
+
+  <!-- pie -->
+  <footer class="footer">
+    <div>
+      <div class="f-brand"><img src="img/logo-surcos-claro.svg" alt="Surcos" /></div>
+      <div class="f-small">Del campo al terminal.</div>
+      <div class="f-small">&copy; 2026 SURCOS. DEL CAMPO AL TERMINAL.</div>
+    </div>
+    <div>
+      <div class="f-head">Red</div><a class="f-link" href="mi_terminal_dashboard.html">Logistica</a><a class="f-link" href="contacto.html">Contacto</a><a class="f-link" href="contacto.html">API de Pools</a>
+      <a class="f-link f-social" href="mailto:contacto@surcos.pa">contacto@surcos.pa</a>
+      <a class="f-link f-social" href="https://instagram.com/surcos.pa" target="_blank" rel="noopener">Instagram @surcos.pa</a>
+      <a class="f-link f-social" href="https://x.com/surcos_pa" target="_blank" rel="noopener">X @surcos_pa</a>
+      <a class="f-link f-social" href="https://facebook.com/surcos.pa" target="_blank" rel="noopener">Facebook /surcos.pa</a>
+    </div>
+    <div>
+      <div class="f-head">Legal</div><a class="f-link" href="contacto.html">Privacidad</a><a class="f-link" href="contacto.html">Terminos</a>
+    </div>
+    <div>
+      <div class="f-head">Idioma</div><a class="f-link" href="configuracion.html">ES</a><a class="f-link" href="configuracion.html">EN</a>
+      <div class="f-small">ESTADO DE RED: OPTIMO</div>
+      <div class="f-small">NODO: PTY-01</div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="js/componentes/CajonLateral.js"></script>
+  <script src="js/datos/datosIniciales.js"></script>
+  <script src="js/servicios/FormatoSurcos.js"></script>
+  <script src="js/servicios/EstadoSurcos.js"></script>
+  <script src="js/servicios/AutenticacionSurcos.js"></script>
+  <script src="js/servicios/GruposCompraSurcos.js"></script>
+  <script src="js/global.js"></script>
+  <script src="js/paginas/historias.js"></script>
+</body>
+
+</html>
+

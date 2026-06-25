@@ -60,14 +60,14 @@ final class SolicitudContacto extends Modelo
         );
     }
 
-    public function cambiarEstado(string $id, string $estado, string $adminId, ?string $nota = null): void
+    public function cambiarEstado(string $id, string $estado, string $adminId, ?string $nota = null, ?string $detalleEvento = null): void
     {
         $this->ejecutar(
             'update solicitudes_contacto set estado = :estado, notas_admin = :nota where id = :id',
             ['estado' => $estado, 'nota' => $nota, 'id' => $id]
         );
 
-        $this->registrarEvento($id, $adminId, $estado, $nota ?: 'Cambio de estado registrado.');
+        $this->registrarEvento($id, $adminId, $estado, $detalleEvento ?: ($nota ?: 'Cambio de estado registrado.'));
     }
 
     public function vincularUsuario(string $id, string $usuarioId): void

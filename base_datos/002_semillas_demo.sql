@@ -2,6 +2,7 @@
 -- Credenciales demo:
 -- Admin: admin@surcos.pa / Admin123!
 -- Comprador: comprador@surcos.pa / Surcos123!
+-- Productor: productor@surcos.pa / Surcos123!
 
 use surcos;
 
@@ -31,7 +32,8 @@ on duplicate key update
 
 insert into usuarios (id, nombre, correo, clave_hash, telefono, rol, estado, provincia, nodo_retiro_id, iniciales)
 values
-    ('usr-comprador-demo', 'Juan Juanes', 'comprador@surcos.pa', '$2y$10$9TGhRYmE3ZdiNIzP3JIgMu2wX143QFuSKAXV4BZu79htj21ptyFjC', '+507 6000-0000', 'comprador', 'activo', 'Panama', 'nodo-pty-terminal-oeste', 'JJ')
+    ('usr-comprador-demo', 'Juan Juanes', 'comprador@surcos.pa', '$2y$10$9TGhRYmE3ZdiNIzP3JIgMu2wX143QFuSKAXV4BZu79htj21ptyFjC', '+507 6000-0000', 'comprador', 'activo', 'Panama', 'nodo-pty-terminal-oeste', 'JJ'),
+    ('usr-productor-demo', 'Ana Rodriguez', 'productor@surcos.pa', '$2y$10$9TGhRYmE3ZdiNIzP3JIgMu2wX143QFuSKAXV4BZu79htj21ptyFjC', '+507 6777-4410', 'productor', 'activo', 'Chiriqui', 'nodo-david-centro', 'AR')
 on duplicate key update
     nombre = values(nombre),
     correo = values(correo),
@@ -42,20 +44,22 @@ on duplicate key update
     nodo_retiro_id = values(nodo_retiro_id),
     iniciales = values(iniciales);
 
-insert into productores (id, nombre, responsable, provincia, zona, especialidad, historia)
+insert into productores (id, usuario_id, nombre, responsable, provincia, zona, especialidad, historia, estado)
 values
-    ('prod-heredia', 'Finca Heredia', 'Don Sebastian Heredia', 'Chiriqui', 'Boquete', 'Cafe Geisha', 'Productor de micro-lotes de altura con proceso honey y perfiles florales.'),
-    ('prod-oasis', 'Finca Oasis', 'Ana Rodriguez', 'Chiriqui', 'Tierras Altas', 'Tomates de Herencia', 'Cultivo de hortalizas de temporada en suelos volcanicos y clima frio.'),
-    ('prod-bosque', 'Apiario Bosque Silvestre', 'Luis Medina', 'Cocle', 'El Valle', 'Miel Cruda', 'Apiario artesanal con cosechas pequenas y trazabilidad por floracion.'),
-    ('prod-darien', 'Cooperativa Darien Cacao', 'Marta Quintero', 'Darien', 'Meteti', 'Cacao Crudo', 'Cooperativa familiar enfocada en cacao fermentado de origen unico.'),
-    ('prod-azuero', 'Finca Azuero Verde', 'Carlos Batista', 'Herrera', 'Chitre', 'Aceite Arbequina', 'Produccion limitada de aceite prensado en frio para pedidos grupales.')
+    ('prod-heredia', null, 'Finca Heredia', 'Don Sebastian Heredia', 'Chiriqui', 'Boquete', 'Cafe Geisha', 'Productor de micro-lotes de altura con proceso honey y perfiles florales.', 'activo'),
+    ('prod-oasis', 'usr-productor-demo', 'Finca Oasis', 'Ana Rodriguez', 'Chiriqui', 'Tierras Altas', 'Tomates de Herencia', 'Cultivo de hortalizas de temporada en suelos volcanicos y clima frio.', 'activo'),
+    ('prod-bosque', null, 'Apiario Bosque Silvestre', 'Luis Medina', 'Cocle', 'El Valle', 'Miel Cruda', 'Apiario artesanal con cosechas pequenas y trazabilidad por floracion.', 'activo'),
+    ('prod-darien', null, 'Cooperativa Darien Cacao', 'Marta Quintero', 'Darien', 'Meteti', 'Cacao Crudo', 'Cooperativa familiar enfocada en cacao fermentado de origen unico.', 'activo'),
+    ('prod-azuero', null, 'Finca Azuero Verde', 'Carlos Batista', 'Herrera', 'Chitre', 'Aceite Arbequina', 'Produccion limitada de aceite prensado en frio para pedidos grupales.', 'activo')
 on duplicate key update
+    usuario_id = values(usuario_id),
     nombre = values(nombre),
     responsable = values(responsable),
     provincia = values(provincia),
     zona = values(zona),
     especialidad = values(especialidad),
-    historia = values(historia);
+    historia = values(historia),
+    estado = values(estado);
 
 insert into pools (
     id, productor_id, producto, variedad, categoria, origen, imagen_url,
@@ -63,11 +67,11 @@ insert into pools (
     cantidad_minima, fecha_cierre, fecha_entrega, estado, modelo_entrega, nodo_retiro_id
 )
 values
-    ('grupo-geisha-42', 'prod-heredia', 'Cafe Geisha', 'Micro-lote #42', 'cafe', 'Tierras Altas, Chiriqui', 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&q=80&fit=crop', 1.10, 0.62, 'lb', 17, 20, 2, '2026-07-03 23:59:00', '2026-07-12', 'activo', 'Retiro en Nodo', 'nodo-pty-terminal-oeste'),
-    ('grupo-tomates-09', 'prod-oasis', 'Tomates de Herencia', 'Lote 09', 'hortalizas', 'Boquete, Chiriqui', 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=800&q=80&fit=crop', 0.85, 0.45, 'lb', 21, 50, 5, '2026-07-05 23:59:00', '2026-07-16', 'activo', 'Retiro en Nodo', 'nodo-mercado-central'),
-    ('grupo-miel-cruda', 'prod-bosque', 'Miel Silvestre Artesanal', 'Cruda', 'miel', 'El Valle, Cocle', 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&q=80&fit=crop', 8.50, 4.20, 'lb', 49, 50, 1, '2026-07-08 23:59:00', '2026-07-20', 'activo', 'Envio a Domicilio', 'nodo-penonome'),
-    ('grupo-cacao-07', 'prod-darien', 'Cacao Crudo', 'Lote 7', 'cacao', 'Meteti, Darien', 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=800&q=80&fit=crop', 3.90, 2.35, 'lb', 12, 35, 3, '2026-07-10 23:59:00', '2026-07-24', 'activo', 'Retiro en Nodo', 'nodo-pty-terminal-oeste'),
-    ('grupo-arbequina-azuero', 'prod-azuero', 'Aceite Arbequina', 'Prensado en frio', 'aceite', 'Chitre, Herrera', 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&q=80&fit=crop', 14.50, 9.75, 'botella', 8, 25, 1, '2026-07-15 23:59:00', '2026-07-30', 'activo', 'Lote Empresarial', 'nodo-chitre-norte')
+    ('grupo-geisha-42', 'prod-heredia', 'Cafe Geisha', 'Micro-lote #42', 'cafe', 'Tierras Altas, Chiriqui', null, 1.10, 0.62, 'lb', 17, 20, 2, '2026-07-03 23:59:00', '2026-07-12', 'activo', 'Retiro en Nodo', 'nodo-pty-terminal-oeste'),
+    ('grupo-tomates-09', 'prod-oasis', 'Tomates de Herencia', 'Lote 09', 'hortalizas', 'Boquete, Chiriqui', null, 0.85, 0.45, 'lb', 21, 50, 5, '2026-07-05 23:59:00', '2026-07-16', 'activo', 'Retiro en Nodo', 'nodo-mercado-central'),
+    ('grupo-miel-cruda', 'prod-bosque', 'Miel Silvestre Artesanal', 'Cruda', 'miel', 'El Valle, Cocle', null, 8.50, 4.20, 'lb', 49, 50, 1, '2026-07-08 23:59:00', '2026-07-20', 'activo', 'Envio a Domicilio', 'nodo-penonome'),
+    ('grupo-cacao-07', 'prod-darien', 'Cacao Crudo', 'Lote 7', 'cacao', 'Meteti, Darien', null, 3.90, 2.35, 'lb', 12, 35, 3, '2026-07-10 23:59:00', '2026-07-24', 'activo', 'Retiro en Nodo', 'nodo-pty-terminal-oeste'),
+    ('grupo-arbequina-azuero', 'prod-azuero', 'Aceite Arbequina', 'Prensado en frio', 'aceite', 'Chitre, Herrera', null, 14.50, 9.75, 'botella', 8, 25, 1, '2026-07-15 23:59:00', '2026-07-30', 'activo', 'Lote Empresarial', 'nodo-chitre-norte')
 on duplicate key update
     producto = values(producto),
     variedad = values(variedad),

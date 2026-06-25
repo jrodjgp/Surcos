@@ -30,6 +30,46 @@ final class Productor extends Modelo
         );
     }
 
+    public function buscarPorUsuario(string $usuarioId): ?array
+    {
+        return $this->uno(
+            'select pr.*,
+                    (select count(*) from pools p where p.productor_id = pr.id) as pools_total,
+                    (select count(*) from pools p where p.productor_id = pr.id and p.estado = "activo" and p.fecha_cierre >= now()) as pools_activos
+               from productores pr
+              where pr.usuario_id = :usuario_id
+              limit 1',
+            ['usuario_id' => $usuarioId]
+        );
+    }
+
+    public function crearDesdeSolicitud(array $solicitud, string $usuarioId): string
+    {
+        $id = $this->id('prod');
+        $nombre = trim((string) $solicitud['nombre']);
+        $asunto = trim((string) ($solicitud['asunto'] ?? ''));
+        $mensaje = trim((string) ($solicitud['mensaje'] ?? ''));
+
+        $this->ejecutar(
+            'insert into productores (
+                id, usuario_id, nombre, responsable, provincia, zona, especialidad, historia, estado
+            ) values (
+                :id, :usuario_id, :nombre, :responsable, "Panama", "Por validar",
+                :especialidad, :historia, "pendiente"
+            )',
+            [
+                'id' => $id,
+                'usuario_id' => $usuarioId,
+                'nombre' => $nombre,
+                'responsable' => $nombre,
+                'especialidad' => $asunto !== '' ? $asunto : 'Produccion agricola',
+                'historia' => $mensaje !== '' ? $mensaje : 'Productor aprobado por solicitud de afiliacion.',
+            ]
+        );
+
+        return $id;
+    }
+
     public function buscarPorPool(string $poolId): ?array
     {
         return $this->uno(

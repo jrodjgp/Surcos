@@ -235,6 +235,17 @@
   background:
     linear-gradient(135deg, rgba(200, 90, 50, .06), transparent 34%),
     var(--surface);
+  gap: 18px;
+}
+
+.form-cosecha--pulida .form-intro {
+  max-width: 68ch;
+  color: #5f544d;
+  line-height: 1.55;
+}
+
+.form-cosecha--pulida .form-grid {
+  gap: 18px;
 }
 
 .form-cosecha--pulida .form-campo label {
@@ -257,9 +268,12 @@
 
 .form-cosecha--pulida .modelo-fieldset {
   background: rgba(253, 251, 247, .45);
+  padding: 8px 16px;
 }
 
 .form-cosecha--pulida .modelo-radio {
+  gap: 12px;
+  min-height: 64px;
   padding: 14px 0;
 }
 

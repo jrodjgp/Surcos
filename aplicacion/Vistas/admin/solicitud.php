@@ -17,6 +17,22 @@
         <div><dt>Asunto</dt><dd><?= escapar($solicitud['asunto']) ?></dd></div>
         <div><dt>Mensaje</dt><dd><?= nl2br(escapar($solicitud['mensaje'])) ?></dd></div>
         <div><dt>Notas</dt><dd><?= nl2br(escapar($solicitud['notas_admin'] ?: 'Sin notas')) ?></dd></div>
+        <div>
+          <dt>Cuenta creada</dt>
+          <dd>
+            <?php if (!empty($usuarioCreado)): ?>
+              <?= escapar($usuarioCreado['correo']) ?> · <?= escapar(str_replace('_', ' ', $usuarioCreado['rol'])) ?> · <?= escapar($usuarioCreado['estado']) ?>
+            <?php else: ?>
+              Pendiente de aprobacion
+            <?php endif; ?>
+          </dd>
+        </div>
+        <?php if (!empty($productorCreado)): ?>
+          <div>
+            <dt>Perfil productor</dt>
+            <dd><?= escapar($productorCreado['nombre']) ?> · <?= escapar($productorCreado['estado']) ?></dd>
+          </div>
+        <?php endif; ?>
       </dl>
     </article>
 

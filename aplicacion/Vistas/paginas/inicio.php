@@ -21,6 +21,13 @@
   <?php if (!empty($errorDatos)): ?>
     <div class="aviso-bd"><?= escapar($errorDatos) ?></div>
   <?php endif; ?>
+  <?php
+    $productorPuedePublicar = !empty($usuarioActual)
+        && ($usuarioActual['rol'] ?? '') === 'productor'
+        && ($usuarioActual['estado'] ?? '') === 'activo'
+        && !empty($productorActual)
+        && ($productorActual['estado'] ?? '') === 'activo';
+  ?>
 
   <section class="hero hero-inicio" aria-labelledby="titulo-inicio">
     <img alt="Vista aerea de plantaciones en tierras volcanicas de Chiriqui Panama"
@@ -32,7 +39,7 @@
       <p>Compradores se unen a pools de compra colectiva. Productores publican lotes de cosecha con precio, cupo y cierre claros.</p>
       <div class="hero-actions">
         <a class="btn btn--compact" href="#pools-activos">Ver pools activos</a>
-        <a class="btn-outline btn-outline--hero" href="#registro-cosecha">Publicar cosecha</a>
+        <a class="btn-outline btn-outline--hero" href="#registro-cosecha"><?= $productorPuedePublicar ? 'Publicar cosecha' : 'Afiliar productor' ?></a>
       </div>
     </div>
   </section>
@@ -115,9 +122,36 @@
       <span>publicar lote agricola</span>
     </div>
 
+    <?php if (!$productorPuedePublicar): ?>
+      <div class="estado-vacio estado-vacio--accion">
+        <?php if (empty($usuarioActual)): ?>
+          <strong>Publicar cosechas requiere una cuenta de productor verificada.</strong>
+          <p>Surcos revisa cada solicitud para mantener productores, compradores y pools ordenados antes de abrir publicaciones.</p>
+          <div class="estado-acciones">
+            <a class="btn" href="<?= escapar(url_para('/contacto.php')) ?>">Solicitar afiliacion</a>
+            <a class="btn-outline" href="<?= escapar(url_para('/ingreso.php')) ?>">Ya tengo cuenta</a>
+          </div>
+        <?php elseif (($usuarioActual['rol'] ?? '') !== 'productor'): ?>
+          <strong>Tu cuenta actual es de <?= escapar(str_replace('_', ' ', (string) $usuarioActual['rol'])) ?>.</strong>
+          <p>Para publicar lotes necesitas una solicitud de productor aprobada y vinculada a una finca o empresa agricola.</p>
+          <div class="estado-acciones">
+            <a class="btn" href="<?= escapar(url_para('/contacto.php')) ?>">Solicitar perfil productor</a>
+            <a class="btn-outline" href="<?= escapar(url_para('/bandeja.php')) ?>">Ir a mi bandeja</a>
+          </div>
+        <?php else: ?>
+          <strong>Tu perfil productor esta en revision.</strong>
+          <p>Cuando la cuenta y el productor esten activos, este espacio mostrara el formulario real para publicar cosechas.</p>
+          <div class="estado-acciones">
+            <a class="btn" href="<?= escapar(url_para('/contacto.php')) ?>">Contactar admin</a>
+            <a class="btn-outline" href="<?= escapar(url_para('/salir.php')) ?>">Cerrar sesion</a>
+          </div>
+        <?php endif; ?>
+      </div>
+    <?php else: ?>
     <form class="form-cosecha needs-validation form-cosecha--pulida" id="formularioCosecha" method="post" action="<?= escapar(url_para('/')) ?>">
       <?= campo_csrf() ?>
       <h3>Publicar Nueva Cosecha</h3>
+      <p class="form-intro">Publicas como <?= escapar($productorActual['nombre']) ?>. El pool quedara ligado a tu historia de productor.</p>
       <div class="form-grid">
         <div class="form-campo">
           <label for="productoCosecha">producto</label>
@@ -140,6 +174,31 @@
           <div class="invalid-feedback">Ingresa un precio valido por kilogramo.</div>
         </div>
         <div class="form-campo">
+          <label for="categoriaCosecha">categoria</label>
+          <select class="form-select" id="categoriaCosecha" name="categoria" required>
+            <option value="">Selecciona categoria</option>
+            <option value="cafe">Cafe</option>
+            <option value="hortalizas">Hortalizas</option>
+            <option value="miel">Miel</option>
+            <option value="cacao">Cacao</option>
+            <option value="aceite">Aceite</option>
+            <option value="frutas">Frutas</option>
+            <option value="granos">Granos</option>
+            <option value="ganaderia">Ganaderia</option>
+          </select>
+          <div class="invalid-feedback">Selecciona una categoria valida.</div>
+        </div>
+        <div class="form-campo">
+          <label for="unidadCosecha">unidad</label>
+          <select class="form-select" id="unidadCosecha" name="unidad" required>
+            <option value="kg">Kilogramo</option>
+            <option value="lb">Libra</option>
+            <option value="caja">Caja</option>
+            <option value="botella">Botella</option>
+          </select>
+          <div class="invalid-feedback">Selecciona una unidad.</div>
+        </div>
+        <div class="form-campo">
           <label for="ubicacionCosecha">ubicacion de la finca</label>
           <select class="form-select" id="ubicacionCosecha" name="ubicacion" required>
             <option value="">Selecciona una zona</option>
@@ -153,30 +212,50 @@
           <div class="invalid-feedback">Selecciona la ubicacion de la finca.</div>
         </div>
         <div class="form-campo">
-          <label for="ventanaCosecha">ventana de cosecha</label>
-          <input class="form-control" id="ventanaCosecha" name="ventana" type="text" placeholder="15 Jul - 30 Jul 2026" minlength="8" required />
-          <div class="invalid-feedback">Indica la ventana estimada de cosecha.</div>
+          <label for="nodoRetiroCosecha">nodo de retiro</label>
+          <select class="form-select" id="nodoRetiroCosecha" name="nodoRetiro" required>
+            <option value="">Selecciona nodo</option>
+            <?php foreach ($nodosRetiro as $nodo): ?>
+              <option value="<?= escapar($nodo['id']) ?>"><?= escapar($nodo['provincia'] . ' - ' . $nodo['nombre']) ?></option>
+            <?php endforeach; ?>
+          </select>
+          <div class="invalid-feedback">Selecciona un nodo de retiro activo.</div>
+        </div>
+        <div class="form-campo">
+          <label for="personasObjetivoCosecha">personas objetivo</label>
+          <input class="form-control tab" id="personasObjetivoCosecha" name="personasObjetivo" type="number" min="5" step="1" value="20" required />
+          <div class="invalid-feedback">El pool necesita al menos 5 personas objetivo.</div>
+        </div>
+        <div class="form-campo">
+          <label for="fechaCierreCosecha">fecha de cierre</label>
+          <input class="form-control" id="fechaCierreCosecha" name="fechaCierre" type="date" required />
+          <div class="invalid-feedback">Selecciona una fecha futura de cierre.</div>
+        </div>
+        <div class="form-campo">
+          <label for="fechaEntregaCosecha">fecha de entrega</label>
+          <input class="form-control" id="fechaEntregaCosecha" name="fechaEntrega" type="date" required />
+          <div class="invalid-feedback">La entrega debe ser posterior al cierre.</div>
         </div>
       </div>
 
       <fieldset class="modelo-fieldset">
         <legend>Modelo de Entrega</legend>
-        <label class="modelo-radio">
-          <input type="radio" name="modeloEntrega" value="Retiro en Nodo" checked />
+        <label class="modelo-radio" for="modeloRetiroNodo">
+          <input id="modeloRetiroNodo" type="radio" name="modeloEntrega" value="Retiro en Nodo" checked />
           <div>
             <p class="modelo-radio-titulo">Retiro en Nodo</p>
             <p class="modelo-radio-desc">El comprador retira en el nodo mas cercano a su provincia</p>
           </div>
         </label>
-        <label class="modelo-radio">
-          <input type="radio" name="modeloEntrega" value="Envio a Domicilio" />
+        <label class="modelo-radio" for="modeloEnvioDomicilio">
+          <input id="modeloEnvioDomicilio" type="radio" name="modeloEntrega" value="Envio a Domicilio" />
           <div>
             <p class="modelo-radio-titulo">Envio a Domicilio</p>
             <p class="modelo-radio-desc">Costo adicional simulado para la demo academica</p>
           </div>
         </label>
-        <label class="modelo-radio">
-          <input type="radio" name="modeloEntrega" value="Lote Empresarial" />
+        <label class="modelo-radio" for="modeloLoteEmpresarial">
+          <input id="modeloLoteEmpresarial" type="radio" name="modeloEntrega" value="Lote Empresarial" />
           <div>
             <p class="modelo-radio-titulo">Lote Empresarial</p>
             <p class="modelo-radio-desc">Minimo institucional con precio negociado directo</p>
@@ -186,5 +265,6 @@
 
       <button class="btn-primary" type="submit" data-accion="publicar-cosecha">Publicar en Marketplace</button>
     </form>
+    <?php endif; ?>
   </section>
 </main>
