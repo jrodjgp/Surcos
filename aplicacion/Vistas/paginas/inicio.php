@@ -40,6 +40,7 @@
       <p>Compradores se unen a pools de compra colectiva. Productores publican lotes de cosecha con precio, cupo y cierre claros.</p>
       <div class="hero-actions">
         <a class="btn btn--compact" href="#pools-activos">Ver pools activos</a>
+        <a class="btn-outline btn-outline--hero" href="<?= escapar(!empty($usuarioActual) ? url_para('/bandeja.php') : url_para('/ingreso.php')) ?>"><?= !empty($usuarioActual) ? 'Mi bandeja' : 'Ingresar comprador' ?></a>
         <a class="btn-outline btn-outline--hero" href="<?= escapar($productorPuedePublicar ? url_para('/productor/') : '#registro-cosecha') ?>"><?= $productorPuedePublicar ? 'Panel productor' : 'Afiliar productor' ?></a>
       </div>
     </div>

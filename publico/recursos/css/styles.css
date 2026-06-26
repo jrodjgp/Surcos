@@ -344,6 +344,36 @@ textarea:focus-visible {
   text-transform: uppercase
 }
 
+.demo-credenciales--lista {
+  display: grid;
+  gap: 8px;
+  padding: 14px 16px;
+  border: 1px solid rgba(200, 90, 50, .22);
+  background: rgba(200, 90, 50, .06);
+  line-height: 1.45;
+  text-transform: none;
+  letter-spacing: .02em
+}
+
+.demo-credenciales--lista span,
+.demo-credenciales--lista a {
+  display: block;
+  color: var(--terra);
+  overflow-wrap: anywhere
+}
+
+.ruta-demo {
+  margin: 18px 0 0;
+  padding-left: 20px;
+  color: #5f544d;
+  font-size: 13px;
+  line-height: 1.55
+}
+
+.ruta-demo li + li {
+  margin-top: 6px
+}
+
 .autenticacion-formulario,
 .pool-compromiso {
   display: grid;

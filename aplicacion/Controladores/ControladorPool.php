@@ -35,7 +35,7 @@ final class ControladorPool extends Controlador
     {
         $this->requierePostValido();
 
-        $usuarioId = Autenticacion::requiereUsuario();
+        $usuarioId = Autenticacion::requiereUsuarioActivo();
         $pool = (new Pool())->buscar((string) ($_POST['pool_id'] ?? ''));
         $cantidad = max(1, (float) ($_POST['cantidad'] ?? 1));
 
@@ -47,6 +47,14 @@ final class ControladorPool extends Controlador
         ) {
             Sesion::mensajeTemporal('error', 'El pool ya no esta disponible.');
             redirigir('/');
+        }
+
+        if ($cantidad < (float) $pool['cantidad_minima']) {
+            Sesion::mensajeTemporal(
+                'error',
+                'La cantidad minima para este pool es ' . number_format((float) $pool['cantidad_minima'], 2) . ' ' . $pool['unidad'] . '.'
+            );
+            redirigir('/pool.php?id=' . urlencode((string) $pool['id']));
         }
 
         try {

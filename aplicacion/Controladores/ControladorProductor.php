@@ -6,7 +6,7 @@ final class ControladorProductor extends Controlador
 {
     public function panel(): void
     {
-        $usuarioId = Autenticacion::requiereUsuario();
+        $usuarioId = Autenticacion::requiereUsuarioActivo();
         $usuario = (new Usuario())->buscar($usuarioId);
         $productor = (new Productor())->buscarPorUsuario($usuarioId);
 

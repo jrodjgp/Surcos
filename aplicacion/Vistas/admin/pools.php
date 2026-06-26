@@ -6,6 +6,10 @@
       <h1>Pools publicados</h1>
       <p>Vista de control para precios por tramo, cierres, progreso y estado de pools.</p>
     </div>
+    <form method="post" action="<?= escapar(url_para('/admin/pools.php' . ($estadoActual !== '' ? '?estado=' . $estadoActual : ''))) ?>">
+      <?= campo_csrf() ?>
+      <button class="btn-admin" type="submit">Cerrar vencidos</button>
+    </form>
   </section>
 
   <section class="admin-metricas" aria-label="Resumen de pools">

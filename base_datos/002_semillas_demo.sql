@@ -3,6 +3,7 @@
 -- Admin: admin@surcos.pa / Admin123!
 -- Comprador: comprador@surcos.pa / Surcos123!
 -- Productor: productor@surcos.pa / Surcos123!
+-- Empresa: empresa@surcos.pa / Surcos123!
 
 use surcos;
 
@@ -30,19 +31,22 @@ on duplicate key update
     nombre = values(nombre),
     direccion = values(direccion);
 
-insert into usuarios (id, nombre, correo, clave_hash, telefono, rol, estado, provincia, nodo_retiro_id, iniciales)
+insert into usuarios (id, nombre, correo, clave_hash, telefono, rol, estado, provincia, nodo_retiro_id, iniciales, debe_cambiar_clave)
 values
-    ('usr-comprador-demo', 'Juan Juanes', 'comprador@surcos.pa', '$2y$10$9TGhRYmE3ZdiNIzP3JIgMu2wX143QFuSKAXV4BZu79htj21ptyFjC', '+507 6000-0000', 'comprador', 'activo', 'Panama', 'nodo-pty-terminal-oeste', 'JJ'),
-    ('usr-productor-demo', 'Ana Rodriguez', 'productor@surcos.pa', '$2y$10$9TGhRYmE3ZdiNIzP3JIgMu2wX143QFuSKAXV4BZu79htj21ptyFjC', '+507 6777-4410', 'productor', 'activo', 'Chiriqui', 'nodo-david-centro', 'AR')
+    ('usr-comprador-demo', 'Juan Juanes', 'comprador@surcos.pa', '$2y$10$9TGhRYmE3ZdiNIzP3JIgMu2wX143QFuSKAXV4BZu79htj21ptyFjC', '+507 6000-0000', 'comprador', 'activo', 'Panama', 'nodo-pty-terminal-oeste', 'JJ', 0),
+    ('usr-productor-demo', 'Ana Rodriguez', 'productor@surcos.pa', '$2y$10$9TGhRYmE3ZdiNIzP3JIgMu2wX143QFuSKAXV4BZu79htj21ptyFjC', '+507 6777-4410', 'productor', 'activo', 'Chiriqui', 'nodo-david-centro', 'AR', 0),
+    ('usr-empresa-demo', 'Compras Restaurante Maito', 'empresa@surcos.pa', '$2y$10$9TGhRYmE3ZdiNIzP3JIgMu2wX143QFuSKAXV4BZu79htj21ptyFjC', '+507 2222-4500', 'empresa', 'activo', 'Panama', 'nodo-mercado-central', 'RM', 0)
 on duplicate key update
     nombre = values(nombre),
     correo = values(correo),
+    clave_hash = values(clave_hash),
     telefono = values(telefono),
     rol = values(rol),
     estado = values(estado),
     provincia = values(provincia),
     nodo_retiro_id = values(nodo_retiro_id),
-    iniciales = values(iniciales);
+    iniciales = values(iniciales),
+    debe_cambiar_clave = values(debe_cambiar_clave);
 
 insert into productores (id, usuario_id, nombre, responsable, provincia, zona, especialidad, historia, estado)
 values
@@ -67,11 +71,11 @@ insert into pools (
     cantidad_minima, fecha_cierre, fecha_entrega, estado, modelo_entrega, nodo_retiro_id
 )
 values
-    ('grupo-geisha-42', 'prod-heredia', 'Cafe Geisha', 'Micro-lote #42', 'cafe', 'Tierras Altas, Chiriqui', null, 1.10, 0.62, 'lb', 17, 20, 2, '2026-07-03 23:59:00', '2026-07-12', 'activo', 'Retiro en Nodo', 'nodo-pty-terminal-oeste'),
-    ('grupo-tomates-09', 'prod-oasis', 'Tomates de Herencia', 'Lote 09', 'hortalizas', 'Boquete, Chiriqui', null, 0.85, 0.45, 'lb', 21, 50, 5, '2026-07-05 23:59:00', '2026-07-16', 'activo', 'Retiro en Nodo', 'nodo-mercado-central'),
-    ('grupo-miel-cruda', 'prod-bosque', 'Miel Silvestre Artesanal', 'Cruda', 'miel', 'El Valle, Cocle', null, 8.50, 4.20, 'lb', 49, 50, 1, '2026-07-08 23:59:00', '2026-07-20', 'activo', 'Envio a Domicilio', 'nodo-penonome'),
-    ('grupo-cacao-07', 'prod-darien', 'Cacao Crudo', 'Lote 7', 'cacao', 'Meteti, Darien', null, 3.90, 2.35, 'lb', 12, 35, 3, '2026-07-10 23:59:00', '2026-07-24', 'activo', 'Retiro en Nodo', 'nodo-pty-terminal-oeste'),
-    ('grupo-arbequina-azuero', 'prod-azuero', 'Aceite Arbequina', 'Prensado en frio', 'aceite', 'Chitre, Herrera', null, 14.50, 9.75, 'botella', 8, 25, 1, '2026-07-15 23:59:00', '2026-07-30', 'activo', 'Lote Empresarial', 'nodo-chitre-norte')
+    ('grupo-geisha-42', 'prod-heredia', 'Cafe Geisha', 'Micro-lote #42', 'cafe', 'Tierras Altas, Chiriqui', null, 1.10, 0.62, 'lb', 17, 20, 2, date_add(now(), interval 7 day), date_add(curdate(), interval 16 day), 'activo', 'Retiro en Nodo', 'nodo-pty-terminal-oeste'),
+    ('grupo-tomates-09', 'prod-oasis', 'Tomates de Herencia', 'Lote 09', 'hortalizas', 'Boquete, Chiriqui', null, 0.85, 0.45, 'lb', 21, 50, 5, date_add(now(), interval 9 day), date_add(curdate(), interval 20 day), 'activo', 'Retiro en Nodo', 'nodo-mercado-central'),
+    ('grupo-miel-cruda', 'prod-bosque', 'Miel Silvestre Artesanal', 'Cruda', 'miel', 'El Valle, Cocle', null, 8.50, 4.20, 'lb', 49, 50, 1, date_add(now(), interval 12 day), date_add(curdate(), interval 24 day), 'activo', 'Envio a Domicilio', 'nodo-penonome'),
+    ('grupo-cacao-07', 'prod-darien', 'Cacao Crudo', 'Lote 7', 'cacao', 'Meteti, Darien', null, 3.90, 2.35, 'lb', 12, 35, 3, date_add(now(), interval 14 day), date_add(curdate(), interval 28 day), 'activo', 'Retiro en Nodo', 'nodo-pty-terminal-oeste'),
+    ('grupo-arbequina-azuero', 'prod-azuero', 'Aceite Arbequina', 'Prensado en frio', 'aceite', 'Chitre, Herrera', null, 14.50, 9.75, 'botella', 8, 25, 1, date_add(now(), interval 19 day), date_add(curdate(), interval 35 day), 'activo', 'Lote Empresarial', 'nodo-chitre-norte')
 on duplicate key update
     producto = values(producto),
     variedad = values(variedad),
@@ -109,7 +113,8 @@ on duplicate key update
 insert into metodos_pago (id, usuario_id, tipo, etiqueta, marca, ultimos, principal, activo)
 values
     ('pago-demo-visa', 'usr-comprador-demo', 'tarjeta_simulada', 'Visa simulada terminada en 4242', 'Visa', '4242', 1, 1),
-    ('pago-demo-clave', 'usr-comprador-demo', 'tarjeta_simulada', 'Clave simulada terminada en 0188', 'Clave', '0188', 0, 1)
+    ('pago-demo-clave', 'usr-comprador-demo', 'tarjeta_simulada', 'Clave simulada terminada en 0188', 'Clave', '0188', 0, 1),
+    ('pago-demo-empresa', 'usr-empresa-demo', 'tarjeta_simulada', 'Visa corporativa terminada en 9001', 'Visa', '9001', 1, 1)
 on duplicate key update
     etiqueta = values(etiqueta),
     marca = values(marca),
@@ -117,10 +122,12 @@ on duplicate key update
     principal = values(principal),
     activo = values(activo);
 
-insert into solicitudes_contacto (id, nombre, correo, telefono, tipo_usuario, asunto, mensaje, acepta_contacto, estado, notas_admin)
+insert into solicitudes_contacto (id, nombre, correo, telefono, tipo_usuario, asunto, mensaje, acepta_contacto, estado, notas_admin, usuario_creado_id)
 values
-    ('sol-demo-productor', 'Maria Batista', 'maria.finca@example.com', '+507 6777-2211', 'productor', 'Quiero afiliar una finca', 'Tengo produccion de hortalizas en Tierras Altas y deseo publicar lotes por temporada.', 1, 'nueva', null),
-    ('sol-demo-empresa', 'Compras Hotel Central', 'compras.hotel@example.com', '+507 2222-1000', 'empresa', 'Compra recurrente para cocina', 'Buscamos entrar a pools de cafe, miel y hortalizas para abastecimiento mensual.', 1, 'en_revision', 'Validar volumen estimado antes de aprobar.')
+    ('sol-demo-productor', 'Maria Batista', 'maria.finca@example.com', '+507 6777-2211', 'productor', 'Quiero afiliar una finca', 'Tengo produccion de hortalizas en Tierras Altas y deseo publicar lotes por temporada.', 1, 'nueva', null, null),
+    ('sol-demo-empresa', 'Compras Hotel Central', 'compras.hotel@example.com', '+507 2222-1000', 'empresa', 'Compra recurrente para cocina', 'Buscamos entrar a pools de cafe, miel y hortalizas para abastecimiento mensual.', 1, 'en_revision', 'Validar volumen estimado antes de aprobar.', null),
+    ('sol-demo-aprobada', 'Compras Restaurante Maito', 'empresa@surcos.pa', '+507 2222-4500', 'empresa', 'Abastecimiento semanal', 'Cuenta aprobada para participar en pools de hortalizas, cafe y miel con retiro en Mercado Central.', 1, 'aprobada', 'Cuenta empresarial creada para compras recurrentes.', 'usr-empresa-demo'),
+    ('sol-demo-rechazada', 'Distribuidora Sin Datos', 'sin.datos@example.com', '+507 6000-9191', 'aliado_logistico', 'Solicitud incompleta', 'No incluyo rutas, permisos ni contacto verificable para operar entregas.', 0, 'rechazada', 'Solicitud rechazada por datos insuficientes.', null)
 on duplicate key update
     nombre = values(nombre),
     correo = values(correo),
@@ -130,12 +137,23 @@ on duplicate key update
     mensaje = values(mensaje),
     acepta_contacto = values(acepta_contacto),
     estado = values(estado),
-    notas_admin = values(notas_admin);
+    notas_admin = values(notas_admin),
+    usuario_creado_id = values(usuario_creado_id);
+
+insert into eventos_solicitud (id, solicitud_id, administrador_id, tipo, detalle)
+values
+    ('evt-demo-empresa-revision', 'sol-demo-empresa', 'admin-surcos', 'en_revision', 'Solicitud empresarial en revision. Falta validar volumen estimado antes de crear cuenta.'),
+    ('evt-demo-aprobada', 'sol-demo-aprobada', 'admin-surcos', 'aprobada', 'Solicitud aprobada. Cuenta vinculada sin exponer clave temporal en bitacora.'),
+    ('evt-demo-rechazada', 'sol-demo-rechazada', 'admin-surcos', 'rechazada', 'Solicitud rechazada por informacion insuficiente para validar operacion logistica.')
+on duplicate key update
+    administrador_id = values(administrador_id),
+    tipo = values(tipo),
+    detalle = values(detalle);
 
 insert into actividad (id, usuario_id, tipo, texto, fecha)
 values
-    ('act-demo-1', 'usr-comprador-demo', 'pool', 'Cafe Geisha alcanzo 85% del cupo objetivo.', '2026-06-24'),
-    ('act-demo-2', 'usr-comprador-demo', 'pago', 'Metodo de pago simulado disponible para confirmar bandeja.', '2026-06-24')
+    ('act-demo-1', 'usr-comprador-demo', 'pool', 'Cafe Geisha alcanzo 85% del cupo objetivo.', date_sub(curdate(), interval 1 day)),
+    ('act-demo-2', 'usr-comprador-demo', 'pago', 'Metodo de pago simulado disponible para confirmar bandeja.', curdate())
 on duplicate key update
     texto = values(texto),
     fecha = values(fecha);

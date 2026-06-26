@@ -47,6 +47,12 @@ final class ControladorIngreso extends Controlador
             }
 
             Autenticacion::iniciarUsuario($usuario);
+
+            if ($usuario['estado'] !== 'activo' || (int) ($usuario['debe_cambiar_clave'] ?? 0) === 1) {
+                Sesion::mensajeTemporal('exito', 'Clave temporal validada. Crea una clave nueva para activar tu cuenta.');
+                redirigir('/activar_cuenta.php');
+            }
+
             Sesion::mensajeTemporal('exito', 'Bienvenido a tu Bandeja de Pools.');
             redirigir('/bandeja.php');
         } catch (Throwable $excepcion) {

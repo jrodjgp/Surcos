@@ -81,10 +81,17 @@ final class ControladorAdmin extends Controlador
         $poolModelo = new Pool();
         $estado = trim((string) ($_GET['estado'] ?? ''));
 
-        try {
-            $poolModelo->cerrarVencidos();
-        } catch (Throwable $excepcion) {
-            Sesion::mensajeTemporal('error', 'No se pudieron cerrar pools vencidos automaticamente.');
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->requierePostValido();
+
+            try {
+                $poolModelo->cerrarVencidos();
+                Sesion::mensajeTemporal('exito', 'Pools vencidos cerrados correctamente.');
+            } catch (Throwable $excepcion) {
+                Sesion::mensajeTemporal('error', 'No se pudieron cerrar pools vencidos.');
+            }
+
+            redirigir('/admin/pools.php' . ($estado !== '' ? '?estado=' . urlencode($estado) : ''));
         }
 
         $this->vistaAdmin('pools', [

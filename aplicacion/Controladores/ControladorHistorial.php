@@ -6,7 +6,7 @@ final class ControladorHistorial extends Controlador
 {
     public function pools(): void
     {
-        $usuarioId = Autenticacion::requiereUsuario();
+        $usuarioId = Autenticacion::requiereUsuarioActivo();
 
         $this->vistaPublica('historial_pools', [
             'tituloPagina' => 'Historial de Pools | Surcos',

@@ -30,6 +30,20 @@ final class Productor extends Modelo
         );
     }
 
+    public function buscarActivo(string $id): ?array
+    {
+        return $this->uno(
+            'select pr.*,
+                    (select count(*) from pools p where p.productor_id = pr.id) as pools_total,
+                    (select count(*) from pools p where p.productor_id = pr.id and p.estado = "activo" and p.fecha_cierre >= now()) as pools_activos
+               from productores pr
+              where pr.id = :id
+                and pr.estado = "activo"
+              limit 1',
+            ['id' => $id]
+        );
+    }
+
     public function buscarPorUsuario(string $usuarioId): ?array
     {
         return $this->uno(
@@ -70,6 +84,17 @@ final class Productor extends Modelo
         return $id;
     }
 
+    public function activarPorUsuario(string $usuarioId): void
+    {
+        $this->ejecutar(
+            'update productores
+                set estado = "activo"
+              where usuario_id = :usuario_id
+                and estado = "pendiente"',
+            ['usuario_id' => $usuarioId]
+        );
+    }
+
     public function buscarPorPool(string $poolId): ?array
     {
         return $this->uno(
@@ -79,6 +104,21 @@ final class Productor extends Modelo
                from pools p
                join productores pr on pr.id = p.productor_id
               where p.id = :pool_id
+              limit 1',
+            ['pool_id' => $poolId]
+        );
+    }
+
+    public function buscarActivoPorPool(string $poolId): ?array
+    {
+        return $this->uno(
+            'select pr.*,
+                    (select count(*) from pools px where px.productor_id = pr.id) as pools_total,
+                    (select count(*) from pools px where px.productor_id = pr.id and px.estado = "activo" and px.fecha_cierre >= now()) as pools_activos
+               from pools p
+               join productores pr on pr.id = p.productor_id
+              where p.id = :pool_id
+                and pr.estado = "activo"
               limit 1',
             ['pool_id' => $poolId]
         );

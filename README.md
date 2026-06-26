@@ -15,6 +15,7 @@ Surcos es un marketplace agricola panameno que reduce la distancia entre product
 - Admin: `admin@surcos.pa` / `Admin123!`
 - Comprador: `comprador@surcos.pa` / `Surcos123!`
 - Productor: `productor@surcos.pa` / `Surcos123!`
+- Empresa: `empresa@surcos.pa` / `Surcos123!`
 
 ## Instalacion Local
 
@@ -28,6 +29,7 @@ MYSQL_PORT=3306
 MYSQL_DATABASE=surcos
 MYSQL_USER=root
 MYSQL_PASSWORD=
+MOSTRAR_DETALLE_SALUD=false
 ```
 
 4. Importa los SQL en phpMyAdmin, en este orden:
@@ -41,6 +43,12 @@ Si ya tenias una base `surcos` creada antes de la capa marketplace real, ejecuta
 
 ```text
 base_datos/003_marketplace_real.sql
+```
+
+Para comprobar que el seed demo quedo completo:
+
+```text
+base_datos/004_verificacion_demo.sql
 ```
 
 5. Configura Apache o el virtual host para que el document root apunte a `publico/`. Abre el sitio desde:
@@ -63,6 +71,7 @@ C:\xampp\php\php.exe -S 127.0.0.1:8000 -t publico
 - `/historias_productor.php?productor=prod-heredia` Historia de un productor especifico.
 - `/contacto.php` Solicitud de afiliacion guardada en MySQL.
 - `/ingreso.php` Login de comprador/productor.
+- `/activar_cuenta.php` Cambio de clave temporal para cuentas pendientes.
 - `/pool.php?id=grupo-geisha-42` Detalle de pool.
 - `/bandeja.php` Bandeja de Pools con compromisos en borrador.
 - `/historial_pools.php` Actividad e historial comercial del comprador.
@@ -73,7 +82,30 @@ C:\xampp\php\php.exe -S 127.0.0.1:8000 -t publico
 - `/api/pools.php` Web service JSON de pools activos.
 - `/api/pool.php?id=grupo-geisha-42` Web service JSON de un pool con tramos.
 - `/api/productores.php` Web service JSON de productores activos.
-- `/salud.php` Diagnostico de PHP, sesiones y MySQL.
+- `/salud.php` Diagnostico seguro de PHP, sesiones y MySQL. Solo muestra detalle interno si `MOSTRAR_DETALLE_SALUD=true`.
+
+## Prueba Rapida Del Flujo
+
+1. Abre `/` y entra a un pool activo desde `Mercado de Pools`.
+2. Entra con `comprador@surcos.pa` / `Surcos123!`.
+3. Agrega la cantidad minima del pool a la Bandeja.
+4. Confirma la Bandeja con un metodo de pago simulado.
+5. Revisa `/historial_pools.php`.
+6. Entra a `/admin/` con `admin@surcos.pa` / `Admin123!`.
+7. Revisa solicitudes, aprueba una solicitud nueva y confirma que se muestra una clave temporal una sola vez.
+8. Revisa `/api/pools.php`, `/api/pool.php?id=grupo-geisha-42` y `/salud.php`.
+
+## QA De Rubrica
+
+La evidencia tecnica de Proyecto 2 esta documentada en `QA.md`: checklist de rubrica, comandos ejecutados, rutas probadas, procedimientos almacenados, web services, sesiones, CSRF y flujo manual para el profesor.
+
+## Demo Final
+
+El recorrido recomendado para revisar el proyecto sin explicacion adicional esta en `DEMO.md`: preparacion de XAMPP, credenciales, flujo comprador, flujo productor, flujo admin, web services, salud y reglas de congelacion de features.
+
+## Entrega Congelada
+
+Antes de hacer commit o push final, usa `ENTREGA.md` como punto de control: lista de archivos finales, comandos, rutas que deben probarse, cambios permitidos durante freeze y mensaje de commit sugerido.
 
 ## MVC
 
@@ -107,9 +139,10 @@ El esquema usa varias tablas relacionadas:
 Los procedimientos almacenados principales son:
 
 - `sp_confirmar_compromiso_pool`: valida que el pool este activo, que exista cupo y que el metodo de pago simulado pertenezca al usuario. Recalcula el precio vigente por tramo antes de confirmar el compromiso y crear el pago simulado.
-- `sp_cerrar_pools_vencidos`: cierra pools vencidos como `cerrado` o `fallido` segun hayan alcanzado el objetivo.
+- `sp_cerrar_pools_vencidos`: cierra pools vencidos como `cerrado` o `fallido` segun hayan alcanzado el objetivo. En admin se ejecuta con accion POST, no al cargar la pagina.
 
 El seed incluye un productor activo vinculado a `productor@surcos.pa` para probar la publicacion real simple de cosechas. Las solicitudes aprobadas desde admin crean una cuenta pendiente; si el tipo es productor, tambien crean un perfil productor pendiente vinculado.
+Tambien incluye una cuenta empresa activa, solicitudes en estados `nueva`, `en_revision`, `aprobada` y `rechazada`, eventos de bitacora admin, cinco productores activos y cinco pools con fechas relativas para que no expiren por una fecha fija.
 
 ## Seguridad
 
@@ -119,7 +152,7 @@ El seed incluye un productor activo vinculado a `productor@surcos.pa` para proba
 - Consultas PDO preparadas.
 - Salida HTML escapada con `htmlspecialchars`.
 - Pagos solo simulados: se guardan marca, ultimos 4 ficticios, monto, estado y referencia simulada. No se guarda numero completo ni CVV.
-- Las claves temporales de aprobacion se muestran una sola vez en mensaje de sesion y no se guardan en notas ni bitacora.
+- Las claves temporales de aprobacion se muestran una sola vez en mensaje de sesion, no se guardan en notas ni bitacora, y obligan a cambiar clave antes de usar bandeja o publicar pools.
 
 ## Checklist Rubrica
 

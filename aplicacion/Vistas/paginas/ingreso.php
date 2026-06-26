@@ -3,8 +3,18 @@
     <div class="auth-copy">
       <p class="eyebrow">Cuenta Surcos</p>
       <h1>Ingresa a tu Bandeja de Pools</h1>
-      <p>Usa el comprador demo para probar compromisos y confirmacion simulada.</p>
-      <p class="demo-credenciales">Demo: comprador@surcos.pa / Surcos123!</p>
+      <p>Usa el comprador demo para probar bandeja, pago simulado e historial. Usa el productor demo para publicar una cosecha desde el registro.</p>
+      <div class="demo-credenciales demo-credenciales--lista" aria-label="Credenciales demo">
+        <span>Comprador: comprador@surcos.pa / Surcos123!</span>
+        <span>Productor: productor@surcos.pa / Surcos123!</span>
+        <span>Empresa: empresa@surcos.pa / Surcos123!</span>
+        <a href="<?= escapar(url_para('/admin/')) ?>">Admin: admin@surcos.pa / Admin123!</a>
+      </div>
+      <ol class="ruta-demo">
+        <li>Abre un pool activo.</li>
+        <li>Agrega la cantidad minima a la bandeja.</li>
+        <li>Confirma con pago simulado y revisa historial.</li>
+      </ol>
     </div>
     <form class="autenticacion-formulario" method="post" action="<?= escapar(url_para('/ingreso.php')) ?>">
       <?= campo_csrf() ?>

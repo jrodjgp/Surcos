@@ -87,6 +87,8 @@ final class Compromiso extends Modelo
 
     public function confirmarBorradores(string $usuarioId, string $metodoPagoId): array
     {
+        $this->validarBorradoresParaConfirmar($usuarioId, $metodoPagoId);
+
         $resultados = [];
 
         foreach ($this->borradores($usuarioId) as $borrador) {
@@ -104,6 +106,49 @@ final class Compromiso extends Modelo
         }
 
         return $resultados;
+    }
+
+    private function validarBorradoresParaConfirmar(string $usuarioId, string $metodoPagoId): void
+    {
+        $metodo = $this->uno(
+            'select id
+               from metodos_pago
+              where id = :metodo_pago_id
+                and usuario_id = :usuario_id
+                and activo = 1
+              limit 1',
+            [
+                'metodo_pago_id' => $metodoPagoId,
+                'usuario_id' => $usuarioId,
+            ]
+        );
+
+        if (!$metodo) {
+            throw new RuntimeException('El metodo de pago simulado no pertenece al usuario o esta inactivo.');
+        }
+
+        $resumen = $this->uno(
+            'select count(*) as total,
+                    sum(case
+                        when p.estado <> "activo"
+                          or p.fecha_cierre < now()
+                          or p.personas_actuales >= p.personas_objetivo
+                        then 1 else 0
+                    end) as no_disponibles
+               from compromisos c
+               join pools p on p.id = c.pool_id
+              where c.usuario_id = :usuario_id
+                and c.estado_compromiso = "borrador"',
+            ['usuario_id' => $usuarioId]
+        );
+
+        if ((int) ($resumen['total'] ?? 0) === 0) {
+            throw new RuntimeException('No hay borradores en la bandeja.');
+        }
+
+        if ((int) ($resumen['no_disponibles'] ?? 0) > 0) {
+            throw new RuntimeException('Uno o mas pools de la bandeja ya no estan disponibles.');
+        }
     }
 
     public function totalBorradores(string $usuarioId): float

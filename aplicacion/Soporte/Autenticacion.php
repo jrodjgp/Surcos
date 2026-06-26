@@ -37,6 +37,12 @@ final class Autenticacion
         return is_string($id) && $id !== '' ? $id : null;
     }
 
+    public static function usuarioRol(): ?string
+    {
+        $rol = Sesion::obtener('usuario_rol');
+        return is_string($rol) && $rol !== '' ? $rol : null;
+    }
+
     public static function adminId(): ?string
     {
         $id = Sesion::obtener('admin_id');
@@ -50,6 +56,25 @@ final class Autenticacion
         if ($id === null) {
             Sesion::mensajeTemporal('error', 'Inicia sesion para continuar con tu bandeja de pools.');
             redirigir('/ingreso.php');
+        }
+
+        return $id;
+    }
+
+    public static function requiereUsuarioActivo(): string
+    {
+        $id = self::requiereUsuario();
+        $usuario = (new Usuario())->buscar($id);
+
+        if (!$usuario) {
+            self::cerrar();
+            Sesion::mensajeTemporal('error', 'La sesion ya no es valida. Ingresa nuevamente.');
+            redirigir('/ingreso.php');
+        }
+
+        if (($usuario['estado'] ?? '') !== 'activo' || (int) ($usuario['debe_cambiar_clave'] ?? 0) === 1) {
+            Sesion::mensajeTemporal('error', 'Activa tu cuenta antes de continuar.');
+            redirigir('/activar_cuenta.php');
         }
 
         return $id;

@@ -25,6 +25,22 @@ final class Usuario extends Modelo
         );
     }
 
+    public function activarConNuevaClave(string $id, string $claveNueva): void
+    {
+        $this->ejecutar(
+            'update usuarios
+                set clave_hash = :clave_hash,
+                    estado = "activo",
+                    debe_cambiar_clave = 0
+              where id = :id
+                and (estado = "pendiente" or debe_cambiar_clave = 1)',
+            [
+                'id' => $id,
+                'clave_hash' => password_hash($claveNueva, PASSWORD_DEFAULT),
+            ]
+        );
+    }
+
     public function crearPendienteDesdeSolicitud(array $solicitud, string $claveTemporal): string
     {
         $id = $this->id('usr');

@@ -134,6 +134,18 @@ begin
        set personas_actuales = personas_actuales + 1
      where id = v_pool_id;
 
+    if v_actuales + 1 >= v_objetivo then
+        update compromisos
+           set estado_grupo = 'ganado'
+         where pool_id = v_pool_id
+           and estado_compromiso = 'confirmado'
+           and estado_grupo = 'pendiente';
+
+        update pools
+           set estado = 'cerrado'
+         where id = v_pool_id;
+    end if;
+
     insert into intentos_pago (
         id, usuario_id, compromiso_id, metodo_pago_id, referencia, monto,
         marca, ultimos, estado, autorizacion_simulada

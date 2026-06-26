@@ -6,7 +6,7 @@ final class ControladorBandeja extends Controlador
 {
     public function mostrar(): void
     {
-        $usuarioId = Autenticacion::requiereUsuario();
+        $usuarioId = Autenticacion::requiereUsuarioActivo();
         $usuarioModelo = new Usuario();
         $compromisoModelo = new Compromiso();
 
@@ -24,7 +24,7 @@ final class ControladorBandeja extends Controlador
     public function quitar(): void
     {
         $this->requierePostValido();
-        $usuarioId = Autenticacion::requiereUsuario();
+        $usuarioId = Autenticacion::requiereUsuarioActivo();
         (new Compromiso())->quitar((string) ($_POST['compromiso_id'] ?? ''), $usuarioId);
         Sesion::mensajeTemporal('exito', 'Borrador retirado de la bandeja.');
         redirigir('/bandeja.php');
@@ -33,7 +33,7 @@ final class ControladorBandeja extends Controlador
     public function confirmar(): void
     {
         $this->requierePostValido();
-        $usuarioId = Autenticacion::requiereUsuario();
+        $usuarioId = Autenticacion::requiereUsuarioActivo();
         $metodoPagoId = (string) ($_POST['metodo_pago_id'] ?? '');
 
         if ($metodoPagoId === '') {

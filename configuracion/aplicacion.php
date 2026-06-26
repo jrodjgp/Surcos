@@ -9,7 +9,7 @@ return [
     'aplicacion' => [
         'nombre' => valor_entorno('NOMBRE_APLICACION', 'Surcos'),
         'entorno' => valor_entorno('ENTORNO_APLICACION', 'local'),
-        'depuracion' => valor_entorno('DEPURACION_APLICACION', true),
+        'depuracion' => valor_entorno('DEPURACION_APLICACION', false),
         'url' => valor_entorno('URL_APLICACION', ''),
         'zona_horaria' => valor_entorno('ZONA_HORARIA_APLICACION', 'America/Bogota'),
     ],

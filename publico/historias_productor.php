@@ -21,11 +21,11 @@ require dirname(__DIR__) . '/aplicacion/Arranque.php';
             $poolId = trim((string) ($_GET['pool'] ?? $_GET['grupo'] ?? $_GET['id'] ?? ''));
 
             if ($productorId !== '') {
-                $productor = $productorModelo->buscar($productorId);
+                $productor = $productorModelo->buscarActivo($productorId);
             }
 
             if (!$productor && $poolId !== '') {
-                $productor = $productorModelo->buscarPorPool($poolId);
+                $productor = $productorModelo->buscarActivoPorPool($poolId);
                 $poolPrincipal = $poolModelo->buscar($poolId);
             }
 

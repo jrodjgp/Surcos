@@ -53,7 +53,7 @@ final class ControladorMarketplace extends Controlador
     private function publicarCosecha(): void
     {
         $this->requierePostValido();
-        $usuarioId = Autenticacion::requiereUsuario();
+        $usuarioId = Autenticacion::requiereUsuarioActivo();
         $usuario = (new Usuario())->buscar($usuarioId);
         $productor = (new Productor())->buscarPorUsuario($usuarioId);
 
