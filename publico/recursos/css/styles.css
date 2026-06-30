@@ -548,24 +548,86 @@ textarea:focus-visible {
 }
 
 @media (max-width: 760px) {
+  .wrap {
+    width: 100%;
+    max-width: 100%;
+    padding-right: 14px;
+    padding-left: 14px
+  }
+
+  .auth-shell,
+  .pool-detalle,
+  .terminal-head,
+  .confirmar-panel {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 18px;
+    margin-top: 28px
+  }
+
   .pool-detalle-media,
   .pool-detalle-cuerpo,
   .auth-copy,
   .autenticacion-formulario,
   .tabla-panel,
   .confirmar-panel {
-    padding: 20px
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+    padding: 18px
+  }
+
+  .pool-detalle-cuerpo > *,
+  .auth-copy > *,
+  .confirmar-panel > * {
+    max-width: 100%
+  }
+
+  .pool-detalle-cuerpo p,
+  .pool-detalle-cuerpo dd,
+  .nota-tramo,
+  .pool-historia-link {
+    overflow-wrap: anywhere;
+    word-break: break-word
   }
 
   .pool-detalle h1,
   .auth-copy h1,
   .terminal-head h1 {
-    font-size: clamp(36px, 12vw, 52px)
+    font-size: clamp(30px, 10vw, 42px);
+    line-height: 1.02;
+    overflow-wrap: anywhere
   }
 
   .pool-detalle-cuerpo .price-row {
     align-items: flex-start;
-    flex-direction: column
+    flex-direction: column;
+    max-width: 100%
+  }
+
+  .pool-detalle-cuerpo .price-row .price,
+  .pool-detalle-cuerpo .price-row .retail {
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere
+  }
+
+  .pool-detalle-cuerpo .price-row .price {
+    font-size: clamp(26px, 8vw, 34px)
+  }
+
+  .prog-head {
+    flex-wrap: wrap;
+    gap: 6px 12px
+  }
+
+  .pool-compromiso .btn-primary,
+  .autenticacion-formulario .btn-primary,
+  .autenticacion-formulario .btn-outline,
+  .confirmar-panel .btn-primary {
+    width: 100%
   }
 
   .detalle-lista div {
@@ -623,6 +685,14 @@ textarea:focus-visible {
     font-weight: 700;
     letter-spacing: .08em;
     text-transform: uppercase
+  }
+}
+
+@media (max-width: 520px) {
+  .wrap {
+    max-width: 390px;
+    margin-right: 0;
+    margin-left: 0
   }
 }
 

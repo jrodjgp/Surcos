@@ -419,24 +419,39 @@
 
 @media (max-width: 720px) {
   .navbar {
-    flex-wrap: wrap;
-    gap: 10px 16px;
-    padding: 14px 16px
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 44px;
+    grid-template-areas:
+      "brand user"
+      "links links";
+    align-items: center;
+    gap: 10px 12px;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 12px 14px
   }
 
   .navbar .brand {
-    width: 118px;
-    min-width: 118px
+    grid-area: brand;
+    flex: 0 0 auto;
+    width: 108px;
+    min-width: 108px
   }
 
   .navbar .nav-links {
+    grid-area: links;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    justify-content: space-between;
     order: 3;
     width: 100%;
     min-width: 0;
     max-width: 100%;
-    gap: 10px;
+    gap: 0;
     overflow-x: auto;
-    padding-top: 6px;
+    padding: 4px 0 2px;
     scrollbar-width: none
   }
 
@@ -445,14 +460,50 @@
   }
 
   .navbar .nav-links a {
+    flex: 0 0 auto;
+    min-height: 40px;
+    padding: 0 3px;
+    font-size: 11px;
     white-space: nowrap
   }
 
   .navbar .nav-user {
-    margin-left: auto
+    grid-area: user;
+    justify-self: end;
+    position: static;
+    width: 44px;
+    max-width: 44px;
+    overflow: hidden;
+    border-color: rgba(44, 76, 59, .28);
+    background: var(--surface);
+    padding: 0;
+    letter-spacing: .04em
+  }
+
+  .navbar .nav-user svg {
+    width: 24px;
+    height: 24px
+  }
+
+  .navbar .nav-user span {
+    display: none
+  }
+
+  .nav-user svg {
+    flex: 0 0 auto
   }
 
   .footer {
     padding: 42px 18px
+  }
+}
+
+@media (max-width: 520px) {
+  .navbar {
+    max-width: 390px
+  }
+
+  .navbar .nav-links {
+    max-width: 362px
   }
 }
