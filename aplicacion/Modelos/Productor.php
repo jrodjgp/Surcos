@@ -8,22 +8,39 @@ final class Productor extends Modelo
     {
         return $this->todos(
             'select pr.*,
-                    (select count(*) from pools p where p.productor_id = pr.id) as pools_total,
-                    (select count(*) from pools p where p.productor_id = pr.id and p.estado = "activo" and p.fecha_cierre >= now()) as pools_activos,
-                    (select min(p.fecha_cierre) from pools p where p.productor_id = pr.id and p.estado = "activo" and p.fecha_cierre >= now()) as proximo_cierre
+                    coalesce(resumen.pools_total, 0) as pools_total,
+                    coalesce(resumen.pools_activos, 0) as pools_activos,
+                    resumen.proximo_cierre
                from productores pr
+          left join (
+                    select productor_id,
+                           count(*) as pools_total,
+                           sum(case when estado = "activo" and fecha_cierre >= now() then 1 else 0 end) as pools_activos,
+                           min(case when estado = "activo" and fecha_cierre >= now() then fecha_cierre end) as proximo_cierre
+                      from pools
+                  group by productor_id
+               ) resumen on resumen.productor_id = pr.id
               where pr.estado = "activo"
-           order by pools_activos desc, pr.nombre asc'
+           order by coalesce(resumen.pools_activos, 0) desc, pr.nombre asc'
         );
+    }
+
+    private function sqlConResumen(): string
+    {
+        return 'select pr.*,
+                       coalesce((
+                           select count(*) from pools p where p.productor_id = pr.id
+                       ), 0) as pools_total,
+                       coalesce((
+                           select count(*) from pools p where p.productor_id = pr.id and p.estado = "activo" and p.fecha_cierre >= now()
+                       ), 0) as pools_activos
+                  from productores pr';
     }
 
     public function buscar(string $id): ?array
     {
         return $this->uno(
-            'select pr.*,
-                    (select count(*) from pools p where p.productor_id = pr.id) as pools_total,
-                    (select count(*) from pools p where p.productor_id = pr.id and p.estado = "activo" and p.fecha_cierre >= now()) as pools_activos
-               from productores pr
+            $this->sqlConResumen() . '
               where pr.id = :id
               limit 1',
             ['id' => $id]
@@ -33,10 +50,7 @@ final class Productor extends Modelo
     public function buscarActivo(string $id): ?array
     {
         return $this->uno(
-            'select pr.*,
-                    (select count(*) from pools p where p.productor_id = pr.id) as pools_total,
-                    (select count(*) from pools p where p.productor_id = pr.id and p.estado = "activo" and p.fecha_cierre >= now()) as pools_activos
-               from productores pr
+            $this->sqlConResumen() . '
               where pr.id = :id
                 and pr.estado = "activo"
               limit 1',
@@ -47,10 +61,7 @@ final class Productor extends Modelo
     public function buscarPorUsuario(string $usuarioId): ?array
     {
         return $this->uno(
-            'select pr.*,
-                    (select count(*) from pools p where p.productor_id = pr.id) as pools_total,
-                    (select count(*) from pools p where p.productor_id = pr.id and p.estado = "activo" and p.fecha_cierre >= now()) as pools_activos
-               from productores pr
+            $this->sqlConResumen() . '
               where pr.usuario_id = :usuario_id
               limit 1',
             ['usuario_id' => $usuarioId]
@@ -98,11 +109,8 @@ final class Productor extends Modelo
     public function buscarPorPool(string $poolId): ?array
     {
         return $this->uno(
-            'select pr.*,
-                    (select count(*) from pools px where px.productor_id = pr.id) as pools_total,
-                    (select count(*) from pools px where px.productor_id = pr.id and px.estado = "activo" and px.fecha_cierre >= now()) as pools_activos
-               from pools p
-               join productores pr on pr.id = p.productor_id
+            $this->sqlConResumen() . '
+              join pools p on p.productor_id = pr.id
               where p.id = :pool_id
               limit 1',
             ['pool_id' => $poolId]
@@ -112,11 +120,8 @@ final class Productor extends Modelo
     public function buscarActivoPorPool(string $poolId): ?array
     {
         return $this->uno(
-            'select pr.*,
-                    (select count(*) from pools px where px.productor_id = pr.id) as pools_total,
-                    (select count(*) from pools px where px.productor_id = pr.id and px.estado = "activo" and px.fecha_cierre >= now()) as pools_activos
-               from pools p
-               join productores pr on pr.id = p.productor_id
+            $this->sqlConResumen() . '
+              join pools p on p.productor_id = pr.id
               where p.id = :pool_id
                 and pr.estado = "activo"
               limit 1',
@@ -144,12 +149,19 @@ final class Productor extends Modelo
     {
         return $this->todos(
             'select pr.*,
-                    (select count(*) from pools p where p.productor_id = pr.id) as pools_total,
-                    (select count(*) from pools p where p.productor_id = pr.id and p.estado = "activo" and p.fecha_cierre >= now()) as pools_activos
+                    coalesce(resumen.pools_total, 0) as pools_total,
+                    coalesce(resumen.pools_activos, 0) as pools_activos
                from productores pr
+          left join (
+                    select productor_id,
+                           count(*) as pools_total,
+                           sum(case when estado = "activo" and fecha_cierre >= now() then 1 else 0 end) as pools_activos
+                      from pools
+                  group by productor_id
+               ) resumen on resumen.productor_id = pr.id
               where pr.estado = "activo"
                 and pr.id <> :productor_id
-           order by pools_activos desc, pr.nombre asc
+           order by coalesce(resumen.pools_activos, 0) desc, pr.nombre asc
               limit ' . max(1, $limite),
             ['productor_id' => $productorId]
         );

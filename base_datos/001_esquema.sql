@@ -215,6 +215,13 @@ create index tramos_pool_idx on tramos_precio_pool(pool_id, compradores_minimos)
 create index compromisos_usuario_idx on compromisos(usuario_id, estado_compromiso);
 create index actividad_usuario_idx on actividad(usuario_id, fecha);
 
+-- Indices adicionales para optimizar consultas frecuentes
+create index usuarios_estado_idx on usuarios(estado);
+create index productores_estado_idx on productores(estado);
+create index pools_productor_estado_cierre_idx on pools(productor_id, estado, fecha_cierre);
+create index metodos_pago_usuario_activo_idx on metodos_pago(usuario_id, activo);
+create index solicitudes_contacto_estado_creada_idx on solicitudes_contacto(estado, creada_en);
+
 delimiter //
 
 drop procedure if exists sp_confirmar_compromiso_pool//

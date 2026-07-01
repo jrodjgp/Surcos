@@ -10,6 +10,8 @@ final class Autenticacion
         Sesion::guardar('usuario_id', $usuario['id']);
         Sesion::guardar('usuario_nombre', $usuario['nombre']);
         Sesion::guardar('usuario_rol', $usuario['rol']);
+        Sesion::guardar('usuario_estado', $usuario['estado'] ?? 'pendiente');
+        Sesion::guardar('usuario_debe_cambiar_clave', (int) ($usuario['debe_cambiar_clave'] ?? 0));
         Sesion::olvidar('admin_id');
     }
 
@@ -19,6 +21,8 @@ final class Autenticacion
         Sesion::guardar('admin_id', $admin['id']);
         Sesion::guardar('admin_nombre', $admin['nombre']);
         Sesion::olvidar('usuario_id');
+        Sesion::olvidar('usuario_estado');
+        Sesion::olvidar('usuario_debe_cambiar_clave');
     }
 
     public static function cerrar(): void
@@ -26,6 +30,8 @@ final class Autenticacion
         Sesion::olvidar('usuario_id');
         Sesion::olvidar('usuario_nombre');
         Sesion::olvidar('usuario_rol');
+        Sesion::olvidar('usuario_estado');
+        Sesion::olvidar('usuario_debe_cambiar_clave');
         Sesion::olvidar('admin_id');
         Sesion::olvidar('admin_nombre');
         Sesion::regenerar();
@@ -64,15 +70,10 @@ final class Autenticacion
     public static function requiereUsuarioActivo(): string
     {
         $id = self::requiereUsuario();
-        $usuario = (new Usuario())->buscar($id);
+        $estado = Sesion::obtener('usuario_estado', '');
+        $debeCambiarClave = (int) Sesion::obtener('usuario_debe_cambiar_clave', 1);
 
-        if (!$usuario) {
-            self::cerrar();
-            Sesion::mensajeTemporal('error', 'La sesion ya no es valida. Ingresa nuevamente.');
-            redirigir('/ingreso.php');
-        }
-
-        if (($usuario['estado'] ?? '') !== 'activo' || (int) ($usuario['debe_cambiar_clave'] ?? 0) === 1) {
+        if ($estado !== 'activo' || $debeCambiarClave === 1) {
             Sesion::mensajeTemporal('error', 'Activa tu cuenta antes de continuar.');
             redirigir('/activar_cuenta.php');
         }

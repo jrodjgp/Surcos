@@ -271,12 +271,40 @@ final class Pool extends Modelo
 
     private function enriquecerConTramos(array $pools): array
     {
-        return array_map(fn (array $pool): array => $this->enriquecerPool($pool), $pools);
+        $poolIds = array_column($pools, 'id');
+
+        $tramosPorPool = $poolIds !== []
+            ? $this->tramosPorIds($poolIds)
+            : [];
+
+        return array_map(
+            fn (array $pool): array => $this->enriquecerPool($pool, $tramosPorPool[(string) $pool['id']] ?? []),
+            $pools
+        );
     }
 
-    private function enriquecerPool(array $pool): array
+    private function tramosPorIds(array $poolIds): array
     {
-        $tramos = $this->tramos((string) $pool['id']);
+        $placeholders = implode(',', array_fill(0, count($poolIds), '?'));
+
+        $filas = $this->todos(
+            "select * from tramos_precio_pool
+              where pool_id in ({$placeholders})
+           order by pool_id, compradores_minimos asc",
+            $poolIds
+        );
+
+        $agrupados = [];
+
+        foreach ($filas as $fila) {
+            $agrupados[(string) $fila['pool_id']][] = $fila;
+        }
+
+        return $agrupados;
+    }
+
+    private function enriquecerPool(array $pool, array $tramos = []): array
+    {
         $compradoresParaPrecio = max(1, (int) $pool['personas_actuales'] + 1);
         $tramoActual = $this->tramoParaCompradores($tramos, $compradoresParaPrecio);
         $siguienteTramo = $this->siguienteTramo($tramos, $compradoresParaPrecio);

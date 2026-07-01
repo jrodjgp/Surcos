@@ -28,7 +28,13 @@ final class BaseDatos
         ];
 
         self::$conexion = new PDO(self::crearDsn(), self::obtenerUsuario(), self::obtenerClave(), $opciones);
-        self::$conexion->exec("SET time_zone = '-05:00'");
+        $zonaHoraria = (string) configuracion('aplicacion.zona_horaria', 'America/Bogota');
+        $offset = new DateTimeZone($zonaHoraria);
+        $offsetSegundos = $offset->getOffset(new DateTime('now', $offset));
+        $signo = $offsetSegundos >= 0 ? '+' : '-';
+        $horas = (int) floor(abs($offsetSegundos) / 3600);
+        $minutos = (int) (abs($offsetSegundos) % 3600 / 60);
+        self::$conexion->exec(sprintf("SET time_zone = '%s%02d:%02d'", $signo, $horas, $minutos));
 
         return self::$conexion;
     }
