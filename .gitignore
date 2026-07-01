@@ -1,5 +1,10 @@
+# Notas locales no oficiales de diseno o exploracion.
 DESIGN.md
+
+# Variables de entorno locales. Usa .env.ejemplo como plantilla segura.
 .env
+
+# Sesiones PHP locales. La carpeta se conserva con .gitkeep.
 almacenamiento/sesiones/*
 !almacenamiento/sesiones/.gitkeep
 

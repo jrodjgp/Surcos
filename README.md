@@ -97,15 +97,15 @@ C:\xampp\php\php.exe -S 127.0.0.1:8000 -t publico
 
 ## QA De Rubrica
 
-La evidencia tecnica de Proyecto 2 esta documentada en `QA.md`: checklist de rubrica, comandos ejecutados, rutas probadas, procedimientos almacenados, web services, sesiones, CSRF y flujo manual para el profesor.
+La evidencia tecnica de Proyecto 2 esta documentada en `docs/QA.md`: checklist de rubrica, comandos ejecutados, rutas probadas, procedimientos almacenados, web services, sesiones, CSRF y flujo manual para el profesor.
 
 ## Demo Final
 
-El recorrido recomendado para revisar el proyecto sin explicacion adicional esta en `DEMO.md`: preparacion de XAMPP, credenciales, flujo comprador, flujo productor, flujo admin, web services, salud y reglas de congelacion de features.
+El recorrido recomendado para revisar el proyecto sin explicacion adicional esta en `docs/DEMO.md`: preparacion de XAMPP, credenciales, flujo comprador, flujo productor, flujo admin, web services, salud y reglas de congelacion de features.
 
 ## Entrega Congelada
 
-Antes de hacer commit o push final, usa `ENTREGA.md` como punto de control: lista de archivos finales, comandos, rutas que deben probarse, cambios permitidos durante freeze y mensaje de commit sugerido.
+Antes de hacer commit o push final, usa `docs/ENTREGA.md` como punto de control: lista de archivos finales, comandos, rutas que deben probarse, cambios permitidos durante freeze y mensaje de commit sugerido.
 
 ## MVC
 

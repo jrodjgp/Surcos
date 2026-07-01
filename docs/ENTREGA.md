@@ -37,11 +37,12 @@ Los archivos legacy en `referencia_legacy/` son referencia historica, no demo of
 
 - `README.md`: instalacion, rutas, credenciales y resumen tecnico.
 - `PRODUCT.md`: definicion de producto y posicionamiento.
-- `DESIGN.md`: criterio visual.
-- `QA.md`: evidencia de rubrica y comandos verificados.
-- `DEMO.md`: recorrido exacto para presentar o probar.
-- `ENTREGA.md`: checklist final de congelacion.
+- `docs/QA.md`: evidencia de rubrica y comandos verificados.
+- `docs/DEMO.md`: recorrido exacto para presentar o probar.
+- `docs/ENTREGA.md`: checklist final de congelacion.
 - `base_datos/README.md`: orden de importacion y notas de datos.
+
+`DESIGN.md` puede existir localmente como nota de exploracion visual, pero no forma parte de la entrega oficial ni se sube al repositorio.
 
 ## Checklist Antes de Commit
 
