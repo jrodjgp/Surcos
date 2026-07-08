@@ -52,7 +52,7 @@
               <div>
                 <span class="estado-chip"><?= escapar($pool['estado']) ?></span>
                 <h3><?= escapar($pool['producto'] . ' - ' . $pool['variedad']) ?></h3>
-                <p><?= escapar($pool['origen']) ?> · <?= escapar($pool['nodo_nombre'] ?? 'Nodo por confirmar') ?></p>
+                <p><?= escapar($pool['origen']) ?> - <?= escapar($pool['nodo_nombre'] ?? 'Nodo por confirmar') ?></p>
               </div>
               <strong class="precio-productor"><?= escapar(dinero($pool['precio_vigente'])) ?><small>/<?= escapar($pool['unidad']) ?></small></strong>
             </div>
@@ -80,7 +80,16 @@
               <p class="nota-tramo">Este pool ya usa el mejor precio configurado.</p>
             <?php endif; ?>
 
-            <a class="sbtn" href="<?= escapar(url_para('/pool.php?id=' . $pool['id'])) ?>">Ver pool publico</a>
+            <div class="productor-pool-actions">
+              <a class="sbtn" href="<?= escapar(url_para('/pool.php?id=' . $pool['id'])) ?>">Ver pool publico</a>
+              <?php if (($pool['estado'] ?? '') === 'activo'): ?>
+                <form method="post" action="<?= escapar(url_para('/productor/retirar_pool.php')) ?>">
+                  <?= campo_csrf() ?>
+                  <input type="hidden" name="pool_id" value="<?= escapar($pool['id']) ?>" />
+                  <button class="btn-outline btn-retirar" type="submit">Retirar publicacion</button>
+                </form>
+              <?php endif; ?>
+            </div>
           </div>
         </article>
       <?php endforeach; ?>

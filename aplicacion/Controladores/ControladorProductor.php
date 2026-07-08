@@ -34,4 +34,27 @@ final class ControladorProductor extends Controlador
             'poolModelo' => $poolModelo,
         ]);
     }
+
+    public function retirarPool(): void
+    {
+        $this->requierePostValido();
+
+        $usuarioId = Autenticacion::requiereUsuarioActivo();
+        $usuario = (new Usuario())->buscar($usuarioId);
+        $productor = (new Productor())->buscarPorUsuario($usuarioId);
+
+        if (!$usuario || ($usuario['rol'] ?? '') !== 'productor' || !$productor || ($productor['estado'] ?? '') !== 'activo') {
+            Sesion::mensajeTemporal('error', 'Solo productores activos pueden retirar publicaciones.');
+            redirigir('/productor/');
+        }
+
+        try {
+            (new Pool())->retirarPorProductor((string) ($_POST['pool_id'] ?? ''), (string) $productor['id']);
+            Sesion::mensajeTemporal('exito', 'Publicacion retirada del marketplace.');
+        } catch (Throwable $excepcion) {
+            Sesion::mensajeTemporal('error', 'No se pudo retirar la publicacion: ' . $excepcion->getMessage());
+        }
+
+        redirigir('/productor/');
+    }
 }

@@ -229,6 +229,54 @@ final class Pool extends Modelo
         ));
     }
 
+    public function retirarPorProductor(string $poolId, string $productorId): void
+    {
+        $pool = $this->uno(
+            'select id, estado
+               from pools
+              where id = :id
+                and productor_id = :productor_id
+              limit 1',
+            ['id' => $poolId, 'productor_id' => $productorId]
+        );
+
+        if (!$pool) {
+            throw new RuntimeException('El pool no pertenece a este productor.');
+        }
+
+        if (($pool['estado'] ?? '') !== 'activo') {
+            throw new RuntimeException('El pool ya no esta activo.');
+        }
+
+        $confirmados = $this->uno(
+            'select count(*) as total
+               from compromisos
+              where pool_id = :pool_id
+                and estado_compromiso = "confirmado"',
+            ['pool_id' => $poolId]
+        );
+
+        if ((int) ($confirmados['total'] ?? 0) > 0) {
+            throw new RuntimeException('No se puede retirar un pool con compromisos confirmados.');
+        }
+
+        $this->ejecutar(
+            'delete from compromisos
+              where pool_id = :pool_id
+                and estado_compromiso = "borrador"',
+            ['pool_id' => $poolId]
+        );
+
+        $this->ejecutar(
+            'update pools
+                set estado = "cerrado"
+              where id = :id
+                and productor_id = :productor_id
+                and estado = "activo"',
+            ['id' => $poolId, 'productor_id' => $productorId]
+        );
+    }
+
     public function tramos(string $poolId): array
     {
         return $this->todos(
