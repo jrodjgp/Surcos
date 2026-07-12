@@ -3,8 +3,8 @@
 }
 
 .historia-hero {
-  height: min(760px, calc(100dvh - 70px));
-  min-height: 560px;
+  height: clamp(520px, 68vh, 680px);
+  min-height: 520px;
 }
 
 .historia-hero img {

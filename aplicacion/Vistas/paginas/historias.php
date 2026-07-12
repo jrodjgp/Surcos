@@ -4,7 +4,57 @@ $nombreCorto = trim((string) preg_replace('/^(Finca|Cooperativa|Apiario)\s+/i', 
 $poolHero = $poolPrincipal ?? ($poolsProductor[0] ?? null);
 $imagenHero = $poolHero ? imagen_cosecha($poolHero) : url_recurso('img/cosechas/cosecha-generica.jpg');
 $avanceHero = $poolHero ? $poolModelo->avance($poolHero) : 0;
-$lineasHistoria = array_filter([
+$historiasEditoriales = [
+    'prod-heredia' => [
+        'parrafos' => [
+            'En Boquete, Finca Heredia trabaja micro-lotes de Cafe Geisha en las tierras altas de Chiriqui. El proceso honey y los perfiles florales son parte de la identidad del lote, no una nota al margen del producto.',
+            'Don Sebastian Heredia publica cada registro con el origen, la variedad y el volumen que el comprador puede revisar antes de comprometerse. La historia de la finca se vuelve concreta cuando el lote tiene una fecha, un precio y un avance visible.',
+            'El Micro-lote #42 entra a Surcos con una demanda que ya se puede medir. El pool muestra cuanto falta para el siguiente tramo y deja que mas compradores se sumen sin perder de vista de donde viene el cafe.',
+            'Aqui la compra grupal no reemplaza el trabajo de la finca. Lo hace legible para quien compra y le da al productor una señal mas clara antes de mover el producto.',
+        ],
+        'cita' => 'En un micro-lote, la altura, el proceso y el origen tambien forman parte de lo que el comprador esta eligiendo.',
+    ],
+    'prod-oasis' => [
+        'parrafos' => [
+            'Finca Oasis cultiva hortalizas de temporada en suelos volcanicos y clima frio. Desde Tierras Altas, Ana Rodriguez publica lotes que se pueden leer por producto, cantidad, fecha y nodo de retiro.',
+            'El pool de Tomates de Herencia lleva esa cosecha a una decision concreta: el comprador ve el precio vigente, el progreso y el volumen que falta para alcanzar el siguiente tramo.',
+            'La Lechuga UTP pertenece al mismo registro de trabajo, pero mantiene su propia historia dentro del marketplace. Cada lote conserva su nombre, su origen y su fecha, en lugar de mezclarse con una promesa general de abastecimiento.',
+            'Surcos le permite a Finca Oasis abrir demanda antes de mover producto y mostrar con claridad que parte del lote ya tiene compradores interesados.',
+        ],
+        'cita' => 'Finca Oasis no publica una idea de cosecha: publica lotes concretos, con origen y volumen a la vista.',
+    ],
+    'prod-bosque' => [
+        'parrafos' => [
+            'En El Valle, el Apiario Bosque Silvestre trabaja con cosechas pequenas y una trazabilidad ligada a la floracion. La Miel Cruda aparece en Surcos con un origen identificable y una historia que empieza antes de la compra.',
+            'Luis Medina publica un producto cuyo valor depende tanto de la calidad como de la claridad del registro. El comprador puede revisar el lote, la fecha de entrega y el modelo de envio antes de confirmar.',
+            'El pool de Miel Silvestre Artesanal muestra como una demanda organizada puede acercar una cosecha artesanal a compradores que buscan conocer de donde viene lo que llevan a su mesa.',
+            'Cuando el objetivo se alcanza, el sistema conserva el compromiso y el pago simulado como parte del historial. La trazabilidad queda asociada al lote, no solo al momento de la compra.',
+        ],
+        'cita' => 'La miel conserva su origen cuando el registro cuenta quien la produce, donde nace y como se forma el lote.',
+    ],
+    'prod-darien' => [
+        'parrafos' => [
+            'La Cooperativa Darien Cacao trabaja desde Meteti con cacao fermentado de origen unico. El lote llega al marketplace con una identidad propia, vinculada a la cooperativa familiar que lo produce.',
+            'Marta Quintero puede publicar el Cacao Crudo con un objetivo de compradores y tramos de precio visibles. Asi, el volumen no queda escondido detras de una cifra final, sino que se construye a medida que el grupo participa.',
+            'El pool deja ver el avance antes del compromiso y conserva el origen del producto durante todo el flujo. El comprador sabe que esta entrando a un lote de Darien, no a una categoria generica de cacao.',
+            'Para una cooperativa, esa claridad ayuda a ordenar la demanda y a presentar un producto de origen unico sin borrar la escala familiar que lo sostiene.',
+        ],
+        'cita' => 'El cacao de Meteti entra al pool con su origen al frente, porque la fermentacion y la procedencia tambien explican su valor.',
+    ],
+    'prod-azuero' => [
+        'parrafos' => [
+            'Finca Azuero Verde produce una cantidad limitada de aceite Arbequina prensado en frio desde Chitre, Herrera. Carlos Batista publica este lote para compradores que necesitan leer primero el producto, el volumen y la fecha de entrega.',
+            'El modelo de Lote Empresarial reconoce que no todos los compradores llegan con la misma escala. En este caso, el registro esta pensado para una compra organizada, con un objetivo claro y un precio que cambia cuando el grupo crece.',
+            'El pool de Aceite Arbequina muestra el avance de la demanda y mantiene visible el nodo de retiro. El comprador puede revisar el compromiso antes de confirmar, mientras el productor ve cuanto interes real tiene el lote.',
+            'Surcos convierte una produccion limitada en una oferta mas facil de coordinar, sin esconder que el aceite sigue dependiendo del ritmo y la disponibilidad de una finca concreta.',
+        ],
+        'cita' => 'Un lote limitado tambien puede venderse con claridad cuando el comprador entiende su origen, su escala y el momento de entrega.',
+    ],
+];
+$historiaEditorial = $historiasEditoriales[(string) ($productor['id'] ?? '')] ?? null;
+$lineasHistoria = is_array($historiaEditorial) && !empty($historiaEditorial['parrafos'])
+    ? $historiaEditorial['parrafos']
+    : array_values(array_filter([
     $productor['historia'] ?? null,
     isset($productor['zona'], $productor['provincia'], $productor['responsable'])
         ? 'Desde ' . $productor['zona'] . ', ' . $productor['provincia'] . ', ' . $productor['responsable'] . ' organiza lotes para vender con menos intermediarios y con demanda visible antes de mover producto.'
@@ -12,7 +62,13 @@ $lineasHistoria = array_filter([
     $poolHero
         ? 'Su pool activo de ' . $poolHero['producto'] . ' muestra precio grupal, cupo, origen, nodo y cierre antes de que el comprador confirme un compromiso.'
         : 'Cuando publica un lote, Surcos lo convierte en una oportunidad clara: origen, volumen, precio y fecha de cierre en un solo registro.',
-]);
+]));
+$citaHistoria = is_array($historiaEditorial) && !empty($historiaEditorial['cita'])
+    ? $historiaEditorial['cita']
+    : 'Cada pool convierte una cosecha en una venta mas predecible para el productor y mas clara para el comprador.';
+if (strtolower(trim((string) ($poolHero['producto'] ?? ''))) === 'lechuga utp') {
+    $citaHistoria = 'Cada pool convierte una cosecha en una venta mas predecible para el productor y mas clara para el comprador.';
+}
 ?>
 
 <main class="pagina-historias">
@@ -59,7 +115,7 @@ $lineasHistoria = array_filter([
           <p class="<?= $indice === 0 ? 'dropcap' : '' ?>"><?= escapar($parrafo) ?></p>
         <?php endforeach; ?>
         <blockquote class="bq">
-          <p>"Cada pool convierte una cosecha en una venta mas predecible para el productor y mas clara para el comprador."</p>
+          <p>"<?= escapar($citaHistoria) ?>"</p>
         </blockquote>
       </article>
 
