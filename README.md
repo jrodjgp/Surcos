@@ -208,7 +208,3 @@ Before pushing publicly, confirm that `.env`, PHP session files, and temporary s
 - Email delivery and production deployment are out of scope.
 - The API is REST/JSON; SOAP is not implemented.
 - `referencia_legacy/` is retained as historical reference and is not the official application path.
-
-## License
-
-No license has been declared yet. Add a license before accepting external contributions or reusing the code in another project.
